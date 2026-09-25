@@ -1,0 +1,2709 @@
+{
+ "entries": [
+  {
+   "english_offset": "0x02CEDE",
+   "english_draft": "{01 02}Atrey\n{01 00}!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x02CEFA",
+   "english_draft": "{01 02}Regina\n{01 00}Your Highness! I’m detecting an unusual space−time distortion!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x02CF66",
+   "english_draft": "{01 02}Atrey\n{01 00}What in the world…?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x02CFC1",
+   "english_draft": "{01 02}Fiona\n{01 00}What…? Something feels strange…",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x02D002",
+   "english_draft": "{01 02}Van\n{01 00}!?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x02D01F",
+   "english_draft": "{01 02}Van\n{01 00}Fiona? Hey, what’s wrong?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x02D0CF",
+   "english_draft": "{01 02}Leena\n{01 00}Eek!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x02D0F7",
+   "english_draft": "{01 02}Bit\n{01 00}Whoa! Was that an earthquake?!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x02D132",
+   "english_draft": "{01 02}Judge\n{01 00}Stop the battle! Stop the battle!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x02D17D",
+   "english_draft": "{01 02}Judge\n{01 00}Emergency alert from the Zoid Battle Commission…",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x02D1E9",
+   "english_draft": "{01 02}Judge\n{01 00}Aaaah!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x02D21A",
+   "english_draft": "{01 00}Far across the galaxy lies Planet Zi, home of Zoids: giant living machines born to fight. With wills of their own, they ruled the battlefield as the most powerful weapons of all…",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x02D36F",
+   "english_draft": "{01 00}Then a test of a new weapons system went wrong, and time and space fused together…",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x02D3E5",
+   "english_draft": "Now the fate of a world thrown into chaos rests with one young Zoid pilot…",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x02D493",
+   "english_draft": "{01 02}{03}\n{01 00}!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x02D4A6",
+   "english_draft": "{01 02}{03}\n{01 00}Whoa… That was a big one.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x02D4E2",
+   "english_draft": "{01 02}{03}\n{01 00}Huh? This isn’t where I was a minute ago…",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x02D51C",
+   "english_draft": "{01 02}{03}\n{01 00}Not like I had anywhere to be. Might as well check out that town.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x02D596",
+   "english_draft": "{01 02}{03}\n{01 00}Great! A whole pack of wild Zoids!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x02D611",
+   "english_draft": "{01 02}{03}\n{01 00}There are too many! They just keep coming!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x02D66C",
+   "english_draft": "{01 02}Mysterious Warrior\n{01 00}Need a hand? I could use a little warm−up.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x02D744",
+   "english_draft": "{01 02}{03}\n{01 00}You really saved me back there. Thanks.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x02D784",
+   "english_draft": "{01 02}Mysterious Warrior\n{01 00}Anytime. Watch yourself out here. There are alot of wild Zoids around.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x02D836",
+   "english_draft": "{01 02}{03}\n{01 00}Hey, wait! I didn’t even get her name…",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x02D889",
+   "english_draft": "{01 02}{03}\n{01 00}Great. A whole pack of wild Zoids!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x02D8F3",
+   "english_draft": "{01 02}{03}\n{01 00}There are too many! They just keep coming!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x02D950",
+   "english_draft": "{01 02}Mysterious Warrior\n{01 00}Need a hand? I could use a little warm−up.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x02DA28",
+   "english_draft": "{01 02}{03}\n{01 00}You really saved me back there. Thanks.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x02DA68",
+   "english_draft": "{01 02}Mysterious Warrior\n{01 00}Anytime. Watch yourself out here. There are wild Zoids around.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x02DB1A",
+   "english_draft": "{01 02}{03}\n{01 00}Hey, wait! I didn’t even get her name…",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x046DF0",
+   "english_draft": "{01 02}Townsperson\n{01 00}You a Zoid Warrior? Don’t see many of those around here.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x046E78",
+   "english_draft": "{01 02}Townsperson\n{01 00}Been a while since we had a Warrior come through town.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x046EF3",
+   "english_draft": "{01 02}{03}\n{01 00}Huh? Well, I do pilot a Zoid…",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x046F4C",
+   "english_draft": "{01 02}{03}\n{01 00}But I’ve never been a Zoid Warrior.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x046FAF",
+   "english_draft": "{01 02}Townsperson\n{01 00}Wait, you’re not a Warrior?",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x046FFF",
+   "english_draft": "{01 02}Townsperson\n{01 00}If your Zoids get banged up in a fight, the Zoids Institute can fix them.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x0470B7",
+   "english_draft": "{01 02}Townsperson\n{01 00}If your Zoids get banged up in a fight, the Zoids Institute can fix them.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04716D",
+   "english_draft": "{01 02}Townsperson\n{01 00}I heard one of the nearby towns holds Zoid battles.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04720D",
+   "english_draft": "{01 02}{03}\n{01 00}Zoid battles? What are those?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x047241",
+   "english_draft": "{01 02}Townsperson\n{01 00}You haven’t heard? Warriors fight with their Zoids for prize money. It’s all a big gamble.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04732B",
+   "english_draft": "{01 02}Townsperson\n{01 00}Think you’d like to give it a shot?",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04739E",
+   "english_draft": "{01 02}Townsperson\n{01 00}Out here on your own? Watch yourself. Plenty of wild Zoids up ahead.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x047449",
+   "english_draft": "{01 02}Townsperson\n{01 00}And if anyone joins you, don’t forget to add their Zoids to your {01 01}team formation{01 00}.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x0474F7",
+   "english_draft": "{01 02}Child\n{01 00}My friend was supposed to come over, but he’s still not here. What if he got hurt in that earthquake?",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x0475E6",
+   "english_draft": "{01 02}{03}\n{01 00}Let’s see what I can find out for now.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04763C",
+   "english_draft": "{01 02}{03}\n{01 00}I’ll ask around town first.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x0476AD",
+   "english_draft": "{01 02}{03}\n{01 00}Zoid battles, huh? Sounds like fun. Let’s find out a little more first.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04777F",
+   "english_draft": "{01 02}{03}\n{01 00}Let’s see what the people here have to say.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x047847",
+   "english_draft": "{01 02}Old Man\n{01 00}A fine weapon needs someone who knows how to use it. Someone like me. Heh.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x0478CA",
+   "english_draft": "{01 02}Shop Clerk\n{01 00}Go ahead, look around!",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x047942",
+   "english_draft": "{01 02}Townsperson\n{01 00}I’m not here to shop… I’m just hoping something interesting happens.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x0479E0",
+   "english_draft": "{01 02}Shop Clerk\n{01 00}Take your time!",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x047A72",
+   "english_draft": "{01 02}Old Man\n{01 00}Join an old man for a drink? And if you wouldn’t mind picking up the tab…",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x047B36",
+   "english_draft": "{01 02}Old Man\n{01 00}Join an old man for a drink? Tell you what, I’ll give you this for your trouble.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x047BEB",
+   "english_draft": "{01 02}Townsperson\n{01 00}Nothing like a cold drink after work. Hey, barkeep! More milk over here!",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x047CAE",
+   "english_draft": "{01 02}Barkeep\n{01 00}Can’t seem to catch a break lately.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x047D07",
+   "english_draft": "{01 02}Waitress\n{01 00}Did you feel that earthquake? Scared me half to death!",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x047DB1",
+   "english_draft": "{01 02}Townsperson\n{01 00}When are they going to start the battles again?",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x047E22",
+   "english_draft": "{01 02}Researcher\n{01 00}Welcome to the Zoids Institute.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x047E8F",
+   "english_draft": "{01 02}Researcher\n{01 00}Tried {01 02}Deck Commands{01 00} yet? {01 02}Deck Commands{01 00} let you use special tactics in battle. You can pick up to ten in command planning before a fight.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x047FF6",
+   "english_draft": "{01 02}Researcher\n{01 00}You can use one per turn, but once it’s used, it’s gone until the next battle. Pick the right moment and you’ll have the edge.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x048179",
+   "english_draft": "{01 02}Researcher\n{01 00}Tried {01 02}Deck Commands{01 00} yet? {01 02}Deck Commands{01 00} let you use special tactics in battle. You can pick up to ten in command planning before a fight.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x0482E0",
+   "english_draft": "{01 02}Researcher\n{01 00}You can use one per turn, but once it’s used, it’s gone until the next battle. Pick the right moment and you’ll have the edge.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04845F",
+   "english_draft": "{01 02}Researcher\n{01 00}Here, try this one. We developed it right here at the institute.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x048521",
+   "english_draft": "{01 02}{03}\n{01 00}All right! Let’s see what these Zoid battles are all about!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04857F",
+   "english_draft": "{01 02}Townsperson\n{01 00}The battles are back, and things are finally getting back to normal around here.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x048623",
+   "english_draft": "{01 02}Townsperson\n{01 00}The Warriors got pretty nasty while the battles were shut down.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x0486BB",
+   "english_draft": "{01 02}Townsperson\n{01 00}I left the village out west. Got too dangerous. It’s a relief to finally get back to business.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x048780",
+   "english_draft": "{01 02}Townsperson\n{01 00}Word is, some outfit called the Backdraft Group is running the battles now.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x048811",
+   "english_draft": "{01 02}Townsperson\n{01 00}I don’t care who’s in charge, as long as they keep the battles going.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x048882",
+   "english_draft": "{01 02}Warrior\n{01 00}These battles? Not worth my time. I’m in a whole other league.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x048953",
+   "english_draft": "{01 02}{03}\n{01 00}Hey! You’re the one who helped me out!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x0489A7",
+   "english_draft": "{01 02}Mysterious Warrior\n{01 00}Oh! You again.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x048A00",
+   "english_draft": "{01 02}{03}\n{01 00}Glad I caught up with you.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x048A42",
+   "english_draft": "{01 02}Mysterious Warrior\n{01 00}Huh?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x048A76",
+   "english_draft": "{01 02}{03}\n{01 00}I never really got to thank you. You got me out of a real jam back there.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x048B02",
+   "english_draft": "{01 02}Mysterious Warrior\n{01 00}Don’t worry about it. The way you handle a Zoid, you might not have needed me at all.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x048BAB",
+   "english_draft": "{01 02}{03}\n{01 00}Hey, come on. Give yourself some credit.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x048BE3",
+   "english_draft": "{01 02}{03}\n{01 00}Oh, right! I never told you my name. I’m {03}.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x048C4F",
+   "english_draft": "{01 02}Mysterious Warrior\n{01 00}Juno. Nice to meet you.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x048CB0",
+   "english_draft": "{01 02}Juno\n{01 00}Wait…",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x048CD0",
+   "english_draft": "{01 02}{03}\n{01 00}What is it?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x048CE7",
+   "english_draft": "{01 02}Juno\n{01 00}That pendant…",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x048D38",
+   "english_draft": "{01 02}Juno\n{01 00}I could swear I’ve seen it before.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x048D85",
+   "english_draft": "{01 02}{03}\n{01 00}My dad gave it to me. It belonged to my mom.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x048E02",
+   "english_draft": "{01 02}{03}\n{01 00}It’s something to remember her by.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x048E42",
+   "english_draft": "{01 02}Juno\n{01 00}It’s beautiful.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x048E89",
+   "english_draft": "{01 02}Juno\n{01 00}Ah!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x048EAF",
+   "english_draft": "{01 02}{03}\n{01 00}Juno? What’s wrong?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x048EE2",
+   "english_draft": "{01 02}Juno\n{01 00}Your pendant… I thought I saw it shine for a bit.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x048F62",
+   "english_draft": "{01 02}{03}\n{01 00}Shine? I didn’t notice anything.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x048FAB",
+   "english_draft": "{01 02}Juno\n{01 00}Sorry. I must be seeing things. It happens sometimes… like I’m just about to remember something.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04906A",
+   "english_draft": "{01 02}{03}\n{01 00}Remember? What do you mean?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x0490A2",
+   "english_draft": "{01 02}Juno\n{01 00}Oh, it’s nothing. Just tired from all the traveling, I guess. So, what brings you here?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x049164",
+   "english_draft": "{01 02}{03}\n{01 00}I’m looking for a Zoid battle partner. Can’t enter on my own, apparently.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x049229",
+   "english_draft": "{01 02}{03}\n{01 00}Since we keep running into each other… how about it? Want to team up?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x0492AF",
+   "english_draft": "{01 02}Juno\n{01 00}Well…",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x0492DF",
+   "english_draft": "{01 02}Juno\n{01 00}I’ve been wanting to try Zoid battles myself. Why not?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04937B",
+   "english_draft": "{01 02}{03}\n{01 00}Great! Let’s get started!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x0493C5",
+   "english_draft": "{01 02}Juno\n{01 00}Lead the way.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x0493ED",
+   "english_draft": "{01 02}{03}\n{01 00}Oh, we need a team name. How about {01 01}Team {03}{01 00}?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04946C",
+   "english_draft": "{01 02}Juno\n{01 00}Heh. Fine by me.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x0494B2",
+   "english_draft": "{01 02}Juno\n{01 00}And here, take this {01 02}Deck Command{01 00}. You look like you could use a little backup.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x049559",
+   "english_draft": "{01 02}Juno\n{01 00}Just remember to put my Zoid in your {01 01}team formation{01 00}, okay?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x049604",
+   "english_draft": "{01 02}{03}\n{01 00}There’s got to be someone here I can team up with.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x049683",
+   "english_draft": "{01 02}Juno\n{01 00}Want to give this arena a try?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x0496E7",
+   "english_draft": "{01 02}Juno\n{01 00}Ready to move on?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04973A",
+   "english_draft": "{01 02}{03}\n{01 00}Yeah. I want to see what the battles are like in other towns. Let’s go.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x0497D0",
+   "english_draft": "{01 02}{03}\n{01 00}There’s a village out west. Let’s check it out.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x049932",
+   "english_draft": "{01 02}Shop Clerk\n{01 00}Can I help you find something?",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x049993",
+   "english_draft": "{01 02}Shop Clerk\n{01 00}Go ahead, look around!",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x049A90",
+   "english_draft": "{01 02}Shop Clerk\n{01 00}Take your time!",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x049B01",
+   "english_draft": "{01 02}Old Man\n{01 00}Haven’t watched a battle in ages. Maybe I’ll head over.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x049BCA",
+   "english_draft": "{01 02}Townsperson\n{01 00}Go win yourself some prize money.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x049C20",
+   "english_draft": "{01 02}Barkeep\n{01 00}The battles have been great for business. Don’t know what I’d do without them!",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x049CB4",
+   "english_draft": "{01 02}Waitress\n{01 00}You should’ve seen the Warriors when the battles stopped. I was afraid to go near them.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x049D50",
+   "english_draft": "{01 02}Warrior\n{01 00}Got banged up a little. I’m sitting things out for now.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x049DEE",
+   "english_draft": "{01 02}Townsperson\n{01 00}When the Zoid Battle Commission went quiet, nobody knew what was going on. We didn’t have any battles for a while.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x049EAB",
+   "english_draft": "{01 02}Townsperson\n{01 00}They finally got the arena’s Judge System running again.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x049F3D",
+   "english_draft": "{01 02}Researcher\n{01 00}Welcome to the Zoids Institute.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x049FA9",
+   "english_draft": "{01 02}Warrior\n{01 00}Don’t go easy on me just because I’m a woman.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04A031",
+   "english_draft": "{01 02}Warrior\n{01 00}I’m not here to battle.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04A078",
+   "english_draft": "{01 02}Warrior\n{01 00}My friends are waiting in the village out west.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04A0F4",
+   "english_draft": "{01 02}Warrior\n{01 00}I’m not here to battle.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04A16F",
+   "english_draft": "{01 02}Attendant\n{01 00}Welcome to the arena.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04A1B8",
+   "english_draft": "{01 02}Attendant\n{01 00}Would you like to enter a Zoid battle?",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04A237",
+   "english_draft": "{01 02}Attendant\n{01 00}You’re all signed up.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04A280",
+   "english_draft": "{01 02}Attendant\n{01 00}Come see me when you’re ready to battle.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04A311",
+   "english_draft": "{01 02}Attendant\n{01 00}Every battle has its own rules. Make sure your team meets the requirements before you enter.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04A3DD",
+   "english_draft": "{01 02}Attendant\n{01 00}Here, it’s two Zoids per team. No more, no less.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04A45E",
+   "english_draft": "{01 02}{03}\n{01 00}Two against two, huh?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04A4A4",
+   "english_draft": "{01 02}{03}\n{01 00}Guess I need a partner.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04A4F0",
+   "english_draft": "{01 02}{03}\n{01 00}Let’s see if any of these Warriors want to team up.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04A5EC",
+   "english_draft": "{01 02}Attendant\n{01 00}Ready for a Zoid battle? Your opponent is Team Cannon.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04A6A3",
+   "english_draft": "{01 02}Attendant\n{01 00}You need two Zoids for the next battle.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04A6F5",
+   "english_draft": "{01 02}Attendant\n{01 00}Sorry, your team doesn’t meet the requirements.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04A767",
+   "english_draft": "{01 02}Attendant\n{01 00}Check how many Zoids you’ve entered, then come see me again.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04A7E6",
+   "english_draft": "{01 02}{03}\n{01 00}Two−on−two. Those are the rules…",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04A83B",
+   "english_draft": "{01 02}Attendant\n{01 00}You’re good to go. Head on into the arena.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04A8E1",
+   "english_draft": "{01 02}Judge\n{01 00}Battlefield set up!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04A92D",
+   "english_draft": "{01 02}Judge\n{01 00}Team {03} versus…",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04A97C",
+   "english_draft": "{01 02}Judge\n{01 00}Team Cannon.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04A9BB",
+   "english_draft": "{01 02}Judge\n{01 00}Battle mode 1−1−1.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04A9FD",
+   "english_draft": "{01 02}Judge\n{01 00}Ready… fight!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04AA45",
+   "english_draft": "{01 02}Judge\n{01 00}The battle is over!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04AA8B",
+   "english_draft": "{01 02}Judge\n{01 00}The winner is Team {03}!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04AAD3",
+   "english_draft": "{01 02}Attendant\n{01 00}Come back whenever you want another battle.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04ABB5",
+   "english_draft": "{01 02}Attendant\n{01 00}Ready for a Zoid battle? Your opponent is Team Killer.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04AC4D",
+   "english_draft": "{01 02}Attendant\n{01 00}You need two Zoids for the next battle.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04AC9F",
+   "english_draft": "{01 02}Attendant\n{01 00}Sorry, your team doesn’t meet the requirements.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04AD11",
+   "english_draft": "{01 02}Attendant\n{01 00}Check how many Zoids you’ve entered, then come see me again.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04AD90",
+   "english_draft": "{01 02}{03}\n{01 00}Two−on−two. Those are the rules…",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04ADEA",
+   "english_draft": "{01 02}Attendant\n{01 00}You’re good to go. Head on into the arena.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04AE90",
+   "english_draft": "{01 02}Judge\n{01 00}Battlefield set up!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04AEDC",
+   "english_draft": "{01 02}Judge\n{01 00}Team {03} versus…",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04AF2B",
+   "english_draft": "{01 02}Judge\n{01 00}Team Killer!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04AF6A",
+   "english_draft": "{01 02}Judge\n{01 00}Battle mode 1−1−2.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04AFAC",
+   "english_draft": "{01 02}Judge\n{01 00}Ready… fight!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04AFF4",
+   "english_draft": "{01 02}Judge\n{01 00}The battle is over!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04B03A",
+   "english_draft": "{01 02}Judge\n{01 00}The winner is Team {03}!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04B082",
+   "english_draft": "{01 02}Attendant\n{01 00}Come back whenever you want another battle.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04B164",
+   "english_draft": "{01 02}Attendant\n{01 00}Ready for a Zoid battle? Your opponent is Team Saicurtis.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04B213",
+   "english_draft": "{01 02}Attendant\n{01 00}You need two Zoids for the next battle.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04B271",
+   "english_draft": "{01 02}Attendant\n{01 00}Sorry, your team doesn’t meet the requirements.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04B2E3",
+   "english_draft": "{01 02}Attendant\n{01 00}Check how many Zoids you’ve entered, then come see me again.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04B362",
+   "english_draft": "{01 02}{03}\n{01 00}Two−on−two. Those are the rules…",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04B3BC",
+   "english_draft": "{01 02}Attendant\n{01 00}You’re good to go. Head on into the arena.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04B462",
+   "english_draft": "{01 02}Judge\n{01 00}Battlefield set up!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04B4AE",
+   "english_draft": "{01 02}Judge\n{01 00}Team {03} versus…",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04B4FD",
+   "english_draft": "{01 02}Judge\n{01 00}Team Saicurtis.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04B543",
+   "english_draft": "{01 02}Judge\n{01 00}Battle mode 1−1−3.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04B585",
+   "english_draft": "{01 02}Judge\n{01 00}Ready… fight!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04B5CD",
+   "english_draft": "{01 02}Judge\n{01 00}The battle is over!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04B613",
+   "english_draft": "{01 02}Judge\n{01 00}The winner is Team {03}!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04B65B",
+   "english_draft": "{01 02}Attendant\n{01 00}Come back whenever you want another battle.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04B73D",
+   "english_draft": "{01 02}Attendant\n{01 00}Ready for a Zoid battle? Your opponent is Team Bugs.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04B7D1",
+   "english_draft": "{01 02}Attendant\n{01 00}You need two Zoids for the next battle.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04B823",
+   "english_draft": "{01 02}Attendant\n{01 00}Sorry, your team doesn’t meet the requirements.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04B895",
+   "english_draft": "{01 02}Attendant\n{01 00}Check how many Zoids you’ve entered, then come see me again.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04B914",
+   "english_draft": "{01 02}{03}\n{01 00}Two−on−two. Those are the rules…",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04B96E",
+   "english_draft": "{01 02}Attendant\n{01 00}You’re good to go. Head on into the arena.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04BA14",
+   "english_draft": "{01 02}Judge\n{01 00}Battlefield set up!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04BA60",
+   "english_draft": "{01 02}Judge\n{01 00}Team {03} versus…",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04BAAF",
+   "english_draft": "{01 02}Judge\n{01 00}Team Bugs!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04BAEA",
+   "english_draft": "{01 02}Judge\n{01 00}Battle mode 1−1−4.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04BB2C",
+   "english_draft": "{01 02}Judge\n{01 00}Ready… fight!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04BB74",
+   "english_draft": "{01 02}Judge\n{01 00}The battle is over!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04BBBA",
+   "english_draft": "{01 02}Judge\n{01 00}The winner is Team {03}!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04BC02",
+   "english_draft": "{01 02}Attendant\n{01 00}Come back whenever you want another battle.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04BCE4",
+   "english_draft": "{01 02}Attendant\n{01 00}Ready for a Zoid battle? Your opponent is Team Helcat.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04BD80",
+   "english_draft": "{01 02}Attendant\n{01 00}You need two Zoids for the next battle.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04BDD2",
+   "english_draft": "{01 02}Attendant\n{01 00}Sorry, your team doesn’t meet the requirements.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04BE44",
+   "english_draft": "{01 02}Attendant\n{01 00}Check how many Zoids you’ve entered, then come see me again.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04BEC3",
+   "english_draft": "{01 02}{03}\n{01 00}Two−on−two. Those are the rules…",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04BF1D",
+   "english_draft": "{01 02}Attendant\n{01 00}You’re good to go. Head on into the arena.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04BFC3",
+   "english_draft": "{01 02}Judge\n{01 00}Battlefield set up!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04C00F",
+   "english_draft": "{01 02}Judge\n{01 00}Team {03} versus…",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04C05E",
+   "english_draft": "{01 02}Judge\n{01 00}Team Helcat.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04C0A1",
+   "english_draft": "{01 02}Judge\n{01 00}Battle mode 1−1−5.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04C0E3",
+   "english_draft": "{01 02}Judge\n{01 00}Ready… fight!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04C12B",
+   "english_draft": "{01 02}Judge\n{01 00}The battle is over!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04C171",
+   "english_draft": "{01 02}Judge\n{01 00}The winner is Team {03}!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04C1B9",
+   "english_draft": "{01 02}Attendant\n{01 00}Congratulations! You’ve won every battle this arena has to offer!",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04C2DA",
+   "english_draft": "{01 02}Attendant\n{01 00}Sorry, the arena’s closed right now.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04C324",
+   "english_draft": "{01 02}Attendant\n{01 00}Looking to enter? Sign up at the reception desk.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04C3E1",
+   "english_draft": "{01 02}Warrior\n{01 00}Sorry, I already have a partner.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04C456",
+   "english_draft": "{01 02}Warrior\n{01 00}Let’s see… Which battle next?",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x049B6C",
+   "english_draft": "{01 02}Townsperson\n{01 00}Oh, you’re entering the battle too?",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04C57A",
+   "english_draft": "{01 02}{03}\n{01 00}!?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04C58D",
+   "english_draft": "{01 02}Villager\n{01 00}H−help! We’re in trouble!",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04C5C8",
+   "english_draft": "{01 02}Villager\n{01 00}There are bandits at the temple! They’re tearing the place apart!",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04C63C",
+   "english_draft": "{01 02}{03}\n{01 00}Juno!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04C65A",
+   "english_draft": "{01 02}Juno\n{01 00}Right! Let’s go!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04C691",
+   "english_draft": "{01 02}Villager\n{01 00}This way!",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04C6F3",
+   "english_draft": "{01 02}Bandit\n{01 00}What do you want? Wait… that woman…",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04C762",
+   "english_draft": "{01 02}{03}\n{01 00}Hey! Where’s he going?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04C7A3",
+   "english_draft": "{01 02}Bandit\n{01 00}What’s your problem, kid? Keep sticking your nose in our business and you won’t live long.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04C83C",
+   "english_draft": "{01 02}{03}\n{01 00}Yeah, well, I’ve never been good at minding my own business!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04C88C",
+   "english_draft": "{01 02}{03}\n{01 00}You guys pilot Zoids too, right?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04C8D8",
+   "english_draft": "{01 02}{03}\n{01 00}Then let’s settle this with a Zoid battle!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04C92A",
+   "english_draft": "{01 02}{03}\n{01 00}Loser backs off. Deal?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04C962",
+   "english_draft": "{01 02}Villager\n{01 00}Look, we’re grateful, but… are you sure you can take on these guys?",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04C9E4",
+   "english_draft": "{01 02}{03}\n{01 00}Relax. I’m not losing to this guy!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04CA3C",
+   "english_draft": "{01 02}Bandit\n{01 00}You’re on! Outside the village! I’ll make you eat those words!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04CB40",
+   "english_draft": "{01 02}{03}\n{01 00}That takes care of that.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04CB61",
+   "english_draft": "{01 02}Bandit\n{01 00}Y−you’ll pay for this!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04CB9E",
+   "english_draft": "{01 02}{03}\n{01 00}Anytime you want a rematch!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04CBD4",
+   "english_draft": "{01 02}Juno\n{01 00}Ah…! It hurts…!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04CC08",
+   "english_draft": "{01 02}{03}\n{01 00}Juno! Hey, what’s wrong?!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04CC45",
+   "english_draft": "{01 02}{03}\n{01 00}Juno!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04CC6D",
+   "english_draft": "{01 02}Villager\n{01 00}Is your friend all right? She looked terrible. Took off north in a real hurry.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04CCF3",
+   "english_draft": "{01 02}{03}\n{01 00}(Something’s wrong. I have to catch up with her!)",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04CD84",
+   "english_draft": "{01 02}Villager\n{01 00}She headed north. Aren’t you going after her?",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04CE21",
+   "english_draft": "{01 02}{03}\n{01 00}Juno… I hope she’s okay.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04CE53",
+   "english_draft": "{01 02}Villager\n{01 00}You mean the girl who passed out?",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04CE9A",
+   "english_draft": "{01 02}Villager\n{01 00}She’s in the house next to the temple.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04CF06",
+   "english_draft": "{01 02}Villager\n{01 00}Nobody’s safe these days.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04CF50",
+   "english_draft": "{01 02}Villager\n{01 00}They brought her to the house next to the temple.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04CFE5",
+   "english_draft": "{01 02}Villager\n{01 00}That’s it. I’m getting out of this village!",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04D04F",
+   "english_draft": "{01 02}Villager\n{01 00}You saved us. Thank you!",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04D0A4",
+   "english_draft": "{01 02}Villager\n{01 00}You’re with that girl, right?",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04D0EB",
+   "english_draft": "{01 02}Old Man\n{01 00}Oh, dear… Oh, dear…",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04D143",
+   "english_draft": "{01 02}Old Man\n{01 00}Maybe I ought to become a Warrior myself.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04D1A0",
+   "english_draft": "{01 02}Villager\n{01 00}Are they gone? Oh, thank goodness. I was scared!",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04D203",
+   "english_draft": "{01 02}Villager\n{01 00}They brought her to the house next to the temple.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04D297",
+   "english_draft": "{01 02}Old Man\n{01 00}Go on. That girl needs you.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04D2D5",
+   "english_draft": "{01 02}Old Man\n{01 00}All this trouble lately… I just want some peace and quiet.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04D38A",
+   "english_draft": "{01 02}Child\n{01 00}Is it okay to come out now?",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04D3C2",
+   "english_draft": "{01 02}Child\n{01 00}Thanks, mister!",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04D3F4",
+   "english_draft": "{01 02}Shop Clerk\n{01 00}Go ahead, look around!",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04D475",
+   "english_draft": "{01 02}Villager\n{01 00}Those guys show up every so often. Nothing but trouble.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04D4E6",
+   "english_draft": "{01 02}Villager\n{01 00}You really know your way around a Zoid!",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04D52A",
+   "english_draft": "{01 02}Shop Clerk\n{01 00}Take your time!",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04D597",
+   "english_draft": "{01 02}Barkeep\n{01 00}Before you settle in for a drink… any chance you could get rid of those bandits?",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04D62F",
+   "english_draft": "{01 02}Waitress\n{01 00}What if they kidnap me?!",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04D69C",
+   "english_draft": "{01 02}Villager\n{01 00}If only I could take those bandits on myself…",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04D701",
+   "english_draft": "{01 02}Villager\n{01 00}Can’t even have a drink in peace with those bandits around.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04D784",
+   "english_draft": "{01 02}Old Man\n{01 00}Mumble, mumble…",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04D7C2",
+   "english_draft": "{01 02}Barkeep\n{01 00}You really helped us out. How about a drink? On the house.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04D821",
+   "english_draft": "{01 02}Waitress\n{01 00}Wait, they weren’t here for me? That’s… a little disappointing.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04D8A7",
+   "english_draft": "{01 02}Villager\n{01 00}I’ll be a pilot someday! Then I can protect this village!",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04D928",
+   "english_draft": "{01 02}Villager\n{01 00}Finally! A drink in peace.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04D996",
+   "english_draft": "{01 02}Old Man\n{01 00}Mumble, mumble…",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04D9D1",
+   "english_draft": "{01 02}Old Man\n{01 00}Mmm… Oh, you saved the village, didn’t you? Here. Take this.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04DAC7",
+   "english_draft": "{01 02}Child\n{01 00}When’s Daddy coming home from work?",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04DB1A",
+   "english_draft": "{01 02}Child\n{01 00}I’m gonna pilot a Zoid when I grow up!",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04DB7D",
+   "english_draft": "{01 02}Researcher\n{01 00}Welcome to the Zoids Institute.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04EC59",
+   "english_draft": "{01 02}{03}\n{01 00}!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04EC7D",
+   "english_draft": "{01 02}{03}\n{01 00}Juno!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04ECAA",
+   "english_draft": "{01 02}Bandit\n{01 00}There he is! That’s him!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04ECF0",
+   "english_draft": "{01 02}Mysterious Woman\n{01 00}So you’re the pilot who’s been giving my men trouble.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04ED9F",
+   "english_draft": "{01 02}Mysterious Woman\n{01 00}Interesting.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04EDDF",
+   "english_draft": "{01 02}Mysterious Woman\n{01 00}Tell you what. Land even one hit on me in a Zoid battle, and I’ll let this slide.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04EE81",
+   "english_draft": "{01 02}{03}\n{01 00}What? Hey, hold on!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04EEDA",
+   "english_draft": "{01 02}Mysterious Woman\n{01 00}No… How could I…?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04EF16",
+   "english_draft": "{01 02}Mysterious Woman\n{01 00}Beaten by some kid…! We’re pulling out!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04EF91",
+   "english_draft": "{01 02}{03}\n{01 00}Hey! Running away already?!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04EFDF",
+   "english_draft": "{01 02}{03}\n{01 00}Juno! Are you okay?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04F032",
+   "english_draft": "{01 02}Villager\n{01 00}Hey! Everything all right?",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04F06E",
+   "english_draft": "{01 02}{03}\n{01 00}I think she’s out cold.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04F09F",
+   "english_draft": "{01 02}Villager\n{01 00}There’s an empty house back in the village. She can rest there.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04F12A",
+   "english_draft": "{01 02}Villager\n{01 00}We’ll carry her back.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04DC30",
+   "english_draft": "{01 02}{03}\n{01 00}Juno? Are you okay?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04DC6A",
+   "english_draft": "{01 02}Juno\n{01 00}What… what happened?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04DCAF",
+   "english_draft": "{01 02}{03}\n{01 00}You don’t remember?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04DCE5",
+   "english_draft": "{01 02}{03}\n{01 00}You suddenly doubled over after we chased off the bandits. Then you ran out of the village on your own.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04DD9C",
+   "english_draft": "{01 02}Juno\n{01 00}No… Nothing. I don’t remember any of it.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04DDEB",
+   "english_draft": "{01 02}Juno\n{01 00}About a year ago, someone found me passed out near some ruins. They saved me, but… all I could remember was my name.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04DED1",
+   "english_draft": "{01 02}Juno\n{01 00}Everything before that is still a blank. Maybe that’s why this keeps happening.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04DF92",
+   "english_draft": "{01 02}{03}\n{01 00}Juno… I had no idea.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04DFC3",
+   "english_draft": "{01 02}Juno\n{01 00}The people who took me in were wonderful. But I had to know who I was, so I left.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04E074",
+   "english_draft": "{01 02}Juno\n{01 00}Funny thing is, I still knew how to pilot a Zoid.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04E0D8",
+   "english_draft": "{01 02}{03}\n{01 00}Guess we’ve got more in common than I thought.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04E110",
+   "english_draft": "{01 02}{03}\n{01 00}My parents used to be in the military, from what I’ve heard. By the time I came along, they’d settled out on the frontier.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04E1EC",
+   "english_draft": "{01 02}{03}\n{01 00}Then the war caught up with us. The village, everyone in it… gone.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04E27C",
+   "english_draft": "{01 02}{03}\n{01 00}I was the only one who made it. Been looking for where I came from ever since. This pendant’s all I have to go on.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04E351",
+   "english_draft": "{01 02}{03}\n{01 00}Though lately, I’ve been having so much fun piloting Zoids, I kind of let the search slide.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04E406",
+   "english_draft": "{01 02}Juno\n{01 00}I didn’t know…",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04E43E",
+   "english_draft": "{01 02}{03}\n{01 00}(But who was that woman? Why was she after Juno? Does she know something about her past?)",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04E515",
+   "english_draft": "{01 02}Child\n{01 00}Oh no! The bandits are back!",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04E572",
+   "english_draft": "{01 02}{03}\n{01 00}Again? All right, I’m on it!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04E5B4",
+   "english_draft": "{01 02}Juno\n{01 00}Wait! I’m coming, too!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04E5FA",
+   "english_draft": "{01 02}{03}\n{01 00}No. I’ve got this!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04E642",
+   "english_draft": "{01 02}{03}\n{01 00}Just stay here, Juno.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04E67E",
+   "english_draft": "{01 02}Juno\n{01 00}…{03}…",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04E6D4",
+   "english_draft": "{01 02}Bandit\n{01 00}You again!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04E707",
+   "english_draft": "{01 02}{03}\n{01 00}What are you really after?!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04E738",
+   "english_draft": "{01 02}Bandit\n{01 00}We’re not here for you! Where’s that woman?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04E7A6",
+   "english_draft": "{01 02}{03}\n{01 00}Juno? What do you want with her?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04E7CB",
+   "english_draft": "{01 02}{03}\n{01 00}Wait a minute…",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04E7E6",
+   "english_draft": "{01 02}{03}\n{01 00}That woman who tried to take her… You work for her, don’t you?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04E861",
+   "english_draft": "{01 02}Bandit\n{01 00}So what if we do?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04E899",
+   "english_draft": "{01 02}{03}\n{01 00}Then you’re not going anywhere!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04E907",
+   "english_draft": "{01 02}Bandit\n{01 00}Not again…!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04E954",
+   "english_draft": "{01 02}{03}\n{01 00}Talk! Where’s your boss?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04E99A",
+   "english_draft": "{01 02}{03}\n{01 00}Don’t make me ask again…",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04E9C3",
+   "english_draft": "{01 02}Bandit\n{01 00}Heh. Sure you want to waste your time on me?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04EA1C",
+   "english_draft": "{01 02}Bandit\n{01 00}Keep talking. By now…",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04EA8A",
+   "english_draft": "{01 02}{03}\n{01 00}What…!?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04EAB1",
+   "english_draft": "{01 02}{03}\n{01 00}Juno!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04EB0C",
+   "english_draft": "{01 02}{03}\n{01 00}It was a setup! I fell for it!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04EB73",
+   "english_draft": "{01 02}{03}\n{01 00}They’re gone…",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04EB9E",
+   "english_draft": "{01 02}{03}\n{01 00}No. They can’t be far. Come on!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04F170",
+   "english_draft": "{01 02}Warrior\n{01 00}You want the big prize money? You won’t find it sticking to this continent.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04F218",
+   "english_draft": "{01 02}Warrior\n{01 00}Bandits? Dunno. Saw someone who looked like a Warrior at the institute.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04F2B4",
+   "english_draft": "{01 02}Townsperson\n{01 00}Word is there’s a tournament at Galil Storm, east of here.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04F352",
+   "english_draft": "{01 02}Warrior\n{01 00}Someone at the institute was going on and on about getting a Zoid fixed.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04F3FA",
+   "english_draft": "{01 02}Warrior\n{01 00}Finished getting your Zoids repaired? Ask for the institute’s Deck Command while you’re there.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04F4C3",
+   "english_draft": "{01 02}Townsperson\n{01 00}This town’s crawling with thugs. Try not to draw attention. We don’t need another fight.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04F560",
+   "english_draft": "{01 02}Townsperson\n{01 00}Got a new teammate? Make sure they’ve got a Zoid to pilot.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04F5D7",
+   "english_draft": "{01 02}{03}\n{01 00}Those bandits might’ve come through here. Time to ask around.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04F673",
+   "english_draft": "{01 02}Bit\n{01 00}That’s the place. Those guys I told you about went in there.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04F769",
+   "english_draft": "{01 02}Shop Clerk\n{01 00}Go ahead, look around!",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04F7B5",
+   "english_draft": "{01 02}Warrior\n{01 00}I hear the Zoid battles on the other continent are on a whole different level.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04F868",
+   "english_draft": "{01 02}Shop Clerk\n{01 00}Take your time!",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04F8AC",
+   "english_draft": "{01 02}Warrior\n{01 00}Some battles on the other continent only let top−ranked Warriors enter.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04F98D",
+   "english_draft": "{01 02}Townsperson\n{01 00}Wonder what it’s like across the ocean.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04FA35",
+   "english_draft": "{01 02}Barkeep\n{01 00}Business is booming!",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04FA7B",
+   "english_draft": "{01 02}Waitress\n{01 00}These people can really drink. I can barely keep up!",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04FAE8",
+   "english_draft": "{01 02}Warrior\n{01 00}I hear there’ll be a tournament at Galil Storm soon.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04FB8A",
+   "english_draft": "{01 02}Warrior\n{01 00}Real Warriors drink standing up. That’s just how we roll.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04FC10",
+   "english_draft": "{01 02}Researcher\n{01 00}Welcome to the Zoids Institute.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04FCB3",
+   "english_draft": "{01 02}Boy\n{01 00}But I don’t have that part! Come on, isn’t there another way?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04FD2A",
+   "english_draft": "{01 02}Researcher\n{01 00}No, no. I can’t fix the module without it.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x04FDB3",
+   "english_draft": "{01 02}Boy\n{01 00}Aw, man! If I had a Zoid, I could be out there winning prize money!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04FE41",
+   "english_draft": "{01 02}{03}\n{01 00}He might be a Warrior, but I doubt he’s mixed up with that woman.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04FED2",
+   "english_draft": "{01 02}Boy\n{01 00}Oh?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04FEEC",
+   "english_draft": "{01 02}Boy\n{01 00}Did you say something about a Warrior?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04FF29",
+   "english_draft": "{01 02}{03}\n{01 00}Oh, uh… Yeah. I’m looking for one.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04FF75",
+   "english_draft": "{01 02}Boy\n{01 00}Need a battle partner? Well, this is your lucky day!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04FFE1",
+   "english_draft": "{01 02}{03}\n{01 00}Huh!?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x04FFFA",
+   "english_draft": "{01 02}Boy\n{01 00}I’m Bit. Bit Cloud.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x050032",
+   "english_draft": "{01 02}Bit\n{01 00}I’m traveling the world, hunting down the best parts I can find. Someday, I’ll build the ultimate Zoid.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x0500E0",
+   "english_draft": "{01 02}Bit\n{01 00}Only trouble is, parts aren’t cheap. Neither are repairs.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x050144",
+   "english_draft": "{01 02}Bit\n{01 00}So, we’re teaming up, right? Great! Time to make some money!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x0501C8",
+   "english_draft": "{01 02}{03}\n{01 00}(That’s not exactly what I meant… Oh, what the heck.)",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x05021A",
+   "english_draft": "{01 02}{03}\n{01 00}I’m {03}. Nice to meet you.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x050259",
+   "english_draft": "{01 02}{03}\n{01 00}I know you want to get out there and battle, but there’s something I need to do first. You in?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x05030E",
+   "english_draft": "{01 02}Bit\n{01 00}Sounds like you’ve got a story to tell. Sure, I’m in.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x050389",
+   "english_draft": "{01 02}{03}\n{01 00}I’m trying to track down the leader of those bandits.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x0503EE",
+   "english_draft": "{01 02}Bit\n{01 00}Bandits? I saw some shady guys go into that building near the entrance of the town. Had a woman with them. Looked like a Warrior. Want to check it out?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x05053F",
+   "english_draft": "{01 02}Bit\n{01 00}One thing, though. I’m still short a Zoid. Give me one to pilot and put me in your formation, okay?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x05066F",
+   "english_draft": "{01 02}Researcher\n{01 00}You’ll need Zi data and a Zoid core to build a Zoid.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x0506E1",
+   "english_draft": "{01 02}Researcher\n{01 00}Found any Zi data yet? Think of it as a set of blueprints. It tells us how to build a Zoid from its core.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x0507B7",
+   "english_draft": "{01 02}Researcher\n{01 00}With that data, we can build Zoids right here. No special military facility needed. Depending on the Zoid, you may need a core and some parts, too.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x05091C",
+   "english_draft": "{01 02}Researcher\n{01 00}The core is what gives a Zoid life. The rest of its body grows around it.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x0509D9",
+   "english_draft": "{01 02}Researcher\n{01 00}Here’s a Deck Command to help you out. Good luck!",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x050AC3",
+   "english_draft": "{01 02}{03}\n{01 00}There you are! Give Juno back!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x050B15",
+   "english_draft": "{01 02}Mysterious Woman\n{01 00}You actually followed us? I’ll give you this: you’ve got nerve.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x050BA7",
+   "english_draft": "{01 02}{03}\n{01 00}What do you want with Juno? Why her?!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x050BFF",
+   "english_draft": "{01 02}Mysterious Woman\n{01 00}I don’t owe you an explanation.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x050C41",
+   "english_draft": "{01 02}Mysterious Woman\n{01 00}You’ve got more pressing things to worry about. Like yourself.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x050CC3",
+   "english_draft": "{01 02}{03}\n{01 00}You…!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x050CE0",
+   "english_draft": "{01 02}Mysterious Woman\n{01 00}I’ll give you a chance. Beat this man in a Zoid battle, and I might hear you out.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x050DC0",
+   "english_draft": "{01 02}Mysterious Woman\n{01 00}Or you can run away. Your choice.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x050E32",
+   "english_draft": "{01 02}Bit\n{01 00}So this is what you needed to take care of.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x050E77",
+   "english_draft": "{01 02}{03}\n{01 00}Yeah. There’s a girl named Juno. I have to get her out of here.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x050EE8",
+   "english_draft": "{01 02}Bit\n{01 00}Say no more. I’ve got your back.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x050F28",
+   "english_draft": "Battle\nFlee",
+   "text_columns": 9
+  },
+  {
+   "english_offset": "0x050F50",
+   "english_draft": "{01 02}Mysterious Woman\n{01 00}Deal with them!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x050F9D",
+   "english_draft": "{01 02}Bandit\n{01 00}Yes, ma’am!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x050FD0",
+   "english_draft": "{01 02}{03}\n{01 00}You’re out of your league!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x05118F",
+   "english_draft": "{01 02}{03}\n{01 00}They got away! Shoot!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x0511CD",
+   "english_draft": "{01 02}Memo\n{01 00}(We have Juno. If you want her back, enter the tournament at the Galil Storm Arena.)",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x05128C",
+   "english_draft": "{01 02}{03}\n{01 00}Galil Storm…",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x0512C0",
+   "english_draft": "{01 02}Bit\n{01 00}Galil Storm? The town with the arena, east of here. Ready to go?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x051330",
+   "english_draft": "{01 02}{03}\n{01 00}You bet! Hang on, Juno. I’m coming!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x0513E7",
+   "english_draft": "{01 02}Mysterious Man\n{01 00}What is it, Lezard?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x051440",
+   "english_draft": "{01 02}Lezard\n{01 00}Duke Gard. Leviathe just reported in. She has secured Juno.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x0514C9",
+   "english_draft": "{01 02}Gard\n{01 00}I see…",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x0514FB",
+   "english_draft": "{01 02}Gard\n{01 00}Then we finally have the advantage over the Backdraft Group.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x05159A",
+   "english_draft": "{01 02}Gard\n{01 00}Although… that does make Leviathe expendable.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x05161C",
+   "english_draft": "{01 02}Lezard\n{01 00}…What are your orders?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x05165B",
+   "english_draft": "{01 02}Gard\n{01 00}Let the Backdraft Group put her to use. Their plans work out well for us too.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x051702",
+   "english_draft": "{01 02}Lezard\n{01 00}I doubt Leviathe will see it that way.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x051765",
+   "english_draft": "{01 02}Gard\n{01 00}Leave that to me.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x052000",
+   "english_draft": "{01 02}{03}\n{01 00}So this is the Galil Storm Arena.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x052057",
+   "english_draft": "{01 02}{03}\n{01 00}All right. Time to sign up.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x0520A0",
+   "english_draft": "{01 02}Townsperson\n{01 00}Here for a battle? The arena’s reception desk will get you signed up.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x052137",
+   "english_draft": "{01 02}Townsperson\n{01 00}Sure, we’ve got an arena, but there aren’t any battles right now. Try another town.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x052200",
+   "english_draft": "{01 02}Townsperson\n{01 00}What’s the Zoid Battle Commission thinking? If the battles hadn’t started again, this town would’ve been finished.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x0522D8",
+   "english_draft": "{01 02}Townsperson\n{01 00}What’s with the Backdraft Group? First they bring the battles back, then shut them down again! Like we don’t get a say!",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x0523EC",
+   "english_draft": "{01 02}Child\n{01 00}Hooray! Zoid battles! Zoid battles!",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x052452",
+   "english_draft": "{01 02}Child\n{01 00}Waaah! I want to see a Zoid battle!",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x0524AD",
+   "english_draft": "{01 02}Old Man\n{01 00}Things are picking up around here. Not like that town out west. I hear it’s full of bandits.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x052572",
+   "english_draft": "{01 02}Old Man\n{01 00}They’re holding battles in the town up north again, too. So I hear.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x05263E",
+   "english_draft": "{01 02}Shop Clerk\n{01 00}Did you find anything you like?",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x05269F",
+   "english_draft": "{01 02}Townsperson\n{01 00}I want the strongest weapon money can buy.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x0526F1",
+   "english_draft": "{01 02}Shop Clerk\n{01 00}Go ahead, look around!",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x05275C",
+   "english_draft": "{01 02}Townsperson\n{01 00}I want this, and that, too…",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x0527AE",
+   "english_draft": "{01 02}Shop Clerk\n{01 00}Take your time!",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x052810",
+   "english_draft": "{01 02}Old Man\n{01 00}A tournament means customers. Might be time to open a little business of my own.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x0528D0",
+   "english_draft": "{01 02}Old Man\n{01 00}A tournament means customers. Might be time to open a little business of my own. Oh, before I forget, let me teach you this.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x0529C9",
+   "english_draft": "{01 02}Old Man\n{01 00}Remember, if you can’t see an enemy’s data, you can’t collect its data or secure its core. Commands like this won’t work on it.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x052AB4",
+   "english_draft": "{01 02}Warrior\n{01 00}I’m taking the prize this time!",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x052B0B",
+   "english_draft": "{01 02}Townsperson\n{01 00}Are you entering the tournament, too? Good luck!",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x052B82",
+   "english_draft": "{01 02}Barkeep\n{01 00}They say those caves east of town lead to a little island. Think the quake opened them up? Or did someone dig them?",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x052C9A",
+   "english_draft": "{01 02}Waitress\n{01 00}My friends and I have a little bet going. Who’s going to make it through the next tournament?",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x052D6F",
+   "english_draft": "{01 02}Warrior\n{01 00}Backdraft may run the show, but we still use the old Judge System. Heard they’ve got their own, though. Nasty piece of work, from what they say.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x052EE8",
+   "english_draft": "{01 02}Researcher\n{01 00}Welcome to the Zoids Institute.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x052F93",
+   "english_draft": "{01 02}Attendant\n{01 00}Welcome to the Galil Storm tournament!",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x052FFB",
+   "english_draft": "{01 02}Attendant\n{01 00}Would you like to enter the tournament? Each team can use up to three Zoids.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x0530AE",
+   "english_draft": "{01 02}Bit\n{01 00}Up to three? That means the two of us can still enter.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x05312F",
+   "english_draft": "{01 02}{03}\n{01 00}Outnumbered or not, we’re getting Juno back!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x0531B7",
+   "english_draft": "{01 02}Attendant\n{01 00}You’re all signed up. Come see me when you’re ready.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x0532BA",
+   "english_draft": "{01 02}Attendant\n{01 00}We’d love to have you join us once the battles start.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x053331",
+   "english_draft": "{01 02}Attendant\n{01 00}Good luck!",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x053367",
+   "english_draft": "{01 02}Attendant\n{01 00}Ready for a Zoid battle? Your opponent is Team Breaker.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x053417",
+   "english_draft": "{01 02}Attendant\n{01 00}You’re good to go. Head on into the arena.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x0534B1",
+   "english_draft": "{01 02}Judge\n{01 00}Battlefield set up!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x0534FD",
+   "english_draft": "{01 02}Judge\n{01 00}Team {03} versus…",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x053548",
+   "english_draft": "{01 02}Judge\n{01 00}Team Breaker!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x053589",
+   "english_draft": "{01 02}Judge\n{01 00}Battle mode 8−1−1.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x0535CB",
+   "english_draft": "{01 02}Judge\n{01 00}Ready… fight!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x053613",
+   "english_draft": "{01 02}Judge\n{01 00}The battle is over!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x053659",
+   "english_draft": "{01 02}Judge\n{01 00}The winner is Team {03}!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x0536A1",
+   "english_draft": "{01 02}Attendant\n{01 00}Come back when you’re ready for the second round.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x0537BC",
+   "english_draft": "{01 02}Attendant\n{01 00}You can use up to three Zoids in the next battle.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x053837",
+   "english_draft": "{01 02}Attendant\n{01 00}Sorry, your team doesn’t meet the requirements.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x05389B",
+   "english_draft": "{01 02}Attendant\n{01 00}Check how many Zoids you’ve entered, then come see me again.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x053919",
+   "english_draft": "{01 02}Attendant\n{01 00}Ready for the second round? Your opponent is Team Viper.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x0539AC",
+   "english_draft": "{01 02}Attendant\n{01 00}Ready for a Zoid battle?",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x0539FB",
+   "english_draft": "{01 02}Attendant\n{01 00}You’re good to go. Head on into the arena.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x053A95",
+   "english_draft": "{01 02}Judge\n{01 00}Battlefield set up!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x053AE1",
+   "english_draft": "{01 02}Judge\n{01 00}Team {03} versus…",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x053B2C",
+   "english_draft": "{01 02}Judge\n{01 00}Team Viper!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x053B69",
+   "english_draft": "{01 02}Judge\n{01 00}Battle mode 8−1−2.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x053BAB",
+   "english_draft": "{01 02}Judge\n{01 00}Ready… fight!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x053BF3",
+   "english_draft": "{01 02}Judge\n{01 00}The battle is over!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x053C39",
+   "english_draft": "{01 02}Judge\n{01 00}The winner is Team {03}!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x053C81",
+   "english_draft": "{01 02}Attendant\n{01 00}Come back when you’re ready for the quarterfinals.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x053D85",
+   "english_draft": "{01 02}Attendant\n{01 00}You can use up to three Zoids in the next battle.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x053E00",
+   "english_draft": "{01 02}Attendant\n{01 00}Sorry, your team doesn’t meet the requirements.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x053E66",
+   "english_draft": "{01 02}Attendant\n{01 00}Check how many Zoids you’ve entered, then come see me again.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x053EDA",
+   "english_draft": "{01 02}Attendant\n{01 00}Your next opponent is Team Bomber.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x053F44",
+   "english_draft": "{01 02}Attendant\n{01 00}Ready for a Zoid battle?",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x053F83",
+   "english_draft": "{01 02}Attendant\n{01 00}You’re good to go. Head on into the arena.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x05401D",
+   "english_draft": "{01 02}Judge\n{01 00}Battlefield set up!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x054069",
+   "english_draft": "{01 02}Judge\n{01 00}Team {03} versus…",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x0540B4",
+   "english_draft": "{01 02}Judge\n{01 00}Team Bomber!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x0540F3",
+   "english_draft": "{01 02}Judge\n{01 00}Battle mode 8−1−3.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x054135",
+   "english_draft": "{01 02}Judge\n{01 00}Ready… fight!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x05417D",
+   "english_draft": "{01 02}Judge\n{01 00}The battle is over!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x0541C3",
+   "english_draft": "{01 02}Judge\n{01 00}The winner is Team {03}!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x05420B",
+   "english_draft": "{01 02}Attendant\n{01 00}Come back when you’re ready for the semifinals.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x05430D",
+   "english_draft": "{01 02}Attendant\n{01 00}You can use up to three Zoids in the next battle.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x054388",
+   "english_draft": "{01 02}Attendant\n{01 00}Sorry, your team doesn’t meet the requirements.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x0543EE",
+   "english_draft": "{01 02}Attendant\n{01 00}Make the changes to your team, then come see me again.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x054462",
+   "english_draft": "{01 02}Attendant\n{01 00}Your next opponent is Team Hunter.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x0544E3",
+   "english_draft": "{01 02}Attendant\n{01 00}Ready for a Zoid battle?",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x054522",
+   "english_draft": "{01 02}Attendant\n{01 00}You’re good to go. Head on into the arena.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x0545BC",
+   "english_draft": "{01 02}Judge\n{01 00}Battlefield set up!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x054608",
+   "english_draft": "{01 02}Judge\n{01 00}Team {03} versus…",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x054653",
+   "english_draft": "{01 02}Judge\n{01 00}Team Hunter!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x054692",
+   "english_draft": "{01 02}Judge\n{01 00}Battle mode 8−1−4.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x0546D4",
+   "english_draft": "{01 02}Judge\n{01 00}Ready… fight!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x05471C",
+   "english_draft": "{01 02}Judge\n{01 00}The battle is over!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x054762",
+   "english_draft": "{01 02}Judge\n{01 00}The winner is Team {03}!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x0547AA",
+   "english_draft": "{01 02}Attendant\n{01 00}Come back when you’re ready for the finals.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x0548AC",
+   "english_draft": "{01 02}Attendant\n{01 00}You can use up to three Zoids in the next battle.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x054927",
+   "english_draft": "{01 02}Attendant\n{01 00}Sorry, your team doesn’t meet the requirements.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x05498D",
+   "english_draft": "{01 02}Attendant\n{01 00}Make the changes to your team, then come see me again.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x054A01",
+   "english_draft": "{01 02}Attendant\n{01 00}Your next opponent is Team Leviathe.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x054A6F",
+   "english_draft": "{01 02}Attendant\n{01 00}Ready for a Zoid battle?",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x054AAE",
+   "english_draft": "{01 02}Attendant\n{01 00}Come back when you’re ready to battle.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x054B14",
+   "english_draft": "{01 02}Attendant\n{01 00}You’re good to go. Head on into the arena.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x054BAE",
+   "english_draft": "{01 02}Judge\n{01 00}Battlefield set up!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x054BFA",
+   "english_draft": "{01 02}Judge\n{01 00}Team {03} versus…",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x054C45",
+   "english_draft": "{01 02}Judge\n{01 00}Team Leviathe.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x054C87",
+   "english_draft": "{01 02}Judge\n{01 00}Battle mode 8−1−5.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x054CC9",
+   "english_draft": "{01 02}Judge\n{01 00}Ready… fight!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x054D00",
+   "english_draft": "{01 02}Mysterious Woman\n{01 00}Well, well. You actually made it.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x054D78",
+   "english_draft": "{01 02}{03}\n{01 00}Team Leviathe… So you’re the one I face in the finals!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x054DF5",
+   "english_draft": "{01 02}Mysterious Woman\n{01 00}We never did introduce ourselves. I’m Leviathe.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x054E8E",
+   "english_draft": "{01 02}{03}\n{01 00}Remember our deal. I win, you let Juno go!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x054EE2",
+   "english_draft": "{01 02}Leviathe\n{01 00}If you can beat me, that is.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x054F2D",
+   "english_draft": "{01 02}{03}\n{01 00}Here I come!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x054F66",
+   "english_draft": "{01 02}Judge\n{01 00}The battle is over!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x054FAC",
+   "english_draft": "{01 02}Judge\n{01 00}The winner is Team {03}!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x055004",
+   "english_draft": "{01 02}{03}\n{01 00}Yes! We won!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x055037",
+   "english_draft": "{01 02}Bit\n{01 00}We did it, {03}! Good thing you had me along, huh?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x055094",
+   "english_draft": "{01 02}Leviathe\n{01 00}No… It can’t be!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x0550DD",
+   "english_draft": "{01 02}Leviathe\n{01 00}I lost to that kid… twice?!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x055126",
+   "english_draft": "{01 02}{03}\n{01 00}I won. Now keep your word. Where’s Juno?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x055162",
+   "english_draft": "{01 02}Leviathe\n{01 00}Go to the waiting room at the arena…",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x0551DD",
+   "english_draft": "{01 02}{03}\n{01 00}Finally! We can get Juno back!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x05522B",
+   "english_draft": "{01 02}Bit\n{01 00}Looks like you’ve got things covered. And I’ve got enough for those repairs now.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x0552C8",
+   "english_draft": "{01 02}Bit\n{01 00}Which means it’s about time I hit the road. Sorry, partner.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x055313",
+   "english_draft": "{01 02}{03}\n{01 00}Sure. Thanks for everything, Bit.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x055359",
+   "english_draft": "{01 02}Bit\n{01 00}Good luck, {03}! When I finish that ultimate Zoid, you’ll be seeing it. Count on it!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x0553F9",
+   "english_draft": "{01 02}{03}\n{01 00}Take care of yourself, Bit. See you around!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x055456",
+   "english_draft": "{01 02}{03}\n{01 00}Juno! The waiting room… I’ve got to hurry!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x0554C3",
+   "english_draft": "{01 02}Attendant\n{01 00}We’re still getting the arena ready. Please wait.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x05552E",
+   "english_draft": "{01 02}Attendant\n{01 00}Sorry, this arena’s closed. The next battles are planned for Mount Town, up north. They’ll have the details.",
+   "text_columns": 28
+  },
+  {
+   "english_offset": "0x055672",
+   "english_draft": "{01 02}{03}\n{01 00}Juno! Are you all right?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x0556BE",
+   "english_draft": "{01 02}Mysterious Man\n{01 00}…",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x0556E8",
+   "english_draft": "{01 02}{03}\n{01 00}Ugh… Who…? Why, you…",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x05572A",
+   "english_draft": "{01 02}Mysterious Man\n{01 00}Nothing personal. Leviathe may have meant to let her go, but we in the Backdraft Group aren’t so generous.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x05582A",
+   "english_draft": "{01 02}{03}\n{01 00}Juno… Damn it! Not again!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x055872",
+   "english_draft": "{01 02}{03}\n{01 00}The Backdraft Group… They’re the ones running the Zoid battles, aren’t they?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x05595E",
+   "english_draft": "{01 02}{03}\n{01 00}This isn’t over! I’ll keep entering those battles. Sooner or later, I’ll get a lead on them.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x0517EC",
+   "english_draft": "{01 02}Leviathe\n{01 00}Lord Gard…",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x051826",
+   "english_draft": "{01 02}Gard\n{01 00}Yes. I’ve heard.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x05187D",
+   "english_draft": "{01 02}Leviathe\n{01 00}Forgive me, sir!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x0518B3",
+   "english_draft": "{01 02}Gard\n{01 00}Never mind that the Backdraft Group took Juno…",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x051939",
+   "english_draft": "{01 02}Gard\n{01 00}But to lose to some makeshift team? Team {03}, was it?",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x0519CF",
+   "english_draft": "{01 02}Leviathe\n{01 00}I know! I’ve disgraced Terra Geist. I’ll make up for it myself!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x051A9D",
+   "english_draft": "{01 02}Leviathe\n{01 00}Until then…",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x051AD5",
+   "english_draft": "{01 02}Gard\n{01 00}You still have your pride, I see. Very well. Do as you like.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x051B47",
+   "english_draft": "{01 02}Leviathe\n{01 00}Yes, sir!",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x051B92",
+   "english_draft": "{01 02}Leviathe\n{01 00}So that’s it. Until I beat {03}, I can’t show my face to Lord Gard again.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x051C27",
+   "english_draft": "{01 02}Gard\n{01 00}The Backdraft Group thinks it can have everything its own way. No matter.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x051CAB",
+   "english_draft": "{01 02}Gard\n{01 00}They can keep Juno. For now.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x051D18",
+   "english_draft": "{01 02}Gard\n{01 00}Leviathe is a gifted Zoid pilot, with the physical abilities to match.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x051DD2",
+   "english_draft": "{01 02}Gard\n{01 00}And Backdraft is looking for strong pilots. She’d make the perfect trade for Juno.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x051EA7",
+   "english_draft": "{01 02}Gard\n{01 00}I suppose I’m still sentimental. I wanted the weapon I created to surpass the one we found.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x02DB6B",
+   "english_draft": "{01 02}{03}\n{01 00}Let’s try a Zoid battle around here first.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x02DBEF",
+   "english_draft": "{01 02}{03}\n{01 00}Let’s check out that village next.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x02DC69",
+   "english_draft": "{01 02}{03}\n{01 00}I hope Juno’s okay. I’d better get back to the village.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x02DCE1",
+   "english_draft": "{01 02}{03}\n{01 00}I still need a lead on those bandits. Better head back and ask around.",
+   "text_columns": 20
+  },
+  {
+   "english_offset": "0x02DD74",
+   "english_draft": "{01 02}{03}\n{01 00}Galil Storm Arena. That’s where I need to be.",
+   "text_columns": 20
+  }
+ ]
+}

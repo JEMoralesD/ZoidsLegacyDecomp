@@ -38,3 +38,11 @@ Full verification also requires complete coverage of every inventoried callable 
 It creates temporary files only and never writes a ROM.
 
 Use `python3 tools/verify.py --rom /path/to/rom --region region0` to verify one region.
+
+## Build the translated ROM
+
+Put a clean `Zoids Legacy (USA).gba` in the repository root. Install Python 3, a host C compiler (`cc`), and the ARM GNU toolchain (`arm-none-eabi-gcc`, `-as`, `-objcopy`, `-nm`).
+
+    python3 tools/insert_vwf.py --output "Zoids Legacy (USA) - Retranslated.gba"
+
+The translation lives in `dialogue-en.json` and `scene-translation.json`, and `kerning-choices.json` holds the font spacing. The two text files hold only the translated English and build metadata. The tools read the original game text and bytes from your ROM when they load these files, so the repository ships no game text. The build rejects edits that use glyphs the font lacks, speaker names, battle menu choices, and battle quotes that overflow their windows, and Deck Command names wider than their menu line.
