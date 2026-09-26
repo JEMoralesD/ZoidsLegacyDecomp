@@ -1032,7 +1032,7 @@ static __attribute__((always_inline)) inline int strict_length(
 
 // Matches writer_plain_span; returns the terminator index or -1.
 static RUNTIME_O2 __attribute__((noinline)) int plain_length(
-        const u8 *source, size_t source_capacity) {
+        const u8 *source, size_t source_capacity, int newlines) {
     size_t position = 0;
     if (!source_capacity)
         return -1;
@@ -1046,7 +1046,8 @@ static RUNTIME_O2 __attribute__((noinline)) int plain_length(
         }
         if (!value)
             break;
-        if (value < 0x20 || position + 1 >= source_capacity)
+        if ((value < 0x20 && (!newlines || value != 10)) ||
+                position + 1 >= source_capacity)
             return -1;
         ++position;
     }
@@ -1065,7 +1066,7 @@ static RUNTIME_O2 __attribute__((noinline)) int strict_length_trim(
 
 static int append_plain(u8 *destination, size_t length, size_t capacity,
                         const u8 *source, size_t source_capacity) {
-    int result = plain_length(source, source_capacity);
+    int result = plain_length(source, source_capacity, 1);
     if (result < 0)
         return 0;
     size_t position = (size_t)result;
@@ -1369,7 +1370,7 @@ u32 vwf_menu_prefix(u8 *destination, const u8 *source) {
 }
 
 u8 vwf_storage_cells(const u8 *text) {
-    int length = plain_length(text, read_capacity(text));
+    int length = plain_length(text, read_capacity(text), 0);
     if (length < 0 || (length & 1) || length > 510)
         return 0;
     return (u8)(length >> 1);
