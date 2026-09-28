@@ -32,7 +32,6 @@ MENU_WINDOW_EDITS = {
     0x004132: (bytes.fromhex('010400000c0400'), bytes.fromhex('010400000d0400')),
     0x004148: (bytes.fromhex('010500040c0400'), bytes.fromhex('010500040d0400')),
     0x00415E: (bytes.fromhex('010600080c0400'), bytes.fromhex('010600080d0400')),
-    0x00473F: (bytes.fromhex('01070505140600'), bytes.fromhex('01070505140800')),
     0x006861: (bytes.fromhex('01040008080400'), bytes.fromhex('010400080a0400')),
     0x006868: (bytes.fromhex('01050808160400'), bytes.fromhex('01050a08140400')),
     0x019A46: (bytes.fromhex('010300020f0c08'), bytes.fromhex('01030002100c08')),

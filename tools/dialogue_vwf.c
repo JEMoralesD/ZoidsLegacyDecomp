@@ -66,6 +66,7 @@ static __attribute__((always_inline)) inline u32 div3(u32 value) {
 #define FORMAT_ROW 2
 #define FORMAT_REPEAT 1
 #define FORMAT_ROW_RESTART 4
+#define FORMAT_ROW_PADDING 8
 #define ROW_ROM_TEXT 0x80
 #define FLOOR_SUFFIX ((const u8 *)0x08103AE0)
 #define FLOOR_BASEMENT_LITERAL 0x0809E90Cu
@@ -159,6 +160,7 @@ typedef struct {
     u16 *cells;
     u8 stride;
     int8_t top_tile;
+    u8 clip_right;
 } RenderContext;
 
 typedef struct __attribute__((may_alias)) {
@@ -282,6 +284,18 @@ static RUNTIME_O2 int free_tiles_at_least(int needed) {
     for (; id < limit; ++id)
         if (!(live[id >> 3] & (1u << (id & 7))) && ++free >= needed)
             return 1;
+    return 0;
+}
+
+static int take_released_tile(u16 *out) {
+    u32 *pending = (u32 *)0x0200DE10;
+    u32 limit = MEM(u32, 0x02021658);
+    for (u32 id = 0; id < limit; ++id)
+        if (pending[id >> 5] & (1u << (id & 31))) {
+            pending[id >> 5] &= ~(1u << (id & 31));
+            *out = (u16)id;
+            return 1;
+        }
     return 0;
 }
 
@@ -935,6 +949,8 @@ static __attribute__((noinline)) void prepare_field_line(
         left = 0;
     if (right > surface_width(context))
         right = surface_width(context);
+    if (context->clip_right && right > context->clip_right)
+        right = context->clip_right;
     int top = event->top < context->surface_top ? context->surface_top : event->top;
     int bottom = event->bottom > surface_height(context)
         ? surface_height(context) : event->bottom;
@@ -1528,9 +1544,11 @@ static __attribute__((always_inline)) inline TextStatus render_layout_work(
                 cursor, result, event, blank_code, blank_unit, blank_count) : -1;
             if (peek < 0) {
                 blank = 0;
-                peek = text_layout_simple_peek(
-                    &runtime_font_data, profile, decoder, &context->state,
-                    cursor, result, event);
+                // Frame waits let window reordering overwrite the cached glyph plan.
+                if (context->direct || !(context->window->flags & 0x10))
+                    peek = text_layout_simple_peek(
+                        &runtime_font_data, profile, decoder, &context->state,
+                        cursor, result, event);
             }
             status = peek < 0 ? text_layout_scan_peek(
                 &runtime_font_data, profile, decoder, &context->state,
@@ -1737,6 +1755,9 @@ static __attribute__((always_inline)) inline const u8 *render_window_profile(
     context->tile_columns = (u8)(window->width - 2);
     context->tile_rows = (u8)(window->height - 2);
     context->direct = 0;
+    // Right-aligned glyphs end on their ink, so their advance boxes pass the field edge.
+    context->clip_right = alignment == TEXT_ALIGN_RIGHT && field_right < 255
+        ? (u8)(field_right + 1) : 0;
     TextStatus status;
     const u8 *render_text = text;
     size_t speaker_length = kind == TEXT_PROFILE_PORTRAIT_DIALOGUE ||
@@ -1805,12 +1826,39 @@ static __attribute__((always_inline)) inline const u8 *render_window_profile(
 
 static const u8 *unpack_menu_row(const u8 *text, const u8 **stored_end);
 
+static int in_menu_records(const u8 *text) {
+    return (u32)text >= (u32)MENU_RECORDS &&
+           (u32)text < (u32)MENU_RECORDS + MENU_SLOTS * MENU_BANK_SIZE;
+}
+
+// A list row's leading full-width space reserves the native icon column.
+static __attribute__((noinline)) const u8 *reserve_icon_column(
+        Window *window, const u8 *text) {
+    size_t prefix = text[0] == 1 ? 2 : 0;
+    if (text[prefix] != 0x81 || text[prefix + 1] != 0x40)
+        return text;
+    size_t at = 0;
+    for (size_t i = 0; i < prefix; ++i)
+        FORMAT_OUTPUT[at++] = text[i];
+    for (const u8 *rest = text + prefix + 2; *rest && at < MENU_TEXT_LIMIT; ++rest)
+        FORMAT_OUTPUT[at++] = *rest;
+    FORMAT_OUTPUT[at] = 0;
+    set_cursor(window, window->column + 1, window->row);
+    return FORMAT_OUTPUT;
+}
+
 __attribute__((noinline)) RUNTIME_O2 const u8 *vwf_render(
         Window *window, const u8 *text) {
     const u8 *stored_end = 0;
     const u8 *decoded = unpack_menu_row(text, &stored_end);
     if (!decoded)
         return text;
+    if (in_menu_records(text) && window->row != -1) {
+        const u8 *row = decoded;
+        decoded = reserve_icon_column(window, decoded);
+        if (decoded != row && !stored_end)
+            stored_end = text + bounded_length(text) - 1;
+    }
     text = decoded;
     size_t title_length = window->row == -1 ? bounded_length(text) : 0;
     const u8 *end = render_window_profile(window, text, 0, 0, TEXT_ALIGN_LEFT, 2);
@@ -1927,7 +1975,7 @@ static RUNTIME_O2 TextStatus flush_format_band(FormatSurface *surface) {
             }
             if (id < 0) {
                 u16 fresh;
-                if (!allocate(1, &fresh))
+                if (!allocate(1, &fresh) && !take_released_tile(&fresh))
                     return TEXT_TILE_EXHAUSTED;
                 reserve(fresh);
                 id = fresh;
@@ -2426,7 +2474,8 @@ static u32 menu_text_columns(const u8 *text, size_t length) {
 }
 
 static __attribute__((noinline)) void discard_covered_fragments(
-        IndexedFormat *format, u32 column, u32 row, u32 columns, u32 width) {
+        IndexedFormat *format, u32 column, u32 row, u32 columns, u32 width,
+        u32 replaced_column) {
     for (int i = 0; i < format->next;) {
         u8 *fragment = (u8 *)format + sizeof(IndexedFormat) +
             i * format->string_bytes;
@@ -2436,7 +2485,7 @@ static __attribute__((noinline)) void discard_covered_fragments(
         u32 right = fragment[1] + span;
         if (right > width)
             right = width;
-        if (fragment[0] != row || fragment[1] == column ||
+        if (fragment[0] != row || fragment[1] == replaced_column ||
                 fragment[1] < column || right > column + columns) {
             ++i;
             continue;
@@ -2452,12 +2501,19 @@ static __attribute__((noinline)) int capture_row_fragment(
                                   Window *window, int kind, int32_t number,
                                   u32 digits, u32 mode, u32 color,
                                   const u8 *text, u32 column, u32 row) {
-    if (text == (const u8 *)0x081061C4)
-        return 0;
     IndexedFormat *format = indexed_format(window);
     if (!format || format->magic != INDEXED_FORMAT_MAGIC ||
             !(format->repeat & FORMAT_ROW))
         return 0;
+    if (text == (const u8 *)0x081061C4) {
+        // Native padding clears the old field before its replacement moves to a new column.
+        if (!(format->repeat & FORMAT_ROW_PADDING) || format->cursor_row != row) {
+            format->cursor_column = (u8)column;
+            format->cursor_row = (u8)row;
+        }
+        format->repeat |= FORMAT_ROW_PADDING;
+        return 0;
+    }
     if (row >= format->count || column > 255 ||
             (kind == 'd' && (!digits || digits > 10)))
         return 0;
@@ -2501,7 +2557,13 @@ static __attribute__((noinline)) int capture_row_fragment(
         format->repeat &= (u8)~FORMAT_ROW_RESTART;
     }
     u32 prior_count = format->next;
-    discard_covered_fragments(format, column, row, columns, window->width - 2);
+    u32 clear_column = column;
+    if ((format->repeat & FORMAT_ROW_PADDING) && format->cursor_row == row &&
+            format->cursor_column < column)
+        clear_column = format->cursor_column;
+    format->repeat &= (u8)~FORMAT_ROW_PADDING;
+    discard_covered_fragments(format, clear_column, row,
+                              column + columns - clear_column, window->width - 2, column);
     if (format->next != prior_count)
         format_changed(window, row);
     int selected = -1;
@@ -2948,6 +3010,22 @@ RUNTIME_O2 __attribute__((used)) void vwf_field_at_body(
     order_window((u8)slot);
 }
 
+RUNTIME_O2 void vwf_editor_text(void) {
+    const u8 *text = *(const u8 *volatile *)0x0202170c;
+    u32 capacity = *(volatile u8 *)0x02021710;
+    u32 column = *(volatile u8 *)0x02021711;
+    Window *window = get_window(0);
+    window->color = 0;
+    // Native cursor sprites mark eight-pixel cells, including spaces.
+    for (u32 index = 0; index < capacity && text[index * 2]; ++index) {
+        u8 glyph[4] = {text[index * 2], text[index * 2 + 1], 0, 0};
+        set_cursor(window, (u16)(column + index), 0);
+        render_window_profile(window, glyph, 0, 0, TEXT_ALIGN_LEFT, 0);
+    }
+    window->flags |= 2;
+    order_window(0);
+}
+
 #define LINE_CACHE_SLOTS 18
 #define LINE_CACHE_LINES 16
 #define LINE_CACHE_TAG 0xd5c2u
@@ -3368,6 +3446,7 @@ static void render_blank_field(Window *window, u32 color, u32 blank) {
     context->tile_columns = (u8)(window->width - 2);
     context->tile_rows = (u8)(window->height - 2);
     context->direct = 0;
+    context->clip_right = 0;
     bind_surface(context, 0);
     int count = (u16)blank;
     TextLayoutState end = context->state;
@@ -3857,6 +3936,7 @@ void vwf_list_render_next(Window *window) {
     if (!text)
         return;
     set_cursor(window, 0, window->row);
+    text = reserve_icon_column(window, text);
     render_window_profile(window, text,
                           (window->width - 2) * 8, 0, TEXT_ALIGN_LEFT, 1);
     set_cursor(window, 0, window->row + 2);
@@ -4145,6 +4225,7 @@ void vwf_list_replace(u32 slot, u32 row, const u8 *text) {
         int saved_column = window->column;
         int saved_row = window->row;
         set_cursor(window, 0, (int)(row - top) * 2);
+        text = reserve_icon_column(window, text);
         render_window_profile(window, text,
                               (window->width - 2) * 8, 0, TEXT_ALIGN_LEFT, 1);
         set_cursor(window, saved_column, saved_row);
@@ -4226,6 +4307,7 @@ __attribute__((optimize("O2"))) const u8 *credits_line(
     context->tile_columns = 30;
     context->tile_rows = 2;
     context->direct = 1;
+    context->clip_right = 0;
     bind_surface(context, 0);
     render_layout_work(profile, decoder, context, result, cursor, event, 0);
     *colour = context->state.color;

@@ -727,6 +727,14 @@ static __attribute__((always_inline)) inline int glyph_advance(
     return metric->advance;
 }
 
+// Tabular digits sit centered in their fixed advance.
+static __attribute__((always_inline)) inline int glyph_offset(
+        const TextFont *font, const TextProfile *profile, int index) {
+    const TextMetric *metric = &font->metrics[index];
+    int advance = glyph_advance(font, profile, index);
+    return advance > metric->advance ? (advance - metric->advance) / 2 : 0;
+}
+
 static __attribute__((always_inline)) inline int glyph_pair(
         const TextFont *font, const TextProfile *profile,
         int left, int right) {
@@ -778,7 +786,7 @@ static __attribute__((always_inline)) inline int geometry_glyph_adjusted(
     int advance = glyph_advance(font, profile, index);
     if (geometry->previous >= 0)
         geometry->x = coordinate(geometry->x + adjust);
-    int ink_left = geometry->x + metric->bearing_x;
+    int ink_left = geometry->x + glyph_offset(font, profile, index) + metric->bearing_x;
     int ink_right = ink_left + metric->width;
     if (metric->width) {
         if (ink_left < geometry->ink_left)
@@ -1367,7 +1375,7 @@ TEXT_O2 int text_layout_simple_emit(
     glyph->metric = (uint16_t)index;
     glyph->code = metric->code;
     glyph->pen_x = coordinate(pen_x);
-    glyph->ink_x = coordinate(pen_x + metric->bearing_x);
+    glyph->ink_x = coordinate(pen_x + glyph_offset(font, profile, index) + metric->bearing_x);
     glyph->ink_y = coordinate(
         state->y + cursor->line_baseline + metric->bearing_y);
     glyph->width = metric->width;
@@ -1476,7 +1484,7 @@ __attribute__((noinline)) TEXT_O2 TextStatus text_layout_emit_peek(
         event->glyph.metric = (uint16_t)index;
         event->glyph.code = code;
         event->glyph.pen_x = coordinate(pen_x);
-        event->glyph.ink_x = coordinate(pen_x + metric->bearing_x);
+        event->glyph.ink_x = coordinate(pen_x + glyph_offset(font, profile, index) + metric->bearing_x);
         event->glyph.ink_y = coordinate(
             state->y + cursor->line_baseline + metric->bearing_y);
         event->glyph.width = metric->width;

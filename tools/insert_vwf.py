@@ -15,6 +15,8 @@ import text_core
 
 ROOT = Path(__file__).resolve().parent.parent
 HOOK = 0x97DA8
+STORY_CHOICE_HOOK = 0x9FBA8
+STORY_CHOICE_WIDTH_HOOK = 0x9FC0C
 DESCRIPTION_HOOK = 0xE2C24
 PAYLOAD = 0x900000
 BASE = dialogue.BASE
@@ -32,6 +34,7 @@ NUMBER_AT_HOOK = 0x9844C
 NUMBER_CURRENT_HOOK = 0x984C4
 CURSOR_SET_HOOK = 0x981D0
 FIELD_AT_HOOK = 0x981F0
+EDITOR_FIELD_HOOK = 0x9C45C
 FIELD_CURRENT_HOOK = 0x98248
 REFRESH_HOOK = 0x972C8
 CLEAR_HOOK = 0x986B4
@@ -347,10 +350,60 @@ glyphs: .incbin "{path / 'glyphs.bin'}"
 .balign 4
 .global compact_indices
 compact_indices: .incbin "{path / 'compact_indices.bin'}"
+.section .story_choice,"ax"
+.balign 4
+.global vwf_story_choice
+.thumb_func
+vwf_story_choice:
+    push {{r4, r5, r6, lr}}
+    ldr r2, =0x08800040
+1:
+    ldr r1, [r2]
+    cmp r1, #0
+    beq 3f
+    cmp r1, r0
+    beq 2f
+    adds r2, #8
+    b 1b
+2:
+    ldr r0, [r2, #4]
+3:
+    sub sp, #24
+    movs r2, r0
+    ldr r0, =0x02030564
+    ldr r3, =0x0809FBB1
+    bx r3
+    .ltorg
+.balign 4
+.global vwf_story_choice_width
+.thumb_func
+vwf_story_choice_width:
+    strb r0, [r4]
+    movs r4, #0
+    movs r6, #0
+1:
+    lsls r0, r4, #2
+    add r0, sp
+    ldr r0, [r0, #8]
+    bl vwf_measure_cells
+    cmp r6, r0
+    bhs 2f
+    movs r6, r0
+2:
+    adds r4, #1
+    cmp r4, r5
+    blo 1b
+    movs r1, #28
+    subs r1, r1, r6
+    lsls r1, #24
+    ldr r3, =0x0809FC15
+    bx r3
+    .ltorg
 ''')
         (path / 'link.ld').write_text(f'''SECTIONS {{
  . = {BASE + PAYLOAD};
  .text : {{ *(.text*) *(.rodata*) }}
+ .story_choice : {{ *(.story_choice) }}
  /DISCARD/ : {{ *(.comment*) *(.ARM.attributes*) *(.ARM.exidx*) }}
 }}
 ''')
@@ -517,6 +570,8 @@ def build_rom(original, document, choices, dialogue_document):
     rom[PAYLOAD:PAYLOAD + len(payload)] = payload
     rom[REFRESH_HOOK:REFRESH_HOOK + 8] = long_jump(symbols['vwf_refresh'])
     rom[HOOK:HOOK + 8] = long_jump(symbols['vwf_render'])
+    rom[STORY_CHOICE_HOOK:STORY_CHOICE_HOOK + 8] = long_jump(symbols['vwf_story_choice'])
+    rom[STORY_CHOICE_WIDTH_HOOK:STORY_CHOICE_WIDTH_HOOK + 8] = long_jump(symbols['vwf_story_choice_width'])
     rom[DESCRIPTION_HOOK:DESCRIPTION_HOOK + 8] = long_jump(symbols['vwf_description'])
     rom[NUMBER_HOOK:NUMBER_HOOK + 12] = long_jump_preserve_r3(symbols['vwf_format_number'])
     rom[NUMBER_AT_HOOK:NUMBER_AT_HOOK + 12] = long_jump_preserve_r3(symbols['vwf_number_at'])
@@ -525,6 +580,7 @@ def build_rom(original, document, choices, dialogue_document):
     rom[CURSOR_SET_HOOK:CURSOR_SET_HOOK + 8] = long_jump(symbols['vwf_cursor_set'])
     rom[FIELD_AT_HOOK:FIELD_AT_HOOK + 12] = long_jump_preserve_r3(
         symbols['vwf_field_at'])
+    rom[EDITOR_FIELD_HOOK:EDITOR_FIELD_HOOK + 8] = long_jump(symbols['vwf_editor_text'])
     rom[FIELD_CURRENT_HOOK:FIELD_CURRENT_HOOK + 8] = long_jump(
         symbols['vwf_field_current'])
     patch_counted_names(rom, original, symbols['vwf_field_counted'])

@@ -291,8 +291,8 @@
   },
   {
    "offset": "0x001B27",
-   "build_text": "{07 00 00}%1$s\n{07 07 03}HP:{08 58 70}{04 02}%2$v\n{07 07 04}MM:{08 58 70}{04 02}%3$v\n{07 07 05}DCP:{08 58 70}{04 02}%4$v\n{07 07 06}SR:{08 58 70}{04 02}%5$v\n{07 07 07}HR:{08 58 70}{04 02}%6$v\n{07 00 0C}Type:{08 28 70}{04 02}%7$s",
-   "repeat_format": true
+   "build_text": "{07 00 00}%1$s\n{07 07 03}HP:{08 58 70}{04 02}%4$s\n{07 07 04}MM:{08 58 70}{04 02}%5$s\n{07 07 05}DCP:{08 58 70}{04 02}%6$s\n{07 07 06}SR:{08 58 70}{04 02}%7$s\n{07 07 07}HR:{08 58 70}{04 02}%8$s\n{07 00 0A}%11$s\n{07 00 0C}Type:{08 28 70}{04 02}%13$s",
+   "row_format": true
   },
   {
    "offset": "0x001B5F",
@@ -438,7 +438,7 @@
   },
   {
    "offset": "0x0026BD",
-   "build_text": "No Zoids are deployed.\nOpening the {01 04}Team\nFormation{01 00} screen."
+   "build_text": "No Zoids are deployed.\nOpening the {01 02}Team\nFormation{01 00} screen."
   },
   {
    "offset": "0x00277B",
@@ -470,15 +470,15 @@
   },
   {
    "offset": "0x002A27",
-   "build_text": "An {01 01}XL{01 00} Zoid can only\nbe placed at the\n{01 01}center of a row{01 00}."
+   "build_text": "An {01 01}XL{01 00} Zoid can only\nbe placed at the\n{01 01}center of a column{01 00}."
   },
   {
    "offset": "0x002AB1",
-   "build_text": "An {01 01}XL{01 00} Zoid cannot share\na row with a Zoid of\n{01 01}size M or larger{01 00}."
+   "build_text": "An {01 01}XL{01 00} Zoid cannot share\na column with a Zoid of\n{01 01}size M or larger{01 00}."
   },
   {
    "offset": "0x002B61",
-   "build_text": "A Zoid of {01 01}size M or\nlarger{01 00} cannot share a\nrow with an {01 01}XL{01 00} Zoid."
+   "build_text": "A Zoid of {01 01}size M or\nlarger{01 00} cannot share a\ncolumn with an {01 01}XL{01 00} Zoid."
   },
   {
    "offset": "0x002C31",
@@ -783,13 +783,13 @@
   },
   {
    "offset": "0x00409E",
-   "build_text": "{07 00 00}%1$s\n{07 00 02}AT:{08 18 50}{04 02}%3$s\n{07 00 03}HR:{08 18 50}{04 02}%4$s%%\n{07 00 04}TG:{08 18 50}{04 02}%5$s\n{07 00 05}EP:{08 18 50}{04 02}%6$s",
+   "build_text": "{07 00 00}%1$s\n{07 00 02}AT:{08 18 58}{04 02}%3$s\n{07 00 03}HR:{08 18 58}{04 02}%4$s%%\n{07 00 04}TG:{08 18 58}{04 02}%5$s\n{07 00 05}EP:{08 18 58}{04 02}%6$s",
    "compact_format": true,
    "row_format": true
   },
   {
    "offset": "0x0040C8",
-   "build_text": "{07 00 00}%1$s\n{07 00 02}%3$s\n{07 00 03}%4$s\n{07 00 04}TG:{08 18 50}{04 02}%5$s\n{07 00 05}EP:{08 18 50}{04 02}%6$s",
+   "build_text": "{07 00 00}%1$s\n{07 00 02}%3$s\n{07 00 03}%4$s\n{07 00 04}TG:{08 18 58}{04 02}%5$s\n{07 00 05}EP:{08 18 58}{04 02}%6$s",
    "compact_format": true,
    "row_format": true
   },
@@ -877,8 +877,8 @@
   },
   {
    "offset": "0x004482",
-   "build_text": "{07 00 00}QTY:{08 28 90}{04 02}%1$d\n{07 00 02}Price:{08 30 90}{04 02}%2$dG",
-   "repeat_format": true
+   "build_text": "{07 00 00}%1$s{07 0B 00}QTY:\n{07 00 02}Price:{08 30 90}{04 02}%3$sG",
+   "row_format": true
   },
   {
    "offset": "0x0044C4",
@@ -932,20 +932,20 @@
   },
   {
    "offset": "0x0046C4",
-   "build_text": "{07 00 01}AT:{08 18 68}{04 02}%2$s\n{07 00 02}HR:{08 18 68}{04 02}%3$s%%\n{07 00 03}TG:{08 18 68}{04 02}%4$s\n{07 00 04}EP:{07 07 04}WP:{07 00 04}%5$s\n{07 00 05}ATR:{08 20 68}%6$s\n{07 00 06}{08 00 68}%7$s\n{07 00 08}Price:\n{07 00 09}{08 00 68}{04 02}%9$sG",
+   "build_text": "{07 00 01}AT:{08 18 68}{04 02}%2$s\n{07 00 02}HR:{08 18 68}{04 02}%3$s%%\n{07 00 03}TG:{08 18 68}{04 02}%4$s\n{07 00 04}EP:{07 07 04}WP:{07 00 04}%5$s\n{07 00 05}ATR:{08 20 68}%6$s\n{07 00 06}{08 00 68}%7$s\n{07 00 08}Price:{08 30 68}{04 02}%9$sG",
    "compact_format": true,
    "row_format": true
   },
   {
    "offset": "0x004712",
-   "build_text": "{07 00 03}TG:{08 18 68}{04 02}%4$s\n{07 00 04}EP:{07 07 04}WP:{07 00 04}%5$s\n{07 00 05}USE:{08 20 68}{04 02}%6$s\n{07 00 06}{08 00 68}%7$s\n{07 00 08}Price:\n{07 00 09}{08 00 68}{04 02}%9$sG",
+   "build_text": "{07 00 01}%2$s\n{07 00 02}%3$s\n{07 00 03}TG:{08 18 68}{04 02}%4$s\n{07 00 04}EP:{07 07 04}WP:{07 00 04}%5$s\n{07 00 05}USE:{08 20 68}{04 02}%6$s\n{07 00 06}{08 00 68}%7$s\n{07 00 08}Price:{08 30 68}{04 02}%9$sG",
    "compact_format": true,
    "row_format": true
   },
   {
    "offset": "0x004748",
-   "build_text": "{07 00 02}QTY:{08 28 90}{04 02}%1$d\n{07 00 04}Price:{08 30 90}{04 02}%2$dG",
-   "repeat_format": true
+   "build_text": "{07 00 00}%1$s{07 0C 00}QTY:\n{07 00 02}Price:{08 30 90}{04 02}%3$sG",
+   "row_format": true
   },
   {
    "offset": "0x00478A",
@@ -1152,7 +1152,8 @@
   },
   {
    "offset": "0x0050CF",
-   "build_text": "Repair cost: %dG"
+   "build_text": "{07 00 00}%1$s{07 00 02}Repair cost:{08 60 A0}{04 02}%3$sG",
+   "row_format": true
   },
   {
    "offset": "0x005102",
@@ -1373,7 +1374,7 @@
   },
   {
    "offset": "0x005F35",
-   "build_text": "{07 00 04}A pilot is aboard.\nIs that OK?"
+   "build_text": "{07 00 04}Pilot aboard. Sell?"
   },
   {
    "offset": "0x005F68",
@@ -4144,7 +4145,7 @@
   },
   {
    "offset": "0x017745",
-   "build_text": "Save {01 04}failed{01 00}.\nYour data was {01 04}not saved{01 00}."
+   "build_text": "Save {01 01}failed{01 00}.\nYour data was {01 01}not saved{01 00}."
   },
   {
    "offset": "0x017821",
@@ -4993,7 +4994,7 @@
   },
   {
    "offset": "0x01AECC",
-   "text": "16−Shot Missiles"
+   "text": "16−Shot Msl."
   },
   {
    "offset": "0x01AEE1",
@@ -6101,7 +6102,7 @@
   },
   {
    "offset": "0x01CA7B",
-   "text": "12−Shot Missiles"
+   "text": "12−Shot Msl."
   },
   {
    "offset": "0x01CA90",
@@ -11761,48 +11762,23 @@
   },
   {
    "offset": "0x02CBB9",
-   "replace_lines": [
-    [
-     0,
-     "{01 02}Jack"
-    ]
-   ]
+   "text": "{01 02}Jack\n{01 00}There are guards everywhere."
   },
   {
    "offset": "0x02CBEF",
-   "replace_lines": [
-    [
-     0,
-     "{01 02}Earth"
-    ]
-   ]
+   "text": "{01 02}Earth\n{01 00}…They’re making quite a show…"
   },
   {
    "offset": "0x02CC1F",
-   "replace_lines": [
-    [
-     0,
-     "{01 02}Regina"
-    ]
-   ]
+   "text": "{01 02}Regina\n{01 00}What do you mean?"
   },
   {
    "offset": "0x02CC43",
-   "replace_lines": [
-    [
-     0,
-     "{01 02}Jack"
-    ]
-   ]
+   "text": "{01 02}Jack\n{01 00}The town has new rulers. They probably want everyone to know it."
   },
   {
    "offset": "0x02CC94",
-   "replace_lines": [
-    [
-     0,
-     "{01 02}Regina"
-    ]
-   ]
+   "text": "{01 02}Regina\n{01 00}Grr!"
   },
   {
    "offset": "0x02CD3A",
@@ -11830,6 +11806,26 @@
      "{01 02}Jack"
     ]
    ]
+  },
+  {
+   "offset": "0x02CDB0",
+   "text": "Battle event, yo!"
+  },
+  {
+   "offset": "0x02CDC9",
+   "text": "Battle event, yo!"
+  },
+  {
+   "offset": "0x02CDE0",
+   "text": "Battle event, yo!"
+  },
+  {
+   "offset": "0x02CDF9",
+   "text": "Battle event, yo!"
+  },
+  {
+   "offset": "0x02CE21",
+   "text": "Bulgogi"
   },
   {
    "offset": "0x02CE92",
@@ -16992,6 +16988,51 @@
    "text": "{01 02}{03}\n{01 00}This castle looks abandoned…"
   },
   {
+   "offset": "0x04AB32",
+   "replace_lines": [
+    [
+     2,
+     " done, please come again.”"
+    ]
+   ]
+  },
+  {
+   "offset": "0x04B0E1",
+   "replace_lines": [
+    [
+     2,
+     " done, please come again.”"
+    ]
+   ]
+  },
+  {
+   "offset": "0x04B6BA",
+   "replace_lines": [
+    [
+     2,
+     " done, please come again.”"
+    ]
+   ]
+  },
+  {
+   "offset": "0x04BC61",
+   "replace_lines": [
+    [
+     2,
+     " done, please come again.”"
+    ]
+   ]
+  },
+  {
+   "offset": "0x04C259",
+   "replace_lines": [
+    [
+     2,
+     " done, please come again.”"
+    ]
+   ]
+  },
+  {
    "offset": "0x05107E",
    "replace_lines": [
     [
@@ -18316,6 +18357,10 @@
     [
      0,
      "{01 02}Dr. T"
+    ],
+    [
+     1,
+     "{01 00}“I see, Zaber Fang..."
     ]
    ]
   },
@@ -18343,6 +18388,10 @@
     [
      0,
      "{01 02}Dr. T"
+    ],
+    [
+     1,
+     "{01 00}“Oh, no!"
     ]
    ]
   },
@@ -18361,6 +18410,10 @@
     [
      0,
      "{01 02}Dr. T"
+    ],
+    [
+     1,
+     "{01 00}“Sorry, but can you"
     ]
    ]
   },
@@ -24183,7 +24236,7 @@
   },
   {
    "offset": "0x07E22F",
-   "text": "This Zoid looks great!\nDoes it work with Pulse?\nI’ve never seen a Zoid like this."
+   "text": "This Zoid looks great!\nDoes it work with Pulse?\nThat Zoid’s new to me."
   },
   {
    "offset": "0x07E2D8",
@@ -27802,7 +27855,7 @@
   },
   {
    "offset": "0x103D60",
-   "text": "Pulse’s emotions will change as shown.\nIs that OK?"
+   "text": "Pulse’s emotions will change\nas shown. Is that OK?"
   },
   {
    "offset": "0x103E00",
@@ -28167,7 +28220,7 @@
   },
   {
    "offset": "0x1093AC",
-   "text": "You learned\n"
+   "text": "You learned "
   },
   {
    "offset": "0x1093C8",
@@ -28175,7 +28228,7 @@
   },
   {
    "offset": "0x1093CC",
-   "text": "You got\n"
+   "text": "You earned "
   },
   {
    "offset": "0x1093DC",
