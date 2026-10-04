@@ -2816,7 +2816,7 @@
   },
   {
    "offset": "0x00EB65",
-   "build_text": "Atrey Arcadia"
+   "build_text": "Athle Arcadia"
   },
   {
    "offset": "0x00EB78",
@@ -2828,7 +2828,7 @@
   },
   {
    "offset": "0x00EBB2",
-   "text": "Atrey is the prince of Arcadia. He defended the kingdom’s space−time transfer device from an Imperial invasion. After the fusion, he searched for Dr. T and a way home."
+   "text": "Athle is the prince of Arcadia. He defended the kingdom’s space−time transfer device from an Imperial invasion. After the fusion, he searched for Dr. T and a way home."
   },
   {
    "offset": "0x00ED75",
@@ -2841,7 +2841,7 @@
   },
   {
    "offset": "0x00EDB3",
-   "text": "One of Arcadia’s Three Beasts. She tutors and guards Atrey, who carries Ancient Zoidian blood. She is serious, responsible, and sometimes meddlesome. She knows ancient technology well."
+   "text": "One of Arcadia’s Three Beasts. She tutors and guards Athle, who carries Ancient Zoidian blood. She is serious, responsible, and sometimes meddlesome. She knows ancient technology well."
   },
   {
    "offset": "0x00EF62",
@@ -2854,7 +2854,7 @@
   },
   {
    "offset": "0x00EFA0",
-   "text": "One of Arcadia’s Three Beasts and a former Guylos Imperial officer. He supports Atrey as part of the group. He is quiet but has a very sharp tongue. He excels in close combat."
+   "text": "One of Arcadia’s Three Beasts and a former Guylos Imperial officer. He supports Athle as part of the group. He is quiet but has a very sharp tongue. He excels in close combat."
   },
   {
    "offset": "0x00F153",
@@ -2867,7 +2867,7 @@
   },
   {
    "offset": "0x00F191",
-   "text": "One of Arcadia’s Three Beasts. This former Helic Republic officer leads Atrey’s three guardians. He is the sensible member of the group."
+   "text": "One of Arcadia’s Three Beasts. This former Helic Republic officer leads Athle’s three guardians. He is the sensible member of the group."
   },
   {
    "offset": "0x00F2C3",
@@ -3668,7 +3668,7 @@
   },
   {
    "offset": "0x0142A6",
-   "text": "Fran is one of the four Imperial generals who once fought Atrey’s group. Earth, one of Arcadia’s Three Beasts, is her longtime rival."
+   "text": "Fran is one of the four Imperial generals who once fought Athle’s group. Earth, one of Arcadia’s Three Beasts, is her longtime rival."
   },
   {
    "offset": "0x0143C8",
@@ -3680,7 +3680,7 @@
   },
   {
    "offset": "0x014408",
-   "text": "Gale is one of the four Imperial generals who once fought Atrey’s group. He is a former Republic soldier who once trained Jack."
+   "text": "Gale is one of the four Imperial generals who once fought Athle’s group. He is a former Republic soldier who once trained Jack."
   },
   {
    "offset": "0x01452E",
@@ -3692,7 +3692,7 @@
   },
   {
    "offset": "0x01456C",
-   "text": "Opis is one of the four Imperial generals who once fought Atrey’s group. The Empire banished this former Zoid researcher for dangerous experiments. His methods earned him a reputation as a mad scientist."
+   "text": "Opis is one of the four Imperial generals who once fought Athle’s group. The Empire banished this former Zoid researcher for dangerous experiments. His methods earned him a reputation as a mad scientist."
   },
   {
    "offset": "0x0146EC",
@@ -3704,7 +3704,7 @@
   },
   {
    "offset": "0x01472C",
-   "text": "Blood is one of the four Imperial generals who once fought Atrey’s group. He vanished until the space−time fusion brought him back. He now works with Gard while pursuing a hidden goal."
+   "text": "Blood is one of the four Imperial generals who once fought Athle’s group. He vanished until the space−time fusion brought him back. He now works with Gard while pursuing a hidden goal."
   },
   {
    "offset": "0x0148C8",
@@ -6980,7 +6980,7 @@
   },
   {
    "offset": "0x01E2CC",
-   "text": "Atrey"
+   "text": "Athle"
   },
   {
    "offset": "0x01E38C",
@@ -11670,7 +11670,7 @@
   },
   {
    "offset": "0x02C5F5",
-   "text": "{01 02}Regina\n{01 00}So you’re Atrey…"
+   "text": "{01 02}Regina\n{01 00}So you’re Athle…"
   },
   {
    "offset": "0x02C61F",
@@ -11681,7 +11681,7 @@
    "replace_lines": [
     [
      1,
-     "{01 00}Yep. I’m {01 02}Atrey{01 00}."
+     "{01 00}Yep. I’m {01 02}Athle{01 00}."
     ]
    ]
   },
@@ -11708,11 +11708,11 @@
   },
   {
    "offset": "0x02C6F3",
-   "text": "{01 02}Regina\n{01 00}Don’t lie to me. You are Atrey…"
+   "text": "{01 02}Regina\n{01 00}Don’t lie to me. You are Athle…"
   },
   {
    "offset": "0x02C733",
-   "text": "{01 02}Earth\n{01 00}So you’re Atrey…"
+   "text": "{01 02}Earth\n{01 00}So you’re Athle…"
   },
   {
    "offset": "0x02C75D",
@@ -16545,11 +16545,11 @@
   },
   {
    "offset": "0x044C18",
-   "text": "{01 02}Dr. T\n{01 00}Prince… Prince Atrey?!"
+   "text": "{01 02}Dr. T\n{01 00}Prince… Prince Athle?!"
   },
   {
    "offset": "0x044C65",
-   "text": "{01 02}Atrey\n{01 00}Doctor! You’re alive?"
+   "text": "{01 02}Athle\n{01 00}Doctor! You’re alive?"
   },
   {
    "offset": "0x044CA4",
@@ -16578,7 +16578,7 @@
   },
   {
    "offset": "0x044EA6",
-   "text": "{01 02}Atrey\n{01 00}I see. So that’s it."
+   "text": "{01 02}Athle\n{01 00}I see. So that’s it."
   },
   {
    "offset": "0x044EE0",
@@ -16586,7 +16586,7 @@
   },
   {
    "offset": "0x044F4A",
-   "text": "{01 02}Atrey\n{01 00}Of course. We’ll help you put the world back as it was."
+   "text": "{01 02}Athle\n{01 00}Of course. We’ll help you put the world back as it was."
   },
   {
    "offset": "0x045009",
@@ -19214,7 +19214,7 @@
   },
   {
    "offset": "0x0628DE",
-   "text": "{01 02}Dr. T\n{01 00}…Prince Atrey must be searching for me…"
+   "text": "{01 02}Dr. T\n{01 00}…Prince Athle must be searching for me…"
   },
   {
    "offset": "0x06293E",
@@ -19222,7 +19222,7 @@
   },
   {
    "offset": "0x062970",
-   "text": "{01 02}{03}\n{01 00}Prince Atrey? Who’s that?"
+   "text": "{01 02}{03}\n{01 00}Prince Athle? Who’s that?"
   },
   {
    "offset": "0x0629B2",
@@ -23948,7 +23948,7 @@
   },
   {
    "offset": "0x07C88D",
-   "text": "{01 02}Dr. T\n{01 00}I thought Prince Atrey took him down…"
+   "text": "{01 02}Dr. T\n{01 00}I thought Prince Athle took him down…"
   },
   {
    "offset": "0x07C8F5",
@@ -25566,7 +25566,7 @@
   },
   {
    "offset": "0x086173",
-   "text": "{01 02}Atrey\n{01 00}Thanks a lot!"
+   "text": "{01 02}Athle\n{01 00}Thanks a lot!"
   },
   {
    "offset": "0x0861BA",
@@ -26139,7 +26139,7 @@
   },
   {
    "offset": "0x089CFF",
-   "text": "{01 02}Atrey\n{01 00}Blood!"
+   "text": "{01 02}Athle\n{01 00}Blood!"
   },
   {
    "offset": "0x089EBD",
@@ -26151,11 +26151,11 @@
   },
   {
    "offset": "0x08A25D",
-   "text": "{01 02}Blood\n{01 00}Atrey, we’ll settle this back in our own world!"
+   "text": "{01 02}Blood\n{01 00}Athle, we’ll settle this back in our own world!"
   },
   {
    "offset": "0x08A309",
-   "text": "{01 02}Atrey\n{01 00}Don’t tell me they…"
+   "text": "{01 02}Athle\n{01 00}Don’t tell me they…"
   },
   {
    "offset": "0x08A4B8",
@@ -26539,7 +26539,7 @@
   },
   {
    "offset": "0x08C366",
-   "text": "{01 02}Atrey\n{01 00}Blood!"
+   "text": "{01 02}Athle\n{01 00}Blood!"
   },
   {
    "offset": "0x08C38C",
@@ -26644,7 +26644,7 @@
   },
   {
    "offset": "0x08C9E9",
-   "text": "{01 02}Atrey\n{01 00}Wait, Blood!"
+   "text": "{01 02}Athle\n{01 00}Wait, Blood!"
   },
   {
    "offset": "0x08CA17",
@@ -26656,7 +26656,7 @@
   },
   {
    "offset": "0x08CACB",
-   "text": "{01 02}Atrey\n{01 00}…"
+   "text": "{01 02}Athle\n{01 00}…"
   },
   {
    "offset": "0x08CAE9",
@@ -27633,7 +27633,7 @@
   },
   {
    "offset": "0x0916ED",
-   "text": "{01 02}Atrey\n{01 00}!"
+   "text": "{01 02}Athle\n{01 00}!"
   },
   {
    "offset": "0x091709",
@@ -27641,11 +27641,11 @@
   },
   {
    "offset": "0x0917A0",
-   "text": "{01 02}Atrey\n{01 00}…No, it’s nothing."
+   "text": "{01 02}Athle\n{01 00}…No, it’s nothing."
   },
   {
    "offset": "0x0917DC",
-   "text": "{01 02}Message from Dr. T\n{01 00}Prince Atrey, I have bad news. The tablet we found says these artifacts form a Zoid enhancement system, but…"
+   "text": "{01 02}Message from Dr. T\n{01 00}Prince Athle, I have bad news. The tablet we found says these artifacts form a Zoid enhancement system, but…"
   },
   {
    "offset": "0x091974",
@@ -27653,7 +27653,7 @@
   },
   {
    "offset": "0x091A59",
-   "text": "{01 02}Atrey\n{01 00}Well, they are ruins… these things happen. Keep the survey going."
+   "text": "{01 02}Athle\n{01 00}Well, they are ruins… these things happen. Keep the survey going."
   },
   {
    "offset": "0x091AE0",
