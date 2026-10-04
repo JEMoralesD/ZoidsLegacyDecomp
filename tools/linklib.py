@@ -44,7 +44,7 @@ def _defined(obj):
             d.add(m.group(1))
     return d
 
-def link_text(objs, vma, out_bin, work="grind", extra_includes=()):
+def link_text(objs, vma, out_bin, work="grind", extra_includes=(), ld_flags=()):
     """Link objects at `vma` and write their `.text` bytes."""
     funcs = _all_func_addrs()
     defined = set()
@@ -94,6 +94,6 @@ def link_text(objs, vma, out_bin, work="grind", extra_includes=()):
         f.write("  /DISCARD/ : { *(*) }\n}\n")
 
     elf = os.path.join(work, "_link.elf")
-    subprocess.run([LD, "--entry=0", "-T", ld] + objs + [stub_o, "-o", elf], check=True, cwd=ROOT)
+    subprocess.run([LD, "--entry=0", *ld_flags, "-T", ld] + objs + [stub_o, "-o", elf], check=True, cwd=ROOT)
     subprocess.run([OBJCOPY, "-O", "binary", "-j", ".text", elf, out_bin], check=True, cwd=ROOT)
     return open(out_bin, "rb").read()

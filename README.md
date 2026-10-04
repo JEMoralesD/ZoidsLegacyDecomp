@@ -39,6 +39,14 @@ It creates temporary files only and never writes a ROM.
 
 Use `python3 tools/verify.py --rom /path/to/rom --region region0` to verify one region.
 
+## Non-matching C
+
+Eleven routines from the hand-written half of the MP2K sound driver use instructions and register conventions that agbcc cannot produce, so the verified build keeps them as assembly. `src/audio/nonmatching/` has equivalent C for 10 of them. SoundMain has no C form because it hands a custom stack frame to the mixer code in IWRAM. `nonmatching.txt` lists each C file with its ROM span.
+
+    python3 tools/nonmatching.py --rom /path/to/rom [--entry m4a_ply_note] [--diff]
+
+The tool compiles each entry at its original address and reports how many instructions match the ROM. `--diff` prints the instruction diff.
+
 ## Build the translated ROM
 
 Put a clean `Zoids Legacy (USA).gba` in the repository root. Install Python 3, a host C compiler (`cc`), and the ARM GNU toolchain (`arm-none-eabi-gcc`, `-as`, `-objcopy`, `-nm`).

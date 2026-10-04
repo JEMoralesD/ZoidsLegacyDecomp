@@ -44,7 +44,7 @@ Animation callbacks cover dust, shields, sweeping windows, falling streaks, and 
 | [zoids/](zoids/) | Zoid forms, base stats, equipment bonuses, and abilities |
 | [ui/](ui/) | Windows, tile allocation, and menu scripts |
 | [graphics/](graphics/) | Sprites, scanline events, HBlank callbacks, and graphics transfers |
-| [audio/](audio/) | Songs, music players, sequence commands, and sound driver assembly |
+| [audio/](audio/) | Songs, music players, sequence commands, and sound driver assembly, with non-matching C for the hand-written driver routines in [nonmatching/](audio/nonmatching/) |
 | [save/](save/) | Save blocks and SRAM access |
 | [engine/](engine/) | Startup, frame updates, task scheduling, input, deferred callbacks, and fixed-point math |
 | [runtime/](runtime/) | BIOS calls, startup, interrupt dispatch, and compiler support |

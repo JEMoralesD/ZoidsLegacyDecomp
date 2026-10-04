@@ -1,0 +1,11 @@
+# Non-matching C for hand-written MP2K routines: name  start_off  end_off  src  [mode]
+# Score with: python3 tools/nonmatching.py --rom /path/to/rom [--entry name] [--diff]
+m4a_ply_fine       0xEAE90  0xEAEC0  audio/nonmatching/music_command_end_track.c  old
+m4a_read_u32       0xEAF00  0xEAF3C  audio/nonmatching/music_command_jump.c  old
+m4a_repeat         0xEAF50  0xEAF80  audio/nonmatching/music_command_repeat.c  old
+m4a_sound_vsync    0xEB084  0xEB0C0  audio/nonmatching/run_sound_vsync.c  old
+m4a_track_stop     0xEB328  0xEB36C  audio/nonmatching/stop_music_track.c  old
+m4a_calc_pan       0xEB36C  0xEB39C  audio/nonmatching/update_music_channel_volume.c  old
+m4a_ply_endtie     0xEB59C  0xEB5DC  audio/nonmatching/music_command_end_tie.c  old
+m4a_mplay_main     0xEB0C0  0xEB328  audio/nonmatching/update_music_player.c  old
+m4a_ply_note       0xEB39C  0xEB59C  audio/nonmatching/play_music_note.c  old
