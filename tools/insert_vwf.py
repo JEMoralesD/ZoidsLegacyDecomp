@@ -560,7 +560,19 @@ def check_deck_command_names(rom, checker):
             raise ValueError(f'Deck Command must fit one 104-pixel line: {name}')
 
 
+def release_version():
+    version = (ROOT / 'VERSION').read_text().strip()
+    if not re.fullmatch(r'[0-9]+\.[0-9]+\.[0-9]+', version):
+        raise ValueError('VERSION must hold a version such as 1.0.2.')
+    return version
+
+
 def build_rom(original, document, choices, dialogue_document):
+    version = release_version()
+    dialogue_document = {'entries': [
+        {key: value.replace('{VERSION}', version) if key in ('text', 'build_text') else value
+         for key, value in entry.items()}
+        for entry in dialogue_document['entries']]}
     font = text_core.extract_font(original, choices)
     checker = text_core.TextChecker(font)
     scene_offsets = {int(entry['english_offset'], 16) for entry in document['entries']}

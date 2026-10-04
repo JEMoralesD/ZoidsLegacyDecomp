@@ -54,3 +54,5 @@ Put a clean `Zoids Legacy (USA).gba` in the repository root. Install Python 3, a
     python3 tools/insert_vwf.py --output "Zoids Legacy (USA) - Retranslated.gba"
 
 The translation lives in `dialogue-en.json` and `scene-translation.json`, and `kerning-choices.json` holds the font spacing. The two text files hold only the translated English and build metadata. The tools read the original game text and bytes from your ROM when they load these files, so the repository ships no game text. The build rejects edits that use glyphs the font lacks, speaker names, battle menu choices, and battle quotes that overflow their windows, and Deck Command names wider than their menu line.
+
+To release a patch, set the version in `VERSION` and run `python3 tools/build_site_patch.py`. It writes `site/patch.bps` and `site/version.mjs`, and the credits read the same `VERSION` through their `{VERSION}` placeholder.

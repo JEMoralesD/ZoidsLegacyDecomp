@@ -1,3 +1,5 @@
+import { PATCH_VERSION } from './version.mjs';
+
 let effects;
 
 const themeButton = document.querySelector('#theme-toggle');
@@ -73,7 +75,7 @@ let busy = false;
 const supported = Boolean(window.Worker && window.crypto?.subtle);
 
 function setStatus(message, state = 'muted') {
-  status.textContent = `Patch v1.0.2 · ${message}`;
+  status.textContent = `Patch v${PATCH_VERSION} · ${message}`;
   status.dataset.error = String(state === 'error');
   for (const dot of statusDots) dot.className = `status-dot ${state}`;
 }
@@ -198,6 +200,8 @@ patchButton.addEventListener('click', () => {
 if (!supported) {
   input.disabled = true;
   setStatus('Open this page over HTTPS or localhost in a modern browser to use the patcher.', 'error');
+} else {
+  setStatus('Select your USA ROM to begin.');
 }
 import('./effects.js').then(({ createEffects }) => {
   effects = createEffects();
