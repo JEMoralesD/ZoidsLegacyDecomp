@@ -73,7 +73,7 @@ let busy = false;
 const supported = Boolean(window.Worker && window.crypto?.subtle);
 
 function setStatus(message, state = 'muted') {
-  status.textContent = `Patch v1.0.1 · ${message}`;
+  status.textContent = `Patch v1.0.2 · ${message}`;
   status.dataset.error = String(state === 'error');
   for (const dot of statusDots) dot.className = `status-dot ${state}`;
 }
