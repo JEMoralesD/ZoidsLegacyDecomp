@@ -128,7 +128,14 @@ nav { display: flex; flex-shrink: 0; align-items: center; gap: 28px; margin-left
 .patcher-title span { position: relative; }
 .section-frame { position: absolute; inset: 0; width: 100%; height: 100%; fill: currentColor; color: var(--amber); pointer-events: none; }
 h2 { margin: 0; color: var(--amber); font: 700 14px/1.5 var(--font); letter-spacing: 1.5px; }
-.action-list { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; }
+.action-list { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
+.language-picker { display: flex; justify-content: center; gap: 12px; }
+.language-option { display: flex; align-items: center; justify-content: center; gap: 8px; min-width: 94px; min-height: 42px; padding: 5px 10px; border: 2px solid var(--rail); background: var(--panel); color: var(--text); font: 700 14px/1 var(--font); }
+.language-option span:first-child { font: 24px/1 Arial, sans-serif; }
+.language-option[aria-pressed="true"] { border-color: var(--amber); color: var(--amber); }
+.language-option:hover:not(:disabled), .language-option:focus-visible { border-color: var(--amber-bright); }
+.language-option:focus-visible { outline: 2px solid var(--amber-bright); outline-offset: 3px; }
+.language-option:disabled { cursor: wait; }
 .menu-control { --control-border: var(--amber); --control-fill: var(--panel); position: relative; isolation: isolate; display: grid; place-items: center; min-width: 0; width: 100%; padding: 22px 16px; border: 0; background: transparent; color: var(--text); cursor: pointer; transition: transform 140ms ease-out; }
 .control-surface { position: absolute; z-index: -1; inset: 0; pointer-events: none; }
 .control-surface::before, .control-surface::after { content: ""; position: absolute; z-index: -1; pointer-events: none; transition: background-color 160ms; }
@@ -142,7 +149,7 @@ h2 { margin: 0; color: var(--amber); font: 700 14px/1.5 var(--font); letter-spac
 .menu-control:hover:not(:disabled):not(.busy), .menu-control:focus-within:not(:disabled):not(.busy) { transform: translateY(-2px); }
 .menu-control:hover:not(:disabled):not(.busy) .control-surface, .menu-control:focus-within:not(:disabled):not(.busy) .control-surface { animation: control-engage 240ms steps(1, end); }
 .menu-control:active:not(:disabled):not(.busy) { transform: translateY(1px); }
-.drop-zone { min-height: 132px; }
+.drop-zone { min-height: 108px; }
 .drop-zone:hover, .drop-zone:focus-within, .drop-zone.drag-over { --control-border: var(--amber-bright); color: var(--amber-bright); }
 .drop-zone.busy { cursor: wait; }
 .drop-zone.selected { --control-border: var(--success); }
@@ -262,9 +269,9 @@ footer p + p { margin-top: 8px; }
   .hud-panel { width: 100%; max-width: 540px; padding: 15% 10% 18%; }
   .actions { padding: calc(13% + 31px) 9%; }
   .patcher-title { font-size: clamp(11px, calc(2.3vw + 3px), 15px); letter-spacing: .4px; }
-  .action-list { gap: 16px; }
+  .action-list { gap: 12px; }
   .menu-control { padding: 20px 12px; }
-  .drop-zone { min-height: 114px; }
+  .drop-zone { min-height: 100px; }
   .control-content { gap: 6px; }
   .control-label { font-size: clamp(22px, calc(4.5vw + 3px), 28px); }
   .control-help { font-size: clamp(12px, calc(2.3vw + 3px), 14px); }

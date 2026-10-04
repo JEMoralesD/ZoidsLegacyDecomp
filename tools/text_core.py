@@ -9,6 +9,7 @@ from pathlib import Path
 import struct
 import subprocess
 import tempfile
+import unicodedata
 
 import dialogue
 
@@ -175,6 +176,10 @@ def extract_font(rom: bytes, choices: dict) -> dict:
     if not 1 <= advance <= 16:
         raise ValueError(f'Invalid advance for glyph {dialogue.COPYRIGHT_CODE:04X}.')
     metrics.append(dict(source_at, code=dialogue.COPYRIGHT_CODE, advance=advance, bitmap=bitmap))
+    metrics.extend(spanish_metric(metrics, char, code)
+                   for char, code in dialogue.SPANISH_CODES.items())
+    metrics.extend(spanish_metric(metrics, char, code, compact=True)
+                   for char, code in dialogue.SPANISH_COMPACT_CODES.items())
     indices = {(metric['face'], metric['code']): index
                for index, metric in enumerate(metrics)}
     pairs = []
@@ -191,6 +196,44 @@ def extract_font(rom: bytes, choices: dict) -> dict:
                 glyphs=b''.join(_pack_rows(metric['bitmap']) for metric in metrics),
                 tall_fallback=indices[(TEXT_FACE_TALL, 0x8148)],
                 compact_fallback=indices[(TEXT_FACE_COMPACT, ord('?'))])
+
+
+def spanish_metric(metrics: list[dict], char: str, code: int, compact: bool = False) -> dict:
+    base = {'¿': '?', '¡': '!'}.get(char, unicodedata.normalize('NFD', char)[0])
+    face = TEXT_FACE_COMPACT if compact else TEXT_FACE_TALL
+    base_code = ord(base) if compact else int.from_bytes(dialogue.encode_text(base)[:-1], 'big')
+    original = next(metric for metric in metrics if metric['face'] == face and
+                    metric['code'] == base_code)
+    bitmap = [[0] * 16 for _ in range(16)]
+    if char in '¿¡':
+        for y in range(original['height']):
+            for x in range(original['width']):
+                bitmap[y][x] = original['bitmap'][original['height'] - y - 1][original['width'] - x - 1]
+        return {**original, 'code': code, 'bitmap': bitmap}
+    accent = unicodedata.normalize('NFD', char)[1]
+    dotted_i = base == 'i'
+    if compact:
+        shift = original['baseline'] + original['bearing_y']
+        marks = ({'\u0301': ('   33', '  33 '), '\u0303': ('  33  ', '33  33'),
+                  '\u0308': ('33 33',)} if shift > 1 else
+                 {'\u0301': ('  33',), '\u0303': ('33 33',),
+                  '\u0308': ('33 33',)})[accent]
+    else:
+        # Use the source font's dark center and medium edges for accent strokes.
+        marks = {'\u0301': ('   32', '  32 '), '\u0303': ('  233 ', '23 332'),
+                 '\u0308': ('32 32',)}[accent]
+        shift = 0 if dotted_i else 2 if accent == '\u0308' else 3
+    width = max(original['width'], len(marks[0]))
+    start = (width - original['width']) // 2
+    for y in range(2 if dotted_i else 0, original['height']):
+        bitmap[y + shift][start:start + original['width']] = original['bitmap'][y][:original['width']]
+    start = (width - len(marks[0])) // 2
+    for y, row in enumerate(marks):
+        for x, pixel in enumerate(row):
+            bitmap[y][start + x] = int(pixel) if pixel != ' ' else 0
+    return {**original, 'code': code, 'bitmap': bitmap, 'width': width,
+            'height': original['height'] + shift, 'bearing_y': original['bearing_y'] - shift,
+            'advance': original['advance'] if compact else max(original['advance'], width + 1)}
 
 
 def pack_font(font: dict) -> dict:
