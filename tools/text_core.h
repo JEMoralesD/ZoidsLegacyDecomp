@@ -20,7 +20,7 @@ typedef enum {
     TEXT_TILE_EXHAUSTED,
 } TextStatus;
 
-enum {
+typedef enum {
     TEXT_TOKEN_GLYPH,
     TEXT_TOKEN_COLOR,
     TEXT_TOKEN_POSITION,
@@ -30,28 +30,28 @@ enum {
     TEXT_TOKEN_INDENT,
     TEXT_TOKEN_ANCHOR,
     TEXT_TOKEN_REGION,
-};
+} TextTokenKind;
 
-enum {
+typedef enum {
     TEXT_ALIGN_LEFT,
     TEXT_ALIGN_CENTER,
     TEXT_ALIGN_RIGHT,
-};
+} TextAlignment;
 
-enum {
+typedef enum {
     TEXT_BOUND_ADVANCE,
     TEXT_BOUND_INK,
-};
+} TextAlignmentBound;
 
-enum {
+typedef enum {
     TEXT_WRAP_NONE,
     TEXT_WRAP_WORD,
-};
+} TextWrap;
 
-enum {
+typedef enum {
     TEXT_OVERFLOW_ERROR,
     TEXT_OVERFLOW_CLIP,
-};
+} TextOverflow;
 
 typedef enum {
     TEXT_PROFILE_PORTRAIT_DIALOGUE,
@@ -66,7 +66,7 @@ typedef enum {
     TEXT_PROFILE_COUNT,
 } TextProfileKind;
 
-enum {
+typedef enum {
     TEXT_EVENT_GLYPH,
     TEXT_EVENT_COLOR,
     TEXT_EVENT_POSITION,
@@ -75,7 +75,7 @@ enum {
     TEXT_EVENT_LINE_BEGIN,
     TEXT_EVENT_ALIGN,
     TEXT_EVENT_REGION,
-};
+} TextEventKind;
 
 typedef struct {
     const uint8_t *data;
@@ -302,13 +302,35 @@ typedef struct {
     uint8_t simple_next;
 } TextLayoutCursor;
 
+typedef uint8_t (*TextGetPixel)(void *context, int x, int y);
+typedef void (*TextSetPixel)(void *context, int x, int y, uint8_t value);
 typedef uint32_t *(*TextGetTileWords)(void *context, int x, int y);
+
+typedef union {
+    struct {
+        TextGetPixel get;
+        TextSetPixel set;
+    } pixels;
+    struct {
+        TextGetTileWords get;
+        void *marker;
+    } tiles;
+} TextSurfaceAccess;
+
+typedef struct {
+    void *context;
+    int16_t width;
+    int16_t height;
+    TextSurfaceAccess access;
+} TextSurface;
 
 typedef struct {
     void *context;
     TextGetTileWords get;
 } TextTileSurface;
 
+void text_decoder_init(TextDecoder *decoder, TextSpan input,
+                       const TextSpan *fields, uint8_t field_count);
 void text_decoder_init_raw(TextDecoder *decoder,
                            const uint8_t *input, size_t input_length,
                            const uint8_t *field, size_t field_length,
@@ -333,11 +355,19 @@ TextStatus text_template_write(TextWriter *writer,
                                size_t value_count);
 
 int text_font_find(const TextFont *font, uint8_t face, uint16_t code);
+int text_font_pair(const TextFont *font, int left, int right);
 int text_font_digit_advance(const TextFont *font, uint8_t face);
 
+TextStatus text_layout(const TextFont *font, const TextProfile *profile,
+                       TextDecoder *decoder, TextLayoutState *state,
+                       TextEmit emit, void *context, TextLayoutResult *result);
 TextStatus text_layout_begin(const TextProfile *profile, TextDecoder *decoder,
                              TextLayoutState *state, TextLayoutCursor *cursor,
                              TextLayoutResult *result);
+TextStatus text_layout_peek(const TextFont *font, const TextProfile *profile,
+                            TextDecoder *decoder, TextLayoutState *state,
+                            TextLayoutCursor *cursor, TextLayoutResult *result,
+                            TextEvent *event);
 int text_layout_scanning(const TextLayoutCursor *cursor);
 int text_blank_run(const TextFont *font, const TextProfile *profile,
                    TextLayoutState *state, uint16_t code, int count);
@@ -380,6 +410,9 @@ TextStatus text_layout_commit(const TextFont *font, const TextProfile *profile,
                               TextLayoutResult *result,
                               const TextEvent *event);
 
+TextStatus text_compose_glyph(const TextFont *font,
+                              const TextPlacement *placement,
+                              TextSurface *surface, uint8_t variant);
 TextStatus text_compose_glyph_tiles(const TextFont *font,
                                     const TextPlacement *placement,
                                     TextTileSurface *surface,
@@ -392,5 +425,7 @@ TextStatus text_compose_glyph_tiles_uniform(const TextFont *font,
                                             const TextPlacement *placement,
                                             TextTileSurface *surface,
                                             uint8_t variant);
+void text_fill(TextSurface *surface, int left, int top,
+               int right, int bottom, uint8_t value);
 
 #endif

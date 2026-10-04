@@ -388,6 +388,17 @@ memcpy:
     bx lr
 .section .rodata,"a"
 .balign 4
+.global metric_count
+metric_count: .word {len(font['metrics'])}
+.global range_count
+range_count: .word {len(font['ranges'])}
+.global pair_count
+pair_count: .word {len(font['pairs'])}
+.global tall_fallback
+tall_fallback: .word {font['tall_fallback']}
+.global compact_fallback
+compact_fallback: .word {font['compact_fallback']}
+.balign 4
 .global runtime_font_data
 runtime_font_data:
     .word metrics
@@ -475,7 +486,7 @@ vwf_story_choice_width:
 ''')
         (path / 'link.ld').write_text(f'''SECTIONS {{
  . = {BASE + PAYLOAD};
- .text : {{ *(.text*) *(.rodata*) }}
+ .text : {{ *(.entry) *(.text*) *(.rodata*) }}
  .story_choice : {{ *(.story_choice) }}
  /DISCARD/ : {{ *(.comment*) *(.ARM.attributes*) *(.ARM.exidx*) }}
 }}

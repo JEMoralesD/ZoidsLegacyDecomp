@@ -160,6 +160,21 @@ static int decoder_at(const TextDecoder *decoder, const DecoderMark *mark) {
     return 1;
 }
 
+void text_decoder_init(TextDecoder *decoder, TextSpan input,
+                       const TextSpan *fields, uint8_t field_count) {
+    const uint8_t *field = 0;
+    size_t field_length = 0;
+    for (uint8_t index = 0; fields && index < field_count; ++index) {
+        if (fields[index].field_id != 1)
+            continue;
+        field = fields[index].data;
+        field_length = fields[index].length;
+        break;
+    }
+    text_decoder_init_raw(decoder, input.data, input.length,
+                          field, field_length, 0);
+}
+
 void text_decoder_init_raw(TextDecoder *decoder,
                            const uint8_t *input, size_t input_length,
                            const uint8_t *field, size_t field_length,
@@ -681,6 +696,10 @@ static __attribute__((always_inline)) inline int font_pair(
             font->pairs[low].right == right)
         return font->pairs[low].adjust;
     return 0;
+}
+
+int text_font_pair(const TextFont *font, int left, int right) {
+    return font_pair(font, left, right);
 }
 
 int text_font_digit_advance(const TextFont *font, uint8_t face) {
@@ -1576,6 +1595,22 @@ __attribute__((noinline)) TEXT_O2 TextStatus text_layout_emit_peek(
     return TEXT_OK;
 }
 
+TEXT_O2 TextStatus text_layout_peek(
+                           const TextFont *font, const TextProfile *profile,
+                            TextDecoder *decoder, TextLayoutState *state,
+                            TextLayoutCursor *cursor, TextLayoutResult *result,
+                            TextEvent *event) {
+    if (cursor->pending)
+        return layout_status(decoder, result, TEXT_MALFORMED_INPUT);
+    if (cursor->phase == LAYOUT_DONE)
+        return (TextStatus)result->status;
+    if (cursor->phase == LAYOUT_SCAN)
+        return text_layout_scan_peek(font, profile, decoder, state,
+                                     cursor, result, event);
+    return text_layout_emit_peek(font, profile, decoder, state,
+                                 cursor, result, event);
+}
+
 int text_layout_scanning(const TextLayoutCursor *cursor) {
     return cursor->phase == LAYOUT_SCAN;
 }
@@ -1629,6 +1664,25 @@ TEXT_O2 TextStatus text_layout_commit(const TextFont *font, const TextProfile *p
     if (event->kind == TEXT_EVENT_COLOR) {
         decoder_restore(decoder, &cursor->after);
         state->color = event->value;
+        result->consumed = (uint16_t)text_decoder_consumed(decoder);
+        return TEXT_OK;
+    }
+    if (event->kind == TEXT_EVENT_GLYPH) {
+        if (event->glyph.metric >= font->metric_count)
+            return layout_status(decoder, result, TEXT_MALFORMED_INPUT);
+        decoder_restore(decoder, &cursor->after);
+        const TextMetric *metric = &font->metrics[event->glyph.metric];
+        state->x = coordinate(event->glyph.pen_x +
+                              glyph_advance(font, profile,
+                                            event->glyph.metric));
+        state->previous = (int16_t)event->glyph.metric;
+        int left = event->glyph.ink_x + event->glyph.clip_left;
+        int right = event->glyph.ink_x + metric->width - event->glyph.clip_right;
+        if (right > left && metric->height)
+            result_bounds(result, left, event->glyph.ink_y, right,
+                          event->glyph.ink_y + metric->height);
+        ++result->glyph_count;
+        result->missing_count += event->glyph.missing;
         result->consumed = (uint16_t)text_decoder_consumed(decoder);
         return TEXT_OK;
     }
@@ -1692,6 +1746,42 @@ TEXT_O2 TextStatus text_layout_commit(const TextFont *font, const TextProfile *p
         return TEXT_OK;
     }
     return layout_status(decoder, result, TEXT_MALFORMED_INPUT);
+}
+
+TextStatus text_layout(const TextFont *font, const TextProfile *profile,
+                       TextDecoder *decoder, TextLayoutState *state,
+                       TextEmit emit, void *context, TextLayoutResult *result) {
+    TextLayoutCursor cursor;
+    TextEvent event;
+    TextStatus status = text_layout_begin(profile, decoder, state,
+                                          &cursor, result);
+    while (status == TEXT_OK) {
+        status = text_layout_peek(font, profile, decoder, state,
+                                  &cursor, result, &event);
+        if (status != TEXT_OK)
+            break;
+        if (event.kind == TEXT_EVENT_COLOR ||
+                event.kind == TEXT_EVENT_POSITION ||
+                event.kind == TEXT_EVENT_ALIGN ||
+                event.kind == TEXT_EVENT_REGION ||
+                event.kind == TEXT_EVENT_LINE ||
+                event.kind == TEXT_EVENT_PAGE) {
+            status = text_layout_commit(font, profile, decoder, state,
+                                        &cursor, result, &event);
+            if (status != TEXT_OK)
+                break;
+            if (emit && (status = emit(context, &event)) != TEXT_OK)
+                break;
+        } else {
+            if (emit && (status = emit(context, &event)) != TEXT_OK)
+                break;
+            status = text_layout_commit(font, profile, decoder, state,
+                                        &cursor, result, &event);
+        }
+    }
+    if (status != TEXT_END)
+        layout_status(decoder, result, status);
+    return status;
 }
 
 #define GLYPH_QUAD(x) x, x+1, x+2, x+3, x+0x10, x+0x11, x+0x12, x+0x13, \
@@ -1803,6 +1893,24 @@ static TEXT_NOIPA TEXT_O2 void blend_into(uint32_t *word, uint32_t mask,
                                           uint32_t pixels, uint8_t variant) {
     *word = blend_word(*word, mask, pixels, variant);
 }
+#endif
+
+typedef struct {
+    const uint8_t *glyph;
+    uint32_t *left;
+    uint32_t *right;
+    uint32_t mask;
+    uint32_t background;
+    int offset;
+    int crosses;
+    int first_y;
+    int height;
+    int stride;
+} GlyphWorkspace;
+
+#ifdef TEXT_RUNTIME_SCRATCH
+#define GLYPH_WORKSPACE ((GlyphWorkspace *)(uintptr_t)(TEXT_RUNTIME_SCRATCH + 0x100))
+typedef char GlyphWorkspaceFits[(sizeof(GlyphWorkspace) <= 0x90) ? 1 : -1];
 #endif
 
 TEXT_NOIPA TEXT_O2 TextStatus text_compose_glyph_tiles_blended(
@@ -1981,6 +2089,103 @@ TEXT_NOIPA TEXT_O2 TextStatus text_compose_glyph_tiles_uniform(
         }
     }
     return TEXT_OK;
+}
+
+static TEXT_NOIPA TextStatus compose_pixels(
+        const TextFont *font, const TextPlacement *placement,
+        TextSurface *surface, uint8_t variant) {
+    const TextMetric *metric = &font->metrics[placement->metric];
+    const uint8_t *glyph = font->glyphs +
+                           (size_t)placement->metric * font->glyph_stride * 16;
+    for (int y = 0; y < metric->height; ++y) {
+        int destination_y = placement->ink_y + y;
+        if (destination_y < 0 || destination_y >= surface->height)
+            continue;
+        for (int x = placement->clip_left; x < metric->width - placement->clip_right; ++x) {
+            int destination_x = placement->ink_x + x;
+            if (destination_x < 0 || destination_x >= surface->width)
+                continue;
+            uint8_t packed = glyph[y * font->glyph_stride + (x >> 2)];
+            uint8_t ink = (uint8_t)((packed >> ((x & 3) * 2)) & 3);
+            if (!ink)
+                continue;
+            uint8_t value = (uint8_t)(variant * 4 + ink);
+            uint8_t old = surface->access.pixels.get(
+                surface->context, destination_x, destination_y);
+            if ((old >> 2) == variant && (old & 3) > ink)
+                value = old;
+            surface->access.pixels.set(surface->context, destination_x,
+                                       destination_y, value);
+        }
+    }
+    return TEXT_OK;
+}
+
+static TEXT_NOIPA TextStatus compose_clipped_tiles(
+        const TextFont *font, const TextPlacement *placement,
+        TextSurface *surface, uint8_t variant) {
+    const TextMetric *metric = &font->metrics[placement->metric];
+    const uint8_t *glyph = font->glyphs +
+                           (size_t)placement->metric * font->glyph_stride * 16;
+    for (int y = 0; y < metric->height; ++y) {
+        int destination_y = placement->ink_y + y;
+        if (destination_y < 0 || destination_y >= surface->height)
+            continue;
+        for (int x = placement->clip_left; x < metric->width - placement->clip_right; ++x) {
+            int destination_x = placement->ink_x + x;
+            if (destination_x < 0 || destination_x >= surface->width)
+                continue;
+            uint8_t packed = glyph[y * font->glyph_stride + (x >> 2)];
+            uint8_t ink = (uint8_t)((packed >> ((x & 3) * 2)) & 3);
+            if (!ink)
+                continue;
+            uint32_t *tile = surface->access.tiles.get(
+                surface->context, destination_x, destination_y);
+            if (!tile)
+                continue;
+            uint32_t *word = &tile[destination_y & 7];
+            int shift = (destination_x & 7) * 4;
+            uint8_t old = (uint8_t)((*word >> shift) & 15);
+            uint8_t value = (uint8_t)(variant * 4 + ink);
+            if ((old >> 2) == variant && (old & 3) > ink)
+                value = old;
+            *word = (*word & ~(15u << shift)) | ((uint32_t)value << shift);
+        }
+    }
+    return TEXT_OK;
+}
+
+TextStatus text_compose_glyph(const TextFont *font,
+                              const TextPlacement *placement,
+                              TextSurface *surface, uint8_t variant) {
+    if (placement->metric >= font->metric_count)
+        return TEXT_MALFORMED_INPUT;
+    const TextMetric *metric = &font->metrics[placement->metric];
+    if (surface->access.tiles.marker || !surface->access.tiles.get)
+        return compose_pixels(font, placement, surface, variant);
+    if (metric->width > 8)
+        return TEXT_MALFORMED_INPUT;
+    if (placement->ink_x < 0 || placement->ink_y < 0 ||
+            placement->ink_x + metric->width > surface->width ||
+            placement->ink_y + metric->height > surface->height)
+        return compose_clipped_tiles(font, placement, surface, variant);
+    TextTileSurface tiles = {surface->context, surface->access.tiles.get};
+    return text_compose_glyph_tiles(font, placement, &tiles, variant);
+}
+
+void text_fill(TextSurface *surface, int left, int top,
+               int right, int bottom, uint8_t value) {
+    if (left < 0)
+        left = 0;
+    if (top < 0)
+        top = 0;
+    if (right > surface->width)
+        right = surface->width;
+    if (bottom > surface->height)
+        bottom = surface->height;
+    for (int y = top; y < bottom; ++y)
+        for (int x = left; x < right; ++x)
+            surface->access.pixels.set(surface->context, x, y, value);
 }
 
 #ifndef TEXT_RUNTIME_SCRATCH

@@ -27795,7 +27795,7 @@
   },
   {
    "offset": "0x103B10",
-   "build_text": "You got %1$s!",
+   "build_text": "You earned %1$s!",
    "template_format": true
   },
   {
@@ -27805,7 +27805,7 @@
   },
   {
    "offset": "0x103BE4",
-   "build_text": "You got %1$s!",
+   "build_text": "You earned %1$s!",
    "template_format": true
   },
   {
@@ -27814,12 +27814,12 @@
   },
   {
    "offset": "0x103C28",
-   "build_text": "You got %1$s!",
+   "build_text": "You earned %1$s!",
    "template_format": true
   },
   {
    "offset": "0x103C58",
-   "build_text": "You got the %1$s\ndata!",
+   "build_text": "You earned the %1$s\ndata!",
    "template_format": true
   },
   {
@@ -27828,7 +27828,7 @@
   },
   {
    "offset": "0x103C94",
-   "build_text": "You got the %1$s!",
+   "build_text": "You earned the %1$s!",
    "template_format": true
   },
   {
@@ -27842,7 +27842,7 @@
   },
   {
    "offset": "0x103D18",
-   "build_text": "You got %1$sG{01 00}!",
+   "build_text": "You earned %1$sG{01 00}!",
    "template_format": true
   },
   {

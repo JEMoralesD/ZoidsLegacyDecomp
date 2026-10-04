@@ -112,6 +112,9 @@ def _ranges(metrics: list[dict]) -> list[tuple[int, int, int, int]]:
     return result
 
 
+AT_CODE = 0x8197
+
+
 def extract_font(rom: bytes, choices: dict) -> dict:
     metrics = []
     advances = choices.get('advances', {})
@@ -128,6 +131,8 @@ def extract_font(rom: bytes, choices: dict) -> dict:
             for offset, code in enumerate(range(first, first + count)):
                 raw = rom[start + offset * glyph_size:start + (offset + 1) * glyph_size]
                 rows = _unpack_rows(raw, height)
+                if face == TEXT_FACE_TALL and code == AT_CODE:
+                    at_rows = rows
                 columns = [x for x in range(8) if any(rows[y][x] for y in range(height))]
                 ink_rows = [y for y in range(height) if any(rows[y])]
                 if columns:
@@ -138,7 +143,11 @@ def extract_font(rom: bytes, choices: dict) -> dict:
                 advance = 8
                 if face == TEXT_FACE_TALL:
                     default = min(right - left + 1, 8) if columns else 4
+                    if 0x824F <= code <= 0x8258:
+                        default -= 1
                     advance = advances.get(f'{code:04X}', default) + letter_spacing
+                elif ord('0') <= code <= ord('9'):
+                    advance = 7
                 if not 1 <= advance <= 16:
                     raise ValueError(f'Invalid advance for glyph {code:04X}.')
                 width = right - left
@@ -152,6 +161,20 @@ def extract_font(rom: bytes, choices: dict) -> dict:
                                     width=width, height=ink_height, advance=advance,
                                     face=face, line_height=height, baseline=baseline,
                                     bitmap=bitmap))
+    source_at = next(metric for metric in metrics
+                     if metric['face'] == TEXT_FACE_TALL and metric['code'] == AT_CODE)
+    rows = [row[:] for row in at_rows]
+    rows[5:12] = [[int(pixel) for pixel in row] for row in (
+        '21033021', '21210221', '21210021', '21210021',
+        '21210221', '21033021', '21000021')]
+    bitmap = [row[:] for row in source_at['bitmap']]
+    top = source_at['baseline'] + source_at['bearing_y']
+    for y in range(source_at['height']):
+        bitmap[y][:8] = rows[top + y]
+    advance = advances.get(f'{dialogue.COPYRIGHT_CODE:04X}', 8) + letter_spacing
+    if not 1 <= advance <= 16:
+        raise ValueError(f'Invalid advance for glyph {dialogue.COPYRIGHT_CODE:04X}.')
+    metrics.append(dict(source_at, code=dialogue.COPYRIGHT_CODE, advance=advance, bitmap=bitmap))
     indices = {(metric['face'], metric['code']): index
                for index, metric in enumerate(metrics)}
     pairs = []

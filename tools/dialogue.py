@@ -12,6 +12,7 @@ import re
 import struct
 
 ROM_SHA1 = "460fa2158606097f6e6f63ce966d2d6ecdd58d70"
+COPYRIGHT_CODE = 0x8760
 PROFILE = {"roots": 0x7A0BF8, "lengths": 0x7A17FC, "glyphs": 0x7A0A98, "menu": 0x98BB4,
            "code_start": 0x923E0, "code_end": 0xED000, "attract": 0x091D5D}
 ROM_SIZE = 0x800000
@@ -91,6 +92,8 @@ def readable(unit: bytes) -> str:
 
 @lru_cache(maxsize=None)
 def _readable(unit: bytes) -> str:
+    if unit in (b"@", COPYRIGHT_CODE.to_bytes(2, "big")):
+        return "©"
     if unit == b"\x0a":
         return "\n"
     if unit[0] < 0x20:
@@ -173,6 +176,7 @@ def character_modes(text: str, original: bytes) -> dict[int, bool]:
 
 def encode_text(text: str, original: bytes | None = None,
                 compact: bool = False) -> bytes:
+    text = text.replace("(c)", "©")
     result = bytearray()
     if original is not None:
         source_text, end = decode_text(original, 0)
@@ -194,7 +198,9 @@ def encode_text(text: str, original: bytes | None = None,
             result.append(10)
         else:
             raw_ascii = compact or modes.get(pos, False)
-            if char == " ":
+            if char == "©":
+                result.extend(b"@" if raw_ascii else COPYRIGHT_CODE.to_bytes(2, "big"))
+            elif char == " ":
                 result.extend(b"\x20" if raw_ascii else b"\x81\x40")
             elif "!" <= char <= "~" and char not in "{}":
                 result.extend(bytes((ord(char),)) if raw_ascii else
