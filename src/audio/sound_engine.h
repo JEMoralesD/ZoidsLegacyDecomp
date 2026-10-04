@@ -3,6 +3,10 @@
 
 #include "mp2k_command_types.h"
 
+#ifndef NULL
+#define NULL ((void *)0)
+#endif
+
 enum AudioVSyncState {
     AUDIO_VSYNC_ENABLED = 0,
     AUDIO_VSYNC_DISABLE_REQUESTED = 1,
@@ -57,6 +61,33 @@ enum MusicTrackInitialization {
     MUSIC_TRACK_DEFAULT_TONE_TYPE = 1
 };
 
+enum SoundChannelFlags {
+    SOUND_CHANNEL_ENVELOPE_MASK = 0x03,
+    SOUND_CHANNEL_ENVELOPE_RELEASE = 0x00,
+    SOUND_CHANNEL_ENVELOPE_SUSTAIN = 0x01,
+    SOUND_CHANNEL_ENVELOPE_DECAY = 0x02,
+    SOUND_CHANNEL_ENVELOPE_ATTACK = 0x03,
+    SOUND_CHANNEL_ECHO = 0x04,
+    SOUND_CHANNEL_STOP = 0x40,
+    SOUND_CHANNEL_START = 0x80,
+    SOUND_CHANNEL_ON = 0xC7
+};
+
+enum PsgChannelModify {
+    PSG_MODIFY_VOLUME = 1,
+    PSG_MODIFY_PITCH = 2
+};
+
+enum ToneTypes {
+    TONE_TYPE_PSG_MASK = 0x07,
+    TONE_TYPE_FIXED = 0x08,
+    TONE_TYPE_SPLIT = 0x40,
+    TONE_TYPE_RHYTHM = 0x80,
+    TONE_TYPE_MULTI = 0xC0
+};
+
+#define SOUND_ENGINE (*(struct SoundEngineState **)0x03007FF0)
+
 enum SoundDmaControl {
     SOUND_DMA_REPEAT = 0x02000000,
     SOUND_DMA_STOP_WORD = 0x84400004,
@@ -67,7 +98,31 @@ enum SoundDmaControl {
 
 struct AudioChannelState {
     u8 flags;
-    u8 reserved01[0x2B];
+    u8 type;
+    u8 volume_right;
+    u8 volume_left;
+    u8 attack;
+    u8 decay;
+    u8 sustain;
+    u8 release;
+    u8 key;
+    u8 envelope_volume;
+    u8 envelope_volume_right;
+    u8 envelope_volume_left;
+    u8 echo_volume;
+    u8 echo_length;
+    u8 reserved0E[2];
+    u8 gate_time;
+    u8 midi_key;
+    u8 velocity;
+    u8 priority;
+    u8 rhythm_pan;
+    u8 reserved15[3];
+    u32 count;
+    u32 fine_frequency;
+    u32 frequency;
+    struct PcmWaveHeader *wave;
+    s8 *current_sample;
     MusicPlayerTrack *owner_track;
     struct AudioChannelState *previous;
     struct AudioChannelState *next;
@@ -79,16 +134,37 @@ struct PsgChannelState {
     u8 channel_id;
     u8 volume_right;
     u8 volume_left;
-    u8 reserved04[2];
+    u8 attack;
+    u8 decay;
     u8 sustain;
-    u8 reserved07[3];
+    u8 release;
+    u8 key;
+    u8 envelope_volume;
     u8 amplitude;
-    u8 reserved0B[0xE];
+    u8 envelope_counter;
+    u8 echo_volume;
+    u8 echo_length;
+    u8 reserved0E[2];
+    u8 gate_time;
+    u8 midi_key;
+    u8 velocity;
+    u8 priority;
+    u8 rhythm_pan;
+    u8 reserved15[4];
     u8 sustain_level;
-    u8 reserved1A;
+    u8 frequency_control;
     u8 output_routing;
     u8 output_pan_mask;
-    u8 reserved1D[0x23];
+    u8 modify;
+    u8 length;
+    u8 sweep;
+    u32 frequency;
+    u32 *wave;
+    u32 *loaded_wave;
+    MusicPlayerTrack *owner_track;
+    struct PsgChannelState *previous;
+    struct PsgChannelState *next;
+    u8 reserved38[8];
 };
 
 struct PcmWaveHeader {
@@ -114,7 +190,8 @@ struct SoundEngineState {
     u8 max_pcm_channels;
     u8 master_volume;
     u8 sample_frequency_index;
-    u8 reserved09[2];
+    u8 mode;
+    u8 psg_envelope_frame;
     u8 dma_reset_period_vblanks;
     u8 max_scanlines;
     u8 reserved0D[3];
