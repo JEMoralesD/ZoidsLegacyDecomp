@@ -27819,7 +27819,7 @@
   },
   {
    "offset": "0x103C58",
-   "build_text": "You got the %1$s\ndata!",
+   "build_text": "You got the %1$s data!",
    "template_format": true
   },
   {
@@ -27828,7 +27828,7 @@
   },
   {
    "offset": "0x103C94",
-   "build_text": "You got the %1$s!",
+   "build_text": "You got the %1$s parts!",
    "template_format": true
   },
   {
