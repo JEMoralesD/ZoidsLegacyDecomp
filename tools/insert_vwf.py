@@ -599,7 +599,7 @@ def build_rom(original, document, choices, dialogue_document):
                            dialogue.encode_text(entry['text'], source,
                                                 compact=entry.get('compact_format', False)))
         indexed_fields = re.findall(rb'%([1-9][0-9]*)\$([dsv])', replacement)
-        if indexed_fields:
+        if indexed_fields and offset not in MESSAGE_TEMPLATE_SITES:
             ordinals = [int(number) for number, _ in indexed_fields]
             if (not template_format or
                     (not entry.get('row_format') and
@@ -623,11 +623,15 @@ def build_rom(original, document, choices, dialogue_document):
         if offset in MESSAGE_TEMPLATE_PARTS:
             raise ValueError(f'Text at {entry["offset"]} is spliced into a message template; edit the template instead.')
         if offset in MESSAGE_TEMPLATE_SITES:
-            if not entry.get('template_format') or any(
-                    field != b'1$s' for field in re.findall(rb'%([1-9][0-9]*\$[dsv])', replacement)):
+            forms = [dialogue.encode_menu_format(form, source, entry.get('compact_format', False))
+                     for form in entry.get('build_text', '').split('|')]
+            if (not entry.get('template_format') or len(forms) > 2 or any(
+                    field != b'1$s' for form in forms
+                    for field in re.findall(rb'%([1-9][0-9]*\$[dsv])', form))):
                 raise ValueError(f'Message at {entry["offset"]} must be a template_format entry using only %1$s.')
-            check_game_text(checker, entry, source, replacement, True)
-            message_templates[offset] = replacement
+            for form in forms:
+                check_game_text(checker, entry, source, form, True)
+            message_templates[offset] = b'|'.join(form[:-1] for form in forms) + b'\0'
             continue
         if (offset in fixed_copies and offset not in TITLE_STRING_COPY_SITES and
                 len(replacement) > fixed_copies[offset]):

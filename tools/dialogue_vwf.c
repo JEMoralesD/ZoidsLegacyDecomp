@@ -3562,7 +3562,36 @@ static u32 message_unit_size(const u8 *text) {
     return 1;
 }
 
-// %1$s is what the game wrote between argument_start and end, minus zero padding.
+static int plural_name(const u8 *argument, u32 length) {
+    u8 plain[ASSET_MESSAGE_CAPACITY];
+    u32 size = 0;
+    for (u32 at = 0; at < length;) {
+        u32 unit = message_unit_size(argument + at);
+        if (!unit) {
+            ++at;
+            continue;
+        }
+        if (argument[at] >= 0x20 && size + unit < sizeof(plain))
+            for (u32 i = 0; i < unit; ++i)
+                plain[size++] = argument[at + i];
+        at += unit;
+    }
+    plain[size] = 0;
+    PlainUnits units;
+    if (!plain_units(plain, &units))
+        return 0;
+    u32 start = units.count;
+    while (start && units.chars[start - 1] != ' ')
+        --start;
+    const char *word = units.chars + start;
+    u32 count = units.count - start;
+    return word_ends_with(word, count, "data") || word_ends_with(word, count, "parts") ||
+           word_ends_with(word, count, "scissors") || word_ends_with(word, count, "guns") ||
+           word_ends_with(word, count, "series");
+}
+
+// %1$s is what the game wrote between argument_start and end, minus zero padding;
+// a template "singular|plural" picks its form by the argument's last word.
 void vwf_compose_message(const u8 *end, const u8 *template_text, u32 argument_start) {
     u8 argument[ASSET_MESSAGE_CAPACITY];
     u32 argument_length = 0;
@@ -3578,8 +3607,18 @@ void vwf_compose_message(const u8 *end, const u8 *template_text, u32 argument_st
             argument[argument_length++] = at[i];
         at += size;
     }
+    const u8 *template_end = 0;
+    for (const u8 *at = template_text; *at; at += message_unit_size(at)) {
+        if (*at == '|') {
+            if (plural_name(argument, argument_length))
+                template_text = at + 1;
+            else
+                template_end = at;
+            break;
+        }
+    }
     u32 length = 0;
-    for (const u8 *cursor = template_text; *cursor;) {
+    for (const u8 *cursor = template_text; *cursor && cursor != template_end;) {
         const u8 *source = cursor;
         u32 size;
         if (cursor[0] == '%' && cursor[1] == '1' && cursor[2] == '$' && cursor[3] == 's') {
