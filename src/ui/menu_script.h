@@ -1,0 +1,21 @@
+#ifndef MENU_SCRIPT_H
+#define MENU_SCRIPT_H
+
+enum MenuOpcode {
+    MENU_END = 0,
+    MENU_OPEN_WINDOW = 1,
+    MENU_CLEAR_WINDOW = 2,
+    MENU_CLOSE_WINDOW = 3,
+    MENU_REFRESH = 4,
+    MENU_PRINT_TEXT = 5,
+    MENU_PRINT_BUFFER = 6,
+    MENU_SELECT = 7,
+    MENU_YES_NO = 8,
+    MENU_PRINT_TITLE = 9,
+    MENU_CLEAR_TITLE = 10,
+    MENU_SET_FRAME_STYLE = 11,
+    MENU_WAIT_CONFIRM = 12,
+    MENU_CLEAR_RECT = 13
+};
+
+#endif
