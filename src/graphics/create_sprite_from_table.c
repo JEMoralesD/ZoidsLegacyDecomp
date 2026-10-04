@@ -11,7 +11,7 @@ struct Sprite {
     u8 palette_bank;
     u8 rotation;
     u16 animation_id;
-    u16 animation_frame;
+    u16 animation_step;
     u16 frame_timer;
     s32 frame_table;
     s32 animation_table;
@@ -62,7 +62,7 @@ struct Sprite *CreateSpriteFromTable(s32 resource_table, u16 resource_id, u16 an
     sprite->tile_offset = tile_offset;
     sprite->palette_bank = palette_bank;
     sprite->animation_id = animation_id;
-    sprite->animation_frame = 0;
+    sprite->animation_step = 0;
     sprite->frame_timer = 0;
 
     if ((flags & 0x400000) == 0) {

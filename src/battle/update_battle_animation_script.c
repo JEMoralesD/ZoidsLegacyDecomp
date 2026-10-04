@@ -3,7 +3,7 @@
 #include "battle_animation.h"
 
 extern s32 CreateBattleAnimationGroup(u8, s32, s32, s32, s32) asm("func_080E083C");
-extern u8 func_080ECF78(u8, s32);
+extern u8 ModuloUnsigned32(u8, s32) asm("func_080ECF78");
 extern u8 gBattleSetup[];
 
 
@@ -113,12 +113,12 @@ command_loop:
                     void *created;
 
                     state_value = STATE->callback_kind;
-                    if (state_value == 1) {
+                    if (state_value == BATTLE_ANIMATION_CALLBACK_PROJECTILE_FLASH) {
                         register u32 mode_bit asm("r0") = work_state->spawn_count;
 
                         mode_bit &= state_value;
-                        state_value = mode_bit + 1;
-                    } else if (state_value == 0x5F && func_080ECF78(work_state->spawn_count, 3) != 0) {
+                        state_value = mode_bit + BATTLE_ANIMATION_CALLBACK_PROJECTILE_FLASH;
+                    } else if (state_value == 0x5F && ModuloUnsigned32(work_state->spawn_count, 3) != 0) {
                         volatile u8 *scene_base = gBattleSetup;
                         u8 scene = scene_base[2];
 

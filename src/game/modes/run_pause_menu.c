@@ -1,4 +1,5 @@
 #include "m2c_prelude.h"
+#include "../../graphics/screen_effects.h"
 #include "../game_state.h"
 
 M2C_UNK PlaySong(s32) asm("func_08092E84");                         /* extern */
@@ -14,30 +15,30 @@ asm(".set func_08094484_4, func_08094484");
 s32 *CreateSprite_4(M2C_UNK, M2C_UNK, s32, s32) asm("func_08094484_4");   /* extern */
 M2C_UNK DestroySprite(s32 *) asm("func_08094554");                       /* extern */
 M2C_UNK SetSpriteAnimation(s32 *, u8) asm("func_08094564");                   /* extern */
-M2C_UNK func_0809534C();                            /* extern */
-M2C_UNK func_0809538C(s32, M2C_UNK, s32, s32, s32, s32, s32, s32); /* extern */
+M2C_UNK DisableDisplayWindows() asm("func_0809534C");                            /* extern */
+M2C_UNK ConfigureDisplayWindows(s32, M2C_UNK, s32, s32, s32, s32, s32, s32) asm("func_0809538C"); /* extern */
 asm(".set func_0809538C_4, func_0809538C");
 M2C_UNK func_0809538C_4(s32, M2C_UNK, s32, s32);    /* extern */
-M2C_UNK func_08096308(s32, s32);                    /* extern */
-s32 func_0809669C();                                /* extern */
-M2C_UNK func_08096FBC(s32, s32, s32, s32, s32, s32, s32, s32, s32, s32); /* extern */
+M2C_UNK StartScreenTransition(s32, s32) asm("func_08096308");                    /* extern */
+s32 IsScreenTransitionComplete() asm("func_0809669C");                                /* extern */
+M2C_UNK InitializeWindowGraphics(s32, s32, s32, s32, s32, s32, s32, s32, s32, s32) asm("func_08096FBC"); /* extern */
 void *GetWindow(s32) asm("func_0809716C");                           /* extern */
 M2C_UNK RequestWindowRefresh() asm("func_080972C8");                            /* extern */
-M2C_UNK func_0809844C(s32, s32, s32, s32, s32, s32, s32); /* extern */
+M2C_UNK PrintWindowNumberAt(s32, s32, s32, s32, s32, s32, s32) asm("func_0809844C"); /* extern */
 M2C_UNK RunMenuScript(M2C_UNK) asm("func_08098BB4");                     /* extern */
-M2C_UNK func_0809AB44(s32, s32, M2C_UNK, s32, s32); /* extern */
-M2C_UNK func_080AC0C8();                            /* extern */
-M2C_UNK func_080ADD38();                            /* extern */
-s32 func_080AF924();                                /* extern */
-M2C_UNK func_080B0980();                            /* extern */
-M2C_UNK func_080B0D38();                            /* extern */
-u8 func_080B2108();                                 /* extern */
-M2C_UNK func_080B35D4(s32);                         /* extern */
-M2C_UNK func_080B56CC();                            /* extern */
-M2C_UNK func_080B654C();                            /* extern */
-M2C_UNK func_080C0AFC();                            /* extern */
+M2C_UNK LoadMenuGradientBackground(s32, s32, M2C_UNK, s32, s32) asm("func_0809AB44"); /* extern */
+M2C_UNK DrawPartyHitPointList() asm("func_080AC0C8");                            /* extern */
+M2C_UNK RunPlayerStatusMenu() asm("func_080ADD38");                            /* extern */
+s32 RunRecoveryItemMenu() asm("func_080AF924");                                /* extern */
+M2C_UNK RunZoidDataMenu() asm("func_080B0980");                            /* extern */
+M2C_UNK RunPlayerEquipmentMenu() asm("func_080B0D38");                            /* extern */
+u8 RunPlayerPilotAssignmentMenu() asm("func_080B2108");                                 /* extern */
+M2C_UNK RunPlayerTeamFormationMenu(s32) asm("func_080B35D4");                         /* extern */
+M2C_UNK ShowFuzorDragonComponentHelp() asm("func_080B56CC");                            /* extern */
+M2C_UNK BuildPlayerRecoveryItemSelection() asm("func_080B654C");                            /* extern */
+M2C_UNK EditPlayerDeckCommands() asm("func_080C0AFC");                            /* extern */
 M2C_UNK BiosLz77ToVram(M2C_UNK, M2C_UNK) asm("func_080ECD34");            /* extern */
-M2C_UNK func_080ED17C(s32);                         /* extern */
+M2C_UNK YieldTaskForUpdates(s32) asm("func_080ED17C");                         /* extern */
 asm(".set D_02021699_b571c, 0x02021699");
 asm(".set D_0202169A_b571c, 0x0202169A");
 asm(".set D_0202169B_b571c, 0x0202169B");
@@ -269,12 +270,12 @@ void RunPauseMenu(void) {
 
     /* Flowgraph is not reducible, falling back to gotos-only mode. */
     *(s16 *)0x0300004C = 0x1840;
-    func_08096FBC(3, 1, 0, 0x35C, 0x3C0, 0, 0xE, 0, 0x3E6, 0xF);
+    InitializeWindowGraphics(3, 1, 0, 0x35C, 0x3C0, 0, 0xE, 0, 0x3E6, 0xF);
     BiosLz77ToVram(0x08104258, 0x0600AB80);
     BiosLz77ToVram(0x081046A8, 0x06015840);
-    func_0809AB44(2, 0, 0x1EF, 4, 4);
+    LoadMenuGradientBackground(2, 0, 0x1EF, 4, 4);
     ClearSpritePools();
-    func_08096308(0xF, 0x10);
+    StartScreenTransition(SCREEN_TRANSITION_CHECKERBOARD_REVEAL, 0x10);
     sp18 = 0;
     var_r4 = 0;
     if (*(s32 *)0x02021690 == GAME_MODE_PAUSE_MENU) {
@@ -369,8 +370,8 @@ block_34:
     initial_record_base = (s32 *)0x020218E4;
     initial_record_offset = 0x6A04;
     asm volatile("" : "+r"(initial_record_base), "+r"(initial_record_offset));
-    func_0809844C(*(s32 *)((u8 *)initial_record_base + initial_record_offset), 7, 0, 2, 2, 1, var_r4);
-    func_080AC0C8();
+    PrintWindowNumberAt(*(s32 *)((u8 *)initial_record_base + initial_record_offset), 7, 0, 2, 2, 1, var_r4);
+    DrawPartyHitPointList();
     {
         register s32 *out_args asm("sp");
 
@@ -504,9 +505,9 @@ block_54:
     RequestWindowRefresh();
     goto loop_56;
 block_55:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_56:
-    if ((func_0809669C() << 0x18) == 0) {
+    if ((IsScreenTransitionComplete() << 0x18) == 0) {
         goto block_55;
     }
     {
@@ -522,7 +523,7 @@ loop_56:
         register s32 *handle asm("r2") = var_sl;
         *handle |= 0x20000;
     }
-    func_080B56CC();
+    ShowFuzorDragonComponentHelp();
     {
         register s32 *handle asm("r6") = var_r9;
         *handle &= 0xFFFDFFFF;
@@ -570,7 +571,7 @@ block_65:
         *toggle_write = (u8)toggle_value;
         SetSpriteAnimation(var_r7, *toggle_write);
     }
-    func_080AC0C8();
+    DrawPartyHitPointList();
     goto block_119;
 block_66:
     menu_input_base = (u8 *)0x0200A880;
@@ -609,7 +610,7 @@ block_71:
     goto block_119;
 block_72:
     *(s32 *)0x02021690 = GAME_MODE_FIELD;
-    func_08096308(0x10, 0x10);
+    StartScreenTransition(SCREEN_TRANSITION_CHECKERBOARD_CONCEAL, 0x10);
     goto block_119;
 block_73:
     DestroySprite(var_r9);
@@ -617,12 +618,12 @@ block_73:
     DestroySprite(var_r8);
     DestroySprite(var_sl);
     RunMenuScript(0x08000F06);
-    func_080ADD38();
+    RunPlayerStatusMenu();
 block_74:
     var_r4 = 0;
     goto block_119;
 block_76:
-    func_080B654C();
+    BuildPlayerRecoveryItemSelection();
     if (*(u8 *)0x020322B1 == 0) {
         goto block_79;
     }
@@ -631,7 +632,7 @@ block_76:
     DestroySprite(var_r8);
     DestroySprite(var_sl);
     RunMenuScript(0x08000F06);
-    if ((func_080AF924() << 0x18) == 0) {
+    if ((RunRecoveryItemMenu() << 0x18) == 0) {
         goto block_74;
     }
     *(s32 *)0x02021690 = GAME_MODE_FIELD;
@@ -646,7 +647,7 @@ block_81:
     DestroySprite(var_r8);
     DestroySprite(var_sl);
     RunMenuScript(0x08000F06);
-    func_080B0980();
+    RunZoidDataMenu();
     goto block_74;
 block_82:
     DestroySprite(var_r9);
@@ -654,7 +655,7 @@ block_82:
     DestroySprite(var_r8);
     DestroySprite(var_sl);
     RunMenuScript(0x08000F06);
-    func_080B0D38();
+    RunPlayerEquipmentMenu();
     goto block_74;
 block_83:
     DestroySprite(var_r9);
@@ -662,12 +663,12 @@ block_83:
     DestroySprite(var_r8);
     DestroySprite(var_sl);
     RunMenuScript(0x08000F06);
-    if (func_080B2108() != 2) {
+    if (RunPlayerPilotAssignmentMenu() != 2) {
         goto block_74;
     }
     RequestWindowRefresh();
-    func_080ED17C(1);
-    func_080B35D4(0);
+    YieldTaskForUpdates(1);
+    RunPlayerTeamFormationMenu(0);
     asm volatile("");
     goto block_74;
 block_85:
@@ -676,7 +677,7 @@ block_85:
     DestroySprite(var_r8);
     DestroySprite(var_sl);
     RunMenuScript(0x08000F06);
-    func_080B35D4(0);
+    RunPlayerTeamFormationMenu(0);
     goto block_74;
 block_87:
     DestroySprite(var_r9);
@@ -710,7 +711,7 @@ block_87:
         var_r8 = CreateSprite_4(0x08105A20, 0x08105A2C, 0, 0xD8);
     }
     RunMenuScript(0x08000F06);
-    func_080C0AFC();
+    EditPlayerDeckCommands();
     DestroySprite(var_r7);
     DestroySprite(var_r8);
     goto block_119;
@@ -723,7 +724,7 @@ block_89:
     }
     *(s8 *)0x02032E5C = 1;
 block_90:
-    func_08096308(0x10, 0);
+    StartScreenTransition(SCREEN_TRANSITION_CHECKERBOARD_CONCEAL, 0);
     goto block_119;
 block_92:
     RunMenuScript(0x080033A6);
@@ -767,9 +768,9 @@ block_96:
         func_0809538C_4(call_r0, call_r1, call_r2, call_r3);
     }
     RunMenuScript(0x080033CC);
-    func_0809534C();
+    DisableDisplayWindows();
     RequestWindowRefresh();
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 block_100:
     if (*(u8 *)0x0200A882 == 1) {
         goto block_102;
@@ -868,9 +869,9 @@ block_119:
 block_121:
     goto loop_124;
 block_123:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_124:
-    if ((func_0809669C() << 0x18) == 0) {
+    if ((IsScreenTransitionComplete() << 0x18) == 0) {
         goto block_123;
     }
     return;

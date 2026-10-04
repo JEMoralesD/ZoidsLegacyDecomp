@@ -1,13 +1,13 @@
 #include "m2c_prelude.h"
 
-extern void func_080ED17C(s32);
+extern void YieldTaskForUpdates(s32) asm("func_080ED17C");
 
-extern s8 D_02031749;
-extern s32 D_0203174C[];
-extern u8 D_02031754;
-extern s32 D_02032E88[];
-extern u16 D_020324A4[];
-extern s32 D_03000054[];
+extern s8 gFieldCameraMoveActive asm("D_02031749");
+extern s32 gFieldCameraMoveTargetFixed8[] asm("D_0203174C");
+extern u8 gFieldCameraMoveDurationUpdates asm("D_02031754");
+extern s32 gFieldBackgroundTilemaps[] asm("D_02032E88");
+extern u16 gFieldMapDimensions[] asm("D_020324A4");
+extern s32 gFieldCameraScrollOffsets[] asm("D_03000054");
 
 void MoveEventCamera(void) {
   u8 direction[4];
@@ -22,8 +22,8 @@ void MoveEventCamera(void) {
   u8 done;
 
   {
-    register s32 *target asm("r3") = D_0203174C;
-    register s32 *initial_camera asm("r6") = D_03000054;
+    register s32 *target asm("r3") = gFieldCameraMoveTargetFixed8;
+    register s32 *initial_camera asm("r6") = gFieldCameraScrollOffsets;
     register s32 x_delta asm("r1");
     register s32 first_x asm("r2");
     register s32 y_delta asm("r0");
@@ -70,15 +70,15 @@ void MoveEventCamera(void) {
   y_accum = 0;
   x_accum = 0;
   count = x_accum;
-  camera = D_03000054;
+  camera = gFieldCameraScrollOffsets;
   {
-    register u8 *initial_step asm("r3") = &D_02031754;
+    register u8 *initial_step asm("r3") = &gFieldCameraMoveDurationUpdates;
 
     asm volatile("" : : "r"(initial_step));
     step = initial_step;
   }
   {
-    register s32 *initial_state asm("r7") = D_02032E88;
+    register s32 *initial_state asm("r7") = gFieldBackgroundTilemaps;
 
     state = initial_state;
   }
@@ -94,7 +94,7 @@ loop: {
     y_accum = y_delta + y_accum;
   }
 
-  if (x_accum >= D_02031754) {
+  if (x_accum >= gFieldCameraMoveDurationUpdates) {
     register s32 current_step asm("r0");
 
     do {
@@ -103,22 +103,22 @@ loop: {
       register u8 *current_step_ptr asm("r7");
 
       if (direction[0] == 0) {
-        value = D_03000054[0];
+        value = gFieldCameraScrollOffsets[0];
         amount = 0x100;
         value += amount;
-        D_03000054[0] = value;
-        if (D_02032E88[1] != 0) {
+        gFieldCameraScrollOffsets[0] = value;
+        if (gFieldBackgroundTilemaps[1] != 0) {
           value = camera[2];
           goto store_shadow_x;
         }
       } else {
         register s32 negative asm("r7");
 
-        value = D_03000054[0];
+        value = gFieldCameraScrollOffsets[0];
         negative = -0x100;
         value += negative;
-        D_03000054[0] = value;
-        if (D_02032E88[1] != 0) {
+        gFieldCameraScrollOffsets[0] = value;
+        if (gFieldBackgroundTilemaps[1] != 0) {
           value = camera[2];
           amount = negative;
         store_shadow_x:
@@ -144,22 +144,22 @@ loop: {
       register u8 *current_step_ptr asm("r7");
 
       if (direction[1] == 0) {
-        value = D_03000054[1];
+        value = gFieldCameraScrollOffsets[1];
         amount = 0x100;
         value += amount;
-        D_03000054[1] = value;
-        if (D_02032E88[1] != 0) {
+        gFieldCameraScrollOffsets[1] = value;
+        if (gFieldBackgroundTilemaps[1] != 0) {
           value = camera[3];
           goto store_shadow_y;
         }
       } else {
         register s32 negative asm("r7");
 
-        value = D_03000054[1];
+        value = gFieldCameraScrollOffsets[1];
         negative = -0x100;
         value += negative;
-        D_03000054[1] = value;
-        if (D_02032E88[1] != 0) {
+        gFieldCameraScrollOffsets[1] = value;
+        if (gFieldBackgroundTilemaps[1] != 0) {
           value = camera[3];
           amount = negative;
         store_shadow_y:
@@ -190,7 +190,7 @@ loop: {
       goto x_clamped;
     }
     {
-      register u16 *dims asm("r2") = D_020324A4;
+      register u16 *dims asm("r2") = gFieldMapDimensions;
       register s32 limit asm("r0") = (dims[0] << 11) - 0xF000;
       if (x > limit) {
         camera[0] = limit;
@@ -223,7 +223,7 @@ loop: {
       goto y_clamped;
     }
     {
-      register u16 *dims asm("r2") = D_020324A4;
+      register u16 *dims asm("r2") = gFieldMapDimensions;
       register s32 limit asm("r0") = (dims[1] << 11) - 0xA000;
       if (y > limit) {
         camera[1] = limit;
@@ -253,10 +253,10 @@ loop: {
     count = (u8)(count + 1);
     count_step = step;
     if (count != *count_step) {
-      func_080ED17C(1);
+      YieldTaskForUpdates(1);
       goto loop;
     }
   }
 
-  D_02031749 = 0;
+  gFieldCameraMoveActive = 0;
 }

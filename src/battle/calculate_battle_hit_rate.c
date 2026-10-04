@@ -7,7 +7,7 @@ M2C_UNK ReleaseEquipmentStatBuffer() asm("func_080E66B8");                      
 s32 FindAbilityValue(s32, s32, s32) asm("func_080E74F0");                   /* extern */
 u8 GetBattleRowDistance() asm("func_080E7BCC");                                 /* extern */
 M2C_UNK BuildBattleEquipmentStats(u8, u8, u8, u8, struct EquipmentRecord *) asm("func_080E8C90"); /* extern */
-s32 func_080ECD98(s32, s32);                        /* extern */
+s32 DivideSigned32(s32, s32) asm("func_080ECD98");                        /* extern */
 M2C_UNK jtbl_080E7CCC();                            /* static */
 extern u8 gBattleSetup[];
 
@@ -331,7 +331,7 @@ loop_16:
             : "=r"(base_value)
             : "m"(sp10)
             : "r1", "r3", "memory");
-        temp_r1_4 = func_080ECD98(base_value - (s16)var_r4, 0xA);
+        temp_r1_4 = DivideSigned32(base_value - (s16)var_r4, 0xA);
     }
     {
         register u32 retained_adjustment asm("r6") = var_r6;
@@ -564,7 +564,7 @@ block_56:
             var_r7 = (u16) (var_r0_3 >> 0x10);
         }
     }
-    if (FindBattleEffect(sp4, sp8, 0x1E) != 0xFF) {
+    if (FindBattleEffect(sp4, sp8, BATTLE_EFFECT_MELEE_ANTI_AIR_BONUS) != 0xFF) {
         register struct EquipmentRecord *equipment_stats asm("r1") = sp18;
 
         if ((equipment_stats->attributes & WEAPON_MELEE) &&

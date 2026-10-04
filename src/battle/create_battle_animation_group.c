@@ -5,9 +5,9 @@
 
 extern u8 gBattleAnimationState[] asm("D_02033FD0");
 extern s32 gBattleZoidScrollX asm("D_02034034");
-extern s32 D_03000054[];
+extern s32 gFieldCameraScrollOffsets[] asm("D_03000054");
 extern s16 D_087EB08C[][16];
-extern s16 D_087EC38C[];
+extern s16 gBattleEquipmentCursorPositions[] asm("D_087EC38C");
 
 void ResetBattleAnimationResourceAllocation(void) asm("func_080D2328");
 struct BattleAnimationGroup *CreateSpriteGroup(s32, u32, u32) asm("func_08095098");
@@ -85,7 +85,7 @@ struct BattleAnimationGroup *CreateBattleAnimationGroup(u32 zoid_id, u32 callbac
             result->x = adjusted;
             narrow = saved_y << 16;
             y = narrow >> 16;
-            adjusted = y - D_03000054[1] / 0x100;
+            adjusted = y - gFieldCameraScrollOffsets[1] / 0x100;
             result->y = adjusted;
         }
         break;
@@ -95,7 +95,7 @@ struct BattleAnimationGroup *CreateBattleAnimationGroup(u32 zoid_id, u32 callbac
             register const s16 *values asm("r6");
             register u8 *case_state asm("r5");
 
-            values = D_087EC38C;
+            values = gBattleEquipmentCursorPositions;
             case_state = gBattleAnimationState;
             {
                 register u32 part3 asm("r0");
@@ -133,7 +133,7 @@ struct BattleAnimationGroup *CreateBattleAnimationGroup(u32 zoid_id, u32 callbac
                 offset += part;
                 table_value = *(s16 *)offset;
                 sum = y + table_value;
-                adjusted = sum - D_03000054[1] / 0x100;
+                adjusted = sum - gFieldCameraScrollOffsets[1] / 0x100;
                 result->y = adjusted;
             }
         }
@@ -160,7 +160,7 @@ struct BattleAnimationGroup *CreateBattleAnimationGroup(u32 zoid_id, u32 callbac
             field = (const u8 *)row + (u32)field;
             table_value = *(s16 *)field;
             y += table_value;
-            adjusted = y - D_03000054[1] / 0x100;
+            adjusted = y - gFieldCameraScrollOffsets[1] / 0x100;
             result->y = adjusted;
         }
         break;
@@ -187,7 +187,7 @@ struct BattleAnimationGroup *CreateBattleAnimationGroup(u32 zoid_id, u32 callbac
             field = (const u8 *)row + (u32)field;
             table_value = *(s16 *)field;
             y += table_value;
-            adjusted = y - D_03000054[1] / 0x100;
+            adjusted = y - gFieldCameraScrollOffsets[1] / 0x100;
             result->y = adjusted;
         }
         break;
@@ -214,7 +214,7 @@ struct BattleAnimationGroup *CreateBattleAnimationGroup(u32 zoid_id, u32 callbac
             field = (const u8 *)row + (u32)field;
             table_value = *(s16 *)field;
             y += table_value;
-            adjusted = y - D_03000054[1] / 0x100;
+            adjusted = y - gFieldCameraScrollOffsets[1] / 0x100;
             result->y = adjusted;
         }
         break;
@@ -241,7 +241,7 @@ struct BattleAnimationGroup *CreateBattleAnimationGroup(u32 zoid_id, u32 callbac
             field = (const u8 *)row + (u32)field;
             table_value = *(s16 *)field;
             y += table_value;
-            adjusted = y - D_03000054[1] / 0x100;
+            adjusted = y - gFieldCameraScrollOffsets[1] / 0x100;
             result->y = adjusted;
         }
         break;
@@ -268,7 +268,7 @@ struct BattleAnimationGroup *CreateBattleAnimationGroup(u32 zoid_id, u32 callbac
             field = (const u8 *)row + (u32)field;
             table_value = *(s16 *)field;
             y += table_value;
-            adjusted = y - D_03000054[1] / 0x100;
+            adjusted = y - gFieldCameraScrollOffsets[1] / 0x100;
             result->y = adjusted;
         }
         break;
@@ -295,7 +295,7 @@ struct BattleAnimationGroup *CreateBattleAnimationGroup(u32 zoid_id, u32 callbac
             field = (const u8 *)row + (u32)field;
             table_value = *(s16 *)field;
             y += table_value;
-            adjusted = y - D_03000054[1] / 0x100;
+            adjusted = y - gFieldCameraScrollOffsets[1] / 0x100;
             result->y = adjusted;
         }
         break;

@@ -2,17 +2,17 @@
 #include "../game/game_state.h"
 
 extern s32 CallFunctionR0(s32) asm("func_080ECD5C");
-extern void func_080ED17C(s32);
+extern void YieldTaskForUpdates(s32) asm("func_080ED17C");
 
 extern s32 gGameMode;
 extern s32 D_02031980;
 extern s32 D_02031984;
 extern s32 D_03000010;
-extern s32 D_03000054[];
+extern s32 gFieldCameraScrollOffsets[] asm("D_03000054");
 extern u8 gEventMapId;
-extern s32 D_02032E88[];
-extern u16 D_020324A4[];
-extern s32 D_030033C4[];
+extern s32 gFieldBackgroundTilemaps[] asm("D_02032E88");
+extern u16 gFieldMapDimensions[] asm("D_020324A4");
+extern s32 gPerspectiveCamera[] asm("D_030033C4");
 
 void ShakeEventCamera(void) {
     if (gGameMode == GAME_MODE_FIELD) {
@@ -59,19 +59,19 @@ void ShakeEventCamera(void) {
             }
 
             {
-                register s32 *camera asm("r1") = D_03000054;
+                register s32 *camera asm("r1") = gFieldCameraScrollOffsets;
                 register s32 camera_current asm("r0") = camera[0];
                 register s32 camera_x asm("r3") = camera_current + delta_x;
 
                 camera[0] = camera_x;
                 camera[1] += delta_y;
-                if (gEventMapId != 0 && D_02032E88[1] != 0) {
+                if (gEventMapId != 0 && gFieldBackgroundTilemaps[1] != 0) {
                     s32 limit;
 
                     if (camera_x < 0) {
                         limit = 0;
                     } else {
-                        limit = (D_020324A4[0] << 11) - 0xF000;
+                        limit = (gFieldMapDimensions[0] << 11) - 0xF000;
                         if (camera_x <= limit) {
                             goto clamp_y;
                         }
@@ -86,31 +86,31 @@ clamp_y:
                         if (y < 0) {
                             camera_y[1] = 0;
                         } else {
-                            limit = (D_020324A4[1] << 11) - 0xA000;
+                            limit = (gFieldMapDimensions[1] << 11) - 0xA000;
                             if (y > limit) {
                                 camera[1] = limit;
                             }
                         }
                     }
                     {
-                        register s32 *copy asm("r0") = D_03000054;
+                        register s32 *copy asm("r0") = gFieldCameraScrollOffsets;
                         copy[2] = copy[0];
                         copy[3] = copy[1];
                     }
                 }
             }
-            func_080ED17C(1);
+            YieldTaskForUpdates(1);
         }
     }
 
     if (gGameMode == GAME_MODE_BATTLE) {
         register s32 *rng asm("r5") = &D_03000010;
-        register s32 *state asm("r4") = D_030033C4;
+        register s32 *state asm("r4") = gPerspectiveCamera;
 
         for (;;) {
             state[5] = ((u32)(CallFunctionR0(*rng) * 7) >> 15) + 0x75;
             state[6] = ((u32)(CallFunctionR0(*rng) * 7) >> 15) + 0x55;
-            func_080ED17C(1);
+            YieldTaskForUpdates(1);
         }
     }
 }

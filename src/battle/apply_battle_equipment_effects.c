@@ -3,9 +3,9 @@
 
 s32 AddBattleEffect(s32, s32, s32, s32, s32, s32, s32, s32, s32, s32) asm("func_080BE65C"); /* extern */
 void QueueBattleEffectDisplay(s32, s32, s32, s32, s32, s32, s32, s32, s32, s32) asm("func_080BE9D8"); /* extern */
-void func_080C02B4(u8, u8);                            /* extern */
-void func_080E77FC();                                  /* extern */
-s16 func_080ECD98(s32, s32);                         /* extern */
+void RemoveBattleUnitFromTurnOrder(u8, u8) asm("func_080C02B4");                            /* extern */
+void LoadAuxiliaryPilotEffects() asm("func_080E77FC");                                  /* extern */
+s16 DivideSigned32(s32, s32) asm("func_080ECD98");                         /* extern */
 void jtbl_080BEF5C();                                  /* static */
 extern u8 gBattleState[];
 
@@ -118,7 +118,7 @@ typedef struct BattleEffectTarget {
 
 void ApplyBattleEquipmentEffects(EquipmentEffectCommand *, s32, s32, s32, s32) asm("func_080BEE04");
 
-void ApplyBattleEquipmentEffects(EquipmentEffectCommand *command, s32 target_side, s32 target_unit_slot, s32 equipment_slot, s32 display_variant) {
+void ApplyBattleEquipmentEffects(EquipmentEffectCommand *command, s32 target_side, s32 target_unit_slot, s32 equipment_slot, s32 passive_equipment) {
     volatile s32 sp18;
     s32 temp_r0;
     s32 temp_r1_2;
@@ -144,8 +144,8 @@ void ApplyBattleEquipmentEffects(EquipmentEffectCommand *command, s32 target_sid
     temp_r1 = (u8)target_side;
     temp_r2 = (u8)target_unit_slot;
     sp18 = (u8)equipment_slot;
-    temp_r4 = (u8) display_variant;
-    temp_r0 = ((s32) ((0 - temp_r4) | temp_r4) >> 0x1F) & 0x1000;
+    temp_r4 = (u8) passive_equipment;
+    temp_r0 = ((s32) ((0 - temp_r4) | temp_r4) >> 0x1F) & BATTLE_EFFECT_PASSIVE_EQUIPMENT;
     {
         register s32 row_value asm("r1") = temp_r1 * 0x1380;
         register s32 col_value asm("r0") = temp_r2 * 0x270;
@@ -166,7 +166,7 @@ void ApplyBattleEquipmentEffects(EquipmentEffectCommand *command, s32 target_sid
                          (s32)({
                              s16 result;
                              asm volatile("" ::: "memory");
-                             result = func_080ECD98(0 - command->value, 0xA);
+                             result = DivideSigned32(0 - command->value, 0xA);
                              result;
                          }),
                          temp_r7, temp_r7);
@@ -176,7 +176,7 @@ void ApplyBattleEquipmentEffects(EquipmentEffectCommand *command, s32 target_sid
         }
         temp_r1_2 = command->attributes;
         if (((temp_r1_2 & WEAPON_FREEZE) || ((temp_r1_2 & 0x4000) && !(0x40 & target->flags))) && ((AddBattleEffect(temp_r1, temp_r2, -1, 0x18U, temp_r7, temp_r7, BATTLE_EFFECT_FREEZE, temp_r7, temp_r7, temp_r7) << 0x18) != 0)) {
-            func_080C02B4(temp_r1, temp_r2);
+            RemoveBattleUnitFromTurnOrder(temp_r1, temp_r2);
         }
         if (!(command->attributes & WEAPON_CONFUSION)) {
             return;
@@ -419,7 +419,7 @@ block_after_50:
             *(u16 *)(setup_ptr + 0x2E) = *(u16 *)(source_ptr + 6);
             *(u16 *)(setup_ptr + 0x30) = *(u16 *)(source_ptr + 8);
             *(u16 *)(setup_ptr + 0x32) = *(u16 *)(source_ptr + 10);
-            func_080E77FC();
+            LoadAuxiliaryPilotEffects();
         }
         break;
     }

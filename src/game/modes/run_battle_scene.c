@@ -1,9 +1,11 @@
 #include "m2c_prelude.h"
+#include "../../battle/battle_display.h"
+#include "../../graphics/screen_effects.h"
 #include "../game_state.h"
 #include "../../battle/battle.h"
 
-M2C_UNK func_08092D8C(s32, M2C_UNK);                /* extern */
-M2C_UNK func_08092E0C(s32);                         /* extern */
+M2C_UNK StartTask(s32, M2C_UNK) asm("func_08092D8C");                /* extern */
+M2C_UNK StopTask(s32) asm("func_08092E0C");                         /* extern */
 M2C_UNK PlaySong(s32) asm("func_08092E84");                         /* extern */
 M2C_UNK ClearSpritePools() asm("func_08094330");                            /* extern */
 s32 CreateSpriteFromTable(s32, u16, s32, s16, s32, s32, s32, s32, s32) asm("func_08094374"); /* extern */
@@ -11,45 +13,45 @@ s32 *CreateSprite(M2C_UNK, M2C_UNK, s32, s32, s32, s32, s32, s32, s32) asm("func
 M2C_UNK DestroySprite(s32) asm("func_08094554");                         /* extern */
 void *CreateSpriteGroup(s32, s32, M2C_UNK) asm("func_08095098");             /* extern */
 M2C_UNK DestroySpriteGroup(void *) asm("func_08095114");                      /* extern */
-M2C_UNK func_0809534C();                            /* extern */
-M2C_UNK func_08096308(s32, s32);                    /* extern */
-s32 func_0809669C();                                /* extern */
-M2C_UNK func_08096F3C();                            /* extern */
-M2C_UNK func_08096FBC(s32, s32, s32, s32, s32, s32, s32, s32, s32, s32); /* extern */
+M2C_UNK DisableDisplayWindows() asm("func_0809534C");                            /* extern */
+M2C_UNK StartScreenTransition(s32, s32) asm("func_08096308");                    /* extern */
+s32 IsScreenTransitionComplete() asm("func_0809669C");                                /* extern */
+M2C_UNK ResetMenuKeyRepeat() asm("func_08096F3C");                            /* extern */
+M2C_UNK InitializeWindowGraphics(s32, s32, s32, s32, s32, s32, s32, s32, s32, s32) asm("func_08096FBC"); /* extern */
 s32 *GetWindow(s32) asm("func_0809716C");                            /* extern */
 M2C_UNK RequestWindowRefresh() asm("func_080972C8");                            /* extern */
-M2C_UNK func_08098248(M2C_UNK, s32, s32);           /* extern */
-M2C_UNK func_0809844C(s16, s32, s32, s32, s32, s32, s32); /* extern */
+M2C_UNK PrintWindowText(M2C_UNK, s32, s32) asm("func_08098248");           /* extern */
+M2C_UNK PrintWindowNumberAt(s16, s32, s32, s32, s32, s32, s32) asm("func_0809844C"); /* extern */
 M2C_UNK ClearWindow(s32) asm("func_080986B4");                         /* extern */
 M2C_UNK RunMenuScript(M2C_UNK) asm("func_08098BB4");                     /* extern */
-M2C_UNK func_0809A5B4(u8, u8, s32, s32, s32);       /* extern */
-M2C_UNK func_0809A94C(u8, s32, s32, s32, s32);      /* extern */
-M2C_UNK func_0809A9C8(s32, s32, s32, s32, s32, s32); /* extern */
-M2C_UNK func_0809AA64(s32, s32, s32, s32);          /* extern */
-M2C_UNK func_0809AEC0(M2C_UNK, s32, M2C_UNK);       /* extern */
-u8 func_0809AEF4();                                 /* extern */
+M2C_UNK LoadSceneBackgroundGraphics(u8, u8, s32, s32, s32) asm("func_0809A5B4");       /* extern */
+M2C_UNK LoadPilotPortraitGraphics(u8, s32, s32, s32, s32) asm("func_0809A94C");      /* extern */
+M2C_UNK QueuePilotPortraitGraphics(s32, s32, s32, s32, s32, s32) asm("func_0809A9C8"); /* extern */
+M2C_UNK LoadSpriteGraphicsFromTable(s32, s32, s32, s32) asm("func_0809AA64");          /* extern */
+M2C_UNK BeginLinkSend(M2C_UNK, s32, M2C_UNK) asm("func_0809AEC0");       /* extern */
+u8 PollLinkSend() asm("func_0809AEF4");                                 /* extern */
 u8 FindBattleEffect(u8, u8, s32) asm("func_080BF464");                      /* extern */
-M2C_UNK func_080BFB90();                            /* extern */
-M2C_UNK func_080CB340(u8 *, u8);                    /* extern */
-M2C_UNK func_080CB490();                            /* extern */
-s32 func_080CBAB4(s32);                             /* extern */
-M2C_UNK func_080CBE8C(s32, s32, s32);               /* extern */
-M2C_UNK func_080CC1E8();                            /* extern */
-M2C_UNK func_080CC2E4(s32);                         /* extern */
-M2C_UNK func_080CC44C();                            /* extern */
-M2C_UNK func_080CC49C(s32);                         /* extern */
-M2C_UNK func_080CC8B0();                            /* extern */
-M2C_UNK func_080CC9F0();                            /* extern */
-M2C_UNK func_080CCA14();                            /* extern */
-M2C_UNK func_080CCA40();                            /* extern */
-M2C_UNK func_080CCA6C(s32);                         /* extern */
-M2C_UNK func_080CCBA8();                            /* extern */
-M2C_UNK func_080CCBAC();                            /* extern */
-M2C_UNK func_080CCBD4(u8, u16, u8, s32, u32);       /* extern */
-M2C_UNK func_080CCE24(u8);                          /* extern */
-M2C_UNK func_080CCEAC(u8);                          /* extern */
-M2C_UNK func_080CD110();                            /* extern */
-M2C_UNK func_080CD5CC();                            /* extern */
+M2C_UNK RollBattleEffectRemovalMasks() asm("func_080BFB90");                            /* extern */
+M2C_UNK LoadBattleSceneZoidGraphics(u8 *, u8) asm("func_080CB340");                    /* extern */
+M2C_UNK ShowBattleActionEquipmentInfo() asm("func_080CB490");                            /* extern */
+s32 SelectBattleEquipmentSlot(s32) asm("func_080CBAB4");                             /* extern */
+M2C_UNK SelectBattleTargetChoice(s32, s32, s32) asm("func_080CBE8C");               /* extern */
+M2C_UNK CreateBattleSelectionCursorSprites() asm("func_080CC1E8");                            /* extern */
+M2C_UNK SetBattleSelectionCursorMode(s32) asm("func_080CC2E4");                         /* extern */
+M2C_UNK PositionBattleEquipmentSelectionCursor() asm("func_080CC44C");                            /* extern */
+M2C_UNK PositionBattleTargetAreaCursors(s32) asm("func_080CC49C");                         /* extern */
+M2C_UNK UpdateBattleSelectionCursorSprites() asm("func_080CC8B0");                            /* extern */
+M2C_UNK DestroyBattleSelectionCursorSprites() asm("func_080CC9F0");                            /* extern */
+M2C_UNK ShowBattleSelectionCursorSprites() asm("func_080CCA14");                            /* extern */
+M2C_UNK HideBattleSelectionCursorSprites() asm("func_080CCA40");                            /* extern */
+M2C_UNK CreateBattleTargetSelectionIcons(s32) asm("func_080CCA6C");                         /* extern */
+M2C_UNK NoOpBattleTargetSelectionIconUpdate() asm("func_080CCBA8");                            /* extern */
+M2C_UNK DestroyBattleTargetSelectionIcons() asm("func_080CCBAC");                            /* extern */
+M2C_UNK ShowBattlePilotActionQuote(u8, u16, u8, s32, u32) asm("func_080CCBD4");       /* extern */
+M2C_UNK ShowQueuedBattleEquipmentName(u8) asm("func_080CCE24");                          /* extern */
+M2C_UNK CloseQueuedBattleEquipmentWindow(u8) asm("func_080CCEAC");                          /* extern */
+M2C_UNK PlayBattlePhalanxVolleyAnimation() asm("func_080CD110");                            /* extern */
+M2C_UNK BuildBattleSelectedTargetList() asm("func_080CD5CC");                            /* extern */
 M2C_UNK StartZoidEquipmentAnimation(u8, u8) asm("func_080D04A0");                      /* extern */
 s32 IsZoidEquipmentAnimationReady() asm("func_080D0AE4");                                /* extern */
 M2C_UNK ResetBattleAnimation(s32) asm("func_080D0AF0");                         /* extern */
@@ -72,24 +74,24 @@ u8 GetBattleScanlineWindowPhase() asm("func_080D1E38");                         
 M2C_UNK StartBattleBackgroundShake() asm("func_080D218C");                            /* extern */
 M2C_UNK RequestBattleBackgroundShakeStop() asm("func_080D2200");                            /* extern */
 s32 IsBattleBackgroundShakeFinished() asm("func_080D222C");                                /* extern */
-s32 func_080E523C(u8);                              /* extern */
-s32 func_080E6664(s32);                             /* extern */
+s32 GetZoidFormIndex(u8) asm("func_080E523C");                              /* extern */
+s32 TestBattleRuleFlag(s32) asm("func_080E6664");                             /* extern */
 void *AcquireEquipmentStatBuffer() asm("func_080E669C");                              /* extern */
 M2C_UNK ReleaseEquipmentStatBuffer() asm("func_080E66B8");                            /* extern */
 s32 FindAbilityValue(s32, s32, s32) asm("func_080E74F0");                   /* extern */
-s32 func_080E7AE0(u8, u8, s32);                     /* extern */
-s32 func_080E8C48(u8, u8);                          /* extern */
+s32 FindActiveBattleAuxiliaryPilotEffectValue(u8, u8, s32) asm("func_080E7AE0");                     /* extern */
+s32 IsBattleCombinedAttackLeader(u8, u8) asm("func_080E8C48");                          /* extern */
 s32 BuildBattleEquipmentStats(u32, u32, u32, u32, void *) asm("func_080E8C90");  /* extern */
 asm(".set func_080E8C90_4_block164, func_080E8C90");
 s32 func_080E8C90_4_block164(u32, u32, u32, u32);
 M2C_UNK RollBattleActionOutcomes() asm("func_080E9998");                            /* extern */
 M2C_UNK ApplyBattleTargetOutcome(s32, s32, s32) asm("func_080E9DCC");               /* extern */
 s32 CallFunctionR0(s32) asm("func_080ECD5C");                             /* extern */
-s32 func_080ECF00(u8, s32);                         /* extern */
-s32 func_080ECF78(u8, s32);                         /* extern */
-M2C_UNK func_080ED17C(s32);                         /* extern */
-extern u8 *D_02033F38;
-extern u8 *D_02033F38_store asm("D_02033F38");
+s32 DivideUnsigned32(u8, s32) asm("func_080ECF00");                         /* extern */
+s32 ModuloUnsigned32(u8, s32) asm("func_080ECF78");                         /* extern */
+M2C_UNK YieldTaskForUpdates(s32) asm("func_080ED17C");                         /* extern */
+extern u8 *gBattleSceneSelectedUnit asm("D_02033F38");
+extern u8 *gBattleSceneSelectedUnitStore asm("D_02033F38");
 extern u8 gBattleState[];
 extern u16 gRepeatedKeys_A[];
 extern u16 gRepeatedKeys_B[];
@@ -106,17 +108,17 @@ extern u16 gRepeatedKeys_H[];
 asm(".set func_08094484_4_cleanup, func_08094484");
 s32 *CreateSprite_4_cleanup(M2C_UNK, M2C_UNK, s32, s32) asm("func_08094484_4_cleanup");
 asm(".set func_0809A94C_4_selection, func_0809A94C");
-M2C_UNK func_0809A94C_4_selection(s32, s32, s32, s32);
+M2C_UNK LoadPilotPortraitGraphics_4_selection(s32, s32, s32, s32) asm("func_0809A94C_4_selection");
 asm(".set func_08094374_wide_early, func_08094374");
 s32 CreateSpriteFromTable_wide_early(s32, s32, s32, s32, s32, s32, s32, s32, s32) asm("func_08094374_wide_early");
 asm(".set func_080CCE24_wide_cleanup, func_080CCE24");
-M2C_UNK func_080CCE24_wide_cleanup(s32);
+M2C_UNK ShowQueuedBattleEquipmentNameWide(s32) asm("func_080CCE24_wide_cleanup");
 asm(".set func_080CCEAC_wide_callback, func_080CCEAC");
-M2C_UNK func_080CCEAC_wide_callback(s32);
+M2C_UNK CloseQueuedBattleEquipmentWindowWide(s32) asm("func_080CCEAC_wide_callback");
 asm(".set func_0809A9C8_4_state2000, func_0809A9C8");
-M2C_UNK func_0809A9C8_4_state2000(s32, s32, s32, s32);
+M2C_UNK QueuePilotPortraitGraphics_4_state2000(s32, s32, s32, s32) asm("func_0809A9C8_4_state2000");
 asm(".set func_0809A94C_4_cleanup_call, func_0809A94C");
-M2C_UNK func_0809A94C_4_cleanup_call(s32, s32, s32, s32);
+M2C_UNK LoadPilotPortraitGraphics_4_cleanup_call(s32, s32, s32, s32) asm("func_0809A94C_4_cleanup_call");
 asm(".set func_0809844C_wide_state110, func_0809844C");
 M2C_UNK func_0809844C_wide_state110(s32, s32, s32, s32, s32, s32, s32);
 asm(".set func_080BF464_wide_state110, func_080BF464");
@@ -124,11 +126,11 @@ u8 FindBattleEffect_wide_state110(u32, u32, s32) asm("func_080BF464_wide_state11
 asm(".set func_0809844C_4_state143, func_0809844C");
 M2C_UNK func_0809844C_4_state143(s32, s32, s32, s32);
 asm(".set func_080CCBD4_wide_state320, func_080CCBD4");
-M2C_UNK func_080CCBD4_wide_state320(u8, s32, u8, s32, u32);
+M2C_UNK ShowBattlePilotActionQuoteWithWideActionId(u8, s32, u8, s32, u32) asm("func_080CCBD4_wide_state320");
 asm(".set func_080CCBD4_wide_block540, func_080CCBD4");
-M2C_UNK func_080CCBD4_wide_block540(u32, s32, u32, s32, u32);
+M2C_UNK ShowBattlePilotActionQuoteWithWideArguments(u32, s32, u32, s32, u32) asm("func_080CCBD4_wide_block540");
 asm(".set func_0809A5B4_wide_cleanup, func_0809A5B4");
-M2C_UNK func_0809A5B4_wide_cleanup(u32, u32, s32, s32, s32);
+M2C_UNK LoadSceneBackgroundGraphicsWideCleanup(u32, u32, s32, s32, s32) asm("func_0809A5B4_wide_cleanup");
 asm(".set func_080D0FF8_wide_unit, func_080D0FF8");
 M2C_UNK StartBattleSlidingImpactAnimation_wide_unit(u8, u8, s32, s32) asm("func_080D0FF8_wide_unit");
 asm(".set func_080D0F94_wide_final, func_080D0F94");
@@ -314,11 +316,11 @@ void RunBattleScene(void) {
 
         *(u32 *)(display_base_r0 + 0x14) = zero_r1;
         *(u32 *)(display_base_r0 + 4) = zero_r1;
-        func_08096FBC(3, zero_r1, 0x100, 0xC0, 0x1C0, 3, 0xE,
+        InitializeWindowGraphics(3, zero_r1, 0x100, 0xC0, 0x1C0, 3, 0xE,
             zero_r1, 0x366, 0xC);
     }
     ResetBattleScanlineWindow();
-    func_08092D8C(2, 0x080CD2DD);
+    StartTask(2, 0x080CD2DD);
     {
         u8 entry_input_state;
 
@@ -523,8 +525,8 @@ block_64:
 
             temp_r0 = *selection_source_r7;
         }
-        D_02033F38_store = temp_r0;
-        func_080CB340(temp_r0, *selection_side_r3);
+        gBattleSceneSelectedUnitStore = temp_r0;
+        LoadBattleSceneZoidGraphics(temp_r0, *selection_side_r3);
     }
     {
         register u8 **selection_reload_slot_r2 asm("r2");
@@ -586,7 +588,7 @@ block_70:
                          : "memory");
             selected_value_r1 += 0x38;
             selected_value_r1 = *(u8 *)selected_value_r1;
-            func_0809A5B4(display_value_r0, selected_value_r1, 3, 2, 1);
+            LoadSceneBackgroundGraphics(display_value_r0, selected_value_r1, 3, 2, 1);
         }
     }
     {
@@ -633,7 +635,7 @@ block_70:
                 selection_zero_r1 = 0;
                 selection_zero_r2 = 0;
                 selection_screen_r3 = 0x3DC;
-                func_0809A94C_4_selection(selection_value_r0,
+                LoadPilotPortraitGraphics_4_selection(selection_value_r0,
                     selection_zero_r1, selection_zero_r2,
                     selection_screen_r3);
             }
@@ -725,7 +727,7 @@ block_77:
         selection_loop_zero_r1 = 0;
         selection_loop_zero_r2 = 0;
         selection_loop_screen_r3 = 0x3DC;
-        func_0809A94C_4_selection(selection_loop_value_r0,
+        LoadPilotPortraitGraphics_4_selection(selection_loop_value_r0,
             selection_loop_zero_r1, selection_loop_zero_r2,
             selection_loop_screen_r3);
     }
@@ -826,10 +828,10 @@ block_88:
             goto block_91;
         }
     }
-    func_08096308(9, 0);
+    StartScreenTransition(SCREEN_TRANSITION_LEFTWARD_CHEVRON_REVEAL, 0);
     goto block_92;
 block_91:
-    func_08096308(0xA, 0);
+    StartScreenTransition(SCREEN_TRANSITION_RIGHTWARD_CHEVRON_REVEAL, 0);
 block_92:
     {
         register u8 *side_base asm("r6") = (u8 *)0x02033F36;
@@ -893,7 +895,7 @@ block_92:
                 tile_zero_r1 = 0;
                 tile_size_r2 = 0x380;
                 tile_kind_r3 = 0xE;
-                func_0809AA64(work_r0, tile_zero_r1, tile_size_r2,
+                LoadSpriteGraphicsFromTable(work_r0, tile_zero_r1, tile_size_r2,
                               tile_kind_r3);
             }
         }
@@ -1028,7 +1030,7 @@ constructor_coordinate_join:
                     asm volatile("" : "+r"(script));
                     script;
                 }),
-                0x080DB965);
+                BATTLE_SHIELD_SPRITE_VISIBILITY_CALLBACK);
             asm volatile("");
         }
     }
@@ -1112,7 +1114,7 @@ block_108:
     }
     StartBattleBackgroundShake();
 block_110:
-    if (func_080E8C48(*(u8 *)0x02033F36, *(u8 *)0x02033F37) == 0) {
+    if (IsBattleCombinedAttackLeader(*(u8 *)0x02033F36, *(u8 *)0x02033F37) == 0) {
         goto block_112;
     }
     {
@@ -1207,7 +1209,7 @@ block_117:
     }
     SetBattleAnimationCameraMode(3, 0);
 block_120:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_121:
     if ((IsBattleAnimationCameraReady() << 0x18) == 0) {
         goto block_117;
@@ -1333,7 +1335,7 @@ block_136:
     if (sp6C == 1) {
         goto block_139;
     }
-    if ((func_080E7AE0(*state132_side_r6, *state132_player_r4, 0x17) << 0x10) == 0) {
+    if ((FindActiveBattleAuxiliaryPilotEffectValue(*state132_side_r6, *state132_player_r4, 0x17) << 0x10) == 0) {
         goto block_139;
     }
     sp6C = (u32) (u8) (sp6C + 1);
@@ -1353,8 +1355,8 @@ block_141:
                           "+r"(state132_count_r4));
         *state132_count_r4 = state132_count_zero_r5;
     }
-    func_080CBAB4(0);
-    func_080CC1E8();
+    SelectBattleEquipmentSlot(0);
+    CreateBattleSelectionCursorSprites();
     {
         register s32 *state132_flags_ptr_r2 asm("r2") =
             GetWindow(1);
@@ -1377,7 +1379,7 @@ block_141:
     }
 block_143:
     RunMenuScript(0x0800407C);
-    func_080CB490();
+    ShowBattleActionEquipmentInfo();
     RunMenuScript(0x0800405D);
     {
         register u32 state143_eight_r4 asm("r4");
@@ -1424,18 +1426,18 @@ block_143:
         asm volatile("" : "+r"(state143_second_slot_r7));
         state143_second_value_r0 =
             *(s16 *)((u8 *)*state143_second_slot_r7 + 0x3E);
-        func_0809844C(state143_second_value_r0, 3, 0, 0xA,
+        PrintWindowNumberAt(state143_second_value_r0, 3, 0, 0xA,
                       state143_eight_r4, 7, state143_zero_r5);
     }
     }
-    func_080CC2E4(0);
+    SetBattleSelectionCursorMode(0);
     RunMenuScript(0x0800417D);
     sp78 = 1;
     goto block_211;
 block_144:
-    func_08096F3C();
+    ResetMenuKeyRepeat();
 loop_145:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     if (!(0x60 & *(u16 *)0x03006034)) {
         goto block_149;
     }
@@ -1455,9 +1457,9 @@ loop_145:
         sp78 = state120_first_one_r5;
     }
 block_148:
-    func_080CBAB4(-1);
-    func_080CC44C();
-    func_080CB490();
+    SelectBattleEquipmentSlot(-1);
+    PositionBattleEquipmentSelectionCursor();
+    ShowBattleActionEquipmentInfo();
     PlaySong(0x40);
 block_149:
     if (!(0x90 & *(u16 *)0x03006034)) {
@@ -1479,12 +1481,12 @@ block_149:
         sp78 = state120_second_one_r0;
     }
 block_152:
-    func_080CBAB4(1);
-    func_080CC44C();
-    func_080CB490();
+    SelectBattleEquipmentSlot(1);
+    PositionBattleEquipmentSelectionCursor();
+    ShowBattleActionEquipmentInfo();
     PlaySong(0x40);
 block_153:
-    func_080CC8B0();
+    UpdateBattleSelectionCursorSprites();
     {
         register s16 *post_reset_value_r0 asm("r0") =
             (s16 *)0x02033F90;
@@ -1595,18 +1597,18 @@ block_157:
     if (*side_base_r6 != 0) {
         goto block_162;
     }
-    func_08096308(0xB, 0);
+    StartScreenTransition(SCREEN_TRANSITION_LEFTWARD_CHEVRON_CONCEAL, 0);
     goto block_163;
 block_162:
-    func_08096308(0xC, 0);
+    StartScreenTransition(SCREEN_TRANSITION_RIGHTWARD_CHEVRON_CONCEAL, 0);
 block_163:
     *(s32 *)0x02021690 = GAME_MODE_BATTLE;
     goto block_165;
 block_164:
     *(u8 *)r5_work = (u8) (temp_r0_4 - 1);
-    func_080CCEAC(*(u8 *)r5_work);
-    func_080CB490();
-    func_080CC44C();
+    CloseQueuedBattleEquipmentWindow(*(u8 *)r5_work);
+    ShowBattleActionEquipmentInfo();
+    PositionBattleEquipmentSelectionCursor();
     {
         register u32 call0_r0 asm("r0") = *side_base_r6;
         register u32 call1_r1 asm("r1");
@@ -1797,7 +1799,7 @@ block_178:
     var_r0_4 = 0x08004279;
     goto block_192;
 block_180:
-    if ((func_080E6664(0x12) << 0x18) == 0) {
+    if ((TestBattleRuleFlag(0x12) << 0x18) == 0) {
         goto block_184;
     }
     {
@@ -1814,7 +1816,7 @@ block_180:
     var_r0_5 = 0x08004352;
     goto block_232;
 block_184:
-    if ((func_080E6664(0x13) << 0x18) == 0) {
+    if ((TestBattleRuleFlag(0x13) << 0x18) == 0) {
         goto block_197;
     }
     {
@@ -1840,7 +1842,7 @@ block_187:
     }
     goto loop_592;
 block_189:
-    if ((func_080E6664(0x14) << 0x18) == 0) {
+    if ((TestBattleRuleFlag(0x14) << 0x18) == 0) {
         goto block_193;
     }
     {
@@ -1870,7 +1872,7 @@ block_192:
     asm volatile("");
     goto loop_592;
 block_193:
-    if ((func_080E6664(0x16) << 0x18) == 0) {
+    if ((TestBattleRuleFlag(0x16) << 0x18) == 0) {
         goto block_197;
     }
     {
@@ -1889,7 +1891,7 @@ block_193:
     var_r0_5 = 0x08004352;
     goto block_232;
 block_197:
-    if ((func_080E6664(0x11) << 0x18) == 0) {
+    if ((TestBattleRuleFlag(0x11) << 0x18) == 0) {
         goto block_200;
     }
     {
@@ -2353,7 +2355,7 @@ block_240:
         }
         count_base_r4 = (u32)(u8 *)0x0203ECFB;
 loop_242:
-        func_080CCEAC_wide_callback(callback_index_r6);
+        CloseQueuedBattleEquipmentWindowWide(callback_index_r6);
         {
             register u32 successor_r0 asm("r0") = callback_index_r6 + 1;
 
@@ -2399,10 +2401,10 @@ block_243:
     }
     goto loop_592;
 block_246:
-    func_080CCA6C(1);
-    func_080CBE8C(1, 0, 0);
-    func_080CC2E4(1);
-    func_080CC49C(1);
+    CreateBattleTargetSelectionIcons(1);
+    SelectBattleTargetChoice(1, 0, 0);
+    SetBattleSelectionCursorMode(1);
+    PositionBattleTargetAreaCursors(1);
     var_r6_7 = 0;
     {
     register u8 **state210_slots asm("r8");
@@ -2438,7 +2440,7 @@ loop_247:
               "r"(state210_work_r5)
             : "memory");
     }
-    if ((func_080ECF00(var_r6_7, 3) << 0x18) != 0) {
+    if ((DivideUnsigned32(var_r6_7, 3) << 0x18) != 0) {
         goto block_250;
     }
     var_r0_7 = 0x30;
@@ -2454,7 +2456,7 @@ block_251:
         state210_work_r4 = (u32)*slot_r0;
     }
     M2C_FIELD((u8 *)state210_work_r4, s32 *, 8) =
-        (s32)(0x48 - ((u32)(func_080ECF78(var_r6_7, 3) << 0x18) >> 0x13));
+        (s32)(0x48 - ((u32)(ModuloUnsigned32(var_r6_7, 3) << 0x18) >> 0x13));
     {
         register s32 *field140_r3 asm("r3") =
             (s32 *)(state210_work_r4 + 0x8C);
@@ -2496,10 +2498,10 @@ block_254:
         asm volatile("" : "+r"(constructor_r1));
         constructor_r2 = 0x330;
         constructor_r3 = 0xB;
-        func_0809AA64(constructor_r0, constructor_r1, constructor_r2,
+        LoadSpriteGraphicsFromTable(constructor_r0, constructor_r1, constructor_r2,
                       constructor_r3);
     }
-    func_08096F3C();
+    ResetMenuKeyRepeat();
     {
         register u32 state210_initial_one_r4 asm("r4") = 1;
 
@@ -2515,7 +2517,7 @@ block_254:
         asm volatile("" : "+r"(slots_seed_r5));
     }
 loop_255:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     {
         register u16 *state210_input_r7 asm("r7") = gRepeatedKeys_A;
         register u32 state210_input_value_r1 asm("r1");
@@ -2538,9 +2540,9 @@ loop_255:
         direction_r1 = -1;
         asm volatile("" : "+r"(direction_r1));
         direction_r2 = 0;
-        func_080CBE8C(direction_r0, direction_r1, direction_r2);
+        SelectBattleTargetChoice(direction_r0, direction_r1, direction_r2);
     }
-    func_080CC49C(1);
+    PositionBattleTargetAreaCursors(1);
     PlaySong(0x40);
     {
         register u32 state210_first_one_r0 asm("r0") = 1;
@@ -2559,8 +2561,8 @@ block_257:
             goto block_259;
         }
     }
-    func_080CBE8C(1, 1, 0);
-    func_080CC49C(1);
+    SelectBattleTargetChoice(1, 1, 0);
+    PositionBattleTargetAreaCursors(1);
     PlaySong(0x40);
     {
         register u32 state210_second_one_r3 asm("r3") = 1;
@@ -2589,9 +2591,9 @@ block_259:
         direction_r1 = 0;
         asm volatile("" : "+r"(direction_r1));
         direction_r2 = -1;
-        func_080CBE8C(direction_r0, direction_r1, direction_r2);
+        SelectBattleTargetChoice(direction_r0, direction_r1, direction_r2);
     }
-    func_080CC49C(1);
+    PositionBattleTargetAreaCursors(1);
     PlaySong(0x40);
     {
         register u32 state210_third_one_r5 asm("r5") = 1;
@@ -2614,8 +2616,8 @@ block_261:
             goto block_263;
         }
     }
-    func_080CBE8C(1, 0, 1);
-    func_080CC49C(1);
+    SelectBattleTargetChoice(1, 0, 1);
+    PositionBattleTargetAreaCursors(1);
     PlaySong(0x40);
     {
         register u32 state210_fourth_one_r0 asm("r0") = 1;
@@ -2781,14 +2783,14 @@ block_277:
     sp70 = edit_work_r4;
     }
 block_280:
-    func_080CC8B0();
-    func_080CCBA8();
+    UpdateBattleSelectionCursorSprites();
+    NoOpBattleTargetSelectionIconUpdate();
     if (3 & *(u16 *)0x0300000E) {
         goto block_282;
     }
     goto loop_255;
 block_282:
-    func_080CCBAC();
+    DestroyBattleTargetSelectionIcons();
     {
     register u32 state210_handler_index_r6 asm("r6") = 0;
 
@@ -2819,7 +2821,7 @@ loop_283:
         }
         count_base_r4 = (u32)(u8 *)0x0203ECFB;
 loop_286:
-        func_080CCE24_wide_cleanup(cleanup_index_r6);
+        ShowQueuedBattleEquipmentNameWide(cleanup_index_r6);
         {
             register u32 successor_r0 asm("r0") = cleanup_index_r6 + 1;
 
@@ -2868,10 +2870,10 @@ block_289:
     goto loop_592;
     }
 block_291:
-    func_080CCA6C(0);
-    func_080CBE8C(0, 0, 0);
-    func_080CC2E4(1);
-    func_080CC49C(0);
+    CreateBattleTargetSelectionIcons(0);
+    SelectBattleTargetChoice(0, 0, 0);
+    SetBattleSelectionCursorMode(1);
+    PositionBattleTargetAreaCursors(0);
     var_r6_11 = 0;
     {
     register u8 **state300_slots asm("r8");
@@ -2901,7 +2903,7 @@ loop_292:
             (u8 **)((u8 *)slot_base_r3 + state300_work_r4);
         *slot_r0 = state300_work_r5;
     }
-    if ((func_080ECF00(var_r6_11, 3) << 0x18) != 0) {
+    if ((DivideUnsigned32(var_r6_11, 3) << 0x18) != 0) {
         goto block_295;
     }
     var_r0_10 = 0x10;
@@ -2917,7 +2919,7 @@ block_296:
         state300_work_r4 = (u32)*slot_r0;
     }
     M2C_FIELD((u8 *)state300_work_r4, s32 *, 8) =
-        (s32)(((u32)(func_080ECF78(var_r6_11, 3) << 0x18) >> 0x13) + 8);
+        (s32)(((u32)(ModuloUnsigned32(var_r6_11, 3) << 0x18) >> 0x13) + 8);
     {
         register s32 *field140_r3 asm("r3") =
             (s32 *)(state300_work_r4 + 0x8C);
@@ -2955,10 +2957,10 @@ block_298:
         asm volatile("" : "+r"(constructor_r1));
         constructor_r2 = 0x330;
         constructor_r3 = 0xB;
-        func_0809AA64(constructor_r0, constructor_r1, constructor_r2,
+        LoadSpriteGraphicsFromTable(constructor_r0, constructor_r1, constructor_r2,
                       constructor_r3);
     }
-    func_08096F3C();
+    ResetMenuKeyRepeat();
     {
         register u32 state310_initial_one_r0 asm("r0") = 1;
 
@@ -2974,7 +2976,7 @@ block_298:
         asm volatile("" : "+r"(state310_slots_seed_r1));
     }
 loop_299:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     {
         register u16 *state310_input_r2 asm("r2") = gRepeatedKeys_E;
 
@@ -2983,8 +2985,8 @@ loop_299:
             goto block_301;
         }
     }
-    func_080CBE8C(0, 1, 0);
-    func_080CC49C(0);
+    SelectBattleTargetChoice(0, 1, 0);
+    PositionBattleTargetAreaCursors(0);
     PlaySong(0x40);
     {
         register u32 state310_first_one_r3 asm("r3") = 1;
@@ -3011,10 +3013,10 @@ block_301:
         state310_left_zero_r0 = 0;
         state310_left_direction_r1 = -1;
         state310_left_zero_r2 = 0;
-        func_080CBE8C(state310_left_zero_r0,
+        SelectBattleTargetChoice(state310_left_zero_r0,
             state310_left_direction_r1, state310_left_zero_r2);
     }
-    func_080CC49C(0);
+    PositionBattleTargetAreaCursors(0);
     PlaySong(0x40);
     {
         register u32 state310_second_one_r5 asm("r5") = 1;
@@ -3037,8 +3039,8 @@ block_303:
             goto block_305;
         }
     }
-    func_080CBE8C(0, 0, 1);
-    func_080CC49C(0);
+    SelectBattleTargetChoice(0, 0, 1);
+    PositionBattleTargetAreaCursors(0);
     PlaySong(0x40);
     {
         register u32 state310_third_one_r0 asm("r0") = 1;
@@ -3067,9 +3069,9 @@ block_305:
         direction_r1 = 0;
         asm volatile("" : "+r"(direction_r1));
         direction_r2 = -1;
-        func_080CBE8C(direction_r0, direction_r1, direction_r2);
+        SelectBattleTargetChoice(direction_r0, direction_r1, direction_r2);
     }
-    func_080CC49C(0);
+    PositionBattleTargetAreaCursors(0);
     PlaySong(0x40);
     {
         register u32 state310_final_one_r3 asm("r3") = 1;
@@ -3221,14 +3223,14 @@ block_314:
         sp70 = state310_zero_r2;
     }
 block_316:
-    func_080CC8B0();
-    func_080CCBA8();
+    UpdateBattleSelectionCursorSprites();
+    NoOpBattleTargetSelectionIconUpdate();
     if (3 & *(u16 *)0x0300000E) {
         goto block_318;
     }
     goto loop_299;
 block_318:
-    func_080CCBAC();
+    DestroyBattleTargetSelectionIcons();
     {
     register u32 state310_handler_index_r6 asm("r6") = 0;
 
@@ -3259,7 +3261,7 @@ loop_319:
         }
         count_base_r4 = (u32)(u8 *)0x0203ECFB;
 loop_322:
-        func_080CCE24_wide_cleanup(cleanup_index_r6);
+        ShowQueuedBattleEquipmentNameWide(cleanup_index_r6);
         {
             register u32 successor_r0 asm("r0") = cleanup_index_r6 + 1;
 
@@ -3302,7 +3304,7 @@ block_325:
     goto block_335;
     }
 block_327:
-    func_080CCA40();
+    HideBattleSelectionCursorSprites();
     {
         register s32 accumulator_r1 asm("r1") = sp64;
         register s32 sum_r0 asm("r0");
@@ -3324,7 +3326,7 @@ block_327:
 
         asm volatile("" : "+r"(call_count_r3));
         call_count_r0 = *call_count_r3;
-        func_080CCE24(call_count_r0);
+        ShowQueuedBattleEquipmentName(call_count_r0);
     }
     {
         register u8 *update_count_r4 asm("r4") = (u8 *)0x0203ECFB;
@@ -3359,7 +3361,7 @@ block_327:
         goto block_339;
     }
     }
-    if ((func_080CBAB4(0) << 0x18) == 0) {
+    if ((SelectBattleEquipmentSlot(0) << 0x18) == 0) {
         goto block_339;
     }
     RunMenuScript(0x080040D7);
@@ -3373,8 +3375,8 @@ block_327:
     if (temp_r0_13 != 0) {
         goto block_337;
     }
-    func_080CCA14();
-    func_080CC44C();
+    ShowBattleSelectionCursorSprites();
+    PositionBattleEquipmentSelectionCursor();
 block_335:
     {
         register u32 block335_state_r0 asm("r0") = 0x110;
@@ -3404,10 +3406,10 @@ block_338:
         decrement_value_r0 -= 1;
         *decrement_address_r2 = (u8)decrement_value_r0;
         decrement_value_r0 = *decrement_address_r2;
-        func_080CCEAC(decrement_value_r0);
+        CloseQueuedBattleEquipmentWindow(decrement_value_r0);
     }
-    func_080CCA14();
-    func_080CC44C();
+    ShowBattleSelectionCursorSprites();
+    PositionBattleEquipmentSelectionCursor();
     {
         register u8 *state_r3 asm("r3") = sp68;
         register u32 delta_r1 asm("r1");
@@ -3458,10 +3460,10 @@ block_342:
         decrement_value_r0 -= 1;
         *decrement_address_r1 = (u8)decrement_value_r0;
         decrement_value_r0 = *decrement_address_r1;
-        func_080CCEAC(decrement_value_r0);
+        CloseQueuedBattleEquipmentWindow(decrement_value_r0);
     }
-    func_080CCA14();
-    func_080CC44C();
+    ShowBattleSelectionCursorSprites();
+    PositionBattleEquipmentSelectionCursor();
     {
         register u8 *state_r2 asm("r2") = sp68;
         register u32 delta_r1 asm("r1");
@@ -3494,7 +3496,7 @@ block_344:
         register u8 *count_base_r3 asm("r3");
         register u8 *count_base_r4 asm("r4");
 
-        func_080CC9F0();
+        DestroyBattleSelectionCursorSprites();
         table_base_r2 = (u8 *)0x020218E4;
         asm volatile("" : "+r"(table_base_r2));
         output_base_r5 = 0x691C;
@@ -3545,7 +3547,7 @@ loop_346:
             value_r1 = *(u8 *)value_r1;
             *(u8 *)destination_r0 = value_r1;
         }
-        func_080CCEAC_wide_callback(index_r6);
+        CloseQueuedBattleEquipmentWindowWide(index_r6);
         {
             register u32 successor_r0 asm("r0") = index_r6 + 1;
 
@@ -3562,12 +3564,12 @@ loop_346:
     }
 block_347:
     RequestWindowRefresh();
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     var_r9 = 0x420;
     goto loop_592;
 block_349:
     RollBattleActionOutcomes();
-    func_080BFB90();
+    RollBattleEffectRemovalMasks();
     {
     register u32 output_index_r6 asm("r6") = 0;
     register u8 *output_base_r4 asm("r4") = (u8 *)0x0203ECF8;
@@ -3606,7 +3608,7 @@ loop_350:
         size_r1 = 4;
         asm volatile("" : "+r"(size_r1));
         asset_r2 = 0x08108C20;
-        func_0809AEC0(destination_r0, size_r1, asset_r2);
+        BeginLinkSend(destination_r0, size_r1, asset_r2);
         asm volatile(
             "1:\n\t"
             "bl func_0809AEF4\n\t"
@@ -3630,7 +3632,7 @@ loop_350:
         size_r1 = 0x2E;
         asm volatile("" : "+r"(size_r1));
         asset_r2 = 0x08108C28;
-        func_0809AEC0(destination_r0, size_r1, asset_r2);
+        BeginLinkSend(destination_r0, size_r1, asset_r2);
         asm volatile(
             "1:\n\t"
             "bl func_0809AEF4\n\t"
@@ -3654,7 +3656,7 @@ loop_350:
         size_r1 = 0xC0;
         asm volatile("" : "+r"(size_r1));
         asset_r2 = 0x08108C34;
-        func_0809AEC0(destination_r0, size_r1, asset_r2);
+        BeginLinkSend(destination_r0, size_r1, asset_r2);
         asm volatile(
             "1:\n\t"
             "bl func_0809AEF4\n\t"
@@ -3756,7 +3758,7 @@ block_365:
     StartBattleScanlineWindowClosing();
     goto loop_368;
 block_367:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_368:
     if ((u32) GetBattleScanlineWindowPhase() <= 1U) {
         goto block_367;
@@ -3768,7 +3770,7 @@ block_369:
     RequestBattleBackgroundShakeStop();
     goto loop_372;
 block_371:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_372:
     if ((IsBattleBackgroundShakeFinished() << 0x18) == 0) {
         goto block_371;
@@ -3948,7 +3950,7 @@ block_379:
             }
         }
     }
-    func_080CD110();
+    PlayBattlePhalanxVolleyAnimation();
 block_382:
     {
         register u32 state_2000_r5 asm("r5") = 0x2000;
@@ -3993,7 +3995,7 @@ loop_387:
     SetBattleAnimationCameraMode(4, 0x80);
     goto loop_390;
 block_389:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_390:
     if ((IsBattleAnimationCameraReady() << 0x18) == 0) {
         goto block_389;
@@ -4070,7 +4072,7 @@ loop_390:
                      : "r"(var_r6_18)
                      : "cc");
         temp_r3_3 = *(u8 *)temp_r3_3;
-        func_080CCBD4(temp_r0_15, unit_r1, temp_r2_10, 0, temp_r3_3);
+        ShowBattlePilotActionQuote(temp_r0_15, unit_r1, temp_r2_10, 0, temp_r3_3);
     }
     goto block_396;
 block_394:
@@ -4105,7 +4107,7 @@ block_394:
                      : "r"(var_r6_18)
                      : "cc");
         temp_r3_4 = *(u8 *)temp_r3_4;
-        func_080CCBD4_wide_block540(selection_side_r0, unit_r1,
+        ShowBattlePilotActionQuoteWithWideArguments(selection_side_r0, unit_r1,
                                     temp_r2_11, 1, temp_r3_4);
     }
     goto block_396;
@@ -4124,11 +4126,11 @@ block_395:
         scene_mode_r1 = 3;
         scene_zero_r2 = 0;
         scene_screen_r3 = 0x3DC;
-        func_0809A9C8_4_state2000(scene_value_r0, scene_mode_r1,
+        QueuePilotPortraitGraphics_4_state2000(scene_value_r0, scene_mode_r1,
                                  scene_zero_r2, scene_screen_r3);
     }
     ClearWindow(1);
-    func_08098248(0x08108C3C, 0, 1);
+    PrintWindowText(0x08108C3C, 0, 1);
 block_396:
     {
     register u8 *post_scene_side_r4 asm("r4");
@@ -4219,16 +4221,16 @@ block_399:
             register u32 lookup_r0 asm("r0");
 
             {
-                register u8 **config_r3 asm("r3") = &D_02033F38;
+                register u8 **config_r3 asm("r3") = &gBattleSceneSelectedUnit;
                 register u8 *config_r0 asm("r0");
 
                 asm volatile("" : "+r"(config_r3));
                 config_r0 = *config_r3;
-                lookup_r0 = func_080E523C(*config_r0);
+                lookup_r0 = GetZoidFormIndex(*config_r0);
                 result_r5 = 0;
             }
             {
-                register u8 **config_r7 asm("r7") = &D_02033F38;
+                register u8 **config_r7 asm("r7") = &gBattleSceneSelectedUnit;
                 register u8 *config_r1 asm("r1");
 
                 asm volatile("" : "+r"(config_r7));
@@ -4256,7 +4258,7 @@ block_403:
 
             asm volatile("" : "+r"(call_r1));
             call_r0 = *(u8 *)call_r1;
-            call_r2 = (u32)&D_02033F38;
+            call_r2 = (u32)&gBattleSceneSelectedUnit;
             asm volatile("" : "+r"(call_r2));
             call_r1 = *(u32 *)call_r2;
             call_r1 = *(u8 *)call_r1;
@@ -4274,7 +4276,7 @@ block_403:
     }
     goto loop_406;
 block_405:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_406:
     temp_r0_17 = GetBattleAnimationResult();
     sp70 = (u32) temp_r0_17;
@@ -4320,7 +4322,7 @@ loop_406:
     }
     goto loop_413;
 block_412:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_413:
     if ((IsZoidEquipmentAnimationReady() << 0x18) != 0) {
         goto block_416;
@@ -4358,7 +4360,7 @@ block_416:
     }
     goto loop_387;
 block_419:
-    func_08096308(0x12, 0x20);
+    StartScreenTransition(SCREEN_TRANSITION_DITHER_CONCEAL, 0x20);
     {
         register u32 state_2010_r7 asm("r7") = 0x2010;
 
@@ -4378,12 +4380,12 @@ block_423:
     if (*sync_left_r5 != *sync_right_r4) {
         goto block_425;
     }
-    func_0809534C();
+    DisableDisplayWindows();
     StopBattleAnimation();
 block_425:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_426:
-    if ((func_0809669C() << 0x18) == 0) {
+    if ((IsScreenTransitionComplete() << 0x18) == 0) {
         goto block_423;
     }
     }
@@ -4536,7 +4538,7 @@ block_438:
         asm volatile("" : "+r"(cleanup_skip_zero_r4));
         sp60 = cleanup_skip_zero_r4;
     }
-    func_080CD5CC();
+    BuildBattleSelectedTargetList();
     {
         register u32 cleanup_skip_state_r5 asm("r5") = 0x3000;
 
@@ -4607,12 +4609,12 @@ block_443:
     }
     ClearSpritePools();
     {
-    register u8 **cleanup_selected_slot_r1 asm("r1") = &D_02033F38;
+    register u8 **cleanup_selected_slot_r1 asm("r1") = &gBattleSceneSelectedUnit;
     register u8 *cleanup_selected_value_r0 asm("r0");
 
     cleanup_selected_value_r0 = *cleanup_selected_slot_r1;
     __asm__ volatile("" : "+r"(cleanup_selected_value_r0));
-    func_080CB340(cleanup_selected_value_r0, *cleanup_side_r4);
+    LoadBattleSceneZoidGraphics(cleanup_selected_value_r0, *cleanup_side_r4);
     }
     }
     {
@@ -4620,7 +4622,7 @@ block_443:
     register u32 cleanup_state_mask_r0 asm("r0");
 
     {
-    register u8 **cleanup_state_slot_r2 asm("r2") = &D_02033F38;
+    register u8 **cleanup_state_slot_r2 asm("r2") = &gBattleSceneSelectedUnit;
     register u8 *cleanup_state_record_r0 asm("r0");
 
     __asm__ volatile("" : "+r"(cleanup_state_slot_r2));
@@ -4675,7 +4677,7 @@ block_450:
             : "=&r"(cleanup_call_value_r1)
             : "r"(cleanup_call_slot_r3)
             : "memory");
-        func_0809A5B4_wide_cleanup(cleanup_call_state_r0,
+        LoadSceneBackgroundGraphicsWideCleanup(cleanup_call_state_r0,
                                    cleanup_call_value_r1, 3, 2, 1);
     }
     }
@@ -4719,7 +4721,7 @@ block_450:
         cleanup_zero_r1 = 0;
         cleanup_call_zero_r2 = 0;
         cleanup_scene_r3 = cleanup_scene_x_r4;
-        func_0809A94C_4_cleanup_call(cleanup_call_value_r0, cleanup_zero_r1,
+        LoadPilotPortraitGraphics_4_cleanup_call(cleanup_call_value_r0, cleanup_zero_r1,
                                     cleanup_call_zero_r2, cleanup_scene_r3);
     }
     asm volatile("ldr %0, [pc, #40]"
@@ -4768,10 +4770,10 @@ block_450:
             goto block_455;
         }
     }
-    func_08096308(9, 0);
+    StartScreenTransition(SCREEN_TRANSITION_LEFTWARD_CHEVRON_REVEAL, 0);
     goto block_456;
 block_455:
-    func_08096308(0xA, 0);
+    StartScreenTransition(SCREEN_TRANSITION_RIGHTWARD_CHEVRON_REVEAL, 0);
 block_456:
     {
         register u8 *side_base asm("r6") = (u8 *)0x02033F36;
@@ -4825,7 +4827,7 @@ block_456:
             asm volatile("" : "+r"(object_script_base_r1));
             object_call_r2 = 0x380;
             object_call_r3 = 0xE;
-            func_0809AA64(object_script_r0, object_script_base_r1,
+            LoadSpriteGraphicsFromTable(object_script_r0, object_script_base_r1,
                            object_call_r2, object_call_r3);
         }
         {
@@ -4940,7 +4942,7 @@ block_456:
                     asm volatile("" : "+r"(script));
                     script;
                 }),
-                0x080DB965);
+                BATTLE_SHIELD_SPRITE_VISIBILITY_CALLBACK);
             asm volatile("");
         }
     }
@@ -5067,9 +5069,9 @@ block_477:
     }
     goto loop_592;
 block_478:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_479:
-    if ((func_0809669C() << 0x18) == 0) {
+    if ((IsScreenTransitionComplete() << 0x18) == 0) {
         goto block_478;
     }
     if (GetBattleScanlineWindowPhase() != 1) {
@@ -5078,7 +5080,7 @@ loop_479:
     StartBattleScanlineWindowClosing();
     goto loop_483;
 block_482:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_483:
     if ((u32) GetBattleScanlineWindowPhase() <= 1U) {
         goto block_482;
@@ -5090,7 +5092,7 @@ block_484:
     RequestBattleBackgroundShakeStop();
     goto loop_487;
 block_486:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_487:
     if ((IsBattleBackgroundShakeFinished() << 0x18) == 0) {
         goto block_486;
@@ -5175,7 +5177,7 @@ block_494:
     asm volatile("" : "+&r"(countdown_r4) : "r"(countdown_seed_r1));
 loop_498:
     *countdown_r4 -= 1;
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     {
         register u32 countdown_value_r0 asm("r0") = *countdown_r4;
 
@@ -5269,7 +5271,7 @@ block_502:
     if ((u32) temp_r1_16 <= 3U) {
         goto block_506;
     }
-    config_class = func_080E523C(*temp_r2_15);
+    config_class = GetZoidFormIndex(*temp_r2_15);
     var_r3_6 = 0;
     classification_address_r1 = *config_slot_r5;
     config_class <<= 0x18;
@@ -5335,7 +5337,7 @@ block_508:
     if ((u32) temp_r1_17 <= 3U) {
         goto block_511;
     }
-    config_class = func_080E523C(*temp_r2_16);
+    config_class = GetZoidFormIndex(*temp_r2_16);
     var_r3_7 = 0;
     classification_address_r1 = *config_slot_r5;
     config_class <<= 0x18;
@@ -5419,7 +5421,7 @@ block_513:
     if ((u32) type_five_side_or_selection_r1 <= 3U) {
         goto block_518;
     }
-    config_class = func_080E523C(*temp_r2_17);
+    config_class = GetZoidFormIndex(*temp_r2_17);
     var_r3_8 = 0;
     classification_address_r1 = *type_five_slot_r5;
     config_class <<= 0x18;
@@ -5544,7 +5546,7 @@ block_522:
     if ((u32) temp_r1_19 <= 3U) {
         goto block_526;
     }
-    config_class = func_080E523C(*temp_r2_18);
+    config_class = GetZoidFormIndex(*temp_r2_18);
     var_r3_9 = 0;
     classification_address_r1 = *alternate_slot_r5;
     config_class <<= 0x18;
@@ -5607,7 +5609,7 @@ block_528:
     if ((u32) temp_r1_20 <= 3U) {
         goto block_532;
     }
-    config_class = func_080E523C(*temp_r2_19);
+    config_class = GetZoidFormIndex(*temp_r2_19);
     var_r3_10 = 0;
     classification_address_r1 = *alternate_slot_r5;
     config_class <<= 0x18;
@@ -5654,7 +5656,7 @@ block_534:
     }
     goto loop_536;
 block_535:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_536:
     temp_r0_19 = GetBattleAnimationResult();
     sp70 = (u32) temp_r0_19;
@@ -5700,7 +5702,7 @@ block_539:
     record_base_r5 = gBattleState;
     selected_record = (u8 *)(record_offset + (u32)record_base_r5);
     selected_record += 0x70;
-    func_080CCBD4_wide_block540(block539_side_value_r0, 0U,
+    ShowBattlePilotActionQuoteWithWideArguments(block539_side_value_r0, 0U,
                                 *selected_record, 3,
                                 (u32) (temp_r7 & 0x18) >> 3);
     }
@@ -5754,7 +5756,7 @@ block_540:
     record_base_r5 = gBattleState;
     selected_record = (u8 *)(record_offset + (u32)record_base_r5);
     selected_record += 0x70;
-    func_080CCBD4_wide_block540(block540_side_value_r0, 0U,
+    ShowBattlePilotActionQuoteWithWideArguments(block540_side_value_r0, 0U,
                                 *selected_record, 4,
                                 (u32) (temp_r7 & 0x18) >> 3);
     }
@@ -5805,7 +5807,7 @@ block_544:
     record_base_r3 = gBattleState;
     selected_record = (u8 *)(record_offset + (u32)record_base_r3);
     selected_record += 0x70;
-    func_080CCBD4_wide_block540(block544_side_value_r0, 0U,
+    ShowBattlePilotActionQuoteWithWideArguments(block544_side_value_r0, 0U,
                                 *selected_record, 2,
                                 (u32) (temp_r7 & 0x18) >> 3);
     }
@@ -5956,7 +5958,7 @@ block_555:
 
     delay_counter_r6 = 0;
 loop_557:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     {
         register u32 delay_next_r0 asm("r0") = delay_counter_r6 + 1;
         delay_counter_r6 = (u8)delay_next_r0;
@@ -5966,7 +5968,7 @@ loop_557:
     }
     }
 block_558:
-    func_08096308(0x12, 0x20);
+    StartScreenTransition(SCREEN_TRANSITION_DITHER_CONCEAL, 0x20);
     {
         register u32 state_3040_r3 asm("r3") = 0xC1;
         state_3040_r3 <<= 6;
@@ -5981,12 +5983,12 @@ block_560:
     if (*(u8 *)0x03005F72 != *(u8 *)0x03005F71) {
         goto block_562;
     }
-    func_0809534C();
+    DisableDisplayWindows();
     StopBattleAnimation();
 block_562:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_563:
-    if ((func_0809669C() << 0x18) == 0) {
+    if ((IsScreenTransitionComplete() << 0x18) == 0) {
         goto block_560;
     }
     *(u8 *)0x03000075 = 1;
@@ -6000,7 +6002,7 @@ loop_563:
     }
     goto loop_592;
 block_566:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_567:
     if ((IsBattleAnimationCameraReady() << 0x18) == 0) {
         goto block_566;
@@ -6011,7 +6013,7 @@ loop_567:
     StartBattleScanlineWindowClosing();
     goto loop_571;
 block_570:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_571:
     if ((u32) GetBattleScanlineWindowPhase() <= 1U) {
         goto block_570;
@@ -6023,7 +6025,7 @@ block_572:
     RequestBattleBackgroundShakeStop();
     goto loop_575;
 block_574:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_575:
     if ((IsBattleBackgroundShakeFinished() << 0x18) == 0) {
         goto block_574;
@@ -6061,7 +6063,7 @@ block_576:
     dialog_selected_r2 = *(u8 *)dialog_selected_r2;
     dialog_out_zero_r3 = 0;
     asm volatile("" : "+r"(dialog_out_zero_r3));
-    func_080CCBD4_wide_state320(
+    ShowBattlePilotActionQuoteWithWideActionId(
         dialog_side_r0, dialog_state_r4, dialog_selected_r2, 1,
         dialog_out_zero_r3);
     dialog_side_r0 = *dialog_side_or_slot_r5;
@@ -6073,12 +6075,12 @@ block_576:
     }
     goto loop_579;
 block_578:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_579:
     if ((GetBattleAnimationResult() << 0x18) == 0) {
         goto block_578;
     }
-    func_08096308(0x12, 0x20);
+    StartScreenTransition(SCREEN_TRANSITION_DITHER_CONCEAL, 0x20);
     asm volatile("");
     {
         register s32 *completion_mode_slot_r0 asm("r0") =
@@ -6122,25 +6124,25 @@ block_582:
             StartBattleSceneAnimation_wide_final(final_side_r0, final_record_r1, 0x321);
         }
     }
-    func_08096308(3, 0x20);
+    StartScreenTransition(SCREEN_TRANSITION_FADE_FROM_WHITE, 0x20);
     var_r6_24 = 0;
     goto loop_587;
 block_583:
-    if ((func_0809669C() << 0x18) == 0) {
+    if ((IsScreenTransitionComplete() << 0x18) == 0) {
         goto block_586;
     }
     if (var_r6_24 != 0) {
         goto block_586;
     }
-    func_08098248(0x08108C60, 0, 1);
+    PrintWindowText(0x08108C60, 0, 1);
     var_r6_24 = 1;
 block_586:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_587:
     if ((GetBattleAnimationResult() << 0x18) == 0) {
         goto block_583;
     }
-    func_08096308(0x12, 0x20);
+    StartScreenTransition(SCREEN_TRANSITION_DITHER_CONCEAL, 0x20);
     asm volatile("");
     {
         register s32 *completion_mode_slot_r0 asm("r0") =
@@ -6167,7 +6169,7 @@ block_589:
     }
     goto loop_592;
 block_591:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_592:
     if (*(s32 *)0x02021690 == GAME_MODE_BATTLE_SCENE) {
         goto block_3;
@@ -6195,13 +6197,13 @@ block_594:
     }
     StopBattleAnimation();
 block_596:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_597:
-    if ((func_0809669C() << 0x18) == 0) {
+    if ((IsScreenTransitionComplete() << 0x18) == 0) {
         goto block_594;
     }
     }
-    func_08092E0C(2);
+    StopTask(2);
     ReleaseEquipmentStatBuffer();
     return;
 }

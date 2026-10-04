@@ -16,7 +16,7 @@ struct Sprite {
     u8 palette_bank;
     u8 rotation;
     u16 animation_id;
-    u16 animation_frame;
+    u16 animation_step;
     u16 frame_timer;
     s32 frame_table;
     s32 animation_table;

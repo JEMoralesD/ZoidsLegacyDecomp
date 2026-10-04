@@ -2,12 +2,12 @@
 #include "battle_animation.h"
 
 extern void BiosLz77ToVram(s32, s32) asm("func_080ECD34");
-extern void func_0809AC30(s32, s32, u8, s32);
+extern void LoadMirroredBgTilemap(s32, s32, u8, s32) asm("func_0809AC30");
 extern volatile u16 D_0300004C;
 extern volatile u16 D_0300004E;
 extern volatile u16 D_03000050;
 extern volatile u8 gBattleSpeedLineBackgroundFrame asm("D_02034860");
-extern volatile u8 D_02033F36;
+extern volatile u8 gBattleSceneSide asm("D_02033F36");
 
 struct BattleBackgroundScrollState {
     u32 bg0_scroll_x;
@@ -45,7 +45,7 @@ void UpdateBattleSpeedLineBackground(void)
         }
         BiosLz77ToVram(0x08108C78, 0x0600A740);
         BiosLz77ToVram(0x08108DA8, 0x05000100);
-        func_0809AC30(0x08108DD0, 0x17, D_02033F36, 0x02002880);
+        LoadMirroredBgTilemap(0x08108DD0, 0x17, gBattleSceneSide, 0x02002880);
         D_0300004E = 0x442;
         D_03000050 = 0x1000;
         *state_base += 1;
@@ -73,7 +73,7 @@ void UpdateBattleSpeedLineBackground(void)
         *state_base += 1;
     }
 
-    if (D_02033F36 == 0) {
+    if (gBattleSceneSide == 0) {
         ((struct BattleBackgroundScrollState *)0x03000054)->bg1_scroll_x += 0xFFFFF000;
     } else {
         ((struct BattleBackgroundScrollState *)0x03000054)->bg1_scroll_x += 0x1000;

@@ -1,4 +1,5 @@
 #include "m2c_prelude.h"
+#include "../../graphics/screen_effects.h"
 #include "../game_state.h"
 
 struct SceneState {
@@ -19,7 +20,7 @@ struct Sprite {
 };
 
 extern volatile u16 D_0300004C;
-extern s32 D_03000054[2];
+extern s32 gFieldCameraScrollOffsets[2] asm("D_03000054");
 extern struct SceneState D_0202ECF4;
 extern u32 D_087EF4E0[];
 extern u8 D_087AFBB4[];
@@ -27,16 +28,16 @@ extern u8 D_0200A880;
 extern u8 D_0200A882;
 extern s32 gGameMode;
 
-void func_08096FBC(s32, s32, s32, s32, s32, s32, s32, s32, s32, s32);
+void InitializeWindowGraphics(s32, s32, s32, s32, s32, s32, s32, s32, s32, s32) asm("func_08096FBC");
 void BiosLz77ToVram(s32, s32) asm("func_080ECD34");
-void func_080ADBF8(s32, s32);
+void LoadWorldOverviewMapGraphics(s32, s32) asm("func_080ADBF8");
 void ClearSpritePools(void) asm("func_08094330");
 struct Sprite *CreateSprite(s32, s32, s32, s32, s32, s32, s32, s32, s32) asm("func_08094484");
 void RunMenuScript(s32) asm("func_08098BB4");
-void func_080988C8(s32, s32);
-void func_08096308(s32, s32);
-u8 func_0809669C(void);
-void func_080ED17C(s32);
+void AppendWindowTextItem(s32, s32) asm("func_080988C8");
+void StartScreenTransition(s32, s32) asm("func_08096308");
+u8 IsScreenTransitionComplete(void) asm("func_0809669C");
+void YieldTaskForUpdates(s32) asm("func_080ED17C");
 
 void RunTownMap(void)
 {
@@ -48,12 +49,12 @@ void RunTownMap(void)
 
     D_0300004C = 0x1940;
     *(volatile u16 *)0x04000008 = 4;
-    D_03000054[1] = 0;
-    D_03000054[0] = 0;
+    gFieldCameraScrollOffsets[1] = 0;
+    gFieldCameraScrollOffsets[0] = 0;
 
-    func_08096FBC(3, 3, 0, 0x1C0, 0x1C0, 1, 0xE, 0, 0x3E6, 0xF);
+    InitializeWindowGraphics(3, 3, 0, 0x1C0, 0x1C0, 1, 0xE, 0, 0x3E6, 0xF);
     BiosLz77ToVram(0x081046A8, 0x06015840);
-    func_080ADBF8(1, 0);
+    LoadWorldOverviewMapGraphics(1, 0);
     ClearSpritePools();
 
     {
@@ -143,7 +144,7 @@ void RunTownMap(void)
     }
     do {
         if (enabled[id >> 5] & (1 << (id & 0x1F))) {
-            func_080988C8(0, D_087EF4E0[id]);
+            AppendWindowTextItem(0, D_087EF4E0[id]);
             if (count == 0) {
                 s32 sprite_data = 0x08105FD0;
                 s32 sprite_anim = 0x08106068;
@@ -185,7 +186,7 @@ void RunTownMap(void)
         id++;
     } while (id <= 0x2A);
 
-    func_08096308(0xF, 0x10);
+    StartScreenTransition(SCREEN_TRANSITION_CHECKERBOARD_REVEAL, 0x10);
     goto wait_for_selection;
 update_cursor:
     {
@@ -235,8 +236,8 @@ wait_for_selection:
     }
 
     gGameMode = GAME_MODE_FIELD;
-    func_08096308(0x10, 0x10);
-    while (!func_0809669C()) {
-        func_080ED17C(1);
+    StartScreenTransition(SCREEN_TRANSITION_CHECKERBOARD_CONCEAL, 0x10);
+    while (!IsScreenTransitionComplete()) {
+        YieldTaskForUpdates(1);
     }
 }

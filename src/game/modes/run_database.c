@@ -1,18 +1,19 @@
 #include "m2c_prelude.h"
+#include "../../graphics/screen_effects.h"
 #include "../game_state.h"
 
 s32 *CreateSprite() asm("func_08094484");                               /* extern */
 M2C_UNK DestroySprite(s32 *) asm("func_08094554");                       /* extern */
-M2C_UNK func_08096308(s32, s32);                    /* extern */
-s32 func_0809669C();                                /* extern */
+M2C_UNK StartScreenTransition(s32, s32) asm("func_08096308");                    /* extern */
+s32 IsScreenTransitionComplete() asm("func_0809669C");                                /* extern */
 void *GetWindow(s32) asm("func_0809716C");                           /* extern */
 M2C_UNK RunMenuScript(M2C_UNK) asm("func_08098BB4");                     /* extern */
-M2C_UNK func_080E2F70(s32);                         /* extern */
-M2C_UNK func_080E364C(s32);                         /* extern */
-M2C_UNK func_080E39C8();                            /* extern */
-M2C_UNK func_080E3CE0();                            /* extern */
+M2C_UNK RunZoidDatabaseViewer(s32) asm("func_080E2F70");                         /* extern */
+M2C_UNK RunCharacterDatabaseViewer(s32) asm("func_080E364C");                         /* extern */
+M2C_UNK RunEquipmentDatabaseViewer() asm("func_080E39C8");                            /* extern */
+M2C_UNK InitializeDatabaseMenu() asm("func_080E3CE0");                            /* extern */
 M2C_UNK BiosLz77ToVram(M2C_UNK, M2C_UNK) asm("func_080ECD34");            /* extern */
-M2C_UNK func_080ED17C(s32);                         /* extern */
+M2C_UNK YieldTaskForUpdates(s32) asm("func_080ED17C");                         /* extern */
 
 void RunDatabase(void) {
     volatile s32 outgoing0;
@@ -144,7 +145,7 @@ block_35:
 block_37:
     goto block_121;
 block_38:
-    func_080E3CE0();
+    InitializeDatabaseMenu();
     var_r5 = 0x10;
     goto block_121;
 block_39:
@@ -220,7 +221,7 @@ block_49:
     var_r5 = 0x3000;
     goto block_121;
 block_50:
-    func_08096308(0x10, 0);
+    StartScreenTransition(SCREEN_TRANSITION_CHECKERBOARD_CONCEAL, 0);
     if (*(u8 *)0x02032E5C != 0) {
         goto block_52;
     }
@@ -581,12 +582,12 @@ block_86:
     var_r5 = 0x1010;
     goto block_121;
 block_87:
-    func_08096308(0x10, 0);
+    StartScreenTransition(SCREEN_TRANSITION_CHECKERBOARD_CONCEAL, 0);
     goto loop_89;
 block_88:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_89:
-    if ((func_0809669C() << 0x18) == 0) {
+    if ((IsScreenTransitionComplete() << 0x18) == 0) {
         goto block_88;
     }
     {
@@ -615,9 +616,9 @@ loop_89:
             column += table;
         }
         address += column;
-        func_080E2F70(address);
+        RunZoidDatabaseViewer(address);
     }
-    func_080E3CE0();
+    InitializeDatabaseMenu();
     {
         register u32 selection_limit asm("r3");
 
@@ -804,7 +805,7 @@ block_110: {
     register s32 item_load asm("r1");
     register s32 item2 asm("r5");
 
-    func_08096308(0x10, 0);
+    StartScreenTransition(SCREEN_TRANSITION_CHECKERBOARD_CONCEAL, 0);
     selection_minus = var_sl;
     selection_minus -= 1;
     selection_copy = var_sl;
@@ -814,9 +815,9 @@ block_110: {
     item2 = item_load << 1;
     goto loop_112;
 block_111:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_112:
-    if ((func_0809669C() << 0x18) == 0) {
+    if ((IsScreenTransitionComplete() << 0x18) == 0) {
         goto block_111;
     }
     {
@@ -836,9 +837,9 @@ loop_112:
         table = 0x087A3D24;
         column += table;
         row += column;
-        func_080E364C(row);
+        RunCharacterDatabaseViewer(row);
     }
-    func_080E3CE0();
+    InitializeDatabaseMenu();
     {
         register u32 selection_test asm("r0");
 
@@ -862,16 +863,16 @@ block_116:
     var_r5 = 0x2000;
     goto block_121;
 block_117:
-    func_08096308(0x10, 0);
+    StartScreenTransition(SCREEN_TRANSITION_CHECKERBOARD_CONCEAL, 0);
     goto loop_119;
 block_118:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_119:
-    if ((func_0809669C() << 0x18) == 0) {
+    if ((IsScreenTransitionComplete() << 0x18) == 0) {
         goto block_118;
     }
     RunMenuScript(0x08006200);
-    func_080E39C8();
+    RunEquipmentDatabaseViewer();
     var_r5 = 0;
 block_121:
     if (*(s32 *)0x02021690 != GAME_MODE_DATABASE) {
@@ -881,9 +882,9 @@ block_121:
 block_123:
     goto loop_125;
 block_124:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_125:
-    if ((func_0809669C() << 0x18) == 0) {
+    if ((IsScreenTransitionComplete() << 0x18) == 0) {
         goto block_124;
     }
     return;

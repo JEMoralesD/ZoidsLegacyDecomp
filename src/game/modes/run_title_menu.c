@@ -1,8 +1,9 @@
 #include "m2c_prelude.h"
+#include "../../graphics/screen_effects.h"
 #include "../game_state.h"
 
-M2C_UNK func_08092D8C(s32, M2C_UNK);                /* extern */
-M2C_UNK func_08092E0C(s32);                         /* extern */
+M2C_UNK StartTask(s32, M2C_UNK) asm("func_08092D8C");                /* extern */
+M2C_UNK StopTask(s32) asm("func_08092E0C");                         /* extern */
 M2C_UNK PlayOrContinueSong(s32) asm("func_08092E74");                         /* extern */
 M2C_UNK PlaySong(s32) asm("func_08092E84");                         /* extern */
 M2C_UNK StopSong(s32) asm("func_08092EA0");                         /* extern */
@@ -11,29 +12,29 @@ void *CreateSprite(M2C_UNK, M2C_UNK, s32, s32, s32, s32, s32, s32, s32) asm("fun
 asm(".set func_08094484_4, func_08094484");
 void *CreateSprite_4(M2C_UNK, M2C_UNK, s32, s32) asm("func_08094484_4");   /* extern */
 M2C_UNK DestroySprite(void *) asm("func_08094554");                      /* extern */
-M2C_UNK func_0809538C(s32, s32, s32, s32, s32, s32, s32, s32); /* extern */
-M2C_UNK func_08096308(s32, s32);                    /* extern */
-s32 func_0809669C();                                /* extern */
-M2C_UNK func_08096F3C();                            /* extern */
-M2C_UNK func_08099F80();                            /* extern */
-M2C_UNK func_08099FEC();                            /* extern */
-M2C_UNK func_0809A00C();                            /* extern */
-M2C_UNK func_0809A048();                            /* extern */
-M2C_UNK func_0809B46C(s32);                         /* extern */
-M2C_UNK func_0809B6DC(s32);                         /* extern */
-s32 func_0809B8C4();                                /* extern */
-M2C_UNK func_0809CC94(s32);                         /* extern */
-M2C_UNK func_0809E204(u16, s32, s32, s32);          /* extern */
+M2C_UNK ConfigureDisplayWindows(s32, s32, s32, s32, s32, s32, s32, s32) asm("func_0809538C"); /* extern */
+M2C_UNK StartScreenTransition(s32, s32) asm("func_08096308");                    /* extern */
+s32 IsScreenTransitionComplete() asm("func_0809669C");                                /* extern */
+M2C_UNK ResetMenuKeyRepeat() asm("func_08096F3C");                            /* extern */
+M2C_UNK ClearGameCompletionFlag() asm("func_08099F80");                            /* extern */
+M2C_UNK ClearPlayerItemInventory() asm("func_08099FEC");                            /* extern */
+M2C_UNK InitializeNewGamePlayerState() asm("func_0809A00C");                            /* extern */
+M2C_UNK InitializeNewGameFieldState() asm("func_0809A048");                            /* extern */
+M2C_UNK CreateTitleMenuSelectionSprites(s32) asm("func_0809B46C");                         /* extern */
+M2C_UNK InitializeTitleMenuGraphics(s32) asm("func_0809B6DC");                         /* extern */
+s32 ConfirmNewGameSaveOverwrite() asm("func_0809B8C4");                                /* extern */
+M2C_UNK RunPlayerNameEntry(s32) asm("func_0809CC94");                         /* extern */
+M2C_UNK RequestFieldMapChange(u16, s32, s32, s32) asm("func_0809E204");          /* extern */
 M2C_UNK ResetEventScripts() asm("func_0809FCB0");                            /* extern */
 M2C_UNK StartMapEventScript(s32, M2C_UNK) asm("func_0809FD3C");                /* extern */
-M2C_UNK func_080E6684();                            /* extern */
-M2C_UNK func_080EB888();                            /* extern */
-M2C_UNK func_080ED17C(s32);                         /* extern */
+M2C_UNK ClearBattleRules() asm("func_080E6684");                            /* extern */
+M2C_UNK StopAllMusicPlayers() asm("func_080EB888");                            /* extern */
+M2C_UNK YieldTaskForUpdates(s32) asm("func_080ED17C");                         /* extern */
 extern volatile u16 D_0300004E;
 extern volatile u16 D_03000050;
 extern volatile s16 D_03000052;
 extern volatile u16 D_0300004C;
-extern volatile s32 D_03000054[];
+extern volatile s32 gFieldCameraScrollOffsets[] asm("D_03000054");
 extern volatile s32 gGameMode;
 extern volatile s8 D_020216F4;
 
@@ -66,23 +67,23 @@ void RunTitleMenu(void) {
     register void *temp_r6 asm("r6");
     void *var_sl;
 
-    func_080E6684();
+    ClearBattleRules();
     if (*(u8 *)0x02021698 != 0) {
         goto block_3;
     }
-    func_0809B6DC(0);
+    InitializeTitleMenuGraphics(0);
     D_0300004E = 0x3F40;
     D_03000050 = 0x10;
-    func_080EB888();
+    StopAllMusicPlayers();
     var_r7 = 0;
     goto block_4;
 block_3:
-    func_0809B6DC(1);
+    InitializeTitleMenuGraphics(1);
     PlayOrContinueSong(1);
-    func_08096308(1, 0x10);
+    StartScreenTransition(SCREEN_TRANSITION_FADE_FROM_BLACK, 0x10);
     var_r7 = 0x2000;
 block_4:
-    func_08092D8C(7, 0x0809BAB1);
+    StartTask(7, 0x0809BAB1);
     var_r1 = 0;
     if (*(u8 *)0x0202169C != 1) {
         goto block_8;
@@ -194,7 +195,7 @@ block_33:
     {
         register s32 callback_r0 asm("r0") = 2;
 
-        func_08092D8C(callback_r0, 0x0809B4FD);
+        StartTask(callback_r0, 0x0809B4FD);
     }
     D_0300004C |= var_r7;
     D_0300004E = 0x3FC1;
@@ -215,7 +216,7 @@ block_33:
 block_37:
             *fade_r5 = (s16) fade_zero_r6;
 block_38:
-            func_080ED17C(1);
+            YieldTaskForUpdates(1);
             var_r4 += 1;
             if (var_r4 > 0x100U) {
                 goto block_43;
@@ -244,7 +245,7 @@ block_38:
         register volatile s32 *camera_r1 asm("r1");
         register s32 camera_value_r0 asm("r0");
 
-        camera_r1 = D_03000054;
+        camera_r1 = gFieldCameraScrollOffsets;
         camera_value_r0 = 0x7000;
         camera_r1[1] = camera_value_r0;
     }
@@ -283,7 +284,7 @@ block_44:
         register volatile s16 *fade2_r5 asm("r5") = &D_03000052;
         do {
             *fade2_r5 = 0x10 - (var_r4_2 >> 1);
-            func_080ED17C(1);
+            YieldTaskForUpdates(1);
             var_r4_2 += 1;
             if (var_r4_2 > 0x20U) {
                 goto block_48;
@@ -326,7 +327,7 @@ block_50:
         sp18 = CreateSprite_4(0x080F6608, 0x080F662C, 2, 0x78);
     }
 block_51:
-    func_08092E0C(2);
+    StopTask(2);
     {
         register s32 *out_args asm("sp");
         register s32 stack_r0 asm("r0");
@@ -366,13 +367,13 @@ block_51:
             : "r3", "memory");
         CreateSprite_4(0x08102ED0, 0x08102EDC, 0, 0x78);
     }
-    func_0809538C(1, 0xF0, 0x10, 1, 0xF0, 0x90A0, 0x3030, 0x31);
+    ConfigureDisplayWindows(1, 0xF0, 0x10, 1, 0xF0, 0x90A0, 0x3030, 0x31);
     var_r0 = 1;
     goto block_107;
 block_53:
     var_r4_3 = 0;
 loop_54:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     var_r4_3 += 1;
     if (var_r4_3 == 0x258) {
         goto block_56;
@@ -389,12 +390,12 @@ block_56:
     var_r7 = 0x2000;
     goto block_108;
 block_58:
-    func_08096308(2, 0x10);
+    StartScreenTransition(SCREEN_TRANSITION_FADE_TO_BLACK, 0x10);
     goto loop_60;
 block_59:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_60:
-    if ((func_0809669C() << 0x18) == 0) {
+    if ((IsScreenTransitionComplete() << 0x18) == 0) {
         goto block_59;
     }
     ResetEventScripts();
@@ -406,23 +407,23 @@ loop_60:
     {
         register s32 callback_r0 asm("r0") = 3;
 
-        func_08092D8C(callback_r0, 0x080A67E5);
+        StartTask(callback_r0, 0x080A67E5);
     }
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     {
         register s32 callback_r0 asm("r0") = 8;
 
-        func_08092D8C(callback_r0, 0x0809B51D);
+        StartTask(callback_r0, 0x0809B51D);
     }
     goto block_108;
 block_63:
-    func_0809B46C(sp14);
+    CreateTitleMenuSelectionSprites(sp14);
     var_r7 = 0x2010;
     goto block_108;
 block_65:
-    func_08096F3C();
+    ResetMenuKeyRepeat();
 loop_66:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     if (!(0x40 & *(u16 *)0x03006034)) {
         goto block_69;
     }
@@ -483,12 +484,12 @@ block_81:
     goto block_108;
 block_82:
     PlaySong(0x3E);
-    func_08096308(2, 0x10);
+    StartScreenTransition(SCREEN_TRANSITION_FADE_TO_BLACK, 0x10);
     goto loop_84;
 block_83:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_84:
-    if ((func_0809669C() << 0x18) == 0) {
+    if ((IsScreenTransitionComplete() << 0x18) == 0) {
         goto block_83;
     }
     if (*(u8 *)0x0202169C != 1) {
@@ -500,20 +501,20 @@ loop_84:
     if (*(u8 *)0x0202169E != 1) {
         goto block_90;
     }
-    if ((func_0809B8C4() << 0x18) != 0) {
+    if ((ConfirmNewGameSaveOverwrite() << 0x18) != 0) {
         goto block_90;
     }
-    func_0809B6DC(1);
+    InitializeTitleMenuGraphics(1);
     var_r7 = 0x2000;
     var_r0_2 = 1;
     goto block_104;
 block_90:
-    func_08099F80();
-    func_08099FEC();
-    func_0809A00C();
-    func_0809A048();
+    ClearGameCompletionFlag();
+    ClearPlayerItemInventory();
+    InitializeNewGamePlayerState();
+    InitializeNewGameFieldState();
     PlayOrContinueSong(3);
-    func_0809CC94(0);
+    RunPlayerNameEntry(0);
     StopSong(3);
     {
         register volatile s8 *zero_dst_r0 asm("r0") =
@@ -536,16 +537,16 @@ block_92:
         }
     }
     PlaySong(0x3E);
-    func_08096308(2, 0x10);
+    StartScreenTransition(SCREEN_TRANSITION_FADE_TO_BLACK, 0x10);
     goto loop_95;
 block_94:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_95:
-    if ((func_0809669C() << 0x18) == 0) {
+    if ((IsScreenTransitionComplete() << 0x18) == 0) {
         goto block_94;
     }
     ReadSaveBlock4();
-    func_0809E204(D_0202ECF4.mode, D_0202ECF4.value4,
+    RequestFieldMapChange(D_0202ECF4.mode, D_0202ECF4.value4,
         D_0202ECF4.value8, 1);
     {
         register volatile s8 *zero_dst_r0 asm("r0") =
@@ -589,7 +590,7 @@ block_99:
         register u32 wait_test_r0 asm("r0");
 
         do {
-            func_080ED17C(1);
+            YieldTaskForUpdates(1);
             wait_value_r1 = *wait_keys_r4;
             wait_test_r0 = wait_mask_r5;
             asm volatile("" : "+r"(wait_test_r0));
@@ -616,7 +617,7 @@ block_103:
     }
     var_r0_2 = 2;
 block_104:
-    func_08096308(var_r0_2, 0x10);
+    StartScreenTransition(var_r0_2, 0x10);
     goto block_108;
 block_106:
     DestroySprite(*(void **)0x020216A4);
@@ -653,11 +654,11 @@ block_108:
 block_110:
     goto loop_112;
 block_111:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_112:
-    if ((func_0809669C() << 0x18) == 0) {
+    if ((IsScreenTransitionComplete() << 0x18) == 0) {
         goto block_111;
     }
-    func_08092E0C(7);
+    StopTask(7);
     return;
 }

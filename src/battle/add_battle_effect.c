@@ -159,7 +159,7 @@ block_14:
         asm volatile("" : "+r"(initial_address));
         initial_address += (s32)base_seed;
         asm volatile("" : "+r"(initial_address));
-        var_r5 = M2C_FIELD(initial_address, u8 *, 0x266);
+        var_r5 = BATTLE_UNIT_FIELD(initial_address, u8, effect_allocation_cursor);
     }
     {
         register s32 record_row asm("r1") = temp_r1;
@@ -201,7 +201,7 @@ loop_16:
             loop_address += (s32)loop_base;
         }
         {
-            register s32 loop_field asm("r4") = 0x266;
+            register s32 loop_field asm("r4") = BATTLE_UNIT_OFFSET(effect_allocation_cursor);
             asm volatile("" : "+r"(loop_field));
             loop_address += loop_field;
         }
@@ -363,7 +363,7 @@ block_39:
             asm volatile("" : "+r"(final_row));
             final_row += (s32) final_base;
             asm volatile("" : "+r"(final_row));
-            final_field = 0x266;
+            final_field = BATTLE_UNIT_OFFSET(effect_allocation_cursor);
             asm volatile("" : "+r"(final_field));
             temp_r1_4 = (void *)(final_row + final_field);
             M2C_FIELD(temp_r1_4, u16 *, 0) = (u16) (M2C_FIELD(temp_r1_4, u16 *, 0) + 1);

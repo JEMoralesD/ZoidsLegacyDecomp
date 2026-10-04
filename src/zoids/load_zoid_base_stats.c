@@ -21,7 +21,7 @@ struct ZoidStatState {
 extern struct ZoidBaseStats gZoidBaseStatTable[];
 
 u16 ScaleByPercent(s16, s32) asm("func_080E522C");
-u8 func_080E523C(u8);
+u8 GetZoidFormIndex(u8) asm("func_080E523C");
 
 void LoadZoidBaseStats(struct ZoidStatState *zoid)
 {
@@ -80,7 +80,7 @@ void LoadZoidBaseStats(struct ZoidStatState *zoid)
         asm volatile("" : "+r"(load_capacity));
         *load_capacity = value;
 
-        bonus_index = func_080E523C(zoid->zoid_id);
+        bonus_index = GetZoidFormIndex(zoid->zoid_id);
         *ep_regen += zoid->bonus_a[bonus_index];
         {
             register u32 bonus asm("r0") =

@@ -16,7 +16,7 @@ struct EventFieldPosition {
 };
 
 void SetEventFlag(s32) asm("func_0809F7C8");
-void *func_080A9D78(s32, s32, s32, s32, s32, s32, s32, s32);
+void *CreateFieldActor(s32, s32, s32, s32, s32, s32, s32, s32) asm("func_080A9D78");
 void SeekEventCommand(s32, s32, s32) asm("func_080A016C");
 
 extern u8 gEventFlagConditionEnabled[];
@@ -99,7 +99,7 @@ s32 EventSetFlag(s32 script_slot, struct EventFlagCommand **cursor)
             if (check->flag_id == 0x88) {
                 D_0202ECF4.x = 0x81000;
                 D_0202ECF4.y = 0xBE000;
-                func_080A9D78(0x6C, 0xD, 0x81000, 0xBE000,
+                CreateFieldActor(0x6C, 0xD, 0x81000, 0xBE000,
                     D_0202ECF4.facing_direction, 2, 0xFF, 0);
             }
         }

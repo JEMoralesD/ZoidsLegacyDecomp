@@ -1,4 +1,5 @@
 #include "m2c_prelude.h"
+#include "../../graphics/screen_effects.h"
 #include "../game_state.h"
 #define NULL ((void *)0)
 
@@ -12,37 +13,37 @@ s32 WriteSaveBlock3() asm("func_080940D4");                                /* ex
 M2C_UNK ClearSpritePools() asm("func_08094330");                            /* extern */
 s32 CreateSprite() asm("func_08094484");                                /* extern */
 M2C_UNK DestroySprite(s32) asm("func_08094554");                         /* extern */
-M2C_UNK func_08096308(s32, s32);                    /* extern */
-s32 func_0809669C();                                /* extern */
-M2C_UNK func_08096FBC(s32, s32, s32, s32, s32, s32, s32, s32, s32, s32); /* extern */
+M2C_UNK StartScreenTransition(s32, s32) asm("func_08096308");                    /* extern */
+s32 IsScreenTransitionComplete() asm("func_0809669C");                                /* extern */
+M2C_UNK InitializeWindowGraphics(s32, s32, s32, s32, s32, s32, s32, s32, s32, s32) asm("func_08096FBC"); /* extern */
 u8 *GetWindow(s32) asm("func_0809716C");                             /* extern */
 M2C_UNK RequestWindowRefresh() asm("func_080972C8");                            /* extern */
-M2C_UNK func_080981F0();                            /* extern */
-M2C_UNK func_08098248(s32, s32, s32);               /* extern */
-M2C_UNK func_0809844C();                             /* extern */
-M2C_UNK func_080984C4();                             /* extern */
+M2C_UNK PrintWindowTextAt() asm("func_080981F0");                            /* extern */
+M2C_UNK PrintWindowText(s32, s32, s32) asm("func_08098248");               /* extern */
+M2C_UNK PrintWindowNumberAt() asm("func_0809844C");                             /* extern */
+M2C_UNK PrintWindowNumber() asm("func_080984C4");                             /* extern */
 M2C_UNK ClearWindow(s32) asm("func_080986B4");                         /* extern */
-M2C_UNK func_08098834(s32);                         /* extern */
+M2C_UNK ClearWindowTextList(s32) asm("func_08098834");                         /* extern */
 M2C_UNK RunMenuScript(M2C_UNK) asm("func_08098BB4");                     /* extern */
-M2C_UNK func_0809AB44(s32, s32, s32, s32, s32);     /* extern */
-M2C_UNK func_0809AC98();                            /* extern */
-s32 func_0809AE38();                                /* extern */
-M2C_UNK func_0809AEA0();                            /* extern */
-M2C_UNK func_0809AEC0(u8 *, s32, s32);              /* extern */
-u8 func_0809AEF4();                                 /* extern */
-M2C_UNK func_0809B00C(u8 *, s32, s32);              /* extern */
-u8 func_0809B040();                                 /* extern */
-M2C_UNK func_080AC6B8(s32);                         /* extern */
-M2C_UNK func_080AC6FC(s32);                         /* extern */
-M2C_UNK func_080AC87C(s32, s32);                    /* extern */
-M2C_UNK func_080B65E4(s32);                         /* extern */
-M2C_UNK func_080B6728();                            /* extern */
-s32 func_080B684C(s32, s32);                        /* extern */
-M2C_UNK func_080E5DC4(s32);                         /* extern */
-M2C_UNK func_080E5E0C(s32, s32);                    /* extern */
-M2C_UNK func_080E5E38(s32, s32);                    /* extern */
+M2C_UNK LoadMenuGradientBackground(s32, s32, s32, s32, s32) asm("func_0809AB44");     /* extern */
+M2C_UNK ResetLinkTransferState() asm("func_0809AC98");                            /* extern */
+s32 TryStartLinkConnection() asm("func_0809AE38");                                /* extern */
+M2C_UNK StopLinkConnection() asm("func_0809AEA0");                            /* extern */
+M2C_UNK BeginLinkSend(u8 *, s32, s32) asm("func_0809AEC0");              /* extern */
+u8 PollLinkSend() asm("func_0809AEF4");                                 /* extern */
+M2C_UNK BeginLinkReceive(u8 *, s32, s32) asm("func_0809B00C");              /* extern */
+u8 PollLinkReceive() asm("func_0809B040");                                 /* extern */
+M2C_UNK AppendZoidModelSelectionRows(s32) asm("func_080AC6B8");                         /* extern */
+M2C_UNK AppendZoidCoreInventoryRows(s32) asm("func_080AC6FC");                         /* extern */
+M2C_UNK DrawZoidDevelopmentRequirements(s32, s32) asm("func_080AC87C");                    /* extern */
+M2C_UNK BuildUnlockedZoidModelSelection(s32) asm("func_080B65E4");                         /* extern */
+M2C_UNK BuildPlayerZoidCoreSelection() asm("func_080B6728");                            /* extern */
+s32 UpdateMenuQuantityFromKeys(s32, s32) asm("func_080B684C");                        /* extern */
+M2C_UNK UnlockZoidData(s32) asm("func_080E5DC4");                         /* extern */
+M2C_UNK AddZoidCoresToInventory(s32, s32) asm("func_080E5E0C");                    /* extern */
+M2C_UNK SubtractZoidCoresFromInventory(s32, s32) asm("func_080E5E38");                    /* extern */
 M2C_UNK BiosLz77ToVram(M2C_UNK, M2C_UNK) asm("func_080ECD34");            /* extern */
-M2C_UNK func_080ED17C(s32);                         /* extern */
+M2C_UNK YieldTaskForUpdates(s32) asm("func_080ED17C");                         /* extern */
 
 void RunLinkTrade(void) {
     u8 sp18;
@@ -93,11 +94,11 @@ void RunLinkTrade(void) {
     register u32 var_r4 asm("r4");
 
     *(s16 *)0x0300004C = 0x1840;
-    func_08096FBC(3, 1, 0, 0x35C, 0x3C0, 0, 0xE, 0, 0x3E6, 0xF);
+    InitializeWindowGraphics(3, 1, 0, 0x35C, 0x3C0, 0, 0xE, 0, 0x3E6, 0xF);
     BiosLz77ToVram(0x081046A8, 0x06015840);
-    func_0809AB44(2, 3, 0, 0, 1);
+    LoadMenuGradientBackground(2, 3, 0, 0, 1);
     ClearSpritePools();
-    func_08096308(0xF, 0x10);
+    StartScreenTransition(SCREEN_TRANSITION_CHECKERBOARD_REVEAL, 0x10);
     asm volatile("" : "=m"(sp20), "=m"(sp24), "=m"(sp28));
     {
         register s32 zero_r3 asm("r3") = 0;
@@ -277,24 +278,24 @@ block_58:
     RunMenuScript(0x08028BF9);
     goto loop_61;
 block_60:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_61:
-    if ((func_0809669C() << 0x18) == 0) {
+    if ((IsScreenTransitionComplete() << 0x18) == 0) {
         goto block_60;
     }
-    func_0809AC98();
+    ResetLinkTransferState();
     goto loop_64;
 block_63:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_64:
-    if ((func_0809AE38() << 0x18) != 0) {
+    if ((TryStartLinkConnection() << 0x18) != 0) {
         goto block_67;
     }
     if (!(2 & *(u16 *)0x0300000E)) {
         goto block_63;
     }
     PlaySong(0x3F);
-    func_0809AEA0();
+    StopLinkConnection();
     DestroySprite(var_r6);
     RunMenuScript(0x08028250);
     *(s32 *)0x02021690 = GAME_MODE_OPTIONS;
@@ -302,12 +303,12 @@ block_67:
     if (*(s32 *)0x02021690 != GAME_MODE_LINK_TRADE) {
         goto block_242;
     }
-    func_0809AEC0(NULL, 0, 0x08109244);
-    func_0809B00C(NULL, 0, 0x08109244);
+    BeginLinkSend(NULL, 0, 0x08109244);
+    BeginLinkReceive(NULL, 0, 0x08109244);
 loop_69:
-    temp_r4 = func_0809AEF4();
-    temp_r5 = func_0809B040();
-    func_080ED17C(1);
+    temp_r4 = PollLinkSend();
+    temp_r5 = PollLinkReceive();
+    YieldTaskForUpdates(1);
     if (temp_r4 == 0) {
         goto loop_69;
     }
@@ -345,11 +346,11 @@ block_75:
         register u8 *arg0 asm("r0") = &sp18;
         register s32 one asm("r1") = 1;
 
-        func_0809AEC0(arg0, one, 0x08109250);
+        BeginLinkSend(arg0, one, 0x08109250);
     }
 loop_76:
-    temp_r4_2 = func_0809AEF4();
-    func_080ED17C(1);
+    temp_r4_2 = PollLinkSend();
+    YieldTaskForUpdates(1);
     if (temp_r4_2 == 0) {
         goto loop_76;
     }
@@ -368,11 +369,11 @@ block_78:
         register u8 *arg0 asm("r0") = &sp18;
         register s32 one asm("r1") = 1;
 
-        func_0809B00C(arg0, one, 0x08109250);
+        BeginLinkReceive(arg0, one, 0x08109250);
     }
 loop_79:
-    temp_r5_2 = func_0809B040();
-    func_080ED17C(1);
+    temp_r5_2 = PollLinkReceive();
+    YieldTaskForUpdates(1);
     if (temp_r5_2 == 0) {
         goto loop_79;
     }
@@ -406,7 +407,7 @@ block_83:
 block_86:
     RunMenuScript(0x08028D3A);
     asm volatile("str %0, [sp, #0]" : : "r"(temp_r4_3) : "memory");
-    func_080981F0(0x0810925C, 0, 2, 1);
+    PrintWindowTextAt(0x0810925C, 0, 2, 1);
     asm volatile("");
     goto block_205;
 block_87:
@@ -420,7 +421,7 @@ block_87:
             : "=r"(zero)
             :
             : "memory");
-        func_080981F0(0x08109268, zero, 2, 1);
+        PrintWindowTextAt(0x08109268, zero, 2, 1);
     }
     goto block_205;
 block_89:
@@ -447,7 +448,7 @@ block_96:
     var_r6 = 0x3200;
     goto block_241;
 block_97:
-    func_0809AEA0();
+    StopLinkConnection();
     RunMenuScript(0x08028CFC);
     *(s32 *)0x02021690 = (s32) temp_r4_4;
     goto block_241;
@@ -478,7 +479,7 @@ block_101:
     }
     goto block_114;
 block_106:
-    func_080B65E4(0);
+    BuildUnlockedZoidModelSelection(0);
     if (*(u8 *)0x02032411 == 0) {
         goto block_108;
     }
@@ -488,7 +489,7 @@ block_108:
     RunMenuScript(0x08028D88);
     goto block_241;
 block_110:
-    func_080B6728();
+    BuildPlayerZoidCoreSelection();
     if (*(u8 *)0x0203246B != 0) {
         goto block_113;
     }
@@ -500,7 +501,7 @@ block_114:
     RunMenuScript(0x08028D42);
     RunMenuScript(0x08028D6D);
     RequestWindowRefresh();
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     goto block_116;
 block_115:
     sp19 = 3U;
@@ -513,12 +514,12 @@ block_116:
         register u8 *arg0 asm("r0") = var_r7;
         register s32 one asm("r1") = 1;
 
-        func_0809AEC0(arg0, one, 0x08109278);
+        BeginLinkSend(arg0, one, 0x08109278);
     }
 loop_117:
-    temp_r4_5 = func_0809AEF4();
+    temp_r4_5 = PollLinkSend();
     temp_r4_5 = (u8)temp_r4_5;
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     if (temp_r4_5 == 0) {
         goto loop_117;
     }
@@ -529,16 +530,16 @@ block_120:
         register u8 *arg0 asm("r0") = &sp19;
         register s32 one asm("r1") = 1;
 
-        func_0809B00C(arg0, one, 0x08109278);
+        BeginLinkReceive(arg0, one, 0x08109278);
     }
     asm volatile(
         "mov %0, sp\n\t"
         "add %0, #25"
         : "=r"(var_r7));
 loop_121:
-    temp_r5_3 = func_0809B040();
+    temp_r5_3 = PollLinkReceive();
     temp_r5_3 = (u8)temp_r5_3;
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     if (temp_r5_3 == 0) {
         goto loop_121;
     }
@@ -582,7 +583,7 @@ block_128:
     goto block_72;
 block_130:
     RunMenuScript(0x08028DE2);
-    func_080AC6B8(1);
+    AppendZoidModelSelectionRows(1);
     var_r6 = 0x4020;
     goto block_241;
 block_131:
@@ -606,7 +607,7 @@ block_131:
         "add %0, %0, %1\n\t"
         "mov %1, #2"
         : "+r"(record), "+r"(work_r1));
-    func_080AC87C(record, work_r1);
+    DrawZoidDevelopmentRequirements(record, work_r1);
     RunMenuScript(0x08028ED9);
     {
         register u32 selected asm("r0") = D_0200A880;
@@ -647,12 +648,12 @@ block_137:
             : "=r"(arg0), "=r"(one)
             :
             : "r5", "memory");
-        func_0809AEC0(arg0, one, 0x08109284);
+        BeginLinkSend(arg0, one, 0x08109284);
     }
 loop_138:
-    temp_r4_6 = func_0809AEF4();
+    temp_r4_6 = PollLinkSend();
     temp_r4_6 = (u8)temp_r4_6;
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     if (temp_r4_6 == 0) {
         goto loop_138;
     }
@@ -665,7 +666,7 @@ block_140:
         register u8 *arg0 asm("r0") = &sp1A;
         register s32 one asm("r1") = 1;
 
-        func_0809AEC0(arg0, one, 0x08109284);
+        BeginLinkSend(arg0, one, 0x08109284);
     }
     asm volatile(
         "mov r1, #26\n\t"
@@ -673,9 +674,9 @@ block_140:
         "mov %0, r1"
         : "=r"(unit_ptr_4040) : : "r1");
 loop_141:
-    temp_r4_7 = func_0809AEF4();
+    temp_r4_7 = PollLinkSend();
     temp_r4_7 = (u8)temp_r4_7;
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     if (temp_r4_7 == 0) {
         goto loop_141;
     }
@@ -684,7 +685,7 @@ loop_141:
         "mov r2, #0\n\t"
         "str r2, [sp, #0]"
         : : : "r2", "memory");
-    func_080981F0(0x08109290, 0, 3, 0);
+    PrintWindowTextAt(0x08109290, 0, 3, 0);
     {
         register s32 *record asm("r0") = (s32 *)0x087EDD54;
         register s32 zero_r5 asm("r5");
@@ -702,9 +703,9 @@ loop_141:
             "mov %1, #0\n\t"
             "str %1, [sp, #0]"
             : "+r"(record), "=r"(zero_r5) : : "memory");
-        func_080981F0(record, 0, 3, 7);
+        PrintWindowTextAt(record, 0, 3, 7);
     }
-    func_08098248(0x081092B0, 0, 3);
+    PrintWindowText(0x081092B0, 0, 3);
     RequestWindowRefresh();
     {
         register volatile u16 *keys asm("r4") = (volatile u16 *)0x0300000E;
@@ -713,7 +714,7 @@ loop_141:
         register u32 masked asm("r0");
 
 loop_143:
-        func_080ED17C(1);
+        YieldTaskForUpdates(1);
         key_word = *keys;
         masked = mask;
         asm volatile("" : "+r"(masked));
@@ -733,7 +734,7 @@ block_146:
     var_r6 = 0x4110;
     goto block_241;
 block_148:
-    func_080AC6FC(1);
+    AppendZoidCoreInventoryRows(1);
     var_r6 = 0x4120;
     goto block_241;
 block_150:
@@ -760,7 +761,7 @@ block_152:
         : "=r"(record)
         : "r"(record_table), "r"(record_base)
         : "r2", "memory");
-    func_08098248(record, 0, 2);
+    PrintWindowText(record, 0, 2);
     RunMenuScript(0x08028ED9);
     sp20 = D_0200A880;
     temp_r0_2 = D_0200A882;
@@ -787,13 +788,13 @@ block_155:
             : "=r"(arg0), "=r"(one)
             : "r"(record_base)
             : "r3", "r5", "memory");
-        func_0809AEC0(arg0, one, 0x081092B8);
+        BeginLinkSend(arg0, one, 0x081092B8);
     }
     choice_ptr = &sp1B;
 loop_156:
-    temp_r4_8 = func_0809AEF4();
+    temp_r4_8 = PollLinkSend();
     temp_r4_8 = (u8)temp_r4_8;
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     if (temp_r4_8 == 0) {
         goto loop_156;
     }
@@ -801,12 +802,12 @@ loop_156:
         register u8 *arg0 asm("r0") = choice_ptr;
         register s32 one asm("r1") = 1;
 
-        func_0809B00C(arg0, one, 0x081092C4);
+        BeginLinkReceive(arg0, one, 0x081092C4);
     }
 loop_158:
-    temp_r5_4 = func_0809B040();
+    temp_r5_4 = PollLinkReceive();
     temp_r5_4 = (u8)temp_r5_4;
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     if (temp_r5_4 == 0) {
         goto loop_158;
     }
@@ -820,12 +821,12 @@ loop_158:
     {
         register s32 one asm("r1") = 1;
 
-        func_0809AEC0(&sp1C, one, 0x081092D0);
+        BeginLinkSend(&sp1C, one, 0x081092D0);
     }
 loop_161:
-    temp_r4_10 = func_0809AEF4();
+    temp_r4_10 = PollLinkSend();
     temp_r4_10 = (u8)temp_r4_10;
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     if (temp_r4_10 == 0) {
         goto loop_161;
     }
@@ -846,12 +847,12 @@ block_165:
             : "=r"(arg0), "=r"(one)
             :
             : "memory");
-        func_0809AEC0(arg0, one, 0x081092B8);
+        BeginLinkSend(arg0, one, 0x081092B8);
     }
 loop_166:
-    temp_r4_11 = func_0809AEF4();
+    temp_r4_11 = PollLinkSend();
     temp_r4_11 = (u8)temp_r4_11;
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     if (temp_r4_11 == 0) {
         goto loop_166;
     }
@@ -889,7 +890,7 @@ block_169:
             "mov %1, #0\n\t"
             "str %1, [sp, #0]"
             : "+r"(child), "=r"(zero_r3) : : "memory");
-        func_080981F0(child, 0, 3, zero_r3);
+        PrintWindowTextAt(child, 0, 3, zero_r3);
     }
     sp1c_seed = &sp1C;
     *sp1c_seed = 1;
@@ -926,7 +927,7 @@ loop_172:
             : "=r"(first), "=r"(second)
             : "r"(sp1c_low), "r"(sp1b_ptr)
             : "memory");
-        temp_r0_3 = func_080B684C(first, second);
+        temp_r0_3 = UpdateMenuQuantityFromKeys(first, second);
     }
     *sp1c_low = temp_r0_3;
     asm volatile(
@@ -951,7 +952,7 @@ loop_172:
             : "=r"(draw_arg), "=r"(zero_r2)
             : "r"(sp1c_ptr), "r"(var_r6)
             : "r1", "memory");
-        func_0809844C(draw_arg, 2, zero_r2, 2);
+        PrintWindowNumberAt(draw_arg, 2, zero_r2, 2);
     }
     RequestWindowRefresh();
     {
@@ -960,7 +961,7 @@ loop_172:
         var_r4 = *previous_ptr;
     }
 block_174:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     temp_r1_2 = *(u16 *)0x0300000E;
     masked = var_r6;
     asm volatile("" : "+r"(masked));
@@ -990,12 +991,12 @@ block_179:
         register u8 *arg0 asm("r0") = sp1c_ptr;
         register s32 arg1 asm("r1") = 1;
 
-        func_0809AEC0(arg0, arg1, 0x081092D0);
+        BeginLinkSend(arg0, arg1, 0x081092D0);
     }
 loop_180:
-    temp_r4_12 = func_0809AEF4();
+    temp_r4_12 = PollLinkSend();
     temp_r4_12 = (u8)temp_r4_12;
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     if (temp_r4_12 == 0) {
         goto loop_180;
     }
@@ -1016,7 +1017,7 @@ block_182:
         choice_ptr_4140 = &sp1C;
         asm volatile("ldrb %0, [r4]"
                      : "=r"(choice) : "r"(choice_ptr_4140) : "memory");
-        func_080E5E38(unit, choice);
+        SubtractZoidCoresFromInventory(unit, choice);
     }
     temp_r0_5 = WriteSaveBlock3();
     *(s8 *)0x0202169C = temp_r0_5;
@@ -1031,9 +1032,9 @@ block_182:
         "mov r0, #0\n\t"
         "str r0, [sp, #0]"
         : : : "r0", "memory");
-    func_080981F0(0x081092DC, 0, 3, 0);
-    func_080984C4(*choice_ptr_4140, 2, 0, 0, 3);
-    func_08098248(0x081092EC, 0, 3);
+    PrintWindowTextAt(0x081092DC, 0, 3, 0);
+    PrintWindowNumber(*choice_ptr_4140, 2, 0, 0, 3);
+    PrintWindowText(0x081092EC, 0, 3);
     {
         register s32 *table asm("r1") = (s32 *)0x087EEE60;
         register s32 record asm("r0");
@@ -1046,12 +1047,12 @@ block_182:
             : "=r"(record)
             : "r"(table), "r"(unit_ptr_4140)
             : "memory");
-        func_08098248(record, 0, 3);
+        PrintWindowText(record, 0, 3);
     }
     if ((u32) *choice_ptr_4140 <= 1U) {
         goto block_185;
     }
-    func_08098248(0x081092F0, 0, 3);
+    PrintWindowText(0x081092F0, 0, 3);
 block_185:
     RequestWindowRefresh();
     {
@@ -1061,7 +1062,7 @@ block_185:
         register u32 masked asm("r0");
 
 loop_186:
-        func_080ED17C(1);
+        YieldTaskForUpdates(1);
         key_word = *keys;
         masked = mask;
         asm volatile("" : "+r"(masked));
@@ -1083,7 +1084,7 @@ block_189:
         register u32 masked asm("r0");
 
 loop_190:
-        func_080ED17C(1);
+        YieldTaskForUpdates(1);
         key_word = *keys;
         masked = mask;
         asm volatile("" : "+r"(masked));
@@ -1094,8 +1095,8 @@ loop_190:
     }
     RunMenuScript(0x0802903F);
 block_192:
-    func_08098834(1);
-    func_080B6728();
+    ClearWindowTextList(1);
+    BuildPlayerZoidCoreSelection();
     temp_r4_13 = *(u8 *)0x0203246B;
     if (temp_r4_13 == 0) {
         goto block_194;
@@ -1116,12 +1117,12 @@ block_194:
             : "=r"(arg0), "=r"(one)
             : "r"(saved_unit_4140), "r"(temp_r4_13)
             : "memory");
-        func_0809AEC0(arg0, one, 0x081092B8);
+        BeginLinkSend(arg0, one, 0x081092B8);
     }
 loop_195:
-    temp_r4_14 = func_0809AEF4();
+    temp_r4_14 = PollLinkSend();
     temp_r4_14 = (u8)temp_r4_14;
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     if (temp_r4_14 == 0) {
         goto loop_195;
     }
@@ -1152,7 +1153,7 @@ block_201:
         register u8 *arg0 asm("r0") = &sp1A;
         register s32 one asm("r1") = 1;
 
-        func_0809B00C(arg0, one, 0x08109284);
+        BeginLinkReceive(arg0, one, 0x08109284);
     }
     asm volatile(
         "mov r3, #26\n\t"
@@ -1165,7 +1166,7 @@ block_202:
         register u8 *arg0 asm("r0") = &sp1A;
         register s32 one asm("r1") = 1;
 
-        func_0809B00C(arg0, one, 0x081092B8);
+        BeginLinkReceive(arg0, one, 0x081092B8);
     }
     asm volatile(
         "mov r5, #26\n\t"
@@ -1173,9 +1174,9 @@ block_202:
         "mov %0, r5"
         : "=r"(selected_ptr) : : "r5");
 loop_203:
-    temp_r5_5 = func_0809B040();
+    temp_r5_5 = PollLinkReceive();
     temp_r5_5 = (u8)temp_r5_5;
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     if (temp_r5_5 == 0) {
         goto loop_203;
     }
@@ -1220,7 +1221,7 @@ block_210:
             : "+r"(arg0), "+r"(work_r1)
             : "r"(selected_ptr)
             : "r2", "memory");
-        func_0809AEC0(arg0, work_r1, 0x081092C4);
+        BeginLinkSend(arg0, work_r1, 0x081092C4);
     }
     var_r6 = 0x5200;
 block_211:
@@ -1252,7 +1253,7 @@ block_215:
             "mov r1, sl\n\t"
             "ldrb %0, [r1]"
             : "=r"(unit) : : "r1", "memory");
-        func_080E5DC4(unit);
+        UnlockZoidData(unit);
     }
     temp_r0_7 = WriteSaveBlock3();
     *(s8 *)0x0202169C = temp_r0_7;
@@ -1291,7 +1292,7 @@ block_220:
         "mov r0, #0\n\t"
         "str r0, [sp, #0]"
         : : : "r0", "memory");
-    func_080981F0(0x081092F4, 0, 3, 0);
+    PrintWindowTextAt(0x081092F4, 0, 3, 0);
     {
         register s32 *record asm("r0") = (s32 *)0x087EDD54;
         register s32 zero_r3 asm("r3");
@@ -1309,9 +1310,9 @@ block_220:
             "mov %1, #0\n\t"
             "str %1, [sp, #0]"
             : "+r"(record), "=r"(zero_r3) : : "memory");
-        func_080981F0(record, 0, 3, 0xB);
+        PrintWindowTextAt(record, 0, 3, 0xB);
     }
-    func_08098248(0x081092B0, 0, 3);
+    PrintWindowText(0x081092B0, 0, 3);
 block_221:
     RequestWindowRefresh();
     goto block_240;
@@ -1335,9 +1336,9 @@ block_224:
         "mov %0, r0"
         : "=r"(choice_ptr_5200) : : "r0");
 loop_225:
-    temp_r4_15 = func_0809AEF4();
+    temp_r4_15 = PollLinkSend();
     temp_r4_15 = (u8)temp_r4_15;
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     if (temp_r4_15 == 0) {
         goto loop_225;
     }
@@ -1345,12 +1346,12 @@ loop_225:
         register u8 *arg0 asm("r0") = choice_ptr_5200;
         register s32 one asm("r1") = 1;
 
-        func_0809B00C(arg0, one, 0x081092D0);
+        BeginLinkReceive(arg0, one, 0x081092D0);
     }
 loop_227:
-    temp_r5_6 = func_0809B040();
+    temp_r5_6 = PollLinkReceive();
     temp_r5_6 = (u8)temp_r5_6;
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     if (temp_r5_6 == 0) {
         goto loop_227;
     }
@@ -1388,7 +1389,7 @@ block_231:
             : "=r"(first), "=r"(second)
             : "r"(choice_ptr_5200)
             : "r2", "r5", "memory");
-        func_080E5E0C(first, second);
+        AddZoidCoresToInventory(first, second);
     }
     temp_r0_9 = WriteSaveBlock3();
     *(s8 *)0x0202169C = temp_r0_9;
@@ -1421,7 +1422,7 @@ block_235:
             "mov %0, #0\n\t"
             "str %0, [sp, #0]"
             : "=r"(zero_r1) : : "memory");
-        func_080981F0(0x0810931C, zero_r1, 3, 0);
+        PrintWindowTextAt(0x0810931C, zero_r1, 3, 0);
     }
     {
         register u32 arg0 asm("r0");
@@ -1434,9 +1435,9 @@ block_235:
             : "=r"(arg0)
             : "r"(choice_ptr_5200)
             : "r1", "r2", "memory");
-        func_080984C4(arg0, 2, 0, 0);
+        PrintWindowNumber(arg0, 2, 0, 0);
     }
-    func_08098248(0x081092EC, 0, 3);
+    PrintWindowText(0x081092EC, 0, 3);
     {
         register s32 *table asm("r1") = (s32 *)0x087EEE60;
         register s32 record asm("r0");
@@ -1450,7 +1451,7 @@ block_235:
             : "=r"(record)
             : "r"(table), "r"(unit_ptr_5200)
             : "r3", "memory");
-        func_08098248(record, 0, 3);
+        PrintWindowText(record, 0, 3);
     }
     {
         register u8 *choice_view asm("r5") = choice_ptr_5200;
@@ -1462,7 +1463,7 @@ block_235:
     }
     goto block_221;
 block_237:
-    func_08098248(0x081092F0, 0, 3);
+    PrintWindowText(0x081092F0, 0, 3);
     goto block_221;
 block_239:
     PlaySong(0x58);
@@ -1476,12 +1477,12 @@ block_241:
         goto loop_2;
     }
 block_242:
-    func_08096308(0x10, 0);
+    StartScreenTransition(SCREEN_TRANSITION_CHECKERBOARD_CONCEAL, 0);
     goto loop_245;
 block_244:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_245:
-    if ((func_0809669C() << 0x18) == 0) {
+    if ((IsScreenTransitionComplete() << 0x18) == 0) {
         goto block_244;
     }
     return;

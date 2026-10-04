@@ -9,8 +9,8 @@ M2C_UNK ApplyBattleDerivedStatEffects(u8, u8) asm("func_080BFE30");
 M2C_UNK LoadZoidBaseStats(void *) asm("func_080E5538");
 M2C_UNK ApplyEquipmentWeightPenalty(void *) asm("func_080E5674");
 M2C_UNK CalculateZoidDerivedStats(void *, void *, s32) asm("func_080E570C");
-M2C_UNK func_080E57D0(void *);
-M2C_UNK func_080E6830(void *, void *, s32);
+M2C_UNK ClampZoidStats(void *) asm("func_080E57D0");
+M2C_UNK ApplyPilotZoidStatModifiers(void *, void *, s32) asm("func_080E6830");
 
 void RecalculateBattleUnitStats(s32 side_arg, s32 unit_slot_arg) {
     s16 temp_r1;
@@ -68,7 +68,7 @@ aux_done:
     LoadZoidBaseStats(unit);
     ApplyBattleStatEffects(side, unit_slot);
     ApplyEquipmentWeightPenalty(unit);
-    func_080E6830(unit, pilot, auxiliary_pilot);
+    ApplyPilotZoidStatModifiers(unit, pilot, auxiliary_pilot);
     if ((gBattleSetup[1] == 0xB) && !(0xC0 & M2C_FIELD(unit, u8 *, 0x36))) {
         temp_r1 = M2C_FIELD(unit, s16 *, 0x44);
         M2C_FIELD(unit, s16 *, 0x44) = (s16)((s32)(temp_r1 + ((u32)temp_r1 >> 31)) >> 1);
@@ -96,10 +96,10 @@ aux_done:
             *dest = temp_r0;
         }
     }
-    func_080E57D0(unit);
+    ClampZoidStats(unit);
     CalculateZoidDerivedStats(unit, pilot, auxiliary_pilot);
     ApplyBattleDerivedStatEffects(side, unit_slot);
-    func_080E57D0(unit);
+    ClampZoidStats(unit);
     if ((s32)M2C_FIELD(unit, s16 *, 6) > (s32)(s16)M2C_FIELD(unit, u16 *, 0x3A)) {
         M2C_FIELD(unit, s16 *, 6) = (s16)M2C_FIELD(unit, u16 *, 0x3A);
     }

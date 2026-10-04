@@ -3,7 +3,7 @@
 
 s32 ScaleByPercent(s32, s32) asm("func_080E522C");                        /* extern */
 s32 FindAbilityValue(void *, s32, s32) asm("func_080E74F0");                /* extern */
-s16 func_080ECD98(s32, u8);                         /* extern */
+s16 DivideSigned32(s32, u8) asm("func_080ECD98");                         /* extern */
 
 void ApplyPilotWeaponModifiers(void *, void *, void *, M2C_UNK, void *) asm("func_080E6994");
 
@@ -100,7 +100,7 @@ void ApplyPilotWeaponModifiers(void *unit_arg, void *pilot_arg, void *auxiliary_
     {
         u8 *required_pilot_level = &M2C_FIELD(unit, u8 *, 0x39);
         if ((u32) effective_pilot_level < (u32) *required_pilot_level) {
-            M2C_FIELD(weapon_stats, s16 *, 0xC) = func_080ECD98(M2C_FIELD(weapon_stats, s16 *, 0xC) * effective_pilot_level, *required_pilot_level);
+            M2C_FIELD(weapon_stats, s16 *, 0xC) = DivideSigned32(M2C_FIELD(weapon_stats, s16 *, 0xC) * effective_pilot_level, *required_pilot_level);
         }
     }
     if (auxiliary_pilot != 0) {

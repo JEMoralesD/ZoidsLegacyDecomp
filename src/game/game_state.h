@@ -25,4 +25,8 @@ enum GameMode {
     GAME_MODE_WAIT = -1
 };
 
+enum GameCompletionState {
+    GAME_COMPLETION_FLAG_RAM = 0x02021770
+};
+
 #endif

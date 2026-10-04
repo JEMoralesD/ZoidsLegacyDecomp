@@ -1,0 +1,196 @@
+#include "m2c_prelude.h"
+#include "window.h"
+
+s32 ModuloUnsigned32(s32, s32) asm("func_080ECF78");
+
+
+s32 ExpandShiftJisGlyphTiles(s32 character_code, s32 text_color, s16 *top_tile, s16 *bottom_tile) asm("func_08097A2C");
+
+s32 ExpandShiftJisGlyphTiles(s32 character_code, s32 text_color, s16 *top_tile, s16 *bottom_tile)
+{
+    register u32 code asm("r4");
+    register u32 color_variant asm("r6");
+    register struct ShiftJisFontRange *ranges asm("r3");
+    register u32 range_index asm("r2");
+    register u8 *glyph_pixels asm("r5");
+    s16 *output_tiles[2];
+
+    character_code <<= 16;
+    code = (u32)character_code >> 16;
+    text_color <<= 24;
+    color_variant = (u32)text_color >> 24;
+    output_tiles[0] = top_tile;
+    output_tiles[1] = bottom_tile;
+    {
+        register u32 result asm("r0") = ModuloUnsigned32(color_variant, FONT_COLOR_VARIANTS_PER_PALETTE);
+
+        result += 1;
+        result <<= 24;
+        color_variant = result >> 24;
+    }
+
+    range_index = 0;
+    {
+        register u32 range_start asm("r0");
+        register u32 range_count asm("r1");
+        register struct ShiftJisFontRange *initial_range asm("r0") =
+            (struct ShiftJisFontRange *)0x087A0A98;
+        register u32 initial_range_start asm("r1");
+
+        initial_range_start = initial_range->first_code;
+        ranges = initial_range;
+        if (initial_range_start <= code) {
+            range_start = ranges->first_code;
+            range_count = ranges->glyph_count;
+            goto test_font_range;
+        }
+
+next_font_range:
+        {
+            register u32 next asm("r0") = range_index + 1;
+
+            next <<= 24;
+            range_index = next >> 24;
+        }
+        if (range_index > (u32)(FONT_RANGE_COUNT - 1)) {
+            goto finish_range_search;
+        }
+        {
+            register u32 offset asm("r0") = range_index << 3;
+            register u8 *entry asm("r1") =
+                (u8 *)(offset + (u32)ranges);
+
+            range_start = *(u16 *)entry;
+            if (range_start > code) {
+                goto next_font_range;
+            }
+            range_count = entry[2];
+        }
+test_font_range:
+        range_start += range_count;
+        if ((s32)range_start <= (s32)code) {
+            goto next_font_range;
+        }
+    }
+
+finish_range_search:
+    if (range_index == FONT_RANGE_COUNT) {
+        range_index = 0;
+        code = FONT_SHIFT_JIS_FALLBACK;
+    }
+    if (range_index > (u32)(FONT_RANGE_COUNT - 1)) {
+        goto glyph_unavailable;
+    }
+    {
+        register u32 offset asm("r0") = range_index << 3;
+        register u8 *data_base asm("r1") = (u8 *)ranges + 4;
+        register u8 **data_slot asm("r1");
+        register u32 delta asm("r0");
+        register u8 *glyphs asm("r1");
+
+        data_slot = (u8 **)(offset + (u32)data_base);
+        delta = code - *(u16 *)(offset + (u32)ranges);
+        delta <<= 5;
+        glyphs = *data_slot;
+        glyph_pixels = glyphs + delta;
+    }
+    {
+        register u32 tile asm("r2") = 0;
+        register u32 color_lane0 asm("r10") = color_variant << 2;
+        register u32 color_lane1 asm("r9");
+        register u32 color_lane2 asm("r8");
+        register u32 color_lane3 asm("r12");
+        s16 **outputs;
+
+        {
+            register u32 color_lane asm("r1") = color_variant << 4;
+
+            asm volatile("" :: "r"(color_lane));
+            color_lane1 = color_lane;
+        }
+        {
+            register u32 color_lane asm("r7") = color_variant << 6;
+
+            asm volatile("" :: "r"(color_lane));
+            color_lane2 = color_lane;
+        }
+        color_lane3 = color_variant << 8;
+        {
+            register s16 **outputs_init asm("r0") = output_tiles;
+
+            asm volatile("" : "+r"(outputs_init));
+            outputs = outputs_init;
+        }
+
+        do {
+            register u32 source_byte asm("r6") = 0;
+            u32 next_tile;
+            s16 **current;
+
+            {
+                register u32 next_init asm("r1") = tile + 1;
+
+                asm volatile("" : "+r"(next_init));
+                next_tile = next_init;
+            }
+            {
+                register u32 offset_init asm("r0") = tile << 2;
+                register s16 **base_init asm("r2") = outputs;
+
+                asm volatile("" : "+r"(offset_init), "+r"(base_init));
+                current = (s16 **)(offset_init + (u32)base_init);
+            }
+
+            do {
+                register s16 *expanded_pixels asm("r3") = *current;
+                register u32 value asm("r2") = *glyph_pixels;
+                register u32 packed asm("r1") = 3;
+                register u32 temp asm("r0");
+                u32 color_lane_value;
+                register u32 next asm("r0");
+
+                packed &= value;
+                color_lane_value = color_lane0;
+                packed |= color_lane_value;
+                temp = 0xC;
+                temp &= value;
+                color_lane_value = color_lane1;
+                temp |= color_lane_value;
+                temp <<= 2;
+                packed |= temp;
+                temp = 0x30;
+                temp &= value;
+                color_lane_value = color_lane2;
+                temp |= color_lane_value;
+                temp <<= 4;
+                packed |= temp;
+                temp = 0xC0;
+                temp &= value;
+                color_lane_value = color_lane3;
+                temp |= color_lane_value;
+                temp <<= 6;
+                packed |= temp;
+                *expanded_pixels++ = packed;
+                *current = expanded_pixels;
+                glyph_pixels += 1;
+                next = source_byte + 1;
+                next <<= 24;
+                source_byte = next >> 24;
+            } while (source_byte <= 15U);
+
+            {
+                register u32 next_reload asm("r7") = next_tile;
+                register u32 outer_value asm("r0");
+
+                asm volatile("" : "+r"(next_reload));
+                outer_value = next_reload;
+                outer_value <<= 24;
+                tile = outer_value >> 24;
+            }
+        } while (tile <= 1U);
+    }
+    return 1;
+
+glyph_unavailable:
+    return 0;
+}

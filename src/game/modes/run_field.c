@@ -1,4 +1,5 @@
 #include "m2c_prelude.h"
+#include "../../graphics/screen_effects.h"
 #include "../game_state.h"
 #define NULL ((void *)0)
 
@@ -24,8 +25,8 @@ struct GameState {
     u8 subvariant;
     s32 x;
     s32 y;
-    s32 camera_x;
-    s32 camera_y;
+    s32 saved_world_map_x_fixed8;
+    s32 saved_world_map_y_fixed8;
     s32 state_x;
     s32 state_y;
     u8 animation;
@@ -61,7 +62,7 @@ extern struct GameState D_0202ECF4;
 extern struct CategoryInfo D_087C4434[];
 extern struct LookupEntry D_087D223C[];
 extern struct LookupEntry D_087D2322[];
-extern u8 D_020324B0;
+extern u8 gFieldMapModeFlags asm("D_020324B0");
 extern u8 D_020324B1;
 extern u8 D_020324B2;
 extern u16 D_020324B4;
@@ -70,13 +71,13 @@ extern u8 D_020324B8;
 extern u8 D_020324B9;
 extern u8 D_020324BA;
 extern volatile s32 gGameMode;
-extern u8 D_02030664;
+extern u8 gFieldEventActive asm("D_02030664");
 extern u8 D_02030665;
-extern u8 D_02030667;
-extern s32 D_02032494[2];
+extern u8 gCurrentFieldSongId asm("D_02030667");
+extern s32 gFieldViewCenterFixed8[2] asm("D_02032494");
 extern struct Actor *D_02032990;
 extern struct Actor *D_02032994;
-extern s32 D_03000054[];
+extern s32 gFieldCameraScrollOffsets[] asm("D_03000054");
 extern s16 D_03005F74;
 extern s16 D_03005F76;
 extern u8 D_0203259E;
@@ -102,36 +103,36 @@ asm(".set D_020324BA, 0x020324BA\n"
     ".set D_087D223C, 0x087D223C\n"
     ".set D_087D2322, 0x087D2322");
 
-M2C_UNK func_08092D8C(s32, M2C_UNK);                /* extern */
-M2C_UNK func_08092D9C(s32, M2C_UNK, u16);           /* extern */
-M2C_UNK func_08092E0C(s32);                         /* extern */
+M2C_UNK StartTask(s32, M2C_UNK) asm("func_08092D8C");                /* extern */
+M2C_UNK StartTaskWithArgument(s32, M2C_UNK, u16) asm("func_08092D9C");           /* extern */
+M2C_UNK StopTask(s32) asm("func_08092E0C");                         /* extern */
 M2C_UNK PlayOrContinueSong(u8) asm("func_08092E74");                          /* extern */
 M2C_UNK PlaySong(s32) asm("func_08092E84");                         /* extern */
 M2C_UNK StopSong(u8) asm("func_08092EA0");                          /* extern */
 M2C_UNK ClearSpritePools() asm("func_08094330");                            /* extern */
-M2C_UNK func_08096308(s32, s32);                    /* extern */
-s32 func_0809669C();                                /* extern */
+M2C_UNK StartScreenTransition(s32, s32) asm("func_08096308");                    /* extern */
+s32 IsScreenTransitionComplete() asm("func_0809669C");                                /* extern */
 M2C_UNK RequestWindowRefresh() asm("func_080972C8");                            /* extern */
 M2C_UNK RunMenuScript(M2C_UNK) asm("func_08098BB4");                     /* extern */
-M2C_UNK func_0809D938(u16, s32, s32);               /* extern */
-M2C_UNK func_0809E204(u16, s32, s32, s32);          /* extern */
-M2C_UNK func_0809E22C();                            /* extern */
-M2C_UNK func_0809E6E0();                            /* extern */
-s32 func_0809E72C();                                /* extern */
-M2C_UNK func_0809EAE0();                            /* extern */
-M2C_UNK func_0809EB24();                            /* extern */
-M2C_UNK func_0809EB38();                            /* extern */
-M2C_UNK func_0809F850();                            /* extern */
+M2C_UNK InitializeFieldMapGraphics(u16, s32, s32) asm("func_0809D938");               /* extern */
+M2C_UNK RequestFieldMapChange(u16, s32, s32, s32) asm("func_0809E204");          /* extern */
+M2C_UNK UpdateFieldTransportBoardingAndLanding() asm("func_0809E22C");                            /* extern */
+M2C_UNK SelectFieldRandomEncounterTable() asm("func_0809E6E0");                            /* extern */
+s32 TrySelectFieldRandomEncounter() asm("func_0809E72C");                                /* extern */
+M2C_UNK InitializeFieldBg3ScanlineEvent() asm("func_0809EAE0");                            /* extern */
+M2C_UNK StopFieldBg3ScanlineEvent() asm("func_0809EB24");                            /* extern */
+M2C_UNK InitializeFieldScanlineEvents() asm("func_0809EB38");                            /* extern */
+M2C_UNK InitializeEventSpritePool() asm("func_0809F850");                            /* extern */
 M2C_UNK ResetEventScripts() asm("func_0809FCB0");                            /* extern */
 M2C_UNK StartMapEventScript(u16, s32) asm("func_0809FD3C");                    /* extern */
-M2C_UNK func_080A9888();                            /* extern */
-void *func_080A9D78(u8, u8, s32, s32, s32, s32, s32, s32); /* extern */
-M2C_UNK func_080A9EBC();                            /* extern */
-M2C_UNK func_080B35D4(s32);                         /* extern */
-M2C_UNK func_080E5FA8(s32, u8);                     /* extern */
-M2C_UNK func_080E6090(s32);                         /* extern */
+M2C_UNK ResetFieldActors() asm("func_080A9888");                            /* extern */
+void *CreateFieldActor(u8, u8, s32, s32, s32, s32, s32, s32) asm("func_080A9D78"); /* extern */
+M2C_UNK CreateActiveFieldActorSprites() asm("func_080A9EBC");                            /* extern */
+M2C_UNK RunPlayerTeamFormationMenu(s32) asm("func_080B35D4");                         /* extern */
+M2C_UNK AssignZoidToPlayerTeam(s32, u8) asm("func_080E5FA8");                     /* extern */
+M2C_UNK RestoreDestroyedZoidHp(s32) asm("func_080E6090");                         /* extern */
 M2C_UNK BiosLz77ToVram(M2C_UNK, M2C_UNK) asm("func_080ECD34");            /* extern */
-M2C_UNK func_080ED17C(s32);                         /* extern */
+M2C_UNK YieldTaskForUpdates(s32) asm("func_080ED17C");                         /* extern */
 
 void RunField(void) {
     volatile u32 sp10;
@@ -223,16 +224,16 @@ void RunField(void) {
     }
     zero = 0;
 loop_2:
-    D_020324B0 = 1;
+    gFieldMapModeFlags = 1;
     D_020324B1 = 1;
     ClearSpritePools();
-    if (D_02030664 != 0) {
+    if (gFieldEventActive != 0) {
         goto block_14;
     }
     if (D_020324B2 == 0) {
         goto block_14;
     }
-    func_080A9888();
+    ResetFieldActors();
     if (D_020324B2 != 2) {
         goto block_15;
     }
@@ -278,7 +279,7 @@ loop_6:
     entity_r2 = *(u32 *)entity_r2;
     entity_r3 += (u32)hold_r8;
     entity_r3 = *(u32 *)entity_r3;
-    func_080A9D78(entity_r0, entity_r1, entity_r2, entity_r3,
+    CreateFieldActor(entity_r0, entity_r1, entity_r2, entity_r3,
         (s32)*(u8 *)(entity_ip + 72), *(s32 *)entity_r6,
         (s32)(entity_r6 = entity_ip, *(u16 *)(entity_r6 + 62)), zero);
 block_11:
@@ -289,7 +290,7 @@ block_11:
     }
     goto block_15;
 block_14:
-    func_080A9EBC();
+    CreateActiveFieldActorSprites();
 block_15:
     BiosLz77ToVram(0x0832BB4C, 0x06017640);
     if (D_020324B2 != 0) {
@@ -322,7 +323,7 @@ block_19:
         goto block_41;
     }
 block_22:
-    if (D_02030664 != 0) {
+    if (gFieldEventActive != 0) {
         goto block_41;
     }
     object_r4 = var_r9;
@@ -429,8 +430,8 @@ block_41:
 block_42:
     object_r4 = (u32)&D_0202ECF4;
     ((struct GameState *)object_r4)->category = *selection;
-    D_02032494[0] = ((struct GameState *)object_r4)->x;
-    D_02032494[1] = ((struct GameState *)object_r4)->y;
+    gFieldViewCenterFixed8[0] = ((struct GameState *)object_r4)->x;
+    gFieldViewCenterFixed8[1] = ((struct GameState *)object_r4)->y;
     lookup_r1 = ((struct GameState *)object_r4)->category;
     temp_r0_5 = category_table[lookup_r1].has_data;
     var_r9 = 1;
@@ -448,7 +449,7 @@ block_42:
     if (object_r3 == 0x6C) {
         goto block_48;
     }
-    func_080A9D78(0x6CU, 0xDU,
+    CreateFieldActor(0x6CU, 0xDU,
         ((struct GameState *)object_r4)->state_x,
         ((struct GameState *)object_r4)->state_y,
         (s32)((struct GameState *)object_r4)->kind,
@@ -457,7 +458,7 @@ block_42:
 block_47:
     var_r6 = 0;
 block_48:
-    if (D_02030664 != 0) {
+    if (gFieldEventActive != 0) {
         goto block_54;
     }
     if (D_020324B2 == 0) {
@@ -485,25 +486,25 @@ block_51:
         outgoing[3] = object_r1;
         object_r0 = 0x4B;
         object_r1 = 0xD;
-        spawned = ((void *(*)())func_080A9D78)(object_r0, object_r1,
+        spawned = ((void *(*)())CreateFieldActor)(object_r0, object_r1,
             object_r2, object_r3);
         spawn_slot = &D_02032994;
         *spawn_slot = spawned;
         goto block_66;
     }
 block_52:
-    func_0809F850();
+    InitializeEventSpritePool();
 block_53:
     object_r0 = 3;
     object_r1 = 0x080A67E5;
-    func_08092D8C(object_r0, object_r1);
+    StartTask(object_r0, object_r1);
     display_table = D_087C4434;
     display_state1 = &D_0202ECF4;
     PlayOrContinueSong(display_table[display_state1->category].display);
-    object_r1 = (u32)&D_02030667;
+    object_r1 = (u32)&gCurrentFieldSongId;
     display_state2 = &D_0202ECF4;
     *(u8 *)object_r1 = display_table[display_state2->category].display;
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 block_54:
     if (var_r6 == 0) {
         goto block_56;
@@ -512,12 +513,12 @@ block_54:
     object_r2 = *(volatile u16 *)object_r4;
     object_r0 = 7;
     object_r1 = 0x0809E8CD;
-    func_08092D9C(object_r0, object_r1, object_r2);
+    StartTaskWithArgument(object_r0, object_r1, object_r2);
 block_56:
     lookup_i = (u32)&D_0202ECF4;
-    func_0809D938(((struct GameState *)lookup_i)->category,
-        D_02032494[0], D_02032494[1]);
-    object_r4 = D_02030664;
+    InitializeFieldMapGraphics(((struct GameState *)lookup_i)->category,
+        gFieldViewCenterFixed8[0], gFieldViewCenterFixed8[1]);
+    object_r4 = gFieldEventActive;
     if (object_r4 == 0) {
         goto block_58;
     }
@@ -534,7 +535,7 @@ block_58:
     }
     var_r1 = 0xD;
 block_61:
-    spawned = ((void *(*)())func_080A9D78)(var_r9, var_r1,
+    spawned = ((void *(*)())CreateFieldActor)(var_r9, var_r1,
         ((struct GameState *)lookup_i)->x,
         ((struct GameState *)lookup_i)->y,
         (s32)((struct GameState *)lookup_i)->animation,
@@ -571,11 +572,11 @@ block_65:
         goto loop_63;
     }
 block_66:
-    func_08096308(0xD, 0);
+    StartScreenTransition(SCREEN_TRANSITION_ROTATING_SQUARE_REVEAL, 0);
     object_r4 = (u32)&D_03005F74;
     entity_r6 = (u8 *)&D_02032990;
     object_r2 = *(u32 *)entity_r6;
-    entity_r3 = (u32)D_03000054;
+    entity_r3 = (u32)gFieldCameraScrollOffsets;
     entity_r1 = *(u32 *)(object_r2 + 8);
     entity_r0 = *(u32 *)entity_r3;
     entity_r0 = entity_r1 - entity_r0;
@@ -602,7 +603,7 @@ block_72:
     if (D_020324B6 != 0) {
         goto block_75;
     }
-    func_08096308(0xF, 0);
+    StartScreenTransition(SCREEN_TRANSITION_CHECKERBOARD_REVEAL, 0);
     goto block_76;
 block_74:
     object_r0 = (u32)&D_020324B6;
@@ -610,11 +611,11 @@ block_74:
     *(volatile u8 *)object_r0 = object_r1;
     goto block_171;
 block_75:
-    func_08096308(7, 0);
+    StartScreenTransition(SCREEN_TRANSITION_SCALED_Z_REVEAL, 0);
 block_76:
     object_r0 = 2;
     object_r1 = 0x0809E1CD;
-    func_08092D8C(object_r0, object_r1);
+    StartTask(object_r0, object_r1);
     {
         u32 clear_address;
         register u32 clear_r2 asm("r2");
@@ -627,7 +628,7 @@ block_76:
         asm volatile("" : "+r"(clear_r2) : "r"(clear_address));
         *(u8 *)clear_address = clear_r2;
     }
-    func_0809E6E0();
+    SelectFieldRandomEncounterTable();
     if (gGameMode == GAME_MODE_FIELD) {
         goto block_78;
     }
@@ -643,7 +644,7 @@ loop_79:
     }
     goto block_89;
 block_81:
-    if (4 & D_020324B0) {
+    if (4 & gFieldMapModeFlags) {
         goto block_83;
     }
     goto block_89;
@@ -653,7 +654,7 @@ block_83:
     }
     goto block_91;
 block_85:
-    func_0809EAE0();
+    InitializeFieldBg3ScanlineEvent();
     goto block_91;
 block_86:
     {
@@ -661,7 +662,7 @@ block_86:
         arg0 = *(u16 *)entity_r6; asm volatile("" : : "r"(arg0));
         arg1 = (u32)hold_r7 + 2; arg1 = object_r4 + arg1; arg1 = *(u16 *)arg1; arg1 <<= 0xB;
         arg2 = (u32)hold_r7 + 4; arg2 = object_r4 + arg2; arg2 = *(u16 *)arg2; arg2 <<= 0xB;
-        func_0809E204(arg0, arg1, arg2, 0);
+        RequestFieldMapChange(arg0, arg1, arg2, 0);
     }
     {
         register u32 value asm("r0"); register u8 *state_view asm("r1");
@@ -701,7 +702,7 @@ block_87:
         arg0 = *(u16 *)entity_r6; asm volatile("" : : "r"(arg0));
         arg1 = (u32)hold_r8 + 2; arg1 = object_r4 + arg1; arg1 = *(u16 *)arg1; arg1 <<= 0xB;
         arg2 = (u32)hold_r8 + 4; arg2 = object_r4 + arg2; arg2 = *(u16 *)arg2; arg2 <<= 0xB;
-        func_0809E204(arg0, arg1, arg2, 0);
+        RequestFieldMapChange(arg0, arg1, arg2, 0);
     }
     {
         register u32 value asm("r0");
@@ -739,9 +740,9 @@ block_89:
     if (D_020324B8 == 0) {
         goto block_91;
     }
-    func_0809EB24();
+    StopFieldBg3ScanlineEvent();
 block_91:
-    if (D_02030664 == 0) {
+    if (gFieldEventActive == 0) {
         goto block_93;
     }
     goto block_146;
@@ -818,9 +819,9 @@ block_104:
     }
     goto loop_106;
 block_105:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_106:
-    if ((func_0809669C() << 0x18) == 0) {
+    if ((IsScreenTransitionComplete() << 0x18) == 0) {
         goto block_105;
     }
     D_020324BA = 1;
@@ -834,11 +835,11 @@ loop_106:
     }
     RunMenuScript(0x080177FA);
     RequestWindowRefresh();
-    func_08096308(0xE, 0);
+    StartScreenTransition(SCREEN_TRANSITION_ROTATING_SQUARE_CONCEAL, 0);
     object_r4 = (u32)&D_03005F74;
     entity_r6 = (u8 *)&D_02032990;
     object_r2 = *(u32 *)entity_r6;
-    entity_r3 = (u32)D_03000054;
+    entity_r3 = (u32)gFieldCameraScrollOffsets;
     entity_r1 = *(u32 *)(object_r2 + 8);
     entity_r0 = *(u32 *)entity_r3;
     entity_r0 = entity_r1 - entity_r0;
@@ -860,9 +861,9 @@ block_111:
     *(s16 *)object_r4 = (s16)((s32)entity_r0 >> 8);
     goto loop_113;
 block_112:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_113:
-    if ((func_0809669C() << 0x18) == 0) {
+    if ((IsScreenTransitionComplete() << 0x18) == 0) {
         goto block_112;
     }
     object_r2 = (u32)D_020218E4;
@@ -876,16 +877,16 @@ loop_113:
     object_r0 <<= 4;
     object_r2 += 4;
     object_r0 += object_r2;
-    func_080E6090(object_r0);
+    RestoreDestroyedZoidHp(object_r0);
     object_r1 = *(volatile u8 *)object_r4;
     object_r0 = 1;
-    func_080E5FA8(object_r0, object_r1);
+    AssignZoidToPlayerTeam(object_r0, object_r1);
     if (D_020324B8 == 0) {
         goto block_116;
     }
-    func_0809EB38();
+    InitializeFieldScanlineEvents();
 block_116:
-    func_08092E0C(2);
+    StopTask(2);
     object_r1 = (u32)hold_r8;
     asm volatile("" : "+r"(object_r1));
     if ((u32) (u16) (((struct GameState *)object_r1)->category - 0x3A) > 6U) {
@@ -1011,9 +1012,9 @@ block_134:
     }
     goto loop_137;
 block_136:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_137:
-    if ((func_0809669C() << 0x18) == 0) {
+    if ((IsScreenTransitionComplete() << 0x18) == 0) {
         goto block_136;
     }
     D_020324BA = 1;
@@ -1026,22 +1027,22 @@ loop_137:
     }
     RunMenuScript(0x080177FA);
     RequestWindowRefresh();
-    func_08096308(0x10, 0);
+    StartScreenTransition(SCREEN_TRANSITION_CHECKERBOARD_CONCEAL, 0);
     goto loop_141;
 block_140:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_141:
-    if ((func_0809669C() << 0x18) == 0) {
+    if ((IsScreenTransitionComplete() << 0x18) == 0) {
         goto block_140;
     }
-    func_08092E0C(2);
+    StopTask(2);
     if (D_020324B8 == 0) {
         goto block_144;
     }
-    func_0809EB38();
+    InitializeFieldScanlineEvents();
 block_144:
-    func_080B35D4(1);
-    object_r2 = (u32)D_02032494;
+    RunPlayerTeamFormationMenu(1);
+    object_r2 = (u32)gFieldViewCenterFixed8;
     object_r3 = (u32)&D_02032990;
     object_r1 = *(u32 *)object_r3;
     object_r0 = *(u32 *)(object_r1 + 8);
@@ -1061,14 +1062,14 @@ block_145:
     object_r0 = zero;
     *(u8 *)object_r4 = object_r0;
 block_146:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     temp_r1_5 = ((s32)D_02032990);
     if (temp_r1_5 != NULL) {
         goto block_148;
     }
     goto block_167;
 block_148:
-    if (D_02030664 == 0) {
+    if (gFieldEventActive == 0) {
         goto block_150;
     }
     goto block_167;
@@ -1090,12 +1091,12 @@ block_150:
     object_r1 = *(u16 *)object_r1; object_r1 <<= 0xB;
     object_r3 += 4; object_r2 += object_r3; object_r2 = *(u16 *)object_r2; object_r2 <<= 0xB;
     object_r3 = 0;
-    func_0809E204(object_r0, object_r1, object_r2, object_r3);
-    func_08096308(0xE, 0);
+    RequestFieldMapChange(object_r0, object_r1, object_r2, object_r3);
+    StartScreenTransition(SCREEN_TRANSITION_ROTATING_SQUARE_CONCEAL, 0);
     object_r4 = (u32)&D_03005F74;
     entity_r6 = (u8 *)&D_02032990;
     object_r2 = *(u32 *)entity_r6;
-    entity_r3 = (u32)D_03000054;
+    entity_r3 = (u32)gFieldCameraScrollOffsets;
     entity_r1 = *(u32 *)(object_r2 + 8);
     entity_r0 = *(u32 *)entity_r3;
     entity_r0 = entity_r1 - entity_r0;
@@ -1118,7 +1119,7 @@ block_156:
     PlaySong(0x45);
     goto block_167;
 block_158:
-    object_r0 = func_0809E72C();
+    object_r0 = TrySelectFieldRandomEncounter();
     object_r0 <<= 24;
     object_r4 = object_r0 >> 24;
     if (object_r4 == 0) {
@@ -1138,7 +1139,7 @@ block_158:
     object_r1 = (u32)&gGameMode;
     object_r0 = 9;
     *(u32 *)object_r1 = object_r0;
-    func_08096308(8, 0);
+    StartScreenTransition(SCREEN_TRANSITION_SCALED_Z_CONCEAL, 0);
     D_020324B6 = 1U;
     object_r1 = (u32)hold_r8;
     asm volatile("" : "+r"(object_r1));
@@ -1152,7 +1153,7 @@ block_158:
     PlaySong(0x52);
     goto block_167;
 block_160:
-    func_0809E22C();
+    UpdateFieldTransportBoardingAndLanding();
     temp_r1_7 = *(u16 *)0x0300000E;
     temp_r5 = 8 & temp_r1_7;
     if (temp_r5 == 0) {
@@ -1161,7 +1162,7 @@ block_160:
     gGameMode = GAME_MODE_PAUSE_MENU;
     D_02032A85 = object_r4;
     D_02032A84 = object_r4;
-    func_08096308(0x10, 0x10);
+    StartScreenTransition(SCREEN_TRANSITION_CHECKERBOARD_CONCEAL, 0x10);
     D_020324B6 = object_r4;
     goto block_167;
 block_162:
@@ -1194,7 +1195,7 @@ block_162:
     goto block_167;
 block_166:
     gGameMode = GAME_MODE_TOWN_MAP;
-    func_08096308(0x10, 0x10);
+    StartScreenTransition(SCREEN_TRANSITION_CHECKERBOARD_CONCEAL, 0x10);
     D_020324B6 = (u8) temp_r5;
 block_167:
     if (D_020324B2 == 0) {
@@ -1214,9 +1215,9 @@ block_171:
     M2C_FIELD(temp_r2_10, s32 *, 0) = (s32) (M2C_FIELD(temp_r2_10, s32 *, 0) | 2);
     goto loop_174;
 block_173:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_174:
-    if ((func_0809669C() << 0x18) == 0) {
+    if ((IsScreenTransitionComplete() << 0x18) == 0) {
         goto block_173;
     }
     temp_r1_8 = ((s32)D_02032990);
@@ -1226,13 +1227,13 @@ loop_174:
     if (D_0202ECF4.category != 0) {
         goto block_178;
     }
-    D_0202ECF4.camera_x = (s32) M2C_FIELD(temp_r1_8, s32 *, 8);
-    D_0202ECF4.camera_y = (s32) M2C_FIELD(temp_r1_8, s32 *, 0xC);
+    D_0202ECF4.saved_world_map_x_fixed8 = (s32) M2C_FIELD(temp_r1_8, s32 *, 8);
+    D_0202ECF4.saved_world_map_y_fixed8 = (s32) M2C_FIELD(temp_r1_8, s32 *, 0xC);
 block_178:
     D_0202ECF4.animation = (u8) M2C_FIELD(((s32)D_02032990), u8 *, 0x1A);
 block_179:
-    func_08092E0C(2);
-    func_08092E0C(7);
+    StopTask(2);
+    StopTask(7);
     if (gGameMode == GAME_MODE_FIELD) {
         goto loop_2;
     }
@@ -1240,13 +1241,13 @@ block_180:
     if (D_020324B8 == 0) {
         goto block_182;
     }
-    func_0809EB38();
+    InitializeFieldScanlineEvents();
 block_182:
-    if (D_02030664 != 0) {
+    if (gFieldEventActive != 0) {
         goto block_185;
     }
     object_r3 = (u32)&D_0202ECF4;
-    object_r2 = (u32)D_02032494;
+    object_r2 = (u32)gFieldViewCenterFixed8;
     object_r0 = (u32)&D_02032990;
     object_r1 = *(u32 *)object_r0;
     object_r0 = *(u32 *)(object_r1 + 8);
@@ -1256,10 +1257,10 @@ block_182:
     *(u32 *)(object_r2 + 4) = object_r0;
     *(u32 *)(object_r3 + 8) = object_r0;
     object_r0 = 3;
-    func_08092E0C(object_r0);
+    StopTask(object_r0);
     return;
 block_185:
-    D_02032494[0] = (s32) (D_03000054[0] + 0x7800);
-    D_02032494[1] = (s32) (D_03000054[1] + 0x5000);
+    gFieldViewCenterFixed8[0] = (s32) (gFieldCameraScrollOffsets[0] + 0x7800);
+    gFieldViewCenterFixed8[1] = (s32) (gFieldCameraScrollOffsets[1] + 0x5000);
     return;
 }

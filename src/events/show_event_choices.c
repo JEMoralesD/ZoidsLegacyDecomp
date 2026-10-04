@@ -3,13 +3,13 @@
 extern u8 D_0200A880;
 extern u8 D_02030564[];
 extern u8 D_020314A4[];
-extern u8 D_020324B0[];
+extern u8 gFieldMapModeFlags[] asm("D_020324B0");
 
 extern void RequestWindowRefresh(void) asm("func_080972C8");
 extern void OpenWindow(s32, s32, s32, s32, s32, s32) asm("func_08098514");
-extern void func_080988C8(s32, s32);
+extern void AppendWindowTextItem(s32, s32) asm("func_080988C8");
 extern void RunMenuScript(s32) asm("func_08098BB4");
-extern void func_080ED17C(s32);
+extern void YieldTaskForUpdates(s32) asm("func_080ED17C");
 
 u8 ShowEventChoices(u8 *script) {
     u8 *lines[4];
@@ -97,7 +97,7 @@ check:
 
         if (index < count) {
 draw:
-            func_080988C8(3, (s32)lines[index]);
+            AppendWindowTextItem(3, (s32)lines[index]);
             {
                 register u32 next asm("r0") = index + 1;
 
@@ -109,7 +109,7 @@ draw:
             }
         }
     }
-    if (D_020324B0[0] & 4) {
+    if (gFieldMapModeFlags[0] & 4) {
         register u8 *position asm("r2") = D_020314A4;
         register u32 offset asm("r1") = count << 1;
         register u32 value asm("r0") = 9 - offset;
@@ -120,9 +120,9 @@ draw:
     }
     RunMenuScript(0x0801780B);
     RequestWindowRefresh();
-    if (D_020324B0[0] & 4) {
+    if (gFieldMapModeFlags[0] & 4) {
         D_020314A4[0] = 95;
     }
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     return D_0200A880;
 }

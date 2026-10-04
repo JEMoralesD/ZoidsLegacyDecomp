@@ -2,7 +2,7 @@
 #include "battle_animation.h"
 extern u8 gBattleBackgroundShakeState asm("D_02034869");
 extern u8 gBattleBackgroundShakeFrame asm("D_0203486A");
-extern s32 D_03000054[];
+extern s32 gFieldCameraScrollOffsets[] asm("D_03000054");
 s16 Sin256(s32) asm("func_08092A90");
 void StopBattleBackgroundShake(void) asm("func_080D220C");
 
@@ -29,7 +29,7 @@ void UpdateBattleBackgroundShake(void) {
             return;
         }
 block_6:
-        background_scroll = D_03000054;
+        background_scroll = gFieldCameraScrollOffsets;
         shake_phase = &gBattleBackgroundShakeFrame;
         temp_r2 = (s16)Sin256(*shake_phase * 2);
         temp_r3 = background_scroll[0];

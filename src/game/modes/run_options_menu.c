@@ -1,27 +1,28 @@
 #include "m2c_prelude.h"
+#include "../../graphics/screen_effects.h"
 #include "../game_state.h"
 
 M2C_UNK PlayOrContinueSong(s32) asm("func_08092E74");                         /* extern */
 M2C_UNK InvalidateSaveBlocks() asm("func_0809423C");                            /* extern */
 s32 CreateSprite(M2C_UNK, M2C_UNK, s32, s32, s32, s32, s32, s32, s32) asm("func_08094484"); /* extern */
 M2C_UNK DestroySprite(s32) asm("func_08094554");                         /* extern */
-M2C_UNK func_08096308(s32, s32);                    /* extern */
-s32 func_0809669C();                                /* extern */
+M2C_UNK StartScreenTransition(s32, s32) asm("func_08096308");                    /* extern */
+s32 IsScreenTransitionComplete() asm("func_0809669C");                                /* extern */
 void *GetWindow(s32) asm("func_0809716C");                           /* extern */
-M2C_UNK func_08098834(s32);                         /* extern */
+M2C_UNK ClearWindowTextList(s32) asm("func_08098834");                         /* extern */
 M2C_UNK RunMenuScript(M2C_UNK) asm("func_08098BB4");                     /* extern */
-M2C_UNK func_08099F80();                            /* extern */
-M2C_UNK func_08099F8C();                            /* extern */
-M2C_UNK func_08099FCC();                            /* extern */
-M2C_UNK func_08099FEC();                            /* extern */
-M2C_UNK func_0809A00C();                            /* extern */
-M2C_UNK func_0809A048();                            /* extern */
-M2C_UNK func_0809A0A0();                            /* extern */
-M2C_UNK func_0809CC94(s32);                         /* extern */
-M2C_UNK func_0809CED8();                            /* extern */
-M2C_UNK func_0809D094();                            /* extern */
-M2C_UNK func_0809D200();                            /* extern */
-M2C_UNK func_080ED17C(s32);                         /* extern */
+M2C_UNK ClearGameCompletionFlag() asm("func_08099F80");                            /* extern */
+M2C_UNK ResetPlayerNameAndBattleQuote() asm("func_08099F8C");                            /* extern */
+M2C_UNK ClearPlayerCatalogFlags() asm("func_08099FCC");                            /* extern */
+M2C_UNK ClearPlayerItemInventory() asm("func_08099FEC");                            /* extern */
+M2C_UNK InitializeNewGamePlayerState() asm("func_0809A00C");                            /* extern */
+M2C_UNK InitializeNewGameFieldState() asm("func_0809A048");                            /* extern */
+M2C_UNK ResetLinkBattleResults() asm("func_0809A0A0");                            /* extern */
+M2C_UNK RunPlayerNameEntry(s32) asm("func_0809CC94");                         /* extern */
+M2C_UNK RunPlayerBattleQuoteEntry() asm("func_0809CED8");                            /* extern */
+M2C_UNK AppendExtraMenuRows() asm("func_0809D094");                            /* extern */
+M2C_UNK InitializeExtraMenuUi() asm("func_0809D200");                            /* extern */
+M2C_UNK YieldTaskForUpdates(s32) asm("func_080ED17C");                         /* extern */
 M2C_UNK jtbl_0809D33C();                            /* static */
 extern s8 D_02021698;
 extern s16 D_02032E76;
@@ -44,7 +45,7 @@ loop_2:
         state_base = 0x1000;
         switch (var_r7) {                           /* switch 1; irregular */
         case 0x0:                                   /* switch 1 */
-            func_0809D200();
+            InitializeExtraMenuUi();
             goto block_67;
         case 0x1000:                                /* switch 1 */
             temp_r4_3 = CreateSprite(0x08105A20, 0x08105A2C, 0, 0xD8, 0x98, 0x343, 0xF, 8, 0);
@@ -106,13 +107,13 @@ loop_2:
 
                     } else {
                         InvalidateSaveBlocks();
-                        func_08099F80();
-                        func_08099F8C();
-                        func_08099FCC();
-                        func_08099FEC();
-                        func_0809A00C();
-                        func_0809A048();
-                        func_0809A0A0();
+                        ClearGameCompletionFlag();
+                        ResetPlayerNameAndBattleQuote();
+                        ClearPlayerCatalogFlags();
+                        ClearPlayerItemInventory();
+                        InitializeNewGamePlayerState();
+                        InitializeNewGameFieldState();
+                        ResetLinkBattleResults();
                         {
                         register u8 *status99 asm("r8") = (u8 *)0x02021699;
                         register u8 *status9A asm("r6") = (u8 *)0x0202169A;
@@ -132,8 +133,8 @@ loop_2:
                         *status9A = 2U;
                         *status99 = 2U;
                         }
-                        func_08098834(0);
-                        func_0809D094();
+                        ClearWindowTextList(0);
+                        AppendExtraMenuRows();
                         RunMenuScript(0x08000C89);
                     }
                 } else {
@@ -151,7 +152,7 @@ block_not_ready:
             D_02021698 = 1;
             }
 block_51:
-            func_08096308(0x10, 0);
+            StartScreenTransition(SCREEN_TRANSITION_CHECKERBOARD_CONCEAL, 0);
 block_inner_done:
             break;
         case 0x2000:                                /* switch 1 */
@@ -162,17 +163,17 @@ block_inner_done:
             temp_r4 = CreateSprite(0x08105AFC, 0x08105B08, 0, 0xC8, 0x40, 0x350, 0xF, 8, 0);
             RunMenuScript(0x08000BF4);
             if (*(u8 *)0x0200A882 == 1) {
-                func_08096308(0x10, 0);
-                while ((func_0809669C() << 0x18) == 0) {
-                    func_080ED17C(1);
+                StartScreenTransition(SCREEN_TRANSITION_CHECKERBOARD_CONCEAL, 0);
+                while ((IsScreenTransitionComplete() << 0x18) == 0) {
+                    YieldTaskForUpdates(1);
                 }
                 temp_r4_2 = *(u8 *)0x0200A880;
                 if (temp_r4_2 == 0) {
-                    func_0809CC94(1);
+                    RunPlayerNameEntry(1);
                 } else {
-                    func_0809CED8();
+                    RunPlayerBattleQuoteEntry();
                 }
-                func_0809D200();
+                InitializeExtraMenuUi();
                 RunMenuScript(0x08000B86);
                 temp_r1 = GetWindow(1);
                 if (temp_r4_2 == 0) {
@@ -192,7 +193,7 @@ block_67:
             goto loop_2;
         }
 loop_72:
-    while ((func_0809669C() << 0x18) == 0) {
-        func_080ED17C(1);
+    while ((IsScreenTransitionComplete() << 0x18) == 0) {
+        YieldTaskForUpdates(1);
     }
 }

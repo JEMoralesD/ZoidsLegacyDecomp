@@ -8,7 +8,7 @@ M2C_UNK ApplyZoidWeaponWeightPenalty(void *, void *) asm("func_080E59A0");      
 void *AcquireEquipmentStatBuffer() asm("func_080E669C");                             /* extern */
 M2C_UNK ReleaseEquipmentStatBuffer() asm("func_080E66B8");                           /* extern */
 M2C_UNK ApplyPilotWeaponModifiers(void *, void *, void *, u16, void *) asm("func_080E6994"); /* extern */
-s32 func_080E8C48(u8, s32);                        /* extern */
+s32 IsBattleCombinedAttackLeader(u8, s32) asm("func_080E8C48");                        /* extern */
 
 extern u8 gBattleState[];
 extern u8 D_off_000027BE;
@@ -380,7 +380,7 @@ loop_12:
         ApplyPilotWeaponModifiers(unit, pilot, auxiliary_pilot, M2C_FIELD((unit + sp1C), u16 *, 0x52), output_stats);
         if (action != 0) {
 
-        } else if ((func_080E8C48(temp_r0, sp4) << 0x18) == 0) {
+        } else if ((IsBattleCombinedAttackLeader(temp_r0, sp4) << 0x18) == 0) {
 
         } else {
             {

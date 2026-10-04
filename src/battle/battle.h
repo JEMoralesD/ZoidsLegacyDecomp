@@ -41,12 +41,125 @@ enum BattleEffectKind {
     BATTLE_EFFECT_FREEZE = 25,
     BATTLE_EFFECT_TURN_MARKER = 26,
     BATTLE_EFFECT_CONFUSION = 27,
+    BATTLE_EFFECT_EXTRA_TURNS = 28,
     BATTLE_EFFECT_DOUBLE_MELEE_POWER = 29,
+    BATTLE_EFFECT_MELEE_ANTI_AIR_BONUS = 30,
+    BATTLE_EFFECT_MELEE_DEFENSE_DAMAGE_CHANCE = 31,
     BATTLE_EFFECT_IGNORE_MELEE_DEFENSE = 32
 };
 
+enum BattleSideId {
+    BATTLE_PLAYER_SIDE = 0,
+    BATTLE_ENEMY_SIDE = 1
+};
+
+enum BattleEncounterLimits {
+    BATTLE_ENCOUNTERS_PER_GROUP = 20,
+    BATTLE_ENCOUNTER_TABLE_ROM = 0x087B9454,
+    BATTLE_PARTY_NAME_CHARACTER_COUNT = 9,
+    BATTLE_PARTY_QUOTE_CHARACTER_COUNT = 23,
+    BATTLE_STATE_RAM = 0x02034B4C
+};
+
+enum BattleLinkExchangeResources {
+    BATTLE_LINK_UNIT_RECORD_PART_COUNT = 3,
+    BATTLE_LINK_EXCHANGE_PROGRESS_MENU = 0x08028388,
+    BATTLE_LINK_EXCHANGE_CLOSE_MENU = 0x080283A8,
+    BATTLE_LINK_ZOID_RECORD_MESSAGE = 0x08109450,
+    BATTLE_LINK_PILOT_RECORD_MESSAGE = 0x0810945C,
+    BATTLE_LINK_AUXILIARY_RECORD_MESSAGE = 0x08109468,
+    BATTLE_LINK_PARTY_NAME_MESSAGE = 0x08109474,
+    BATTLE_LINK_BATTLE_QUOTE_MESSAGE = 0x08109480
+};
+
+enum BattleTransportModelId {
+    ZOID_GUSTAV = 147,
+    ZOID_HOVER_CARGO = 148,
+    ZOID_WHALE_KING = 149,
+    ZOID_DRAGOON_NEST = 150
+};
+
+struct BattleEncounterUnitRecord {
+    u8 zoid_id;
+    u8 palette_variant;
+    u8 pilot_id;
+    u8 flag40_enabled;
+    u8 equipment_item_ids[4];
+    u32 experience_reward;
+    u32 money_reward;
+} __attribute__((packed));
+
+struct BattleEncounterRecord {
+    u8 song_id;
+    u8 data01[3];
+    struct BattleEncounterUnitRecord units[BATTLE_ACTIVE_UNIT_COUNT];
+};
+
+struct BattleEncounterGroup {
+    struct BattleEncounterRecord encounters[BATTLE_ENCOUNTERS_PER_GROUP];
+};
+
+struct BattlePartyIdentityStateView {
+    u8 data0000[0xA29C];
+    u16 pilot_names[BATTLE_SIDE_COUNT][BATTLE_PARTY_NAME_CHARACTER_COUNT];
+    u16 battle_quotes[BATTLE_SIDE_COUNT][BATTLE_PARTY_QUOTE_CHARACTER_COUNT];
+    u8 original_party_stored_zoid_slots[BATTLE_ACTIVE_UNIT_COUNT];
+} __attribute__((packed));
+
+#define BATTLE_ENCOUNTER_OFFSET(field) \
+    ((s32)&((struct BattleEncounterRecord *)0)->field)
+
+#define BATTLE_ENCOUNTER_UNIT_OFFSET(field) \
+    ((s32)&((struct BattleEncounterUnitRecord *)0)->field)
+
+#define BATTLE_PARTY_IDENTITY_OFFSET(field) \
+    ((s32)&((struct BattlePartyIdentityStateView *)0)->field)
+
+#define BATTLE_PARTY_IDENTITY_ADDRESS(field) \
+    (BATTLE_STATE_RAM + BATTLE_PARTY_IDENTITY_OFFSET(field))
+
 enum BattleSelectionResult {
     BATTLE_UNIT_NOT_SELECTED = 0xFF
+};
+
+enum BattleCandidateRemoval {
+    BATTLE_REMOVE_EQUIPMENT_CANDIDATE = 0xFF
+};
+
+enum BattleCandidateRemovalResult {
+    BATTLE_CANDIDATE_REMOVED = 0,
+    BATTLE_CANDIDATE_REMAINS = 1
+};
+
+enum BattleRuleId {
+    BATTLE_RULE_UP_TO_ONE_ZOID = 1,
+    BATTLE_RULE_UP_TO_TWO_ZOIDS = 2,
+    BATTLE_RULE_UP_TO_THREE_ZOIDS = 3,
+    BATTLE_RULE_UP_TO_FOUR_ZOIDS = 4,
+    BATTLE_RULE_SIZE_S_ONLY = 5,
+    BATTLE_RULE_UP_TO_SIZE_M = 6,
+    BATTLE_RULE_SIZE_M_ONLY = 7,
+    BATTLE_RULE_UP_TO_SIZE_L = 8,
+    BATTLE_RULE_AT_LEAST_ONE_SIZE_L_OR_LARGER = 9,
+    BATTLE_RULE_AT_LEAST_ONE_SIZE_XL_OR_LARGER = 10,
+    BATTLE_RULE_NO_FLYING_ZOIDS = 11,
+    BATTLE_RULE_FLYING_ZOIDS_ONLY = 12,
+    BATTLE_RULE_LIGER_MODELS_ONLY = 13,
+    BATTLE_RULE_TIGER_MODELS_ONLY = 14,
+    BATTLE_RULE_WOLF_MODELS_ONLY = 15,
+    BATTLE_RULE_LIGER_TIGER_OR_WOLF_MODELS_ONLY = 16,
+    BATTLE_RULE_EQUIPMENT_SLOTS_4_TO_7_ONLY = 17,
+    BATTLE_RULE_MELEE_ONLY = 18,
+    BATTLE_RULE_NO_MELEE = 19,
+    BATTLE_RULE_NO_RECOVERY = 20,
+    BATTLE_RULE_NO_DECK_COMMANDS = 21,
+    BATTLE_RULE_NO_ORGANOID_OR_ZOS = 22,
+    BATTLE_RULE_EXACTLY_TWO_ZOIDS = 23
+};
+
+enum PilotNameEventFlag {
+    PILOT_NAME_REVEAL_MYSTERY_WARRIOR = 2,
+    PILOT_NAME_REVEAL_MYSTERY_WOMAN = 26
 };
 
 enum ZoidStatIndex {
@@ -75,10 +188,23 @@ enum ZoidFormId {
     ZOID_BERSERK_FURY_Z = 0x43
 };
 
+enum ZoidFormLimits {
+    ZOID_FORM_SLOT_COUNT = 6
+};
+
+enum ZoidSizeClass {
+    ZOID_SIZE_CLASS_S = 0,
+    ZOID_SIZE_CLASS_M = 1,
+    ZOID_SIZE_CLASS_L = 2,
+    ZOID_SIZE_CLASS_XL = 3,
+    ZOID_SIZE_CLASS_DOUBLE_ICON = 4
+};
+
 enum BattleEffectBits {
     BATTLE_EFFECT_KIND_MASK = 0x7F,
     BATTLE_EFFECT_SOURCE_FLAG = 0x80,
     BATTLE_EFFECT_EQUIPMENT_SLOT_MASK = 0xF00,
+    BATTLE_EFFECT_PASSIVE_EQUIPMENT = 0x1000,
     BATTLE_EFFECT_LIFETIME_MASK = 0xE000
 };
 
@@ -98,6 +224,10 @@ enum WeaponAttributes {
     WEAPON_FREEZE = 0x1000,
     WEAPON_CONFUSION = 0x2000,
     WEAPON_TYPE_MASK = 0x1F
+};
+
+enum EquipmentResources {
+    EQUIPMENT_RECORDS_ROM = 0x087B2524
 };
 
 enum EquipmentFlags {
@@ -144,7 +274,22 @@ enum BattleOutcomeKind {
     BATTLE_OUTCOME_HIT = 3,
     BATTLE_OUTCOME_DIRECT_HIT = 4,
     BATTLE_OUTCOME_KIND_MASK = 0x07,
-    BATTLE_OUTCOME_VARIANT_MASK = 0x38
+    BATTLE_OUTCOME_VARIANT_MASK = 0x38,
+    BATTLE_OUTCOME_FREEZE_RESISTED = 0x40
+};
+
+enum BattleUnitFlags {
+    BATTLE_UNIT_DESTROYED = 0x08
+};
+
+enum BattleEffectRemovalBank {
+    BATTLE_EFFECT_REMOVAL_ROUND = 0,
+    BATTLE_EFFECT_REMOVAL_FIRST_ACTION = 1,
+    BATTLE_EFFECT_REMOVAL_BANK_COUNT = 4
+};
+
+struct BattleEffectRemovalMasks {
+    u32 banks[BATTLE_EFFECT_REMOVAL_BANK_COUNT][BATTLE_SIDE_COUNT][BATTLE_ACTIVE_UNIT_COUNT];
 };
 
 enum EquipmentEffectKind {
@@ -186,14 +331,25 @@ enum ZoidMovementFlags {
 };
 
 enum PilotAbilityKind {
+    PILOT_ABILITY_ZOID_PROFICIENCY_1 = 3,
+    PILOT_ABILITY_ZOID_PROFICIENCY_2 = 4,
+    PILOT_ABILITY_ZOID_PROFICIENCY_3 = 5,
     PILOT_ABILITY_RANGED_EP_SAVING_1 = 6,
     PILOT_ABILITY_RANGED_EP_SAVING_2 = 7,
     PILOT_ABILITY_RANGED_EP_SAVING_3 = 8,
     PILOT_ABILITY_MELEE_EP_SAVING_1 = 9,
     PILOT_ABILITY_MELEE_EP_SAVING_2 = 10,
     PILOT_ABILITY_MELEE_EP_SAVING_3 = 11,
+    PILOT_ABILITY_OPENING_INITIATIVE_200 = 12,
+    PILOT_ABILITY_OPENING_INITIATIVE_500 = 13,
+    PILOT_ABILITY_BLOCK_OPPONENT_OPENING_BONUS = 14,
     PILOT_ABILITY_ULTRA_REACTION_1 = 15,
     PILOT_ABILITY_ULTRA_REACTION_2 = 16,
+    PILOT_ABILITY_STRATEGY_COMMAND_1 = 17,
+    PILOT_ABILITY_STRATEGY_COMMAND_2 = 18,
+    PILOT_ABILITY_STRATEGY_COMMAND_3 = 19,
+    PILOT_ABILITY_STATUS_RESISTANCE_BONUS = 21,
+    PILOT_ABILITY_STATUS_RESISTANCE_PENALTY = 22,
     PILOT_ABILITY_RANGED_ACCURACY_PENALTY = 23,
     PILOT_ABILITY_MELEE_ACCURACY_PENALTY = 24,
     PILOT_ABILITY_MISSILE_ACCURACY_PENALTY = 27,
@@ -215,7 +371,8 @@ struct EquipmentSlot {
 };
 
 struct EquipmentRecord {
-    u16 data00;
+    u8 family_id;
+    u8 family_variant;
     u16 flags;
     u32 attributes;
     u8 range_kind;
@@ -229,6 +386,9 @@ struct EquipmentRecord {
     u8 zoid_compatibility_group;
     u16 data16;
 };
+
+#define EQUIPMENT_RECORD_FIELD(record, type, field) \
+    M2C_FIELD(record, type *, (s32)&((struct EquipmentRecord *)0)->field)
 
 struct BattleTargetPreview {
     u16 flags;
@@ -259,6 +419,9 @@ struct BattleEquipmentAction {
     struct BattleTargetChoice target_choices[BATTLE_TARGET_CHOICE_COUNT];
 };
 
+#define BATTLE_ACTION_FIELD(action, type, field) \
+    M2C_FIELD(action, type *, (s32)&((struct BattleEquipmentAction *)0)->field)
+
 struct BattleEquipmentChoices {
     struct BattleEquipmentAction actions[BATTLE_ACTION_COUNT];
 };
@@ -269,6 +432,13 @@ struct BattleActionSelection {
     u8 target_choices[BATTLE_ACTION_COUNT];
     u8 outcomes[BATTLE_ACTION_COUNT][BATTLE_SIDE_COUNT][BATTLE_ACTIVE_UNIT_COUNT];
 };
+
+struct BattleActionCandidates {
+    u8 equipment_slots[BATTLE_EQUIPMENT_SLOT_COUNT];
+    u8 target_choices[BATTLE_EQUIPMENT_SLOT_COUNT][BATTLE_TARGET_CHOICE_COUNT];
+    u8 equipment_count;
+    u8 target_choice_counts[BATTLE_EQUIPMENT_SLOT_COUNT];
+} __attribute__((packed));
 
 enum BattleEffectLifetime {
     BATTLE_EFFECT_ROUND_COUNTDOWN = 0x0000,
@@ -315,9 +485,91 @@ struct BattleEffect {
     u16 data0A;
 };
 
+enum BattleEffectDisplayFlags {
+    BATTLE_EFFECT_DISPLAY_PENDING = 0x01,
+    BATTLE_EFFECT_DISPLAY_DAMAGE_RESULT = 0x02,
+    BATTLE_EFFECT_DISPLAY_DAMAGE = 0x08,
+    BATTLE_EFFECT_DISPLAY_DECOY = 0x10
+};
+
+enum BattleEffectDisplayCameraMode {
+    BATTLE_EFFECT_CAMERA_KEEP = 0,
+    BATTLE_EFFECT_CAMERA_QUEUED_UNITS = 1,
+    BATTLE_EFFECT_CAMERA_FOCUS_SIDE = 2
+};
+
+enum BattleResultFlags {
+    BATTLE_RESULT_PLAYER_EMPTY = 1,
+    BATTLE_RESULT_ENEMY_EMPTY = 2,
+    BATTLE_RESULT_SCRIPTED_END = 4
+};
+
+enum BattleStoryScenario {
+    BATTLE_STORY_LEVIATHE_FIRST_DAMAGE = 1,
+    BATTLE_STORY_GARD_HALF_HP_END = 4,
+    BATTLE_STORY_GARD_HALF_HP_END_SCENE = 5,
+    BATTLE_STORY_GARD_HALF_HP_SCENE = 6,
+    BATTLE_STORY_BIT_VERSUS_LEON = 7,
+    BATTLE_STORY_BIT_VERSUS_STOLLER = 8,
+    BATTLE_STORY_GARD_ONE_HP_END = 10
+};
+
+enum BattleStoryPilot {
+    BATTLE_STORY_BIT = 30,
+    BATTLE_STORY_LEON = 34,
+    BATTLE_STORY_GARD = 52,
+    BATTLE_STORY_LEVIATHE = 54,
+    BATTLE_STORY_LEVIATHE_VARIANT = 55,
+    BATTLE_STORY_STOLLER = 59,
+    BATTLE_STORY_GARD_VARIANT = 94,
+    BATTLE_STORY_BIT_VARIANT = 95
+};
+
+enum BattleStorySceneFlags {
+    BATTLE_STORY_BIT_FIRST_DAMAGE_SCENE = 2,
+    BATTLE_STORY_BIT_DAMAGE_200_SCENE = 4,
+    BATTLE_STORY_LEON_DAMAGE_200_SCENE = 8,
+    BATTLE_STORY_DAMAGE_THRESHOLD = 200
+};
+
+struct BattleStorySetupView {
+    u8 data00[5];
+    u8 story_scenario;
+    u8 played_scene_flags;
+} __attribute__((packed));
+
+struct BattleStoryDamageStateView {
+    u8 data0000[0xA078];
+    u16 bit_damage_taken;
+    u16 leon_damage_taken_from_bit;
+};
+
+#define BATTLE_STORY_SETUP_OFFSET(field) \
+    ((s32)&((struct BattleStorySetupView *)0)->field)
+
+#define BATTLE_STORY_DAMAGE_OFFSET(field) \
+    ((s32)&((struct BattleStoryDamageStateView *)0)->field)
+
+struct BattleUnitEffectDisplayQueue {
+    u16 flags;
+    s16 damage;
+    struct BattleEffect applied_effects[BATTLE_EFFECT_SLOT_COUNT];
+    struct BattleEffect removed_effects[BATTLE_EFFECT_SLOT_COUNT];
+};
+
+struct BattleEffectDisplayQueueStateView {
+    u8 data0000[0x7C28];
+    struct BattleUnitEffectDisplayQueue units[BATTLE_SIDE_COUNT][BATTLE_ACTIVE_UNIT_COUNT];
+};
+
+#define BATTLE_EFFECT_DISPLAY_QUEUE_OFFSET(field) \
+    ((s32)&((struct BattleEffectDisplayQueueStateView *)0)->field)
+
 struct BattleUnit {
     u8 zoid_id;
-    u8 data01[3];
+    u8 palette_variant;
+    u8 pilot_slot_or_definition_id;
+    u8 form_flags;
     u16 flags;
     u16 hp;
     u16 ep;
@@ -325,10 +577,12 @@ struct BattleUnit {
     u16 evasion_score;
     u16 equipment_weight;
     s16 level;
-    u8 data12[0x24];
+    u8 form_ep_regen_bonuses[ZOID_FORM_SLOT_COUNT];
+    u8 form_defense_bonuses[ZOID_FORM_SLOT_COUNT];
+    u8 form_weapon_power_bonuses[ZOID_FORM_SLOT_COUNT][4];
     u8 movement_flags;
     u8 data37;
-    u8 data38;
+    u8 size_class;
     u8 required_pilot_level;
     u16 max_hp;
     u16 dcp;
@@ -342,13 +596,49 @@ struct BattleUnit {
     u16 load_capacity;
     u8 data4E[2];
     struct EquipmentSlot equipment[BATTLE_EQUIPMENT_SLOT_COUNT];
-    u8 data70[0x74];
+    u8 pilot_id;
+    u8 data71[0x73];
     struct BattleEffect effects[BATTLE_EFFECT_SLOT_COUNT];
-    u8 data264[0xC];
+    u8 data264[2];
+    u16 effect_allocation_cursor;
+    u32 experience_reward;
+    u32 money_reward;
 };
+
+#define BATTLE_UNIT_FIELD(unit, type, field) \
+    M2C_FIELD(unit, type *, (s32)&((struct BattleUnit *)0)->field)
+
+#define BATTLE_UNIT_OFFSET(field) \
+    ((s32)&((struct BattleUnit *)0)->field)
+
+#define BATTLE_EFFECT_FIELD(effect, type, field) \
+    M2C_FIELD(effect, type *, (s32)&((struct BattleEffect *)0)->field)
 
 struct BattleSide {
     struct BattleUnit units[BATTLE_UNIT_SLOT_COUNT];
+};
+
+enum BattleOutcomeMode {
+    BATTLE_OUTCOME_DEFEAT = 0,
+    BATTLE_OUTCOME_VICTORY = 1,
+    BATTLE_OUTCOME_RETREAT = 2,
+    BATTLE_OUTCOME_RESTORE_ONLY = 3
+};
+
+struct BattleRewardTotalsStateView {
+    u8 data0000[0xA070];
+    u32 experience_total;
+    u32 money_total;
+};
+
+#define BATTLE_REWARD_TOTALS_OFFSET(field) \
+    ((s32)&((struct BattleRewardTotalsStateView *)0)->field)
+
+/* These kinds select visuals without adding persistent combat modifiers. */
+enum BattleEffectPresentationKind {
+    BATTLE_EFFECT_PRESENTATION_GREEN_STREAK = 36,
+    BATTLE_EFFECT_PRESENTATION_DISSOLVING_ORBS = 37,
+    BATTLE_EFFECT_PRESENTATION_PURPLE_RING = 38
 };
 
 #endif

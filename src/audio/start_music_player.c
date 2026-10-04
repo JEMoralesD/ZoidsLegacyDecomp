@@ -1,7 +1,7 @@
 #include "m2c_prelude.h"
 
 void func_080EB328(void *, u8 *);
-void func_080EBC40(u8);
+void ConfigureSoundMode(u8) asm("func_080EBC40");
 
 void StartMusicPlayer(u8 *player_state, u8 *song_header)
 {
@@ -158,7 +158,7 @@ loops_done:
 
         mask &= flags;
         if (mask != 0) {
-            func_080EBC40(*(volatile u8 *)(song + 3));
+            ConfigureSoundMode(*(volatile u8 *)(song + 3));
         }
     }
     *(u32 *)(player + 0x34) = 0x68736D53;

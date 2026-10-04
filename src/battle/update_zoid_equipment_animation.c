@@ -1,6 +1,7 @@
 #include "m2c_prelude.h"
 #include "battle.h"
 #include "battle_animation.h"
+#include "../graphics/zoid_body_sprites.h"
 
 #define NULL ((void *)0)
 
@@ -8,10 +9,10 @@ M2C_UNK PlaySong(u16) asm("func_08092E84");                         /* extern */
 M2C_UNK QueueTilemapCopy(s32, s32, u16, u16) asm("func_08095254");          /* extern */
 M2C_UNK jtbl_080D08EC();                            /* static */
 
-extern u8 D_02033F36;
-extern u8 *D_02033F38;
+extern u8 gBattleSceneSide asm("D_02033F36");
+extern u8 *gBattleSceneSelectedUnit asm("D_02033F38");
 extern s32 *D_02033F40[];
-extern void *D_02033F3C;
+extern void *gZoidBodySpriteGroup asm("D_02033F3C");
 extern u8 gZoidEquipmentAnimationZoidId asm("D_02034055");
 extern u8 gZoidEquipmentAnimationSlot asm("D_02034056");
 extern u8 gZoidEquipmentAnimationState asm("D_02034057");
@@ -21,7 +22,7 @@ extern u16 gZoidEquipmentAnimationElapsedFrames asm("D_0203405C");
 extern u8 gZoidEquipmentAnimationScriptBuffer[] asm("D_02034060");
 asm(".set D_087AC90C, 0x087AC90C");
 extern s16 D_087AC90C[];
-extern s16 D_087EC38C[];
+extern s16 gBattleEquipmentCursorPositions[] asm("D_087EC38C");
 extern u8 D_087ED68C[];
 
 #define D0644_COMMAND_FIRST(base, index) ({ \
@@ -174,7 +175,7 @@ block_25:
                          : "=r"(descriptor_seed)
                          : "r"(temp_r0_3), "r"(command_base));
             temp_r3_2 = descriptor_seed;
-            if (D_02033F36 == 0) {
+            if (gBattleSceneSide == 0) {
                 QueueTilemapCopy(temp_r3_2 + 8, (((M2C_FIELD(temp_r3_2, u16 *, 2) << 5) + M2C_FIELD(temp_r3_2, u16 *, 0)) * 2) + 0x06000000, M2C_FIELD(temp_r3_2, u16 *, 4), M2C_FIELD(temp_r3_2, u16 *, 6));
             } else {
                 register s16 *mirror_start asm("r8");
@@ -298,7 +299,7 @@ loop_66:
                 if (((u32) gZoidEquipmentAnimationSlot <= 8U) && (var_r6_2 != 0)) {
                     var_r5 ^= 3;
                 }
-                coordinate_table = D_087EC38C;
+                coordinate_table = gBattleEquipmentCursorPositions;
                 coordinate_offset = var_r5 * 4;
                 coordinate_offset += gZoidEquipmentAnimationZoidId << 5;
                 asm volatile("add %0, %0, %1"
@@ -310,7 +311,7 @@ loop_66:
                     s32 coordinate_adjustment;
 
                     coordinate_adjust_table = D_087AC90C;
-                    coordinate_adjustment = *(s16 *)((u32)coordinate_adjust_table + (M2C_FIELD((D_02033F38 + object_offset), u16 *, 0x52) * 2));
+                    coordinate_adjustment = *(s16 *)((u32)coordinate_adjust_table + (M2C_FIELD((gBattleSceneSelectedUnit + object_offset), u16 *, 0x52) * 2));
                     var_r0_2 = temp_r3_4 - coordinate_adjustment;
                 } else {
                     var_r0_2 = (u16) temp_r3_4;
@@ -321,7 +322,7 @@ loop_66:
                     temp_r0_8 = (s16) var_r3;
                     var_r3 = temp_r0_8 + ((var_r9 - temp_r0_8) * 2);
                 }
-                if (D_02033F36 == 0) {
+                if (gBattleSceneSide == 0) {
                     M2C_FIELD(M2C_FIELD(object_offset, void **, (u32)D_02033F40), u16 *, 4) = var_r3;
                 } else {
                     register s32 mirror_base_seed asm("r0");
@@ -347,7 +348,7 @@ loop_66:
                 attribute_bits = (M2C_FIELD(temp_r3_5, s32 *, 0) ^ 0x8000) & ~0xC0;
                 M2C_FIELD(temp_r3_5, s32 *, 0) = attribute_bits;
                 attribute_table = D_087ED68C;
-                attribute_index = *D_02033F38 * 3;
+                attribute_index = *gBattleSceneSelectedUnit * 3;
                 asm volatile("add %0, %1, %0"
                              : "+r"(attribute_index)
                              : "r"((u32)var_r5));
@@ -375,8 +376,8 @@ command_stop:
         goto block_94;
     }
     if (temp_r1 == 2) {
-        temp_r0_9 = D_02033F3C;
-        if ((temp_r0_9 == NULL) || (M2C_FIELD(temp_r0_9, s32 *, 0x8C) == 0xFF)) {
+        temp_r0_9 = gZoidBodySpriteGroup;
+        if ((temp_r0_9 == NULL) || (ZOID_BODY_GROUP_FIELD(temp_r0_9, s32, phase) == ZOID_BODY_SPRITES_READY)) {
 block_93:
             *state_ptr = 0;
             goto block_94;

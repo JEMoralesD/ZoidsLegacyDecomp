@@ -6,7 +6,7 @@ extern volatile u8 gBattleScanlineWindowMode asm("D_02034863");
 extern volatile s16 gBattleScanlineWindowBandPhase asm("D_02034864");
 extern volatile s16 gBattleScanlineWindowLinePhase asm("D_02034866");
 extern volatile u8 gBattleScanlineWindowBufferIndex asm("D_02034868");
-extern s32 D_03000054[];
+extern s32 gFieldCameraScrollOffsets[] asm("D_03000054");
 
 void UpdateBattleScanlineWindow(void) asm("func_080D1E58");
 
@@ -366,7 +366,7 @@ case2_write:
         register u32 active asm("r0") = *state_view;
 
         if (active != 0) {
-            register s32 *background_scroll asm("r1") = D_03000054;
+            register s32 *background_scroll asm("r1") = gFieldCameraScrollOffsets;
             register s32 value asm("r0") = background_scroll[4];
             register u32 step asm("r2") = 0x80;
 

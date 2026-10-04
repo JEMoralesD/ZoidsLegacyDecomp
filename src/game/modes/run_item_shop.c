@@ -1,35 +1,36 @@
 #include "m2c_prelude.h"
+#include "../../graphics/screen_effects.h"
 #include "../game_state.h"
 
 M2C_UNK PlaySong(s32) asm("func_08092E84");                         /* extern */
 M2C_UNK ClearSpritePools() asm("func_08094330");                            /* extern */
 s32 CreateSprite(M2C_UNK, M2C_UNK, s32, s32, s32, s32, s32, s32, s32) asm("func_08094484"); /* extern */
 M2C_UNK DestroySprite(s32) asm("func_08094554");                         /* extern */
-M2C_UNK func_08096308(s32, s32);                    /* extern */
-s32 func_0809669C();                                /* extern */
-M2C_UNK func_08096F3C();                            /* extern */
-M2C_UNK func_08096FBC(s32, s32, s32, s32, s32, s32, s32, s32, s32, s32); /* extern */
+M2C_UNK StartScreenTransition(s32, s32) asm("func_08096308");                    /* extern */
+s32 IsScreenTransitionComplete() asm("func_0809669C");                                /* extern */
+M2C_UNK ResetMenuKeyRepeat() asm("func_08096F3C");                            /* extern */
+M2C_UNK InitializeWindowGraphics(s32, s32, s32, s32, s32, s32, s32, s32, s32, s32) asm("func_08096FBC"); /* extern */
 asm(".set func_08096FBC_4, func_08096FBC");
 M2C_UNK func_08096FBC_4(s32, s32, s32, s32);        /* extern */
 M2C_UNK RequestWindowRefresh() asm("func_080972C8");                            /* extern */
-M2C_UNK func_080981F0(s32, s32, s32, s32, s32);     /* extern */
-M2C_UNK func_08098248(s32, s32, s32);               /* extern */
-M2C_UNK func_0809844C(u32, s32, s32, s32, s32, s32, s32); /* extern */
-M2C_UNK func_080984C4(u32, s32, s32, s32, s32);     /* extern */
+M2C_UNK PrintWindowTextAt(s32, s32, s32, s32, s32) asm("func_080981F0");     /* extern */
+M2C_UNK PrintWindowText(s32, s32, s32) asm("func_08098248");               /* extern */
+M2C_UNK PrintWindowNumberAt(u32, s32, s32, s32, s32, s32, s32) asm("func_0809844C"); /* extern */
+M2C_UNK PrintWindowNumber(u32, s32, s32, s32, s32) asm("func_080984C4");     /* extern */
 M2C_UNK ClearWindow(s32) asm("func_080986B4");                         /* extern */
-M2C_UNK func_08098834(s32);                         /* extern */
-M2C_UNK func_080988C8(s32, s32);                    /* extern */
+M2C_UNK ClearWindowTextList(s32) asm("func_08098834");                         /* extern */
+M2C_UNK AppendWindowTextItem(s32, s32) asm("func_080988C8");                    /* extern */
 M2C_UNK RunMenuScript(M2C_UNK) asm("func_08098BB4");                     /* extern */
-M2C_UNK func_0809AB44(s32, s32, s32, s32, s32);     /* extern */
-M2C_UNK func_080B654C();                            /* extern */
-u32 func_080B684C(u32, u8);                         /* extern */
-M2C_UNK func_080E5D6C(u8, u8);                      /* extern */
-M2C_UNK func_080E5D98(u8, u8);                      /* extern */
-M2C_UNK func_080E5E64(s32);                         /* extern */
-M2C_UNK func_080E5E90(s32);                         /* extern */
+M2C_UNK LoadMenuGradientBackground(s32, s32, s32, s32, s32) asm("func_0809AB44");     /* extern */
+M2C_UNK BuildPlayerRecoveryItemSelection() asm("func_080B654C");                            /* extern */
+u32 UpdateMenuQuantityFromKeys(u32, u8) asm("func_080B684C");                         /* extern */
+M2C_UNK AddRecoveryItemsToInventory(u8, u8) asm("func_080E5D6C");                      /* extern */
+M2C_UNK SubtractRecoveryItemsFromInventory(u8, u8) asm("func_080E5D98");                      /* extern */
+M2C_UNK AddPlayerMoney(s32) asm("func_080E5E64");                         /* extern */
+M2C_UNK SubtractPlayerMoney(s32) asm("func_080E5E90");                         /* extern */
 M2C_UNK BiosLz77ToVram(M2C_UNK, M2C_UNK) asm("func_080ECD34");            /* extern */
-u8 func_080ECF00(u32, s32);                         /* extern */
-M2C_UNK func_080ED17C(s32);                         /* extern */
+u8 DivideUnsigned32(u32, s32) asm("func_080ECF00");                         /* extern */
+M2C_UNK YieldTaskForUpdates(s32) asm("func_080ED17C");                         /* extern */
 
 asm(
     ".macro B68F8_FORCE_SHORT_NEXT_BRANCH\n"
@@ -323,12 +324,12 @@ void RunItemShop(void) {
         func_08096FBC_4(0, 1, 0, setup_x);
     }
     BiosLz77ToVram(0x081046A8, 0x06015840);
-    func_0809AB44(2, 3, 0, 0, 1);
+    LoadMenuGradientBackground(2, 3, 0, 0, 1);
     RunMenuScript(0x080043D7);
-    func_0809844C(*(u32 *)0x020282E8, 7, 0, 2, 1, 1, var_r5);
+    PrintWindowNumberAt(*(u32 *)0x020282E8, 7, 0, 2, 1, 1, var_r5);
     ClearSpritePools();
     CreateSprite(0x08105724, 0x08105758, 0, 0xA0, 0x6C, 0x2EA, 0xF, 0x20, var_r5);
-    func_08096308(0xF, 0);
+    StartScreenTransition(SCREEN_TRANSITION_CHECKERBOARD_REVEAL, 0);
     if (*(s32 *)0x02021690 == GAME_MODE_ITEM_SHOP) {
         var_sl = var_r5;
         do {
@@ -446,7 +447,7 @@ state_0:
                     if (*(u8 *)0x0200A880 == 0) {
                         var_r5 = 0x1000;
                     } else {
-                        func_080B654C();
+                        BuildPlayerRecoveryItemSelection();
                         if (*(u8 *)0x020322B1 == 0) {
                             RunMenuScript(0x080045C6);
                         } else {
@@ -455,7 +456,7 @@ state_0:
                     }
                 } else {
                     *(s32 *)0x02021690 = GAME_MODE_FIELD;
-                    func_08096308(0x10, 0);
+                    StartScreenTransition(SCREEN_TRANSITION_CHECKERBOARD_CONCEAL, 0);
                 }
                 break;
             case 0x1000:
@@ -480,7 +481,7 @@ loop_60:
                             page_offset *= 0x10;
                             entry_offset += page_offset;
                             entry_offset += (u32)loop_order_base;
-                            func_080988C8(4, message_table[*(u16 *)entry_offset]);
+                            AppendWindowTextItem(4, message_table[*(u16 *)entry_offset]);
                         }
                         var_r4 += 1;
                         if ((u32)var_r4 <= 7U) {
@@ -517,12 +518,12 @@ loop_64:
 
                     asm volatile("" : "+r"(name_base));
                 temp_r4_2 = var_r7 * 4;
-                func_08098248(*(s32 *)(temp_r4_2 + (u32)name_base), 0, 5);
+                PrintWindowText(*(s32 *)(temp_r4_2 + (u32)name_base), 0, 5);
                 }
-                func_080981F0(0x08106568, 0, 5, 0, 8);
-                func_080984C4(M2C_FIELD(temp_r4_2, u32 *, 0x087A2188), 6, 0, 2, 5);
-                func_08098248(0x08106578, 0, 5);
-                func_0809844C((u32) M2C_FIELD(var_r7, u8 *, 0x020217F4), 2, 0, 2, 6, 0xA, var_sl);
+                PrintWindowTextAt(0x08106568, 0, 5, 0, 8);
+                PrintWindowNumber(M2C_FIELD(temp_r4_2, u32 *, 0x087A2188), 6, 0, 2, 5);
+                PrintWindowText(0x08106578, 0, 5);
+                PrintWindowNumberAt((u32) M2C_FIELD(var_r7, u8 *, 0x020217F4), 2, 0, 2, 6, 0xA, var_sl);
                 RunMenuScript(0x0800446E);
                 temp_r0 = *(u8 *)0x0200A882;
                 if (temp_r0 == 0) {
@@ -566,7 +567,7 @@ state_1100:
                     money_ptr = (u32 *)0x020282E8;
                     money = *money_ptr;
                     price_address = *(u32 *)price_address;
-                    asm volatile("" : "=r"(var_r9) : "0"(func_080ECF00(money, price_address)));
+                    asm volatile("" : "=r"(var_r9) : "0"(DivideUnsigned32(money, price_address)));
                 }
                 temp_r2 = M2C_FIELD(var_r7, u8 *, 0x020217F4);
                 if ((s32) (temp_r2 + var_r9) > 0x63) {
@@ -577,7 +578,7 @@ state_1100:
                 } else {
                     var_r8 = 1;
                     RunMenuScript(0x08004479);
-                    func_080981F0(M2C_FIELD(temp_r4, s32 *, 0x087EEE10), 1, 7, 0, var_sl);
+                    PrintWindowTextAt(M2C_FIELD(temp_r4, s32 *, 0x087EEE10), 1, 7, 0, var_sl);
                     sp1C = CreateSprite(0x0810548C, 0x08105498, 0, 0x80, 0x50, 0x2CF, 0xF, 8, var_sl);
                     var_r5 = 0x1110;
                 }
@@ -590,7 +591,7 @@ state_1105:
 state_1110:
                 displayed_quantity = 0;
                 RunMenuScript(0x08004510);
-                func_08096F3C();
+                ResetMenuKeyRepeat();
                 {
                     register s32 seven asm("r5") = 7;
                     register u32 *price_base asm("r1") = (u32 *)0x087A2188;
@@ -603,14 +604,14 @@ state_1110:
                         price_ptr = (u32 *)(price_offset + (u32)price_base);
                     }
                 do {
-                    var_r8 = func_080B684C(var_r8, var_r9);
+                    var_r8 = UpdateMenuQuantityFromKeys(var_r8, var_r9);
                     if (var_r8 != displayed_quantity) {
-                        func_0809844C((u32) var_r8, 2, 0, 2, seven, 0x10, var_sl);
-                        func_0809844C(var_r8 * *price_ptr, 7, 0, 2, seven, 0xA, 2);
+                        PrintWindowNumberAt((u32) var_r8, 2, 0, 2, seven, 0x10, var_sl);
+                        PrintWindowNumberAt(var_r8 * *price_ptr, 7, 0, 2, seven, 0xA, 2);
                         RequestWindowRefresh();
                         displayed_quantity = var_r8;
                     }
-                    func_080ED17C(1);
+                    YieldTaskForUpdates(1);
                     temp_r1 = *(u16 *)0x0300000E;
                 } while (!(3 & temp_r1));
                 if (1 & temp_r1) {
@@ -645,12 +646,12 @@ state_1130:
                         register u32 price_address asm("r0") = var_r7 * 4;
 
                         price_address += (u32)price_base;
-                        func_080E5E90(var_r8 * *(s32 *)price_address);
+                        SubtractPlayerMoney(var_r8 * *(s32 *)price_address);
                     }
                 }
-                func_080E5D6C(var_r7, (u8)var_r8);
-                func_0809844C(*(u32 *)0x020282E8, 7, 0, 2, 1, 1, var_sl);
-                func_0809844C((u32) M2C_FIELD(var_r7, u8 *, 0x020217F4), 2, 0, 2, 6, 0xA, var_sl);
+                AddRecoveryItemsToInventory(var_r7, (u8)var_r8);
+                PrintWindowNumberAt(*(u32 *)0x020282E8, 7, 0, 2, 1, 1, var_sl);
+                PrintWindowNumberAt((u32) M2C_FIELD(var_r7, u8 *, 0x020217F4), 2, 0, 2, 6, 0xA, var_sl);
                 RunMenuScript(0x080044BD);
                 RunMenuScript(0x080044A1);
                 DestroySprite(sp1C);
@@ -671,7 +672,7 @@ state_2010:
                     register s32 *message_table asm("r5") = (s32 *)0x087EEE10;
 
 loop_2010:
-                    func_080988C8(4, message_table[M2C_FIELD(var_r4_3, u8 *, 0x020322A8)]);
+                    AppendWindowTextItem(4, message_table[M2C_FIELD(var_r4_3, u8 *, 0x020322A8)]);
                     var_r4_3 = (u8)(var_r4_3 + 1);
                     if ((u32)var_r4_3 < (u32)*(u8 *)0x020322B1) {
                         goto loop_2010;
@@ -697,12 +698,12 @@ loop_100:
 
                     asm volatile("" : "+r"(name_base));
                 temp_r4_3 = var_r7 * 4;
-                func_08098248(*(s32 *)(temp_r4_3 + (u32)name_base), 0, 5);
+                PrintWindowText(*(s32 *)(temp_r4_3 + (u32)name_base), 0, 5);
                 }
-                func_080981F0(0x08106568, 0, 5, 0, 8);
-                func_080984C4((u32) M2C_FIELD(temp_r4_3, u32 *, 0x087A2188) >> 1, 6, 0, 2, 5);
-                func_08098248(0x08106578, 0, 5);
-                func_0809844C((u32) M2C_FIELD(var_r7, u8 *, 0x020217F4), 2, 0, 2, 6, 0xA, var_sl);
+                PrintWindowTextAt(0x08106568, 0, 5, 0, 8);
+                PrintWindowNumber((u32) M2C_FIELD(temp_r4_3, u32 *, 0x087A2188) >> 1, 6, 0, 2, 5);
+                PrintWindowText(0x08106578, 0, 5);
+                PrintWindowNumberAt((u32) M2C_FIELD(var_r7, u8 *, 0x020217F4), 2, 0, 2, 6, 0xA, var_sl);
                 RunMenuScript(0x0800446E);
                 temp_r0_2 = *(u8 *)0x0200A882;
                 if (temp_r0_2 == 0) {
@@ -734,7 +735,7 @@ state_2100:
                     {
                         register u32 message_offset asm("r0") = var_r7 * 4;
 
-                        func_080981F0(*(s32 *)(message_offset + (u32)message_base), 1, 7, 0, var_sl);
+                        PrintWindowTextAt(*(s32 *)(message_offset + (u32)message_base), 1, 7, 0, var_sl);
                     }
                 }
                 var_r8 = 1;
@@ -746,7 +747,7 @@ state_2100:
 state_2110:
                 displayed_quantity = 0;
                 RunMenuScript(0x080045AE);
-                func_08096F3C();
+                ResetMenuKeyRepeat();
                 {
                     register s32 seven asm("r5") = 7;
                     register u32 *price_base asm("r1") = (u32 *)0x087A2188;
@@ -759,14 +760,14 @@ state_2110:
                         price_ptr = (u32 *)(price_offset + (u32)price_base);
                     }
                 do {
-                    var_r8 = func_080B684C(var_r8, var_r9);
+                    var_r8 = UpdateMenuQuantityFromKeys(var_r8, var_r9);
                     if (var_r8 != displayed_quantity) {
-                        func_0809844C((u32) var_r8, 2, 0, 2, seven, 0x10, var_sl);
-                        func_0809844C(var_r8 * (*price_ptr >> 1), 7, 0, 2, seven, 0xA, 2);
+                        PrintWindowNumberAt((u32) var_r8, 2, 0, 2, seven, 0x10, var_sl);
+                        PrintWindowNumberAt(var_r8 * (*price_ptr >> 1), 7, 0, 2, seven, 0xA, 2);
                         RequestWindowRefresh();
                         displayed_quantity = var_r8;
                     }
-                    func_080ED17C(1);
+                    YieldTaskForUpdates(1);
                     temp_r1_2 = *(u16 *)0x0300000E;
                 } while (!(3 & temp_r1_2));
                 if (1 & temp_r1_2) {
@@ -801,17 +802,17 @@ state_2130:
                         register u32 price_address asm("r0") = var_r7 * 4;
 
                         price_address += (u32)price_base;
-                        func_080E5E64(var_r8 * (*(u32 *)price_address >> 1));
+                        AddPlayerMoney(var_r8 * (*(u32 *)price_address >> 1));
                     }
                 }
-                func_080E5D98(var_r7, (u8)var_r8);
-                func_0809844C(*(u32 *)0x020282E8, 7, 0, 2, 1, 1, var_sl);
-                func_0809844C((u32) M2C_FIELD(var_r7, u8 *, 0x020217F4), 2, 0, 2, 6, 0xA, var_sl);
+                SubtractRecoveryItemsFromInventory(var_r7, (u8)var_r8);
+                PrintWindowNumberAt(*(u32 *)0x020282E8, 7, 0, 2, 1, 1, var_sl);
+                PrintWindowNumberAt((u32) M2C_FIELD(var_r7, u8 *, 0x020217F4), 2, 0, 2, 6, 0xA, var_sl);
                 RunMenuScript(0x080044BD);
                 RunMenuScript(0x080044A1);
                 DestroySprite(sp1C);
                 RunMenuScript(0x08004544);
-                func_080B654C();
+                BuildPlayerRecoveryItemSelection();
                 temp_r0_3 = *(u8 *)0x020322B1;
                 if (temp_r0_3 != 0) {
                     goto case2130_nonempty;
@@ -826,7 +827,7 @@ case2130_nonempty:
                 if (temp_r0_3 == sp18) {
                     sp18 = (u8) (sp18 - 1);
                 }
-                func_08098834(4);
+                ClearWindowTextList(4);
 block_127:
                 var_r5 = 0x2010;
                 break;
@@ -838,13 +839,13 @@ state_done:
     }
     goto loop_132;
 block_132:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_132:
-    if ((func_0809669C() << 0x18) == 0) {
+    if ((IsScreenTransitionComplete() << 0x18) == 0) {
         goto block_132;
     }
     if (*(u8 *)0x02030664 == 2) {
         *(u8 *)0x02030664 = 1;
-        func_080ED17C(1);
+        YieldTaskForUpdates(1);
     }
 }

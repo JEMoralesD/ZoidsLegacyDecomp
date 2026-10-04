@@ -63,7 +63,7 @@ s16 CalculateBattleDamage(u32 attacker_side_arg, u32 attacker_unit_slot_arg, u32
           "m"(action_index_saved)
         : "r0", "r1", "r2", "r3", "lr", "cc", "memory");
 
-    if (FindBattleEffect(attacker_side, attacker_unit_slot, 30) != 0xFF &&
+    if (FindBattleEffect(attacker_side, attacker_unit_slot, BATTLE_EFFECT_MELEE_ANTI_AIR_BONUS) != 0xFF &&
         (equipment_stats->attributes & WEAPON_MELEE) != 0 &&
         (target_unit[0x36] & ZOID_MOVEMENT_FLYING) != 0) {
         equipment_stats->power_or_value += 20;

@@ -1,4 +1,5 @@
 #include "../../tools/m2c_prelude.h"
+#include "graphics_resources.h"
 
 struct Sprite {
     u32 flags;
@@ -11,7 +12,7 @@ struct Sprite {
     u8 palette_bank;
     u8 rotation;
     u16 animation_id;
-    u16 animation_frame;
+    u16 animation_step;
     u16 frame_timer;
     s32 frame_table;
     s32 animation_table;
@@ -25,7 +26,7 @@ struct Sprite {
 
 extern struct Sprite gSpritePool[];
 extern struct Sprite *gActiveSprites[];
-extern s32 D_03000054[];
+extern s32 gFieldCameraScrollOffsets[] asm("D_03000054");
 
 u16 Sin256(u8) asm("func_08092A90");                              /* extern */
 s32 Cos256(u8) asm("func_08092ADC");                              /* extern */
@@ -646,7 +647,7 @@ asm(
     ".endm\n");
 
 void UpdateSpritesAndBuildOam(void) {
-    void *sp0;
+    void *animation_command;
     u32 sp4;
     s32 sp8;
     s32 spC;
@@ -791,22 +792,22 @@ void UpdateSpritesAndBuildOam(void) {
             sprite = gActiveSprites[(s16)var_r2_2];
             temp_r2 = var_r2_2 << 0x10;
             {
-                u32 outer_tile_address;
-                u32 outer_tile_base;
-                u32 outer_tile_offset;
-                register s32 outer_tile_entry asm("r1");
+                u32 animation_table_entry_address;
+                u32 animation_table_base;
+                u32 animation_command_offset;
+                register s32 animation_command_address asm("r1");
                 register struct Sprite *outer_record asm("r5");
 
-                outer_tile_address = sprite->animation_id;
-                outer_tile_base = sprite->animation_table;
-                outer_tile_address <<= 2;
-                outer_tile_address += outer_tile_base;
+                animation_table_entry_address = sprite->animation_id;
+                animation_table_base = sprite->animation_table;
+                animation_table_entry_address <<= 2;
+                animation_table_entry_address += animation_table_base;
                 outer_record = sprite;
-                outer_tile_offset = outer_record->animation_frame;
-                outer_tile_offset <<= 2;
-                outer_tile_entry = *(s32 *)outer_tile_address;
-                outer_tile_entry += outer_tile_offset;
-                sp0 = (void *)outer_tile_entry;
+                animation_command_offset = outer_record->animation_step;
+                animation_command_offset <<= 2;
+                animation_command_address = *(s32 *)animation_table_entry_address;
+                animation_command_address += animation_command_offset;
+                animation_command = (void *)animation_command_address;
                 sp10 = 0;
                 temp_r1_2 = outer_record->flags;
             }
@@ -817,17 +818,17 @@ void UpdateSpritesAndBuildOam(void) {
                 {
                     register s16 *script_base asm("r3");
                     register s32 script_index asm("r4");
-                    register s32 script_entry asm("r0");
+                    register s32 visual_frame_id asm("r0");
 
-                    script_base = sp0;
+                    script_base = animation_command;
                     script_index = 0;
                     asm volatile(
                         "ldrsh %0, [%1, %2]\n\t"
                         "Q946A0_FIX_INITIAL_CARRIERS"
-                        : "=r"(script_entry)
+                        : "=r"(visual_frame_id)
                         : "r"(script_base), "r"(script_index)
                         : "memory");
-                    var_r7 = *(s16 **)((script_entry * 4) + outer_body_record->frame_table);
+                    var_r7 = *(s16 **)((visual_frame_id * 4) + outer_body_record->frame_table);
                 }
                 spC = 0;
                 if ((*var_r7 != -1) && (sp4 < ({
@@ -1009,7 +1010,7 @@ loop_12:
                         window_flag_byte = M2C_FIELD(var_r7, u8 *, 0x11);
                         window_mode_bit = 2;
                         window_mode_bit &= window_flag_byte;
-                        window_stack_base = (u8 *)&sp0;
+                        window_stack_base = (u8 *)&animation_command;
                         asm volatile("" : "+g"(temp_r4_2) : "r"(window_stack_base));
                         M2C_FIELD(window_stack_base, u8 *, 0x1C) = window_flag_byte;
                         temp_r0_4 = window_mode_bit;
@@ -1139,7 +1140,7 @@ loop_12:
                         u32 camera_base;
                         u32 camera_address;
 
-                        camera_base = (u32)D_03000054;
+                        camera_base = (u32)gFieldCameraScrollOffsets;
                         temp_r1_10 = (u32) (0x6000 & sp14) >> 0xD;
                         asm volatile("" : "+r"(temp_r1_10));
                         camera_address = temp_r1_10 << 3;
@@ -1394,7 +1395,7 @@ block_114:
                         asm volatile("Q946A0_FIX_CONDITION_WINDOW" : "+r"(condition_record));
                         temp_r1_12 = condition_record->flags;
                         temp_r2_8 ^= (u32) (0x18000 & temp_r1_12) >> 0xF;
-                        condition_stack_byte = M2C_FIELD(&sp0, u8 *, 0x1C);
+                        condition_stack_byte = M2C_FIELD(&animation_command, u8 *, 0x1C);
                         asm volatile("" : "+r"(condition_stack_byte));
                         if (!(1 & condition_stack_byte) && (condition_record->rotation == 0) && (condition_record->scale == 0x100) && !({
                             temp_r1_12 &= 0x80000;
@@ -1998,8 +1999,8 @@ block_160:
                         register s16 *script_record asm("r3");
                         counter_record = sprite;
                         counter_record->frame_timer = (u16) (counter_record->frame_timer + 1);
-                        script_record = sp0;
-                        if (M2C_FIELD(script_record, s16 *, 2) == counter_record->frame_timer) {
+                        script_record = animation_command;
+                        if (SPRITE_ANIMATION_FIELD(script_record, s16, duration) == counter_record->frame_timer) {
                             register s32 second_script_index asm("r1");
                             register s32 second_script_value asm("r0");
 
@@ -2011,7 +2012,7 @@ block_160:
                             if (second_script_value != script_sentinel) {
                                 register struct Sprite *increment_record asm("r2");
                                 increment_record = sprite;
-                                increment_record->animation_frame = (u16) (increment_record->animation_frame + 1);
+                                increment_record->animation_step = (u16) (increment_record->animation_step + 1);
                                 goto block_190;
                             }
                             {
@@ -2035,7 +2036,7 @@ block_160:
                             {
                                 register struct Sprite *zero_record asm("r1");
                                 zero_record = sprite;
-                                zero_record->animation_frame = (u16)script_zero;
+                                zero_record->animation_step = (u16)script_zero;
                             }
                                 goto block_190;
                             case 16:                /* switch 6 */
@@ -2054,9 +2055,9 @@ block_190:
                             }
                             {
                                 register void *next_script asm("r3");
-                                next_script = sp0;
+                                next_script = animation_command;
                                 next_script += 4;
-                                sp0 = next_script;
+                                animation_command = next_script;
                             }
                         }
 block_191:

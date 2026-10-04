@@ -1,7 +1,7 @@
 #include "m2c_prelude.h"
 #include "event_script.h"
 
-void func_0809F850(void);
+void InitializeEventSpritePool(void) asm("func_0809F850");
 
 void ResetEventScripts(void) {
     register u32 index asm("r2");
@@ -81,5 +81,5 @@ void ResetEventScripts(void) {
             index += 1;
         } while (index <= 69);
     }
-    func_0809F850();
+    InitializeEventSpritePool();
 }

@@ -2,7 +2,7 @@
 #include "battle.h"
 #include "battle_animation.h"
 
-void func_0809AA64(u8 *, u8, u16, u16);
+void LoadSpriteGraphicsFromTable(u8 *, u8, u16, u16) asm("func_0809AA64");
 
 extern s32 gBattleAnimationResourceIds[] asm("D_02034874");
 extern s32 gBattleAnimationTileOffsets[] asm("D_02034894");
@@ -44,7 +44,7 @@ loop_1:
             register s32 packed asm("r2");
             register s32 upd asm("r0");
 
-            func_0809AA64(table, value, *(u16 *)first, *(u16 *)second);
+            LoadSpriteGraphicsFromTable(table, value, *(u16 *)first, *(u16 *)second);
             {
                 s32 *o0_base = gBattleAnimationResourceIds;
                 s32 *o0 = o0_base + count;

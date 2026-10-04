@@ -1,8 +1,8 @@
 #include "m2c_prelude.h"
 #include "../event_script.h"
 extern s32 SeekEventCommand(u8, s32, s32) asm("func_080A016C");
-extern void *func_080A9D78(u8, u8, s32, s32, s32, s32, s32, s32);
-extern u8 func_080A9EF0(s32);
+extern void *CreateFieldActor(u8, u8, s32, s32, s32, s32, s32, s32) asm("func_080A9D78");
+extern u8 FindFieldActorSlot(s32) asm("func_080A9EF0");
 extern u8 D_020218E4[];
 
 s32 EventSpawnActor(u8 script_slot, void **cursor) {
@@ -20,7 +20,7 @@ s32 EventSpawnActor(u8 script_slot, void **cursor) {
         if (flag == 0) {
             r4v = 0x10;
         }
-        r0res = func_080A9D78(r5[2], r5[1], (r5[3] * r4v) << 8, (r5[4] * r4v) << 8,
+        r0res = CreateFieldActor(r5[2], r5[1], (r5[3] * r4v) << 8, (r5[4] * r4v) << 8,
                               (s32)r5[5], 0, (s32)r5[6], (s32)r5[7]);
         if (r0res != 0 && ((u8 *)*cursor)[6] == 0) {
             *(void **)0x02032990 = r0res;
@@ -32,9 +32,9 @@ s32 EventSpawnActor(u8 script_slot, void **cursor) {
                 {
                     u8 *p = (u8 *)((var_r2 << 6) + (u32)base);
                     if (p[0x5A94] == 1 && p[0x5AC5] == 1) {
-                        var_r2 = func_080A9EF0(0xD);
+                        var_r2 = FindFieldActorSlot(0xD);
                         if (var_r2 == 0xFF) {
-                            *(void **)0x02032994 = func_080A9D78(
+                            *(void **)0x02032994 = CreateFieldActor(
                                 0x4B, 0xD,
                                 *(s32 *)((u8 *)r0res + 8),
                                 *(s32 *)((u8 *)r0res + 12),

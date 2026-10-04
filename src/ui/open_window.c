@@ -1,35 +1,14 @@
 #include "m2c_prelude.h"
+#include "window.h"
 
-struct Window {
-    u32 flags;
-    s16 x;
-    s16 y;
-    u16 width;
-    u16 height;
-    s16 text_column;
-    s16 text_row;
-    u8 pad10[2];
-    u8 unk12;
-    u8 slot;
-    u8 unk14;
-    u8 unk15;
-    u8 unk16;
-    u8 unk17;
-    u8 unk18;
-    u8 unk19;
-    u8 unk1A;
-    u8 unk1B;
-    s16 unk1C;
-    u16 tiles[1];
-};
 
 extern struct Window *GetWindow(u8) asm("func_0809716C");
 extern void BringWindowToFront(u8) asm("func_080971AC");
-extern void func_08097DA8(struct Window *, void *);
-extern u32 D_02021664;
-extern u16 D_02021668;
-extern u8 D_0200E6C4[];
-extern u8 D_0200DE90[];
+extern void DrawWindowText(struct Window *, void *) asm("func_08097DA8");
+extern u32 gWindowFrameTileOffset asm("D_02021664");
+extern u16 gWindowBgPaletteAttribute asm("D_02021668");
+extern u8 gWindowTextItemCounts[] asm("D_0200E6C4");
+extern u8 gWindowTextBlockOffsets[] asm("D_0200DE90");
 
 void OpenWindow(s32 window_id, s32 x, s32 y, s32 width, s32 height, volatile s32 flags)
 {
@@ -64,11 +43,11 @@ void OpenWindow(s32 window_id, s32 x, s32 y, s32 width, s32 height, volatile s32
     window->height = saved_height;
     window->text_row = 0;
     window->text_column = 0;
-    window->unk12 = 0;
-    window->unk1A = 0;
-    window->unk19 = 0;
-    window->unk1C = 0;
-    window->unk1B = 0;
+    window->text_color = 0;
+    window->frame_decoration_width = 0;
+    window->frame_decoration_x = 0;
+    window->prior_held_keys = 0;
+    window->key_repeat_frames = 0;
     {
         register s32 one asm("r0") = 1;
         register s32 loaded_flags asm("r5");
@@ -83,8 +62,8 @@ void OpenWindow(s32 window_id, s32 x, s32 y, s32 width, s32 height, volatile s32
     asm volatile("" : "+r"(tile));
     row = 0;
     if (row < saved_height) {
-        u32 *base = &D_02021664;
-        u16 *attribute = &D_02021668;
+        u32 *base = &gWindowFrameTileOffset;
+        u16 *attribute = &gWindowBgPaletteAttribute;
 
         do {
             u32 column = 0;
@@ -141,16 +120,16 @@ void OpenWindow(s32 window_id, s32 x, s32 y, s32 width, s32 height, volatile s32
         } while (row < window->height);
     }
 
-    if (window->flags & 0x80) {
-        D_0200E6C4[window->slot] = 0;
-        D_0200DE90[window->slot * 0xD2] = 0;
-        window->unk16 = 0;
-        window->unk14 = 0;
-        window->unk15 = 0;
-        window->unk17 = 0xFF;
+    if (window->flags & WINDOW_FLAG_TEXT_LIST) {
+        gWindowTextItemCounts[window->slot] = 0;
+        gWindowTextBlockOffsets[window->slot * 0xD2] = 0;
+        window->selected_item = 0;
+        window->top_item = 0;
+        window->prior_top_item = 0;
+        window->prior_selected_item = 0xFF;
     }
 
-    if (window->flags & 0x100) {
+    if (window->flags & WINDOW_FLAG_YES_NO_PROMPT) {
         register s16 zero16 asm("r4");
         register u8 zero8 asm("r7");
         s32 text_column;
@@ -161,15 +140,15 @@ void OpenWindow(s32 window_id, s32 x, s32 y, s32 width, s32 height, volatile s32
         asm volatile("" : "+r"(zero8), "+r"(zero16));
         window->text_column = text_column;
         window->text_row = window->height - 6;
-        func_08097DA8(window, (void *)0x080ED930);
+        DrawWindowText(window, (void *)0x080ED930);
 
         window->text_column = (window->width - 2) / 2 - 1;
         window->text_row = window->height - 4;
-        func_08097DA8(window, (void *)0x080ED938);
+        DrawWindowText(window, (void *)0x080ED938);
 
         window->text_row = zero16;
         window->text_column = zero16;
-        window->unk16 = zero8;
+        window->selected_item = zero8;
     }
 
     BringWindowToFront(saved_window_id);

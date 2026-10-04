@@ -1,4 +1,5 @@
 #include "m2c_prelude.h"
+#include "../../graphics/screen_effects.h"
 #include "../game_state.h"
 
 M2C_UNK PlayOrContinueSong(s32) asm("func_08092E74");                         /* extern */
@@ -10,23 +11,23 @@ s32 WriteSaveBlock4() asm("func_080940E8");                                /* ex
 s32 WriteSaveBlock5() asm("func_080940FC");                                /* extern */
 s32 CreateSprite() asm("func_08094484");                                /* extern */
 M2C_UNK DestroySprite(s32) asm("func_08094554");                         /* extern */
-M2C_UNK func_08096308(s32, s32);                    /* extern */
-s32 func_0809669C();                                /* extern */
-M2C_UNK func_080981F0();                            /* extern */
-M2C_UNK func_08098248(s32, s32, s32);               /* extern */
+M2C_UNK StartScreenTransition(s32, s32) asm("func_08096308");                    /* extern */
+s32 IsScreenTransitionComplete() asm("func_0809669C");                                /* extern */
+M2C_UNK PrintWindowTextAt() asm("func_080981F0");                            /* extern */
+M2C_UNK PrintWindowText(s32, s32, s32) asm("func_08098248");               /* extern */
 M2C_UNK OpenWindow() asm("func_08098514");                            /* extern */
 M2C_UNK RunMenuScript(M2C_UNK) asm("func_08098BB4");                     /* extern */
-M2C_UNK func_080BE600();                            /* extern */
-M2C_UNK func_080E4518();                            /* extern */
-M2C_UNK func_080E47EC();                            /* extern */
-M2C_UNK func_080E4948();                            /* extern */
-M2C_UNK func_080E5DC4(u8);                          /* extern */
-M2C_UNK func_080E5E0C(u8, s32);                     /* extern */
-M2C_UNK func_080E5EBC(u8);                          /* extern */
-M2C_UNK func_080EB888();                            /* extern */
+M2C_UNK ResetAllBattleEffects() asm("func_080BE600");                            /* extern */
+M2C_UNK InitializeChallengeBattleUnits() asm("func_080E4518");                            /* extern */
+M2C_UNK InitializeChallengeCourseMenu() asm("func_080E47EC");                            /* extern */
+M2C_UNK BuildChallengeRoundSelectionRows() asm("func_080E4948");                            /* extern */
+M2C_UNK UnlockZoidData(u8) asm("func_080E5DC4");                          /* extern */
+M2C_UNK AddZoidCoresToInventory(u8, s32) asm("func_080E5E0C");                     /* extern */
+M2C_UNK UnlockDeckCommand(u8) asm("func_080E5EBC");                          /* extern */
+M2C_UNK StopAllMusicPlayers() asm("func_080EB888");                            /* extern */
 M2C_UNK BiosLz77ToVram(M2C_UNK, M2C_UNK) asm("func_080ECD34");            /* extern */
 M2C_UNK CopyBytes(M2C_UNK, M2C_UNK, s32) asm("func_080ED038");       /* extern */
-M2C_UNK func_080ED17C(s32);                         /* extern */
+M2C_UNK YieldTaskForUpdates(s32) asm("func_080ED17C");                         /* extern */
 asm(".set D_02032E78_e4a44, 0x02032E78");
 extern u8 D_02032E78_e4a44;
 
@@ -131,7 +132,7 @@ block_22:
 block_24:
     goto block_95;
 block_25:
-    func_080E47EC();
+    InitializeChallengeCourseMenu();
     CopyBytes(0x0202186C, 0x020217F4, 0x78);
     CopyBytes(0x020282EC, 0x020218E4, 0x6A08);
     PlayOrContinueSong(3);
@@ -195,11 +196,11 @@ block_33:
     RunMenuScript(0x0801760D);
     goto block_95;
 block_34:
-    func_08096308(0x10, 0);
+    StartScreenTransition(SCREEN_TRANSITION_CHECKERBOARD_CONCEAL, 0);
     *(s32 *)0x02021690 = GAME_MODE_OPTIONS;
     goto block_95;
 block_35:
-    func_080E4948();
+    BuildChallengeRoundSelectionRows();
     goto block_85;
 block_36:
     asm volatile(
@@ -232,8 +233,8 @@ block_37:
         goto block_46;
     }
     *(u8 *)0x02032E78 = temp_r1_3;
-    func_080BE600();
-    func_080E4518();
+    ResetAllBattleEffects();
+    InitializeChallengeBattleUnits();
     {
     register s32 clear_index asm("r6");
     register u8 *clear_base asm("r2");
@@ -252,12 +253,12 @@ loop_40:
         goto loop_40;
     }
     }
-    func_08096308(0x10, 0);
+    StartScreenTransition(SCREEN_TRANSITION_CHECKERBOARD_CONCEAL, 0);
     goto loop_44;
 block_43:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_44:
-    if ((func_0809669C() << 0x18) == 0) {
+    if ((IsScreenTransitionComplete() << 0x18) == 0) {
         goto block_43;
     }
     *(s8 *)0x02032EF8 = 0x1D;
@@ -296,7 +297,7 @@ block_48:
     }
     goto block_95;
 block_49:
-    func_080EB888();
+    StopAllMusicPlayers();
     {
     register s32 copy_index asm("r6");
 
@@ -388,8 +389,8 @@ loop_53:
     flag_base += (s32) copy_base;
     M2C_FIELD(selected, u8 *, (s32) flag_base) = 1;
     }
-    func_080E47EC();
-    func_080E4948();
+    InitializeChallengeCourseMenu();
+    BuildChallengeRoundSelectionRows();
     var_r7 = 0;
     count_index = 0;
     {
@@ -507,42 +508,42 @@ block_69:
         register s32 outgoing_r0 asm("r0") = var_r7 * 2;
         asm volatile("str %0, [sp, #0]" : "+r"(outgoing_r0) : : "memory");
     }
-    func_080981F0(0x081093AC, 0, 3, 0);
+    PrintWindowTextAt(0x081093AC, 0, 3, 0);
     {
     register s32 *message_table asm("r1") = (s32 *)0x087EF130;
     asm volatile("" : "+r"(message_table));
-    func_08098248(message_table[temp_r4[1]], 2, 3);
+    PrintWindowText(message_table[temp_r4[1]], 2, 3);
     }
-    func_08098248(0x081093C8, 0, 3);
-    func_080E5EBC(temp_r4[1]);
+    PrintWindowText(0x081093C8, 0, 3);
+    UnlockDeckCommand(temp_r4[1]);
     goto block_74;
 block_71:
     {
         register s32 outgoing_r0 asm("r0") = var_r7 * 2;
         asm volatile("str %0, [sp, #0]" : "+r"(outgoing_r0) : : "memory");
     }
-    func_080981F0(0x081093CC, 0, 3, 0);
+    PrintWindowTextAt(0x081093CC, 0, 3, 0);
     {
     register s32 *message_table asm("r1") = (s32 *)0x087EEE60;
     asm volatile("" : "+r"(message_table));
-    func_08098248(message_table[temp_r4[1]], 2, 3);
+    PrintWindowText(message_table[temp_r4[1]], 2, 3);
     }
-    func_08098248(0x081093DC, 0, 3);
-    func_080E5E0C(temp_r4[1], 1);
+    PrintWindowText(0x081093DC, 0, 3);
+    AddZoidCoresToInventory(temp_r4[1], 1);
     goto block_74;
 block_73:
     {
         register s32 outgoing_r0 asm("r0") = var_r7 * 2;
         asm volatile("str %0, [sp, #0]" : "+r"(outgoing_r0) : : "memory");
     }
-    func_080981F0(0x081093CC, 0, 3, 0);
+    PrintWindowTextAt(0x081093CC, 0, 3, 0);
     {
     register s32 *message_table asm("r1") = (s32 *)0x087EDD54;
     asm volatile("" : "+r"(message_table));
-    func_08098248(message_table[temp_r4[1]], 2, 3);
+    PrintWindowText(message_table[temp_r4[1]], 2, 3);
     }
-    func_08098248(0x081093EC, 0, 3);
-    func_080E5DC4(temp_r4[1]);
+    PrintWindowText(0x081093EC, 0, 3);
+    UnlockZoidData(temp_r4[1]);
 block_74:
     var_r7 += 1;
 block_75:
@@ -685,7 +686,7 @@ loop_91:
     }
     }
     }
-    func_080E47EC();
+    InitializeChallengeCourseMenu();
     PlayOrContinueSong(3);
     asm volatile(
         "mov %0, #128\n\t"
@@ -706,9 +707,9 @@ block_95:
 block_97:
     goto loop_100;
 block_99:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_100:
-    if ((func_0809669C() << 0x18) == 0) {
+    if ((IsScreenTransitionComplete() << 0x18) == 0) {
         goto block_99;
     }
     return;

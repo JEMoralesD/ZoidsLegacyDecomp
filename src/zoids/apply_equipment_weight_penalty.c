@@ -20,7 +20,7 @@ struct ZoidWeightState {
 };
 
 extern struct EquipmentWeightRecord gEquipmentCatalog[] asm("D_087B2524");
-s16 func_080ECD98(s32, s32);
+s16 DivideSigned32(s32, s32) asm("func_080ECD98");
 
 void ApplyEquipmentWeightPenalty(struct ZoidWeightState *zoid)
 {
@@ -98,7 +98,7 @@ void ApplyEquipmentWeightPenalty(struct ZoidWeightState *zoid)
                 factor -= saved_total;
                 factor *= speed_value;
                 divisor = saved_limit;
-                *value_ptr = func_080ECD98(factor, divisor);
+                *value_ptr = DivideSigned32(factor, divisor);
 
                 value_ptr++;
                 {
@@ -119,7 +119,7 @@ void ApplyEquipmentWeightPenalty(struct ZoidWeightState *zoid)
                     asm volatile("" : "+r"(second_total));
                     second_factor -= second_total;
                     second_factor *= second_value;
-                    *value_ptr = func_080ECD98(second_factor, second_limit);
+                    *value_ptr = DivideSigned32(second_factor, second_limit);
                 }
             } else {
                 register s16 *clear_ptr asm("r0") = &owner->mobility;

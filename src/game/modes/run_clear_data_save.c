@@ -1,4 +1,5 @@
 #include "m2c_prelude.h"
+#include "../../graphics/screen_effects.h"
 
 extern s32 WriteSaveBlock0(void) asm("func_08094098");
 extern s32 WriteSaveBlock1(void) asm("func_080940AC");
@@ -7,15 +8,15 @@ extern s32 WriteSaveBlock3(void) asm("func_080940D4");
 extern s32 WriteSaveBlock4(void) asm("func_080940E8");
 extern s32 WriteSaveBlock5(void) asm("func_080940FC");
 extern void ClearSpritePools(void) asm("func_08094330");
-extern void func_08096308(s32, s32);
-extern s32 func_0809669C(void);
-extern void func_08096FBC(s32, s32, s32, s32, s32, s32, s32, s32, s32, s32);
+extern void StartScreenTransition(s32, s32) asm("func_08096308");
+extern s32 IsScreenTransitionComplete(void) asm("func_0809669C");
+extern void InitializeWindowGraphics(s32, s32, s32, s32, s32, s32, s32, s32, s32, s32) asm("func_08096FBC");
 extern void RunMenuScript(s32) asm("func_08098BB4");
-extern void func_0809AB44(s32, s32, s32, s32, s32);
+extern void LoadMenuGradientBackground(s32, s32, s32, s32, s32) asm("func_0809AB44");
 extern void RunLoadGame(void) asm("func_0809C1D4");
 extern void ClearEventFlag(s32) asm("func_0809F7F0");
 extern void BiosLz77ToVram(s32, s32) asm("func_080ECD34");
-extern void func_080ED17C(s32);
+extern void YieldTaskForUpdates(s32) asm("func_080ED17C");
 extern u8 D_0200A880;
 extern u8 D_0200A882;
 extern u8 D_02021699;
@@ -33,11 +34,11 @@ void RunClearDataSave(void) {
     u32 expected;
 
     *(s16 *)0x0300004C = 0x1840;
-    func_08096FBC(3, 1, 0, 0x35C, 0x3C0, 0, 0xE, 0, 0x3E6, 0xF);
+    InitializeWindowGraphics(3, 1, 0, 0x35C, 0x3C0, 0, 0xE, 0, 0x3E6, 0xF);
     BiosLz77ToVram(0x081046A8, 0x06015840);
-    func_0809AB44(2, 3, 0, 0, 1);
+    LoadMenuGradientBackground(2, 3, 0, 0, 1);
     ClearSpritePools();
-    func_08096308(0xF, 0x10);
+    StartScreenTransition(SCREEN_TRANSITION_CHECKERBOARD_REVEAL, 0x10);
 
     zero = 0;
     clear_mask = 0xFFFD;
@@ -164,12 +165,12 @@ checks_failed:
     goto retry;
 
 done:
-    func_08096308(0x10, 0x10);
+    StartScreenTransition(SCREEN_TRANSITION_CHECKERBOARD_CONCEAL, 0x10);
     goto poll;
 wait:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 poll:
-    if ((func_0809669C() << 24) == 0) {
+    if ((IsScreenTransitionComplete() << 24) == 0) {
         goto wait;
     }
     RunLoadGame();

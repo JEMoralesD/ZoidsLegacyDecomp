@@ -1,47 +1,53 @@
 #include "m2c_prelude.h"
+#include "../link_battle.h"
+extern u8 gLinkBattleStartLocalDecision asm("D_02032E57");
+extern u8 gLinkBattleStartReceiveComplete asm("D_02032E56");
+extern u8 gLinkBattleStartSendComplete asm("D_02032E55");
+extern u8 gLinkBattleStartHandshakePhase asm("D_02032E54");
+#include "../../graphics/screen_effects.h"
 #include "../game_state.h"
 
-M2C_UNK func_08092D8C(s32, M2C_UNK);                /* extern */
-M2C_UNK func_08092E0C(s32);                         /* extern */
+M2C_UNK StartTask(s32, M2C_UNK) asm("func_08092D8C");                /* extern */
+M2C_UNK StopTask(s32) asm("func_08092E0C");                         /* extern */
 M2C_UNK PlayOrContinueSong(s32) asm("func_08092E74");                         /* extern */
 M2C_UNK PlaySong(s32) asm("func_08092E84");                         /* extern */
 M2C_UNK ClearSpritePools() asm("func_08094330");                            /* extern */
 s32 CreateSprite(M2C_UNK, M2C_UNK, s32, s32, s32, s32, s32, s32, s32) asm("func_08094484"); /* extern */
 M2C_UNK DestroySprite(s32) asm("func_08094554");                         /* extern */
-M2C_UNK func_08096308(s32, s32);                    /* extern */
-s32 func_0809669C();                                /* extern */
-M2C_UNK func_08096FBC(s32, s32, s32, s32, s32, s32, s32, s32, s32, s32); /* extern */
+M2C_UNK StartScreenTransition(s32, s32) asm("func_08096308");                    /* extern */
+s32 IsScreenTransitionComplete() asm("func_0809669C");                                /* extern */
+M2C_UNK InitializeWindowGraphics(s32, s32, s32, s32, s32, s32, s32, s32, s32, s32) asm("func_08096FBC"); /* extern */
 void *GetWindow(s32) asm("func_0809716C");                           /* extern */
 M2C_UNK RequestWindowRefresh() asm("func_080972C8");                            /* extern */
-M2C_UNK func_080981F0(M2C_UNK, s32, s32, s32, s32); /* extern */
-M2C_UNK func_08098248(s32, s32, s32);               /* extern */
-M2C_UNK func_0809844C(u32, s32, s32, s32, s32, s32, s32); /* extern */
+M2C_UNK PrintWindowTextAt(M2C_UNK, s32, s32, s32, s32) asm("func_080981F0"); /* extern */
+M2C_UNK PrintWindowText(s32, s32, s32) asm("func_08098248");               /* extern */
+M2C_UNK PrintWindowNumberAt(u32, s32, s32, s32, s32, s32, s32) asm("func_0809844C"); /* extern */
 M2C_UNK ClearWindow(s32) asm("func_080986B4");                         /* extern */
 M2C_UNK RunMenuScript(s32) asm("func_08098BB4");                         /* extern */
-M2C_UNK func_0809AB44(s32, s32, M2C_UNK, s32, s32); /* extern */
-M2C_UNK func_0809AC98();                            /* extern */
-s32 func_0809AE38();                                /* extern */
-M2C_UNK func_0809AEA0();                            /* extern */
-M2C_UNK func_0809AEC0(s32 *, s32, s32);             /* extern */
-u8 func_0809AEF4();                                 /* extern */
-M2C_UNK func_0809B00C(s32 *, s32, s32);             /* extern */
-u8 func_0809B040();                                 /* extern */
-M2C_UNK func_080B0D38();                            /* extern */
-s32 func_080B2108();                                /* extern */
-M2C_UNK func_080B35D4(s32);                         /* extern */
-M2C_UNK func_080BE600();                            /* extern */
-M2C_UNK func_080E0F44();                            /* extern */
-M2C_UNK func_080E125C();                            /* extern */
-s32 func_080E13C4();                                /* extern */
-s32 func_080E60B0(u32);                             /* extern */
-M2C_UNK func_080E65B4(u8);                          /* extern */
-M2C_UNK func_080E664C(s32);                         /* extern */
-s32 func_080E6664(u8);                              /* extern */
-M2C_UNK func_080E9128();                            /* extern */
-M2C_UNK func_080E96E8();                            /* extern */
+M2C_UNK LoadMenuGradientBackground(s32, s32, M2C_UNK, s32, s32) asm("func_0809AB44"); /* extern */
+M2C_UNK ResetLinkTransferState() asm("func_0809AC98");                            /* extern */
+s32 TryStartLinkConnection() asm("func_0809AE38");                                /* extern */
+M2C_UNK StopLinkConnection() asm("func_0809AEA0");                            /* extern */
+M2C_UNK BeginLinkSend(s32 *, s32, s32) asm("func_0809AEC0");             /* extern */
+u8 PollLinkSend() asm("func_0809AEF4");                                 /* extern */
+M2C_UNK BeginLinkReceive(s32 *, s32, s32) asm("func_0809B00C");             /* extern */
+u8 PollLinkReceive() asm("func_0809B040");                                 /* extern */
+M2C_UNK RunPlayerEquipmentMenu() asm("func_080B0D38");                            /* extern */
+s32 RunPlayerPilotAssignmentMenu() asm("func_080B2108");                                /* extern */
+M2C_UNK RunPlayerTeamFormationMenu(s32) asm("func_080B35D4");                         /* extern */
+M2C_UNK ResetAllBattleEffects() asm("func_080BE600");                            /* extern */
+M2C_UNK DrawEnabledBattleRules() asm("func_080E0F44");                            /* extern */
+M2C_UNK BuildBattleRuleToggleTextList() asm("func_080E125C");                            /* extern */
+s32 GetPlayerPartyScore() asm("func_080E13C4");                                /* extern */
+s32 DoesPlayerTeamMeetBattleRule(u32) asm("func_080E60B0");                             /* extern */
+M2C_UNK EnableBattleRule(u8) asm("func_080E65B4");                          /* extern */
+M2C_UNK DisableBattleRule(s32) asm("func_080E664C");                         /* extern */
+s32 TestBattleRuleFlag(u8) asm("func_080E6664");                              /* extern */
+M2C_UNK InitializePlayerBattleUnits() asm("func_080E9128");                            /* extern */
+M2C_UNK ExchangeLinkBattleUnitRecords() asm("func_080E96E8");                            /* extern */
 M2C_UNK BiosLz77ToVram(M2C_UNK, M2C_UNK) asm("func_080ECD34");            /* extern */
 s32 CallFunctionR0(s32) asm("func_080ECD5C");                             /* extern */
-M2C_UNK func_080ED17C(s32);                         /* extern */
+M2C_UNK YieldTaskForUpdates(s32) asm("func_080ED17C");                         /* extern */
 M2C_UNK jtbl_080E1DC4();                            /* static */
 
 void RunLinkBattle(void) {
@@ -89,123 +95,123 @@ void RunLinkBattle(void) {
     u8 var_r9;
 
     *(s16 *)0x0300004C = 0x1840;
-    func_08096FBC(3, 1, 0, 0x35C, 0x3C0, 0, 0xE, 0, 0x3E6, 0xF);
+    InitializeWindowGraphics(3, 1, 0, 0x35C, 0x3C0, 0, 0xE, 0, 0x3E6, 0xF);
     BiosLz77ToVram(0x081046A8, 0x06015840);
-    func_0809AB44(2, 0, 0x1EF, 4, 4);
+    LoadMenuGradientBackground(2, 0, 0x1EF, 4, 4);
     ClearSpritePools();
-    func_08096308(0xF, 0x10);
+    StartScreenTransition(SCREEN_TRANSITION_CHECKERBOARD_REVEAL, 0x10);
     RunMenuScript(0x08028199);
-    func_080981F0(0x02021774, 0, 2, 0, 0);
+    PrintWindowTextAt(0x02021774, 0, 2, 0, 0);
     fixed_r6 = (u16 *)0x0202F08C;
-    func_0809844C(fixed_r6[0], 5, 0, 2, 3, 0, 0);
-    func_0809844C(fixed_r6[1], 5, 0, 2, 3, 7, 0);
-    temp_r0 = func_080E13C4();
+    PrintWindowNumberAt(fixed_r6[0], 5, 0, 2, 3, 0, 0);
+    PrintWindowNumberAt(fixed_r6[1], 5, 0, 2, 3, 7, 0);
+    temp_r0 = GetPlayerPartyScore();
     sp20[0] = temp_r0;
-    func_0809844C(temp_r0, 0xA, 0, 2, 6, 3, 0);
+    PrintWindowNumberAt(temp_r0, 0xA, 0, 2, 6, 3, 0);
     RequestWindowRefresh();
     temp_r7 = CreateSprite(0x08105AFC, 0x08105B08, 0, 0xA8, 0x30, 0x350, 0xF, 8, 0);
-    while ((func_0809669C() << 0x18) == 0) {
-        func_080ED17C(1);
+    while ((IsScreenTransitionComplete() << 0x18) == 0) {
+        YieldTaskForUpdates(1);
     }
-    func_0809AC98();
-    while ((func_0809AE38() << 0x18) == 0) {
+    ResetLinkTransferState();
+    while ((TryStartLinkConnection() << 0x18) == 0) {
         if (2 & *(u16 *)0x0300000E) {
             PlaySong(0x3F);
-            func_0809AEA0();
+            StopLinkConnection();
             DestroySprite(temp_r7);
             RunMenuScript(0x08028250);
-            func_08096308(0x10, 0);
-            while ((func_0809669C() << 0x18) == 0) {
-                func_080ED17C(1);
+            StartScreenTransition(SCREEN_TRANSITION_CHECKERBOARD_CONCEAL, 0);
+            while ((IsScreenTransitionComplete() << 0x18) == 0) {
+                YieldTaskForUpdates(1);
             }
             *(s32 *)0x02021690 = GAME_MODE_OPTIONS;
             return;
         }
-        func_080ED17C(1);
+        YieldTaskForUpdates(1);
     }
         {
         register s32 left_ready asm("r5");
         register s32 right_ready asm("r4");
 
-        func_0809AEC0((s32 *)0, 0, 0x081091FC);
-        func_0809B00C((s32 *)0, 0, 0x081091FC);
+        BeginLinkSend((s32 *)0, 0, 0x081091FC);
+        BeginLinkReceive((s32 *)0, 0, 0x081091FC);
         do {
 loop_13:
-            func_0809AEF4();
+            PollLinkSend();
             asm volatile("lsl r0, r0, #24\n\tlsr %0, r0, #24"
                          : "=r"(left_ready) : : "r0");
-            func_0809B040();
+            PollLinkReceive();
             asm volatile("lsl r0, r0, #24\n\tlsr %0, r0, #24"
                          : "=r"(right_ready) : : "r0");
-            func_080ED17C(1);
+            YieldTaskForUpdates(1);
             if (left_ready == 0) {
                 goto loop_13;
             }
         } while (right_ready == 0);
-        func_0809AEC0((s32 *)0x02021774, 0x12, 0x0810920C);
-        func_0809B00C((s32 *)0x02030564, 0x12, 0x0810920C);
+        BeginLinkSend((s32 *)0x02021774, 0x12, 0x0810920C);
+        BeginLinkReceive((s32 *)0x02030564, 0x12, 0x0810920C);
         do {
 loop_16:
-            func_0809AEF4();
+            PollLinkSend();
             asm volatile("lsl r0, r0, #24\n\tlsr %0, r0, #24"
                          : "=r"(left_ready) : : "r0");
-            func_0809B040();
+            PollLinkReceive();
             asm volatile("lsl r0, r0, #24\n\tlsr %0, r0, #24"
                          : "=r"(right_ready) : : "r0");
-            func_080ED17C(1);
+            YieldTaskForUpdates(1);
             if (left_ready == 0) {
                 goto loop_16;
             }
         } while (right_ready == 0);
-        func_0809AEC0((s32 *)0x0202F08C, 4, 0x08109218);
-        func_0809B00C(&sp1C, 4, 0x08109218);
+        BeginLinkSend((s32 *)0x0202F08C, 4, 0x08109218);
+        BeginLinkReceive(&sp1C, 4, 0x08109218);
         do {
 loop_19:
-            func_0809AEF4();
+            PollLinkSend();
             asm volatile("lsl r0, r0, #24\n\tlsr %0, r0, #24"
                          : "=r"(left_ready) : : "r0");
-            func_0809B040();
+            PollLinkReceive();
             asm volatile("lsl r0, r0, #24\n\tlsr %0, r0, #24"
                          : "=r"(right_ready) : : "r0");
-            func_080ED17C(1);
+            YieldTaskForUpdates(1);
             if (left_ready == 0) {
                 goto loop_19;
             }
         } while (right_ready == 0);
-        func_0809AEC0((s32 *)&sp20[0], 4, 0x08109220);
-        func_0809B00C((s32 *)&sp20[1], 4, 0x08109220);
+        BeginLinkSend((s32 *)&sp20[0], 4, 0x08109220);
+        BeginLinkReceive((s32 *)&sp20[1], 4, 0x08109220);
         do {
 loop_22:
-            func_0809AEF4();
+            PollLinkSend();
             asm volatile("lsl r0, r0, #24\n\tlsr %0, r0, #24"
                          : "=r"(left_ready) : : "r0");
-            func_0809B040();
+            PollLinkReceive();
             asm volatile("lsl r0, r0, #24\n\tlsr %0, r0, #24"
                          : "=r"(right_ready) : : "r0");
-            func_080ED17C(1);
+            YieldTaskForUpdates(1);
             if (left_ready == 0) {
                 goto loop_22;
             }
         } while (right_ready == 0);
         }
         RunMenuScript(0x080282AA);
-        func_080981F0(0x02030564, 0, 4, 0, 0);
-        func_0809844C(((u16 *)&sp1C)[0], 5, 0, 2, 5, 0, 0);
-        func_0809844C(((u16 *)&sp1C)[1], 5, 0, 2, 5, 7, 0);
-        func_0809844C(sp20[1], 0xA, 0, 2, 7, 3, 0);
+        PrintWindowTextAt(0x02030564, 0, 4, 0, 0);
+        PrintWindowNumberAt(((u16 *)&sp1C)[0], 5, 0, 2, 5, 0, 0);
+        PrintWindowNumberAt(((u16 *)&sp1C)[1], 5, 0, 2, 5, 7, 0);
+        PrintWindowNumberAt(sp20[1], 0xA, 0, 2, 7, 3, 0);
         RequestWindowRefresh();
         DestroySprite(temp_r7);
         var_r4 = 0;
         do {
-            func_080ED17C(1);
+            YieldTaskForUpdates(1);
             var_r4 += 1;
         } while ((u32) var_r4 <= 0x12BU);
-        func_08096308(0x10, 0x10);
-        while ((func_0809669C() << 0x18) == 0) {
-            func_080ED17C(1);
+        StartScreenTransition(SCREEN_TRANSITION_CHECKERBOARD_CONCEAL, 0x10);
+        while ((IsScreenTransitionComplete() << 0x18) == 0) {
+            YieldTaskForUpdates(1);
         }
         RunMenuScript(0x08028378);
-        func_08096308(0xF, 0x10);
+        StartScreenTransition(SCREEN_TRANSITION_CHECKERBOARD_REVEAL, 0x10);
         var_r5 = 0;
         var_r7 = 0;
 loop_31:
@@ -222,12 +228,12 @@ loop_31:
             break;
         case 0x1000:                                /* switch 1 */
             RunMenuScript(0x0802843B);
-            func_080E0F44();
+            DrawEnabledBattleRules();
             M2C_FIELD(&sp18, u8 *, 0) = 0U;
             M2C_FIELD(&sp18, u8 *, 1) = (u8) ((u32) (CallFunctionR0(*(s32 *)0x03000010) * 0xE) >> 0xF);
             menu_table = (s32 *)0x087A3624;
             asm volatile("" : "+r"(menu_table));
-            func_08098248(*(s32 *)(M2C_FIELD(&sp18, u8 *, 0) * 4 + (u32)menu_table), 0, 7);
+            PrintWindowText(*(s32 *)(M2C_FIELD(&sp18, u8 *, 0) * 4 + (u32)menu_table), 0, 7);
             var_r5 = 0x1010;
             break;
         case 0x1010:                                /* switch 1 */
@@ -336,18 +342,18 @@ block_115:
             var_r5 = 0x1510;
             break;
         case 0x1510:                                /* switch 1 */
-            func_080E125C();
+            BuildBattleRuleToggleTextList();
             RunMenuScript(0x08028755);
             if (*(u8 *)0x0200A882 == 1) {
-                if ((func_080E6664((u8) (*(u8 *)0x0200A880 + 0x11)) << 0x18) == 0) {
+                if ((TestBattleRuleFlag((u8) (*(u8 *)0x0200A880 + 0x11)) << 0x18) == 0) {
                     var_r0_3 = *(u8 *)0x0200A880 + 0x11;
 block_145:
-                    func_080E65B4(var_r0_3);
+                    EnableBattleRule(var_r0_3);
                 } else {
-                    func_080E664C(*(u8 *)0x0200A880 + 0x11);
+                    DisableBattleRule(*(u8 *)0x0200A880 + 0x11);
                 }
 block_147:
-                func_080E0F44();
+                DrawEnabledBattleRules();
                 break;
             }
 block_148:
@@ -373,7 +379,7 @@ block_149:
                 ClearWindow(7);
                 menu_table = (s32 *)0x087A3624;
                 asm volatile("" : "+r"(menu_table));
-                func_08098248(*(s32 *)(M2C_FIELD(&sp18, u8 *, 0) * 4 + (u32)menu_table), 0, 7);
+                PrintWindowText(*(s32 *)(M2C_FIELD(&sp18, u8 *, 0) * 4 + (u32)menu_table), 0, 7);
             }
             var_r0 = 0x08028875;
 block_156:
@@ -384,19 +390,19 @@ block_156:
             register s32 receive_ready asm("r5");
 
             RunMenuScript(0x080284B8);
-            func_0809AEC0((s32 *)0x0202F090, 4, 0x0810922C);
+            BeginLinkSend((s32 *)0x0202F090, 4, 0x0810922C);
             do {
-                func_0809AEF4();
+                PollLinkSend();
                 asm volatile("lsl r0, r0, #24\n\tlsr %0, r0, #24"
                              : "=r"(receive_ready) : : "r0");
-                func_080ED17C(1);
+                YieldTaskForUpdates(1);
             } while (receive_ready == 0);
-            func_0809AEC0(&sp18, 2, 0x08109238);
+            BeginLinkSend(&sp18, 2, 0x08109238);
             do {
-                func_0809AEF4();
+                PollLinkSend();
                 asm volatile("lsl r0, r0, #24\n\tlsr %0, r0, #24"
                              : "=r"(receive_ready) : : "r0");
-                func_080ED17C(1);
+                YieldTaskForUpdates(1);
             } while (receive_ready == 0);
             var_r5 = 0x3000;
             break;
@@ -405,110 +411,110 @@ block_156:
             register s32 send_ready asm("r4");
 
             RunMenuScript(0x08028983);
-            func_0809B00C((s32 *)0x0202F090, 4, 0x0810922C);
+            BeginLinkReceive((s32 *)0x0202F090, 4, 0x0810922C);
             do {
-                func_0809B040();
+                PollLinkReceive();
                 asm volatile("lsl r0, r0, #24\n\tlsr %0, r0, #24"
                              : "=r"(send_ready) : : "r0");
-                func_080ED17C(1);
+                YieldTaskForUpdates(1);
             } while (send_ready == 0);
-            func_0809B00C(&sp18, 2, 0x08109238);
+            BeginLinkReceive(&sp18, 2, 0x08109238);
             do {
-                func_0809B040();
+                PollLinkReceive();
                 asm volatile("lsl r0, r0, #24\n\tlsr %0, r0, #24"
                              : "=r"(send_ready) : : "r0");
-                func_080ED17C(1);
+                YieldTaskForUpdates(1);
             } while (send_ready == 0);
             RunMenuScript(0x080289DE);
-            func_080E0F44();
+            DrawEnabledBattleRules();
             menu_table = (s32 *)0x087A3624;
             asm volatile("" : "+r"(menu_table));
-            func_08098248(*(s32 *)(M2C_FIELD(&sp18, u8 *, 0) * 4 + (u32)menu_table), 0, 7);
+            PrintWindowText(*(s32 *)(M2C_FIELD(&sp18, u8 *, 0) * 4 + (u32)menu_table), 0, 7);
             var_r5 = 0x3000;
             break;
         }
         case 0x3000:                                /* switch 1 */
             M2C_FIELD((void *)0x0203055C, s8 *, 0) = 1;
             RunMenuScript(0x08028A0F);
-            func_08092D8C(2, 0x080E1439);
+            StartTask(2, LINK_BATTLE_START_HANDSHAKE_TASK);
             var_r5 = 0x3020;
             break;
         case 0x3010:                                /* switch 1 */
             RunMenuScript(0x08028A69);
-            func_080E0F44();
+            DrawEnabledBattleRules();
             menu_table = (s32 *)0x087A3624;
             asm volatile("" : "+r"(menu_table));
-            func_08098248(*(s32 *)(M2C_FIELD(&sp18, u8 *, 0) * 4 + (u32)menu_table), 0, 7);
+            PrintWindowText(*(s32 *)(M2C_FIELD(&sp18, u8 *, 0) * 4 + (u32)menu_table), 0, 7);
             M2C_FIELD(GetWindow(0), u8 *, 0x16) = var_r9;
             var_r5 = 0x3020;
             break;
         case 0x3020:                                /* switch 1 */
-            func_0809844C(func_080E13C4(), 0xA, 0, 2, 2, 4, 0);
+            PrintWindowNumberAt(GetPlayerPartyScore(), 0xA, 0, 2, 2, 4, 0);
             RunMenuScript(0x08028AF1);
             temp_r0_7 = *(u8 *)0x0200A880;
             var_r9 = temp_r0_7;
             switch ((u32) temp_r0_7) {              /* switch 5; irregular */
             case 0:                                 /* switch 5 */
                 RunMenuScript(0x08028AF5);
-                func_080B0D38();
+                RunPlayerEquipmentMenu();
                 var_r5 = 0x3010;
                 break;
             case 1:                                 /* switch 5 */
                 RunMenuScript(0x08028AF5);
-                if (func_080B2108() == 2) {
+                if (RunPlayerPilotAssignmentMenu() == 2) {
                     RequestWindowRefresh();
-                    func_080ED17C(1);
-                    func_080B35D4(0);
+                    YieldTaskForUpdates(1);
+                    RunPlayerTeamFormationMenu(0);
                 }
                 var_r5 = 0x3010;
                 break;
             case 2:                                 /* switch 5 */
                 RunMenuScript(0x08028AF5);
-                func_080B35D4(0);
+                RunPlayerTeamFormationMenu(0);
                 var_r5 = 0x3010;
                 break;
             case 3:                                 /* switch 5 */
                 for (var_r4_3 = 1; var_r4_3 <= 0x10U;
                      var_r4_3 = (u32)(u8)(var_r4_3 + 1)) {
-                    if (((func_080E6664((u8) var_r4_3) << 0x18) != 0) &&
-                        ((func_080E60B0(var_r4_3) << 0x18) == 0)) {
+                    if (((TestBattleRuleFlag((u8) var_r4_3) << 0x18) != 0) &&
+                        ((DoesPlayerTeamMeetBattleRule(var_r4_3) << 0x18) == 0)) {
                         PlaySong(0x58);
                         RunMenuScript(0x08028AFE);
                         break;
                     }
                 }
                 if (var_r4_3 == 0x11) {
-                    *(s8 *)0x02032E57 = 0;
+                    *(s8 *)&gLinkBattleStartLocalDecision = LINK_BATTLE_START_READY;
                     RunMenuScript(0x08028B33);
                     var_r5 = 0x7000;
                 }
                 break;
             case 4:                                 /* switch 5 */
-                *(s8 *)0x02032E57 = 1;
+                *(s8 *)&gLinkBattleStartLocalDecision = LINK_BATTLE_START_CANCEL;
                 var_r5 = 0x7000;
                 break;
             }
             break;
         case 0x7000:                                /* switch 1 */
-            *(s8 *)0x02032E54 = 1;
-            while (*(u8 *)0x02032E55 == 0 ||
-                   *(u8 *)0x02032E56 == 0) {
-                func_080ED17C(1);
+            *(s8 *)&gLinkBattleStartHandshakePhase = LINK_BATTLE_START_SEND_DECISION;
+            while (gLinkBattleStartSendComplete == 0 ||
+                   gLinkBattleStartReceiveComplete == 0) {
+                YieldTaskForUpdates(1);
             }
             RunMenuScript(0x08028B7E);
-            func_08092E0C(2);
+            StopTask(2);
             var_r7 = 1;
             break;
         }
         if (var_r7 == 0) {
             goto loop_31;
         }
-        func_080BE600();
-        func_080E9128();
-        func_080E96E8();
-        func_08096308(0x10, 0x10);
-        while ((func_0809669C() << 0x18) == 0) {
-            func_080ED17C(1);
+        ResetAllBattleEffects();
+        InitializePlayerBattleUnits();
+        ExchangeLinkBattleUnitRecords();
+        StartScreenTransition(SCREEN_TRANSITION_CHECKERBOARD_CONCEAL, 0x10);
+        while ((IsScreenTransitionComplete() << 0x18) == 0) {
+            YieldTaskForUpdates(1);
         }
         *(s8 *)0x02032EF8 = 0x1D;
         PlayOrContinueSong(0x1D);

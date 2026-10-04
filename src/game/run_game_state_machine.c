@@ -20,13 +20,13 @@ extern void RunLinkTrade(void) asm("func_080E1F40");
 extern void RunDatabase(void) asm("func_080E3EA0");
 extern void RunChallengeMenu(void) asm("func_080E4A44");
 extern void RunCredits(void) asm("func_080E5000");
-extern void func_080E6690(void);
-extern void func_080ED17C(s32);
+extern void ResetEquipmentStatBufferDepth(void) asm("func_080E6690");
+extern void YieldTaskForUpdates(s32) asm("func_080ED17C");
 
 void RunGameStateMachine(void) {
     u32 mode;
 
-    func_080E6690();
+    ResetEquipmentStatBufferDepth();
     *(u8 *)0x02030665 = 0;
     *(u8 *)0x03000075 = 1;
     for (;;) {
@@ -52,7 +52,7 @@ void RunGameStateMachine(void) {
         case GAME_MODE_LOAD_GAME: RunLoadGame(); break;
         case GAME_MODE_CLEAR_DATA_SAVE: RunClearDataSave(); break;
         case GAME_MODE_CREDITS: RunCredits(); break;
-        case (u32)GAME_MODE_WAIT: func_080ED17C(1); break;
+        case (u32)GAME_MODE_WAIT: YieldTaskForUpdates(1); break;
         }
     }
 }

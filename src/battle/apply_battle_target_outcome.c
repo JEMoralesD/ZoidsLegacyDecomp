@@ -6,7 +6,7 @@ M2C_UNK ApplyBattleEquipmentEffects(void *, u8, u8, u8, s32) asm("func_080BEE04"
 u8 FindBattleEffect(u8, u8, s32) asm("func_080BF464");                      /* extern */
 M2C_UNK RemoveBattleEffect(u8, u8) asm("func_080BF514");                      /* extern */
 M2C_UNK RemoveBattleActionEffects(u8, u8, u8) asm("func_080BFAD0");                  /* extern */
-M2C_UNK func_080C02B4(u8, u8);                      /* extern */
+M2C_UNK RemoveBattleUnitFromTurnOrder(u8, u8) asm("func_080C02B4");                      /* extern */
 void *AcquireEquipmentStatBuffer() asm("func_080E669C");                              /* extern */
 M2C_UNK ReleaseEquipmentStatBuffer() asm("func_080E66B8");                            /* extern */
 M2C_UNK RecalculateBattleUnitStats(u8, u8) asm("func_080E8B08");                      /* extern */
@@ -15,7 +15,7 @@ M2C_UNK jtbl_080E9EC4();                            /* static */
 extern u8 gBattleState[];
 extern u8 gBattleSetup[];
 
-struct FrameE9DCC {
+struct BattleTargetOutcomeFrame {
     void *target_preview;
     void *target_unit;
     void *equipment_stats;
@@ -28,7 +28,7 @@ struct FrameE9DCC {
 void ApplyBattleTargetOutcome(s32 target_side, s32 target_unit_slot, s32 action_index) asm("func_080E9DCC");
 
 void ApplyBattleTargetOutcome(s32 target_side, s32 target_unit_slot, s32 action_index) {
-    volatile struct FrameE9DCC frame;
+    volatile struct BattleTargetOutcomeFrame frame;
     register s32 temp_r2_2 asm("r2");
     s16 temp_r3_3;
     s32 temp_r1_3;
@@ -318,7 +318,7 @@ block_13:
     goto block_38;
 block_16:
     {
-        register u32 mask_r0 asm("r0") = 0x40;
+        register u32 mask_r0 asm("r0") = BATTLE_OUTCOME_FREEZE_RESISTED;
         register u32 flags_r1 asm("r1") = frame.outcome_flags;
 
         mask_r0 &= flags_r1;
@@ -334,7 +334,7 @@ block_18:
     }
     goto block_38;
 block_20:
-    func_080C02B4(target_side_index, target_slot_index);
+    RemoveBattleUnitFromTurnOrder(target_side_index, target_slot_index);
     goto block_38;
 block_21:
     {
@@ -564,7 +564,7 @@ block_40:
 block_42:
     {
         register u32 work_r0 asm("r0");
-        register u32 work_r1 asm("r1") = 0xA078;
+        register u32 work_r1 asm("r1") = BATTLE_STORY_DAMAGE_OFFSET(bit_damage_taken);
 
         work_r1 += phase_sl;
         work_r0 = *(u16 *)work_r1;
@@ -629,7 +629,7 @@ block_45:
         if (work_r0 != 0x22) {
             goto block_52;
         }
-        work_r0 = 0xA07A;
+        work_r0 = BATTLE_STORY_DAMAGE_OFFSET(leon_damage_taken_from_bit);
         work_r1 = temp_r4 + work_r0;
         work_r2 = frame.sp30;
         work_r0 = (s32)work_r2 >> 16;

@@ -63,7 +63,7 @@ typedef struct {
     u8 trackCount;
     u8 priority;
     u8 command;
-    u8 field0B;
+    u8 priorityCheckEnabled;
     u32 clock;
     u8 pad10[8];
     u8 *memory;
@@ -78,11 +78,14 @@ typedef struct {
     ToneData *tone;
 } MusicPlayerInfo;
 
-extern void func_80EAEF4(MusicPlayerInfo *player, MusicPlayerTrack *track);
-extern void func_80EAEDA_regs(MusicPlayerInfo *, MusicPlayerTrack *,
-                              ToneData *, u32) asm("func_80EAEDA");
-extern void func_80EAEF6_regs(volatile u8 *, MusicPlayerTrack *,
-                              u8 *, u32) asm("func_80EAEF6");
+extern void ReadNextMusicCommandByteIntoR3WithAddressGuard(
+    MusicPlayerInfo *player, MusicPlayerTrack *track) asm("func_080EAEF4");
+extern void ApplyMusicAddressGuardToR3(
+    MusicPlayerInfo *player, MusicPlayerTrack *track,
+    ToneData *source, u32 value) asm("func_80EAEDA");
+extern void ReadMusicCommandByteFromR2WithAddressGuard(
+    volatile u8 *io_register, MusicPlayerTrack *track,
+    u8 *command_cursor, u32 unused_r3) asm("func_80EAEF6");
 
 #define SAVE_LINK_REGISTER() asm volatile("mov ip, lr" : : : "memory")
 #define RETURN_THROUGH_LINK_REGISTER() asm volatile("bx ip")

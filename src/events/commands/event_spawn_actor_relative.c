@@ -1,8 +1,8 @@
 #include "m2c_prelude.h"
 #include "../event_script.h"
 extern s32 SeekEventCommand(u8, s32, s32) asm("func_080A016C");
-extern void *func_080A9D78(u8, u8, s32, s32, s32, s32, s32, s32);
-extern u8 func_080A9EF0(s32);
+extern void *CreateFieldActor(u8, u8, s32, s32, s32, s32, s32, s32) asm("func_080A9D78");
+extern u8 FindFieldActorSlot(s32) asm("func_080A9EF0");
 extern u8 D_020218E4[];
 extern s32 D_020325A0[][0x12];
 
@@ -27,10 +27,10 @@ s32 EventSpawnActorRelative(s32 script_slot, void **cursor) {
         if (flag == 0) {
             scale = 0x10;
         }
-        index = func_080A9EF0(pre[3]);
+        index = FindFieldActorSlot(pre[3]);
         if (index != 0xFF) {
             input = (u8 *)*saved_cursor;
-            result = func_080A9D78(input[2], input[1],
+            result = CreateFieldActor(input[2], input[1],
                 D_020325A0[index][2] + ((input[4] * scale) << 8),
                 D_020325A0[index][3] + ((input[5] * scale) << 8),
                 (s32)input[6], 0, (s32)input[7], 0);
@@ -48,9 +48,9 @@ s32 EventSpawnActorRelative(s32 script_slot, void **cursor) {
                     {
                         u8 *p = (u8 *)((index << 6) + (u32)base);
                         if (p[0x5A94] == 1 && p[0x5AC5] == 1) {
-                            index = func_080A9EF0(0xD);
+                            index = FindFieldActorSlot(0xD);
                             if (index == 0xFF) {
-                                *(void **)0x02032994 = func_080A9D78(
+                                *(void **)0x02032994 = CreateFieldActor(
                                     0x4B, 0xD,
                                     *(s32 *)((u8 *)result + 8),
                                     *(s32 *)((u8 *)result + 12),

@@ -70,6 +70,7 @@ success:
         { register u32 next asm("r1") = word_index + 1; next <<= 24; word_index = next >> 24; }
     } while (word_index <= 31);
     {
+        /* The native full-pool path returns the value left in r0. */
         register u32 terminal asm("r0");
         return terminal;
     }

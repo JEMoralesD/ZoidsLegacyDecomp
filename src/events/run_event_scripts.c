@@ -6,7 +6,7 @@ extern void *gEventCommandHandlers[];
 
 extern void DestroySprite(void *) asm("func_08094554");
 extern void RunMenuScript(s32) asm("func_08098BB4");
-extern void func_080ED17C(s32);
+extern void YieldTaskForUpdates(s32) asm("func_080ED17C");
 extern s32 CallFunctionR2(s32, void *, void *) asm("func_080ECD64");
 
 void RunEventScripts(void)
@@ -83,6 +83,6 @@ skip_message:
             goto loop;
         }
     }
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     goto again;
 }

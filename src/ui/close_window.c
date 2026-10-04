@@ -6,17 +6,17 @@ struct Window {
     u16 width;
     u16 height;
     u8 padC[7];
-    u8 refresh_id;
+    u8 slot;
     u8 pad14[6];
-    u8 extra_width;
+    u8 frame_decoration_width;
 };
 
 struct Window *GetWindow(u8) asm("func_809716C");
 void SendWindowToBack(u8) asm("func_8097240");
 void ReleaseWindowTile(u16) asm("func_8097980");
 
-extern u32 D_02021664;
-extern s32 D_02021670;
+extern u32 gWindowFrameTileOffset asm("D_02021664");
+extern s32 gWindowTextTileOffset asm("D_02021670");
 
 void CloseWindow(u8 window_id)
 {
@@ -38,7 +38,7 @@ rows:
             }
         }
         {
-            register u32 *base asm("r3") = &D_02021664;
+            register u32 *base asm("r3") = &gWindowFrameTileOffset;
             u32 * volatile base_spill;
 
             do {
@@ -55,7 +55,7 @@ rows:
                 saved_tile_id = tile_id;
 
                 if (tile_id < *base || tile_id >= *base + 0x40) {
-                    u16 removal = (u16)(saved_tile_id - D_02021670);
+                    u16 removal = (u16)(saved_tile_id - gWindowTextTileOffset);
                     base_spill = base;
                     ReleaseWindowTile(removal);
                     base = base_spill;
@@ -87,7 +87,7 @@ test_rows:
 
         if (flags & 8) {
             register s32 y asm("r0") = 0;
-            register u32 *base asm("r3") = &D_02021664;
+            register u32 *base asm("r3") = &gWindowFrameTileOffset;
 
             do {
                 register s32 x asm("r5") = 0;
@@ -97,7 +97,7 @@ test_rows:
                 asm volatile("" : "+r"(next_y));
 
                 {
-                    register s32 entry_width asm("r2") = window->extra_width;
+                    register s32 entry_width asm("r2") = window->frame_decoration_width;
                     asm volatile("" : "+r"(entry_width));
                     if (x >= entry_width) {
                         goto extra_columns_done;
@@ -109,7 +109,7 @@ test_rows:
                     do {
                         *tile++ = *load_base;
                         x++;
-                    } while (x < window->extra_width);
+                    } while (x < window->frame_decoration_width);
                 }
 extra_columns_done:
                 y = next_y;
@@ -119,5 +119,5 @@ extra_columns_done:
 
         window->flags = flags | 6;
     }
-    SendWindowToBack(window->refresh_id);
+    SendWindowToBack(window->slot);
 }

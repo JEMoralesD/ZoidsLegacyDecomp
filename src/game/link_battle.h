@@ -1,0 +1,19 @@
+#ifndef LINK_BATTLE_H
+#define LINK_BATTLE_H
+
+enum LinkBattleStartHandshakePhase {
+    LINK_BATTLE_START_WAIT_FOR_DECISION = 0,
+    LINK_BATTLE_START_SEND_DECISION = 1,
+    LINK_BATTLE_START_WAIT_FOR_SEND = 2
+};
+
+enum LinkBattleStartDecision {
+    LINK_BATTLE_START_READY = 0,
+    LINK_BATTLE_START_CANCEL = 1
+};
+
+enum LinkBattleStartTask {
+    LINK_BATTLE_START_HANDSHAKE_TASK = 0x080E1439
+};
+
+#endif

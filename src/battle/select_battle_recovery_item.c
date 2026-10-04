@@ -19,19 +19,19 @@ struct BattleRecoveryTarget {
 extern u8 D_0200A880;
 extern u8 D_0200A881;
 extern u8 D_0200A882;
-extern u8 D_020322A8[];
-extern u8 D_020322B1;
+extern u8 gRecoveryItemSelectionIds[] asm("D_020322A8");
+extern u8 gRecoveryItemSelectionCount asm("D_020322B1");
 extern u8 gBattleState[];
 
 extern void PlaySong(s32) asm("func_08092E84");
 extern void *GetWindow(s32) asm("func_0809716C");
-extern void func_080981F0(s32, s32, s32, s32, s32);
+extern void PrintWindowTextAt(s32, s32, s32, s32, s32) asm("func_080981F0");
 extern void ClearWindow(s32) asm("func_080986B4");
 extern void RunMenuScript(s32) asm("func_08098BB4");
-extern void func_080AC7BC(s32);
-extern void func_080B654C(void);
+extern void AppendRecoveryItemInventoryRows(s32) asm("func_080AC7BC");
+extern void BuildPlayerRecoveryItemSelection(void) asm("func_080B654C");
 extern u8 FindBattleEffect(s32, u8, s32) asm("func_080BF464");
-extern u8 func_080C05A8(s32, u8);
+extern u8 SelectActiveBattleUnit(s32, u8) asm("func_080C05A8");
 
 static inline void reject_selection(void)
 {
@@ -52,8 +52,8 @@ s32 SelectBattleRecoveryItem(void)
     void *window;
     struct BattleRecoveryTarget *record;
 
-    func_080B654C();
-    if (D_020322B1 == 0)
+    BuildPlayerRecoveryItemSelection();
+    if (gRecoveryItemSelectionCount == 0)
         goto no_units;
 
     menu_column = 0;
@@ -66,7 +66,7 @@ state_loop:
     switch (state) {
     case BATTLE_ITEM_MENU_OPEN:
         RunMenuScript(0x08003990);
-        func_080AC7BC(1);
+        AppendRecoveryItemInventoryRows(1);
         window = GetWindow(1);
         *(u8 *)((u8 *)window + 0x14) = menu_column;
         *(u8 *)((u8 *)window + 0x16) = menu_row;
@@ -78,7 +78,7 @@ state_loop:
         ClearWindow(2);
         messages = (s32 *)0x087EEE38;
         asm volatile("" : "+r"(messages));
-        func_080981F0(messages[D_020322A8[menu_row]], 0, 2, 0, 0);
+        PrintWindowTextAt(messages[gRecoveryItemSelectionIds[menu_row]], 0, 2, 0, 0);
         RunMenuScript(0x080039E6);
         menu_column = D_0200A881;
         menu_row = D_0200A880;
@@ -93,7 +93,7 @@ state_loop:
         goto state_loop;
 
 response_one:
-        if ((u32)(u8)(D_020322A8[menu_row] - 8) <= 1) {
+        if ((u32)(u8)(gRecoveryItemSelectionIds[menu_row] - 8) <= 1) {
             PlaySong(0x58);
             RunMenuScript(0x08003A60);
         } else {
@@ -118,12 +118,12 @@ response_two:
     }
 
 select:
-    unit_slot = func_080C05A8(0, unit_slot);
+    unit_slot = SelectActiveBattleUnit(0, unit_slot);
     if (unit_slot == BATTLE_UNIT_NOT_SELECTED)
         goto restart;
 
     invalid = 0;
-    recovery_kind = D_020322A8[menu_row] - 1;
+    recovery_kind = gRecoveryItemSelectionIds[menu_row] - 1;
     switch (recovery_kind) {
     case BATTLE_RECOVER_HP_300 - 1:
     case BATTLE_RECOVER_HP_150 - 1:
@@ -189,7 +189,7 @@ select:
 
     if (invalid != 0)
         goto state_loop;
-    gBattleState[0xA07D] = D_020322A8[menu_row];
+    gBattleState[0xA07D] = gRecoveryItemSelectionIds[menu_row];
     gBattleState[0xA07E] = unit_slot;
     return 1;
 

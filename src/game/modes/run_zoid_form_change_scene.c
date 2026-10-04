@@ -1,18 +1,18 @@
 #include "m2c_prelude.h"
 #include "../game_state.h"
 
-M2C_UNK func_08092D8C(s32, M2C_UNK);                /* extern */
-M2C_UNK func_08092E0C(s32);                         /* extern */
+M2C_UNK StartTask(s32, M2C_UNK) asm("func_08092D8C");                /* extern */
+M2C_UNK StopTask(s32) asm("func_08092E0C");                         /* extern */
 M2C_UNK PlayOrContinueSong(u8) asm("func_08092E74");                          /* extern */
 M2C_UNK PlaySong(s32) asm("func_08092E84");                         /* extern */
 M2C_UNK ClearSpritePools() asm("func_08094330");                            /* extern */
 void *CreateSprite(s32, s32, s32, s16, s32, s32, s32, s32, s32) asm("func_08094484"); /* extern */
 M2C_UNK DestroySpriteGroup(s32) asm("func_08095114");                         /* extern */
-M2C_UNK func_0809538C(s32, s32, s32, s32, s32, s32, s32, s32); /* extern */
-M2C_UNK func_0809A1BC(M2C_UNK, M2C_UNK, M2C_UNK);   /* extern */
-s32 func_0809A35C(u8, u8, s32, s32, s32, s32);      /* extern */
+M2C_UNK ConfigureDisplayWindows(s32, s32, s32, s32, s32, s32, s32, s32) asm("func_0809538C"); /* extern */
+M2C_UNK LoadCompressedPalette(M2C_UNK, M2C_UNK, M2C_UNK) asm("func_0809A1BC");   /* extern */
+s32 LoadZoidBodyGraphicsWithWramStaging(u8, u8, s32, s32, s32, s32) asm("func_0809A35C");      /* extern */
 M2C_UNK BiosLz77ToVram(M2C_UNK, s32) asm("func_080ECD34");                /* extern */
-M2C_UNK func_080ED17C(s32);                         /* extern */
+M2C_UNK YieldTaskForUpdates(s32) asm("func_080ED17C");                         /* extern */
 extern u8 gBattleState[];
 asm(".set D_02033FCC, 0x02033FCC");
 extern u8 D_02033FCC;
@@ -461,7 +461,7 @@ block_11:
                            gBattleState[0x27A4] != 0 ? 0x8018 : 0x18, 0);
     sp20 = 0;
     BiosLz77ToVram(0x083C422C, 0x06013000);
-    func_0809A1BC(0x083C5338, 0x05000260, 0x02002880);
+    LoadCompressedPalette(0x083C5338, 0x05000260, 0x02002880);
     BiosLz77ToVram(0x083C71E0, 0x06008000);
     BiosLz77ToVram(0x083C77FC,
                   (s32) (var_r4 = (u16 *)0x06001000));
@@ -483,14 +483,14 @@ loop_16:
     temp_r3 = gBattleState[0x27A4];
     temp_r1 = gBattleState + (temp_r3 * 0x1380) + (gBattleState[0x27A5] * 0x270);
     sp18 = temp_r1;
-    *(s32 *)0x02033F3C = func_0809A35C(M2C_FIELD(temp_r1, u8 *, 0), M2C_FIELD(temp_r1, u8 *, 1), 1, 0, (s32) temp_r3, 0x02002880);
-    func_0809538C(1, 0xF0, 0x50, 1, 0xF0, 0x50A0, 0, 0x3F);
+    *(s32 *)0x02033F3C = LoadZoidBodyGraphicsWithWramStaging(M2C_FIELD(temp_r1, u8 *, 0), M2C_FIELD(temp_r1, u8 *, 1), 1, 0, (s32) temp_r3, 0x02002880);
+    ConfigureDisplayWindows(1, 0xF0, 0x50, 1, 0xF0, 0x50A0, 0, 0x3F);
     *(s8 *)0x02033F54 = 1;
     D_02033F55 = 0;
     *(s16 *)0x0300004E = 0;
     exit_setup = &D_02033FCC;
     *exit_setup = 0;
-    func_08092D8C(2, 0x080CFD99);
+    StartTask(2, 0x080CFD99);
     PlayOrContinueSong(0x16U);
     var_r7 = 0;
     {
@@ -561,7 +561,7 @@ block_40:
     var_r0_5 = M2C_FIELD(temp_r6, u16 *, 4) + 3;
 block_41:
     M2C_FIELD(temp_r6, u16 *, 4) = var_r0_5;
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     if (*state0_side != 0) {
         goto block_44;
     }
@@ -632,7 +632,7 @@ block_63:
 block_66:
     PlaySong(0x59);
 block_67:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     state16_frame = M2C_FIELD(temp_r6, u16 *, 0x14);
     if ((u32) state16_frame > 0xBU) {
         goto block_69;
@@ -650,7 +650,7 @@ block_71:
     goto block_122;
 block_72:
     DestroySpriteGroup(*(void **)0x02033F3C);
-    *(void **)0x02033F3C = (void *)func_0809A35C(
+    *(void **)0x02033F3C = (void *)LoadZoidBodyGraphicsWithWramStaging(
         gBattleState[0x270E], M2C_FIELD(sp18, u8 *, 1), 1, 0,
         (s32)gBattleState[0x27A4], 0x02002880);
     var_r7 = 0x30;
@@ -693,7 +693,7 @@ block_84:
     }
     PlaySong(0x59);
 block_87:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     if (M2C_FIELD(temp_r6, s32 *, 0) & 4) {
         goto block_89;
     }
@@ -748,7 +748,7 @@ block_103:
     var_r0_9 += 0xFF;
 block_105:
     M2C_FIELD(temp_r6, u16 *, 4) = (u16) (var_r0_9 >> 8);
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     if (*state64_side != 0) {
         goto block_109;
     }
@@ -809,7 +809,7 @@ block_120:
         ".purgem bl\n\t"
         "bl \\target\n\t"
         ".endm");
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     if (*exit_flag == 0) {
         goto loop_116;
     }
@@ -821,7 +821,7 @@ block_122:
     }
     goto loop_18;
 block_124:
-    func_08092E0C(2);
+    StopTask(2);
     *(s32 *)0x02021690 = GAME_MODE_BATTLE;
     *(s8 *)0x02033F35 = 0;
     PlayOrContinueSong(*(u8 *)0x02032EF8);

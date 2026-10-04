@@ -1,106 +1,93 @@
 #include "m2c_prelude.h"
+#include "../../graphics/screen_effects.h"
 #include "../game_state.h"
 #include "../../battle/battle.h"
+#include "../../graphics/camera.h"
 
-struct ViewStateBBA04 {
-    s32 x;
-    s32 y;
-    s32 scale;
-    s16 width;
-    s16 field0E;
-    s16 field10;
-    u8 pad12[2];
-    s32 center_x;
-    s32 center_y;
-    s32 size;
-    u8 pad20[0x40];
-    s32 flags;
-};
-
-M2C_UNK func_08092E0C(s32);                         /* extern */
+M2C_UNK StopTask(s32) asm("func_08092E0C");                         /* extern */
 M2C_UNK PlayOrContinueSong(u8) asm("func_08092E74");                          /* extern */
 M2C_UNK PlaySong(s32) asm("func_08092E84");                         /* extern */
 M2C_UNK StopSong(u8) asm("func_08092EA0");                          /* extern */
 s32 IsSongPlayerStopped(s32) asm("func_08092EB0");                             /* extern */
-M2C_UNK func_08093AE8(M2C_UNK, s32);                /* extern */
-M2C_UNK func_08093B54();                            /* extern */
-M2C_UNK func_08093B7C();                            /* extern */
+M2C_UNK InitializePerspectiveScanlineBuffers(M2C_UNK, s32) asm("func_08093AE8");                /* extern */
+M2C_UNK StopPerspectiveScanlineCallback() asm("func_08093B54");                            /* extern */
+M2C_UNK UpdatePerspectiveScanlineBuffers() asm("func_08093B7C");                            /* extern */
 s32 WriteSaveBlock6() asm("func_08094110");                                /* extern */
 s32 CreateSprite(M2C_UNK, M2C_UNK, s32, s32, s32, s32, s32, s32, s32) asm("func_08094484"); /* extern */
 M2C_UNK DestroySprite(s32) asm("func_08094554");                         /* extern */
-M2C_UNK func_0809534C();                            /* extern */
-M2C_UNK func_08096308(s32, s32);                    /* extern */
-s32 func_0809669C();                                /* extern */
+M2C_UNK DisableDisplayWindows() asm("func_0809534C");                            /* extern */
+M2C_UNK StartScreenTransition(s32, s32) asm("func_08096308");                    /* extern */
+s32 IsScreenTransitionComplete() asm("func_0809669C");                                /* extern */
 s32 *GetWindow(s32) asm("func_0809716C");                            /* extern */
 M2C_UNK RequestWindowRefresh() asm("func_080972C8");                            /* extern */
-M2C_UNK func_080981F0(M2C_UNK, s32, s32, s32, s32); /* extern */
-M2C_UNK func_08098248(s32, s32, s32);               /* extern */
-M2C_UNK func_080984C4(u8, s32, s32, s32, s32);      /* extern */
+M2C_UNK PrintWindowTextAt(M2C_UNK, s32, s32, s32, s32) asm("func_080981F0"); /* extern */
+M2C_UNK PrintWindowText(s32, s32, s32) asm("func_08098248");               /* extern */
+M2C_UNK PrintWindowNumber(u8, s32, s32, s32, s32) asm("func_080984C4");      /* extern */
 M2C_UNK OpenWindow(s32, s32, u32, s32, s32, s32) asm("func_08098514"); /* extern */
 M2C_UNK ClearWindow(s32) asm("func_080986B4");                         /* extern */
-M2C_UNK func_080988C8(s32, s32);                    /* extern */
+M2C_UNK AppendWindowTextItem(s32, s32) asm("func_080988C8");                    /* extern */
 M2C_UNK RunMenuScript(M2C_UNK) asm("func_08098BB4");                     /* extern */
-M2C_UNK func_0809A9C8(s32, s32, s32, s32, s32, s32); /* extern */
-M2C_UNK func_0809AEA0();                            /* extern */
-M2C_UNK func_0809AEC0(M2C_UNK, s32, s32);           /* extern */
-u8 func_0809AEF4();                                 /* extern */
-M2C_UNK func_0809B00C(s32, s32, s32);               /* extern */
-u8 func_0809B040();                                 /* extern */
-M2C_UNK func_0809E204(u16, s32, s32, s32);          /* extern */
-M2C_UNK func_080B35D4(s32);                         /* extern */
-M2C_UNK func_080B6768(void *);                      /* extern */
-M2C_UNK func_080BAB3C();                            /* extern */
-M2C_UNK func_080BAF2C(s32, s32, s32, s32, s32, s32, s32); /* extern */
-M2C_UNK func_080BB224(s32, u8, u8, s32);            /* extern */
-s32 func_080BB654();                                /* extern */
-u8 func_080BB660();                                 /* extern */
-M2C_UNK func_080BB764();                            /* extern */
-M2C_UNK func_080BB7EC();                            /* extern */
-M2C_UNK func_080BB940();                            /* extern */
-M2C_UNK func_080BE560(u8, u8);                      /* extern */
-M2C_UNK func_080BE600();                            /* extern */
+M2C_UNK QueuePilotPortraitGraphics(s32, s32, s32, s32, s32, s32) asm("func_0809A9C8"); /* extern */
+M2C_UNK StopLinkConnection() asm("func_0809AEA0");                            /* extern */
+M2C_UNK BeginLinkSend(M2C_UNK, s32, s32) asm("func_0809AEC0");           /* extern */
+u8 PollLinkSend() asm("func_0809AEF4");                                 /* extern */
+M2C_UNK BeginLinkReceive(s32, s32, s32) asm("func_0809B00C");               /* extern */
+u8 PollLinkReceive() asm("func_0809B040");                                 /* extern */
+M2C_UNK RequestFieldMapChange(u16, s32, s32, s32) asm("func_0809E204");          /* extern */
+M2C_UNK RunPlayerTeamFormationMenu(s32) asm("func_080B35D4");                         /* extern */
+M2C_UNK BuildPlayerAlternateFormSelection(void *) asm("func_080B6768");                      /* extern */
+M2C_UNK UpdateBattleUnitGaugeGraphics() asm("func_080BAB3C");                            /* extern */
+M2C_UNK ConfigureBattleUnitSprites(s32, s32, s32, s32, s32, s32, s32) asm("func_080BAF2C"); /* extern */
+M2C_UNK StartBattleCameraTransition(s32, u8, u8, s32) asm("func_080BB224");            /* extern */
+s32 IsBattleCameraTransitionComplete() asm("func_080BB654");                                /* extern */
+u8 GetBattleEscapeChance() asm("func_080BB660");                                 /* extern */
+M2C_UNK UpdateCameraRotationMatrix() asm("func_080BB764");                            /* extern */
+M2C_UNK RestoreBitFromPlayerBackup() asm("func_080BB7EC");                            /* extern */
+M2C_UNK InitializeBattleFieldDisplay() asm("func_080BB940");                            /* extern */
+M2C_UNK ClearBattleUnitEffects(u8, u8) asm("func_080BE560");                      /* extern */
+M2C_UNK ResetAllBattleEffects() asm("func_080BE600");                            /* extern */
 M2C_UNK AddBattleEffect(u8, u8, s32, s32, s32, s32, s32, s32, s32, s32) asm("func_080BE65C"); /* extern */
 M2C_UNK QueueBattleEffectDisplay(u8, u8, s32, s32, s32, s32, s32, s32, s32, s32) asm("func_080BE9D8"); /* extern */
 u8 FindBattleEffect(u32, u32, s32) asm("func_080BF464");                    /* extern */
 M2C_UNK UpdateBattleRoundEffects() asm("func_080BF858");                            /* extern */
 M2C_UNK UpdateBattleUnitTurnEffects(u8, u8) asm("func_080BF984");                      /* extern */
 M2C_UNK RemoveBattleAttackEffects(u8, u8) asm("func_080BFA4C");                      /* extern */
-M2C_UNK func_080BFB90();                            /* extern */
+M2C_UNK RollBattleEffectRemovalMasks() asm("func_080BFB90");                            /* extern */
 M2C_UNK SwapBattleEffectMaskSides() asm("func_080BFCD8");                            /* extern */
-M2C_UNK func_080BFD1C(u8, u8);                      /* extern */
-M2C_UNK func_080C030C(s32);                         /* extern */
-M2C_UNK func_080C0AFC();                            /* extern */
-s32 func_080C1414();                                /* extern */
-s32 func_080C25DC(s32);                             /* extern */
-M2C_UNK func_080C2DD0(u8);                          /* extern */
-M2C_UNK func_080C3050(u8);                          /* extern */
-M2C_UNK func_080C35C4(u8);                          /* extern */
-M2C_UNK func_080C577C(s32);                         /* extern */
+M2C_UNK BattleTurnNoOp(u8, u8) asm("func_080BFD1C");                      /* extern */
+M2C_UNK BuildBattleTurnOrder(s32) asm("func_080C030C");                         /* extern */
+M2C_UNK EditPlayerDeckCommands() asm("func_080C0AFC");                            /* extern */
+s32 SelectPlayerBattleDeckCommand() asm("func_080C1414");                                /* extern */
+s32 PrepareBattleDeckCommandData(s32) asm("func_080C25DC");                             /* extern */
+M2C_UNK AnimateBattleCombinationDeparture(u8) asm("func_080C2DD0");                          /* extern */
+M2C_UNK AnimateBattleCombinationArrival(u8) asm("func_080C3050");                          /* extern */
+M2C_UNK ExecuteBattleDeckCommand(u8) asm("func_080C35C4");                          /* extern */
+M2C_UNK PromoteBattleRearRow(s32) asm("func_080C577C");                         /* extern */
 s32 SelectBattleRecoveryItem() asm("func_080C598C");                                /* extern */
 M2C_UNK UseBattleRecoveryItem(u8, u8, u8) asm("func_080C5C00");                  /* extern */
-M2C_UNK func_080C5D14();                            /* extern */
-M2C_UNK func_080C5DB4(s32);                         /* extern */
-u8 func_080C682C();                                 /* extern */
-M2C_UNK func_080C7190(s32);                         /* extern */
-M2C_UNK func_080C8538(s32, u8);                     /* extern */
-M2C_UNK func_080CA1A0();                            /* extern */
+M2C_UNK ResetBattleEffectDisplayQueue() asm("func_080C5D14");                            /* extern */
+M2C_UNK PresentQueuedBattleEffectResults(s32) asm("func_080C5DB4");                         /* extern */
+u8 CheckBattleResultAndPlayStoryScenes() asm("func_080C682C");                                 /* extern */
+M2C_UNK ProcessBattleOutcomeAndRewards(s32) asm("func_080C7190");                         /* extern */
+M2C_UNK ShowBattleUnitStatusViewer(s32, u8) asm("func_080C8538");                     /* extern */
+M2C_UNK ChooseRandomBattleAction() asm("func_080CA1A0");                            /* extern */
 u8 GetZoidFormId(void *, u8) asm("func_080E5320");                       /* extern */
-M2C_UNK func_080E5D98(u8, s32);                     /* extern */
-s32 func_080E6664(s32);                             /* extern */
-M2C_UNK func_080E6684();                            /* extern */
+M2C_UNK SubtractRecoveryItemsFromInventory(u8, s32) asm("func_080E5D98");                     /* extern */
+s32 TestBattleRuleFlag(s32) asm("func_080E6664");                             /* extern */
+M2C_UNK ClearBattleRules() asm("func_080E6684");                            /* extern */
 M2C_UNK BuildBattleTargetPreview(u8, s32, s32, s32, s32, s32, u32) asm("func_080E83A4"); /* extern */
 M2C_UNK BuildBattleActionChoices(s32, s32) asm("func_080E8554");                    /* extern */
 M2C_UNK RecalculateBattleUnitStats(u8, u8) asm("func_080E8B08");                      /* extern */
 M2C_UNK ApplyBattlePassiveEquipmentEffects(u8, u8) asm("func_080E90AC");                      /* extern */
-M2C_UNK func_080E9128();                            /* extern */
-M2C_UNK func_080E94A0(u8, u8);                      /* extern */
+M2C_UNK InitializePlayerBattleUnits() asm("func_080E9128");                            /* extern */
+M2C_UNK InitializeEnemyBattleUnitsFromEncounter(u8, u8) asm("func_080E94A0");                      /* extern */
 M2C_UNK RollBattleActionOutcomes() asm("func_080E9998");                            /* extern */
 M2C_UNK SwapBattleActionOutcomeSides() asm("func_080E9D48");                            /* extern */
 s32 IsBattleUnitActive(u32, u32) asm("func_080E9D88");                        /* extern */
-M2C_UNK func_080EA408(u8, u8);                      /* extern */
+M2C_UNK ApplyBattleAuxiliaryPilotEffects(u8, u8) asm("func_080EA408");                      /* extern */
 M2C_UNK BiosLz77ToVram(M2C_UNK, M2C_UNK) asm("func_080ECD34");            /* extern */
 u32 CallFunctionR0(s32) asm("func_080ECD5C");                             /* extern */
-M2C_UNK func_080ED17C(s32);                         /* extern */
+M2C_UNK YieldTaskForUpdates(s32) asm("func_080ED17C");                         /* extern */
 M2C_UNK jtbl_080BD764();                            /* static */
 M2C_UNK jtbl_080BD9A4();                            /* static */
 extern u8 gBattleState[];
@@ -126,8 +113,8 @@ asm(".set gGameMode_BBA04, 0x02021690");
 extern u32 gGameMode_BBA04;
 asm(".set D_02021698_BBA04, 0x02021698");
 extern u8 D_02021698_BBA04;
-extern u8 D_02032EEC[2][6];
-extern u8 *D_02032EBC[2][6];
+extern u8 gBattleUnitSpriteMotionStates[2][6] asm("D_02032EEC");
+extern u8 *gBattleUnitGaugeSprites[2][6] asm("D_02032EBC");
 
 void RunBattle(void) {
     struct {
@@ -600,7 +587,7 @@ block_101:
     }
     goto loop_105;
 block_104:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_105:
     if (IsSongPlayerStopped(0x52) == 0) {
         goto block_104;
@@ -632,9 +619,9 @@ loop_105:
         column_term += (u32)table;
         *output = *(u8 *)column_term;
         PlayOrContinueSong(*output);
-        func_080BE600();
-        func_080E9128();
-        func_080E94A0(state_base[3], state_base[4]);
+        ResetAllBattleEffects();
+        InitializePlayerBattleUnits();
+        InitializeEnemyBattleUnitsFromEncounter(state_base[3], state_base[4]);
     }
 block_107:
     {
@@ -694,7 +681,7 @@ block_107:
         address = base + offset;
         *(u16 *)address = zero;
     }
-    func_080BB940();
+    InitializeBattleFieldDisplay();
     counter = 0;
 loop_108:
     if ((IsBattleUnitActive(1U, counter) << 0x18) == 0) {
@@ -738,18 +725,18 @@ block_110:
     }
     }
     {
-        register struct ViewStateBBA04 *config asm("r1");
-        config = (struct ViewStateBBA04 *)0x030033C4;
-        config->center_x = 0x78;
-        config->center_y = 0x78;
-        config->size = 0x80;
-        config->flags = 0x20000;
+        register struct PerspectiveCamera *config asm("r1");
+        config = (struct PerspectiveCamera *)0x030033C4;
+        config->projection.screen_center_x = 0x78;
+        config->projection.screen_center_y = 0x78;
+        config->projection.focal_length = 0x80;
+        config->far_clip_depth = 0x20000;
     }
-    func_080BB224(1, 0U, 0U, 1);
-    func_08093AE8(0x0202F094, 1);
+    StartBattleCameraTransition(1, 0U, 0U, 1);
+    InitializePerspectiveScanlineBuffers(0x0202F094, 1);
     *(u8 *)0x03000074 = (u8) (*(u8 *)0x03000074 | 1);
     RunMenuScript(0x080036D3);
-    func_08096308(1, 8);
+    StartScreenTransition(SCREEN_TRANSITION_FADE_FROM_BLACK, 8);
     *(u32 *)0x02030558 = 0x10U;
     goto block_643;
 block_113:
@@ -870,16 +857,16 @@ loop_125:
             ClearWindow(0);
             count_125 = stack.sp34;
             count_125 += var_r6_2;
-            func_080984C4(*count_125, 1, 0, 0, 0);
-            func_08098248(message_125, 0, 0);
-            func_08098248(table_125[stack.sp2C[var_r6_2]], 2, 0);
+            PrintWindowNumber(*count_125, 1, 0, 0, 0);
+            PrintWindowText(message_125, 0, 0);
+            PrintWindowText(table_125[stack.sp2C[var_r6_2]], 2, 0);
             if ((u32)*count_125 <= 1U) {
                 goto block_127;
             }
-            func_08098248(0x0810705C, 2, 0);
+            PrintWindowText(0x0810705C, 2, 0);
         }
 block_127:
-        func_08098248(message_125, 0, 0);
+        PrintWindowText(message_125, 0, 0);
         RunMenuScript(0x080036DC);
         {
             register u32 next_125 asm("r0") = var_r6_2 + 1;
@@ -919,14 +906,14 @@ loop_131:
         second_130 = *(u8 *)(carrier_130 + 1);
         carrier_130 += 0x38;
         carrier_130 = *(u8 *)carrier_130;
-        func_080BAF2C(first_130, second_130, carrier_130, 0,
+        ConfigureBattleUnitSprites(first_130, second_130, carrier_130, 0,
             counter_130, 0x10000U, 0);
     }
     {
         register u8 *status_130 asm("r0");
         register u32 one_130 asm("r1");
 
-        status_130 = (u8 *)D_02032EEC;
+        status_130 = (u8 *)gBattleUnitSpriteMotionStates;
         status_130 = (u8 *)(counter_130 + (u32)status_130);
         one_130 = 1;
         *status_130 = one_130;
@@ -942,7 +929,7 @@ block_133:
         goto loop_131;
     }
     }
-    func_080BB224(3, 0U, 0U, 0);
+    StartBattleCameraTransition(3, 0U, 0U, 0);
     goto block_191;
 block_136:
     if (M2C_FIELD((void *)0x0203055C, u8 *, 0) == 2) {
@@ -1024,21 +1011,21 @@ block_148:
 block_150:
     temp_r8 = CreateSprite(0x08359850, 0x0835985C, 0, 8, 0x68, 0x3C2, 0xD, 8, 0);
     RunMenuScript(0x08017BD3);
-    func_0809A9C8(0x23, 3, 0, 0x3C2, 0xD, 0x02002880);
+    QueuePilotPortraitGraphics(0x23, 3, 0, 0x3C2, 0xD, 0x02002880);
     RunMenuScript(0x08018B16);
-    func_0809A9C8(0x22, 0, 0, 0x3C2, 0xD, 0x02002880);
+    QueuePilotPortraitGraphics(0x22, 0, 0, 0x3C2, 0xD, 0x02002880);
     RunMenuScript(0x08018B89);
-    func_0809A9C8(0x22, 3, 0, 0x3C2, 0xD, 0x02002880);
+    QueuePilotPortraitGraphics(0x22, 3, 0, 0x3C2, 0xD, 0x02002880);
     RunMenuScript(0x08018BBC);
-    func_0809A9C8(0x1E, 0, 0, 0x3C2, 0xD, 0x02002880);
+    QueuePilotPortraitGraphics(0x1E, 0, 0, 0x3C2, 0xD, 0x02002880);
     RunMenuScript(0x08018C4E);
-    func_0809A9C8(0x22, 0, 0, 0x3C2, 0xD, 0x02002880);
+    QueuePilotPortraitGraphics(0x22, 0, 0, 0x3C2, 0xD, 0x02002880);
     RunMenuScript(0x08018C79);
-    func_0809A9C8(0x1E, 0, 0, 0x3C2, 0xD, 0x02002880);
+    QueuePilotPortraitGraphics(0x1E, 0, 0, 0x3C2, 0xD, 0x02002880);
     RunMenuScript(0x08018CF6);
-    func_0809A9C8(0x1E, 0, 0, 0x3C2, 0xD, 0x02002880);
+    QueuePilotPortraitGraphics(0x1E, 0, 0, 0x3C2, 0xD, 0x02002880);
     RunMenuScript(0x08018D61);
-    func_0809A9C8(0x22, 0, 0, 0x3C2, 0xD, 0x02002880);
+    QueuePilotPortraitGraphics(0x22, 0, 0, 0x3C2, 0xD, 0x02002880);
     RunMenuScript(0x08018DAF);
     asm volatile(
         "str r5, [sp]\n\t"
@@ -1052,9 +1039,9 @@ block_150:
         :
         : "r0", "r1", "r2", "r3", "lr", "cc", "memory");
     RunMenuScript(0x08018DE2);
-    func_0809A9C8(0x1E, 0, 0, 0x3C2, 0xD, 0x02002880);
+    QueuePilotPortraitGraphics(0x1E, 0, 0, 0x3C2, 0xD, 0x02002880);
     RunMenuScript(0x08018E74);
-    func_0809A9C8(0x1E, 3, 0, 0x3C2, 0xD, 0x02002880);
+    QueuePilotPortraitGraphics(0x1E, 3, 0, 0x3C2, 0xD, 0x02002880);
     RunMenuScript(0x08018EA1);
     DestroySprite(temp_r8);
     RunMenuScript(0x08017BE6);
@@ -1112,7 +1099,7 @@ block_165:
 block_166:
     {
         register u32 random_166 asm("r0") =
-            ((u32 (*)())func_080BB660)();
+            ((u32 (*)())GetBattleEscapeChance)();
         register u8 *limit_base_166 asm("r1") = gBattleState;
         register s32 limit_offset_166 asm("r2") = 0x270D;
         register u8 *limit_166 asm("r1");
@@ -1150,7 +1137,7 @@ block_169:
     }
     {
         register u32 random_174 asm("r0") =
-            ((u32 (*)())func_080BB660)();
+            ((u32 (*)())GetBattleEscapeChance)();
         register u8 *limit_base_174 asm("r1") = gBattleState;
         register s32 limit_offset_174 asm("r3") = 0x270D;
         register u8 *limit_174 asm("r1");
@@ -1187,24 +1174,24 @@ block_177:
     goto block_643;
 }
 block_179:
-    func_08096308(2, 8);
+    StartScreenTransition(SCREEN_TRANSITION_FADE_TO_BLACK, 8);
     goto loop_181;
 block_180:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_181:
-    if ((func_0809669C() << 0x18) == 0) {
+    if ((IsScreenTransitionComplete() << 0x18) == 0) {
         goto block_180;
     }
-    func_08092E0C(7);
-    func_08093B54();
+    StopTask(7);
+    StopPerspectiveScanlineCallback();
     *(u8 *)0x03000074 = 0U;
-    func_0809534C();
+    DisableDisplayWindows();
     *(s8 *)0x03000075 = 1;
     *(s8 *)0x0300603D = 1;
-    func_080B35D4(1);
-    func_080BE600();
-    func_080E9128();
-    func_080BB940();
+    RunPlayerTeamFormationMenu(1);
+    ResetAllBattleEffects();
+    InitializePlayerBattleUnits();
+    InitializeBattleFieldDisplay();
     {
     register u32 outer asm("r6");
     register u8 *base_seed asm("r4");
@@ -1245,7 +1232,7 @@ loop_184:
         second = record[1];
         record += 0x38;
         third = record[0];
-        func_080BAF2C(first, second, third, outer, inner, 0, 0);
+        ConfigureBattleUnitSprites(first, second, third, outer, inner, 0, 0);
     }
 block_186:
     {
@@ -1267,11 +1254,11 @@ block_186:
         goto loop_183;
     }
     }
-    func_080BB224(3, 0U, 0U, 1);
-    func_08093AE8(0x0202F094, 1);
+    StartBattleCameraTransition(3, 0U, 0U, 1);
+    InitializePerspectiveScanlineBuffers(0x0202F094, 1);
     *(u8 *)0x03000074 = (u8) (*(u8 *)0x03000074 | 1);
     RunMenuScript(0x080036D3);
-    func_08096308(1, 8);
+    StartScreenTransition(SCREEN_TRANSITION_FADE_FROM_BLACK, 8);
 block_189:
     *(u32 *)0x02030558 = 0x50U;
     goto block_643;
@@ -1297,7 +1284,7 @@ block_190:
         asm volatile("" : "+r"(second_stack_190));
         temp_r4_2 = CreateSprite(asset0_190, asset1_190, 0, 0xD8,
             second_stack_190, 0x3D9, 0xF, 8, 0);
-        func_080C0AFC();
+        EditPlayerDeckCommands();
         DestroySprite(first_result_190);
         DestroySprite(temp_r4_2);
     }
@@ -1307,7 +1294,7 @@ block_191:
 block_192:
     {
         register u32 outer_192 asm("r6") = 0;
-        register u8 ***slot_base_192 asm("r2") = D_02032EBC;
+        register u8 ***slot_base_192 asm("r2") = gBattleUnitGaugeSprites;
 loop_193:
         {
             register u32 inner_192 asm("r5") = 0;
@@ -1352,12 +1339,12 @@ block_196:
             }
         }
     }
-    func_080BAB3C();
-    func_080C577C(0);
+    UpdateBattleUnitGaugeGraphics();
+    PromoteBattleRearRow(0);
     *(u32 *)0x02030558 = 0x1010U;
     goto block_643;
 block_200:
-    func_080C030C(0);
+    BuildBattleTurnOrder(0);
     {
     register u32 outer asm("r6");
     register u8 *base_seed asm("r4");
@@ -1440,7 +1427,7 @@ block_205:
     *(u32 *)0x02030558 = 0x1020U;
     goto block_643;
 block_208:
-    func_080BB224(3, 1U, 0U, 0);
+    StartBattleCameraTransition(3, 1U, 0U, 0);
     if (*(u8 *)0x02030664 != 0) {
         goto block_211;
     }
@@ -1481,7 +1468,7 @@ block_214:
             goto block_219;
         }
     }
-    if ((func_080E6664(0x15) << 0x18) != 0) {
+    if ((TestBattleRuleFlag(0x15) << 0x18) != 0) {
         goto block_402;
     }
     {
@@ -1554,7 +1541,7 @@ block_236:
         register u32 side_236 asm("r0") = var_r5_6;
         register u32 index_236 asm("r1") = var_r4;
 
-        func_080C8538(side_236, index_236);
+        ShowBattleUnitStatusViewer(side_236, index_236);
     }
     var_r0_3 = 3;
     var_r1 = 1;
@@ -1583,12 +1570,12 @@ block_237:
         temp_r4_3 = CreateSprite(asset0_237, asset1_237, 0, 0xD8,
             second_stack_237, 0x3D9, 0xF, 8, 0);
     }
-    if ((func_080C1414() << 0x18) == 0) {
+    if ((SelectPlayerBattleDeckCommand() << 0x18) == 0) {
         goto block_241;
     }
     DestroySprite(temp_r7_2);
     DestroySprite(temp_r4_3);
-    if ((func_080C25DC(0) << 0x18) == 0) {
+    if ((PrepareBattleDeckCommandData(0) << 0x18) == 0) {
         goto block_643;
     }
     {
@@ -1653,7 +1640,7 @@ block_245:
         one = 0x22;
         *base = one;
     }
-    func_080C25DC(1);
+    PrepareBattleDeckCommandData(1);
     goto block_264;
 block_247:
     {
@@ -1663,15 +1650,15 @@ block_247:
     register u32 right_ready asm("r4");
     transfer = (u8 *)0x0203EBC8;
     asset = (u8 *)0x08107060;
-    func_0809AEC0(transfer, 4, asset);
+    BeginLinkSend(transfer, 4, asset);
     transfer += 4;
-    func_0809B00C(transfer, 4, asset);
+    BeginLinkReceive(transfer, 4, asset);
 loop_248:
-    left_ready = func_0809AEF4();
+    left_ready = PollLinkSend();
     left_ready = (u8)left_ready;
-    right_ready = func_0809B040();
+    right_ready = PollLinkReceive();
     right_ready = (u8)right_ready;
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     if (left_ready == 0) {
         goto loop_248;
     }
@@ -1697,7 +1684,7 @@ loop_248:
     left_data_offset = 0xA084;
     asm volatile("" : "+r"(left_data_offset));
     address = (u32)base + left_data_offset;
-    func_0809AEC0(address, 0x94, 0x0810706C);
+    BeginLinkSend(address, 0x94, 0x0810706C);
 block_252:
     right_flag_offset = 0xA080;
     asm volatile("" : "+r"(right_flag_offset));
@@ -1707,7 +1694,7 @@ block_252:
     }
     right_data_offset = 0xA118;
     address = (u32)base + right_data_offset;
-    func_0809B00C(address, 0x94, 0x0810706C);
+    BeginLinkReceive(address, 0x94, 0x0810706C);
 block_254:
     {
     register u8 *left_active asm("r7");
@@ -1723,7 +1710,7 @@ loop_255:
         goto block_258;
     }
     }
-    left_ready = func_0809AEF4();
+    left_ready = PollLinkSend();
     left_ready = (u8)left_ready;
     goto block_259;
 block_258:
@@ -1732,13 +1719,13 @@ block_259:
     if (*right_active != 1) {
         goto block_261;
     }
-    right_ready = func_0809B040();
+    right_ready = PollLinkReceive();
     right_ready = (u8)right_ready;
     goto block_262;
 block_261:
     right_ready = 1;
 block_262:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     if (left_ready == 0) {
         goto loop_255;
     }
@@ -1813,7 +1800,7 @@ block_273:
     goto block_638;
 block_274:
     ClearWindow(0);
-    func_080981F0(0x08107078, 0, 0, 0, 0);
+    PrintWindowTextAt(0x08107078, 0, 0, 0, 0);
     {
         register s32 *table asm("r1");
         register u32 index asm("r0");
@@ -1829,18 +1816,18 @@ block_274:
         index <<= 2;
         index += (u32)table;
         index = *(u32 *)index;
-        func_08098248(index, 0, 0);
+        PrintWindowText(index, 0, 0);
     }
-    func_08098248(0x08107090, 0, 0);
+    PrintWindowText(0x08107090, 0, 0);
     RequestWindowRefresh();
     *(u32 *)0x02030558 = 0x13F0U;
-    func_080C5D14();
-    func_080C35C4(*side_ptr);
+    ResetBattleEffectDisplayQueue();
+    ExecuteBattleDeckCommand(*side_ptr);
     goto block_643;
 block_276:
     {
         register u32 random_276 asm("r0") =
-            ((u32 (*)())func_080BB660)();
+            ((u32 (*)())GetBattleEscapeChance)();
         register s32 limit_offset_276 asm("r3") = 0x270D;
         register u8 *limit_276 asm("r1");
 
@@ -1960,19 +1947,19 @@ block_285:
         goto block_288;
     }
 block_287:
-    func_080CA1A0();
+    ChooseRandomBattleAction();
     RollBattleActionOutcomes();
 block_288:
     if (M2C_FIELD((void *)0x0203055C, u8 *, 0) != 1) {
         goto block_305;
     }
-    func_080BFB90();
+    RollBattleEffectRemovalMasks();
     if (*(u8 *)0x02032E89 != 0) {
         goto block_298;
     }
     {
     register u32 ready asm("r5");
-    func_0809AEC0(0x0203EBC8, 4, 0x08107094);
+    BeginLinkSend(0x0203EBC8, 4, 0x08107094);
     asm volatile(
         "1:\n\t"
         "bl func_0809AEF4\n\t"
@@ -1985,7 +1972,7 @@ block_288:
         : "=r"(ready)
         :
         : "r0", "r1", "r2", "r3", "lr", "cc", "memory");
-    func_0809AEC0(0x0203ECF8, 0x2E, 0x0810709C);
+    BeginLinkSend(0x0203ECF8, 0x2E, 0x0810709C);
     asm volatile(
         "1:\n\t"
         "bl func_0809AEF4\n\t"
@@ -1998,7 +1985,7 @@ block_288:
         : "=r"(ready)
         :
         : "r0", "r1", "r2", "r3", "lr", "cc", "memory");
-    func_0809AEC0(0x0203ED28, 0xC0, 0x081070A8);
+    BeginLinkSend(0x0203ED28, 0xC0, 0x081070A8);
     asm volatile(
         "1:\n\t"
         "bl func_0809AEF4\n\t"
@@ -2016,28 +2003,28 @@ block_288:
 block_298:
     {
     register u32 ready asm("r4");
-    func_0809B00C(0x0203EBCC, 4, 0x08107094);
+    BeginLinkReceive(0x0203EBCC, 4, 0x08107094);
 loop_299:
-    ready = func_0809B040();
+    ready = PollLinkReceive();
     ready = (u8)ready;
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     if (ready == 0) {
         goto loop_299;
     }
-    func_0809B00C(0x0203ECF8, 0x2E, 0x0810709C);
+    BeginLinkReceive(0x0203ECF8, 0x2E, 0x0810709C);
 loop_301:
-    ready = func_0809B040();
+    ready = PollLinkReceive();
     ready = (u8)ready;
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     if (ready == 0) {
         goto loop_301;
     }
     SwapBattleActionOutcomeSides();
-    func_0809B00C(0x0203ED28, 0xC0, 0x081070A8);
+    BeginLinkReceive(0x0203ED28, 0xC0, 0x081070A8);
 loop_303:
-    ready = func_0809B040();
+    ready = PollLinkReceive();
     ready = (u8)ready;
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     if (ready == 0) {
         goto loop_303;
     }
@@ -2049,7 +2036,7 @@ block_305:
     *(u8 *)0x02033F34 = 0U;
     goto block_633;
 block_307:
-    func_080BB940();
+    InitializeBattleFieldDisplay();
     {
     register u32 outer_307 asm("r6") = 0;
     register u32 zero_307_local asm("r8");
@@ -2057,7 +2044,7 @@ block_307:
 
     zero_307_local = outer_307;
     {
-        register u8 ***slot_seed_307 asm("r2") = D_02032EBC;
+        register u8 ***slot_seed_307 asm("r2") = gBattleUnitGaugeSprites;
 
         slot_base_307_local = slot_seed_307;
     }
@@ -2100,7 +2087,7 @@ loop_309:
         second_307 = *(u8 *)(record_307 + 1);
         record_307 += 0x38;
         record_307 = *(u8 *)record_307;
-        func_080BAF2C(first_307, second_307, record_307, outer_307,
+        ConfigureBattleUnitSprites(first_307, second_307, record_307, outer_307,
             inner_307, zero_307_local, zero_307_local);
         {
             register u32 slot_outer_307 asm("r0") = outer_307 << 1;
@@ -2136,12 +2123,12 @@ block_311:
         goto loop_308;
     }
     }
-    func_080BAB3C();
-    func_08093AE8(0x0202F094, 1);
+    UpdateBattleUnitGaugeGraphics();
+    InitializePerspectiveScanlineBuffers(0x0202F094, 1);
     *(u8 *)0x03000074 = (u8) (*(u8 *)0x03000074 | 1);
     RunMenuScript(0x080036D3);
-    func_08096308(1, 8);
-    func_080C5DB4(1);
+    StartScreenTransition(SCREEN_TRANSITION_FADE_FROM_BLACK, 8);
+    PresentQueuedBattleEffectResults(1);
     asm volatile("");
     goto block_332;
 block_315:
@@ -2189,7 +2176,7 @@ block_315:
     asm volatile("");
     goto block_633;
 block_316:
-    func_080BB940();
+    InitializeBattleFieldDisplay();
     {
     register u32 outer_316_local asm("r6") = 0;
     register u32 zero_316_local asm("r8");
@@ -2197,7 +2184,7 @@ block_316:
 
     zero_316_local = outer_316_local;
     {
-        register u8 ***slot_seed_316 asm("r4") = D_02032EBC;
+        register u8 ***slot_seed_316 asm("r4") = gBattleUnitGaugeSprites;
 
         asm volatile("" : "+r"(slot_seed_316));
         slot_base_316_local = slot_seed_316;
@@ -2240,7 +2227,7 @@ loop_318:
         second_316_local = *(u8 *)(record_316_local + 1);
         record_316_local += 0x38;
         record_316_local = *(u8 *)record_316_local;
-        func_080BAF2C(first_316_local, second_316_local, record_316_local,
+        ConfigureBattleUnitSprites(first_316_local, second_316_local, record_316_local,
             outer_316_local, inner_316_local, zero_316_local, zero_316_local);
         {
             register u32 slot_outer_316 asm("r0") = outer_316_local << 1;
@@ -2276,11 +2263,11 @@ block_320:
         goto loop_317;
     }
     }
-    func_080BAB3C();
-    func_08093AE8(0x0202F094, 1);
+    UpdateBattleUnitGaugeGraphics();
+    InitializePerspectiveScanlineBuffers(0x0202F094, 1);
     *(u8 *)0x03000074 = (u8) (*(u8 *)0x03000074 | 1);
     RunMenuScript(0x080036D3);
-    func_08096308(1, 8);
+    StartScreenTransition(SCREEN_TRANSITION_FADE_FROM_BLACK, 8);
     {
         register u32 row_316_tail asm("r0");
         register u32 col_316_tail asm("r1") = (u32)gBattleState;
@@ -2294,9 +2281,9 @@ block_320:
         col_offset_316_tail = (u32)D_off_27A5_BBA04;
         col_316_tail += col_offset_316_tail;
         col_316_tail = *(u8 *)col_316_tail;
-        func_080EA408(row_316_tail, col_316_tail);
+        ApplyBattleAuxiliaryPilotEffects(row_316_tail, col_316_tail);
     }
-    func_080C5DB4(1);
+    PresentQueuedBattleEffectResults(1);
     goto block_332;
 block_323:
     {
@@ -2305,7 +2292,7 @@ block_323:
         register u8 *row asm("r1");
 
         carrier = 0x02032E89;
-        func_080C2DD0(*(u8 *)carrier);
+        AnimateBattleCombinationDeparture(*(u8 *)carrier);
         base = gBattleState;
         {
             register u32 selected_323 asm("r0") = *(u8 *)carrier;
@@ -2348,7 +2335,7 @@ block_323:
     *(u8 *)0x02033F34 = 2U;
     goto block_643;
 block_325:
-    func_080BB940();
+    InitializeBattleFieldDisplay();
     RunMenuScript(0x080036D3);
     {
         register u8 *selection asm("r0") = gBattleState;
@@ -2356,11 +2343,11 @@ block_325:
 
         asm volatile("" : "+r"(selection_offset));
         selection += selection_offset;
-        func_080C3050(*selection);
+        AnimateBattleCombinationArrival(*selection);
     }
     {
         register u32 outer_325 asm("r6") = 0;
-        register u8 ***slot_base_325 asm("r2") = D_02032EBC;
+        register u8 ***slot_base_325 asm("r2") = gBattleUnitGaugeSprites;
 loop_326:
         {
             register u32 inner_325 asm("r5") = 0;
@@ -2405,7 +2392,7 @@ block_329:
             }
         }
     }
-    func_080BAB3C();
+    UpdateBattleUnitGaugeGraphics();
 block_332:
     *(u32 *)0x02030558 = 0x1400U;
     goto block_643;
@@ -2423,7 +2410,7 @@ block_333:
         destination_base += destination_offset;
         *destination_base = selection_address;
     }
-    func_080C5DB4(2);
+    PresentQueuedBattleEffectResults(2);
     var_r0_6 = 0x1400;
     goto block_494;
 block_335:
@@ -2432,7 +2419,7 @@ block_335:
     register u8 *saved_state_335 asm("r6");
     register u32 state_mode_335 asm("r1");
 
-    temp_r4_8 = func_080C682C();
+    temp_r4_8 = CheckBattleResultAndPlayStoryScenes();
     if (temp_r4_8 == 0) {
         goto block_556;
     }
@@ -2442,7 +2429,7 @@ block_335:
     if (state_mode_335 != 0xA) {
         goto block_338;
     }
-    func_080BB7EC();
+    RestoreBitFromPlayerBackup();
 block_338:
     if (!(4 & temp_r4_8)) {
         goto block_341;
@@ -2481,7 +2468,7 @@ block_347:
     if (temp_r0_8 != 2) {
         goto block_350;
     }
-    func_080C577C(1);
+    PromoteBattleRearRow(1);
     var_r0_5 = BATTLE_PHASE_SELECT_NEXT_UNIT;
     goto block_638;
 block_350:
@@ -2673,9 +2660,9 @@ block_360:
             work_r1_360_c += 0xB0;
             *slot_360_c = (u8 *)work_r1_360_c;
         }
-        func_080C5D14();
+        ResetBattleEffectDisplayQueue();
         UpdateBattleUnitTurnEffects(*row_360, *col_360);
-        func_080C5DB4(1);
+        PresentQueuedBattleEffectResults(1);
         BuildBattleActionChoices(*row_360, *col_360);
         var_r0_4 = 0x2020;
         goto block_549;
@@ -2683,7 +2670,7 @@ block_360:
 block_361:
     {
         register u32 outer_361 asm("r6") = 0;
-        register u8 ***slot_base_361 asm("r2") = D_02032EBC;
+        register u8 ***slot_base_361 asm("r2") = gBattleUnitGaugeSprites;
 loop_362:
         {
             register u32 inner_361 asm("r5") = 0;
@@ -2728,7 +2715,7 @@ block_365:
             }
         }
     }
-    func_080BAB3C();
+    UpdateBattleUnitGaugeGraphics();
     goto block_451;
 block_368:
 {
@@ -2783,7 +2770,7 @@ block_374:
     register u8 *list_374 asm("r8");
     register u32 mode_374 asm("r0");
     ClearWindow(0);
-    func_08098248(0x081070B0, 0, 0);
+    PrintWindowText(0x081070B0, 0, 0);
     {
         register u32 *table_374 asm("r1") = (u32 *)0x087EDD54;
         register u32 record_offset_374 asm("r2") = (u32)D_off_27A8_BBA04;
@@ -2796,7 +2783,7 @@ block_374:
         record_374 <<= 2;
         record_374 += (u32)table_374;
         record_374 = *(u32 *)record_374;
-        func_08098248(record_374, 0, 0);
+        PrintWindowText(record_374, 0, 0);
     }
     list_head_374 = stack.sp24;
     list_head_374[0] = temp_r4_9;
@@ -2857,7 +2844,7 @@ block_379:
         register u32 record_379 asm("r0") = base_379 + record_offset_379;
 
         record_379 = *(u32 *)record_379;
-        func_080B6768((void *)record_379);
+        BuildPlayerAlternateFormSelection((void *)record_379);
     if (*(u8 *)0x02032472 == 0) {
         goto block_381;
     }
@@ -2873,12 +2860,12 @@ block_379:
 block_381:
     temp_r0_10 = var_r4_3 * 2;
     OpenWindow(1, 0, (u32) ((0xE - temp_r0_10) << 0x17) >> 0x18, 0xA, (s32) (u8) (temp_r0_10 + 2), 0x80);
-    func_080988C8(1, 0x081070D0);
-    func_080988C8(1, 0x081070E0);
+    AppendWindowTextItem(1, 0x081070D0);
+    AppendWindowTextItem(1, 0x081070E0);
     if (M2C_FIELD((void *)0x0203055C, u8 *, 0) == 1) {
         goto block_383;
     }
-    func_080988C8(1, 0x081070F0);
+    AppendWindowTextItem(1, 0x081070F0);
 block_383:
     {
         register u32 record_offset_383 asm("r3") = (u32)D_off_27AC_BBA04;
@@ -2904,19 +2891,19 @@ block_383:
             goto block_386;
         }
     }
-    func_080988C8(1, 0x081070FC);
+    AppendWindowTextItem(1, 0x081070FC);
 block_386:
     if (*(u8 *)0x02032472 == 0) {
         goto block_389;
     }
-    func_080988C8(1, 0x08107110);
+    AppendWindowTextItem(1, 0x08107110);
     goto block_389;
     }
     }
 }
 block_388:
     ClearWindow(0);
-    func_08098248(0x08107118, 0, 0);
+    PrintWindowText(0x08107118, 0, 0);
     {
         register u32 *table_388 asm("r1") = (u32 *)0x087EDD54;
         register u32 carrier_388 asm("r0") = (u32)gBattleState;
@@ -2929,7 +2916,7 @@ block_388:
         carrier_388 <<= 2;
         carrier_388 += (u32)table_388;
         carrier_388 = *(u32 *)carrier_388;
-        func_08098248(carrier_388, 0, 0);
+        PrintWindowText(carrier_388, 0, 0);
     }
     RequestWindowRefresh();
 block_389:
@@ -2947,7 +2934,7 @@ block_389:
         asm volatile("" : "+r"(col_offset_389));
         carrier_389 += col_offset_389;
         carrier_389 = *(u8 *)carrier_389;
-        func_080BB224(5, row_389, carrier_389, 0);
+        StartBattleCameraTransition(5, row_389, carrier_389, 0);
     }
     *(u32 *)0x02030558 = 0x2040U;
     goto block_643;
@@ -3032,7 +3019,7 @@ block_396:
     if (selected_396 != 2) {
         goto block_400;
     }
-    if ((func_080E6664(0x14) << 0x18) != 0) {
+    if ((TestBattleRuleFlag(0x14) << 0x18) != 0) {
         goto block_402;
     }
     {
@@ -3049,7 +3036,7 @@ block_400:
     if (selected_396 != 4) {
         goto block_406;
     }
-    if ((func_080E6664(0x16) << 0x18) == 0) {
+    if ((TestBattleRuleFlag(0x16) << 0x18) == 0) {
         goto block_404;
     }
 block_402:
@@ -3112,7 +3099,7 @@ block_417:
         }
     }
     ClearWindow(0);
-    func_08098248(0x081070B0, 0, 0);
+    PrintWindowText(0x081070B0, 0, 0);
     {
         register u32 *table_417 asm("r1") = (u32 *)0x087EDD54;
         register u32 record_offset_417 asm("r2") = (u32)D_off_27A8_BBA04;
@@ -3127,7 +3114,7 @@ block_417:
         record_417 <<= 2;
         record_417 += (u32)table_417;
         record_417 = *(u32 *)record_417;
-        func_08098248(record_417, 0, 0);
+        PrintWindowText(record_417, 0, 0);
     }
     goto block_643;
 block_419:
@@ -3139,7 +3126,7 @@ block_420:
         register u32 first_420 asm("r0") = var_r5_12;
         register u32 second_420 asm("r1") = (u8) var_r4_4;
 
-        func_080C8538(first_420, second_420);
+        ShowBattleUnitStatusViewer(first_420, second_420);
     }
     {
         register u32 carrier_420 asm("r2") = (u32)gBattleState;
@@ -3160,13 +3147,13 @@ block_420:
                          : "r"(col_offset_420)
                          : "cc");
             carrier_420 = *(u8 *)carrier_420;
-            func_080BB224(5, row_420, carrier_420, 1);
+            StartBattleCameraTransition(5, row_420, carrier_420, 1);
         }
     }
     goto block_643;
 }
 block_421:
-    func_080BB224(var_r0_3, var_r1, var_r2_2, 1);
+    StartBattleCameraTransition(var_r0_3, var_r1, var_r2_2, 1);
     goto block_643;
 block_422:
     {
@@ -3181,18 +3168,18 @@ block_422:
             goto loop_426;
         }
     }
-    func_080CA1A0();
+    ChooseRandomBattleAction();
     goto block_450;
 block_425:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_426:
-    if ((func_080BB654() << 0x18) == 0) {
+    if ((IsBattleCameraTransitionComplete() << 0x18) == 0) {
         goto block_425;
     }
     if (M2C_FIELD((void *)0x0203055C, u8 *, 0) == 1) {
         goto block_432;
     }
-    func_080CA1A0();
+    ChooseRandomBattleAction();
     {
         register u32 base_426 asm("r1") = (u32)gBattleState;
         register u32 row_offset_426 asm("r2") = (u32)D_off_27A4_BBA04;
@@ -3228,11 +3215,11 @@ block_432:
 {
     register u32 ready_432 asm("r4");
 
-    func_0809B00C(0x0203EBCC, 4, 0x08107094);
+    BeginLinkReceive(0x0203EBCC, 4, 0x08107094);
 loop_433:
-    ready_432 = func_0809B040();
+    ready_432 = PollLinkReceive();
     ready_432 = (u8)ready_432;
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     if (ready_432 == 0) {
         goto loop_433;
     }
@@ -3255,21 +3242,21 @@ loop_433:
                          : "=r"(transfer_address_432)
                          : "r"(base_432), "r"(transfer_offset_432)
                          : "cc");
-            func_0809B00C(transfer_address_432, 0x2E, 0x0810709C);
+            BeginLinkReceive(transfer_address_432, 0x2E, 0x0810709C);
         }
 loop_436:
-    ready_432 = func_0809B040();
+    ready_432 = PollLinkReceive();
     ready_432 = (u8)ready_432;
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     if (ready_432 == 0) {
         goto loop_436;
     }
     SwapBattleActionOutcomeSides();
-    func_0809B00C(0x0203ED28, 0xC0, 0x081070A8);
+    BeginLinkReceive(0x0203ED28, 0xC0, 0x081070A8);
 loop_438:
-    ready_432 = func_0809B040();
+    ready_432 = PollLinkReceive();
     ready_432 = (u8)ready_432;
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     if (ready_432 == 0) {
         goto loop_438;
     }
@@ -3283,12 +3270,12 @@ block_440:
                      : "=r"(transfer_address_432)
                      : "r"(base_432), "r"(transfer_offset_440)
                      : "cc");
-        func_0809B00C(transfer_address_432, 0x30, 0x081070A8);
+        BeginLinkReceive(transfer_address_432, 0x30, 0x081070A8);
     }
 loop_441:
-    ready_432 = func_0809B040();
+    ready_432 = PollLinkReceive();
     ready_432 = (u8)ready_432;
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     if (ready_432 == 0) {
         goto loop_441;
     }
@@ -3332,7 +3319,7 @@ loop_447:
             selected = GetZoidFormId(record, (u32)list_value);
             selected <<= 24;
             selected >>= 22;
-            func_080988C8(1, table[selected / 4]);
+            AppendWindowTextItem(1, table[selected / 4]);
         }
         {
             register u32 next asm("r0");
@@ -3373,12 +3360,12 @@ block_451:
     *(u32 *)0x02030558 = 0x2030U;
     goto block_643;
 block_453:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_454:
-    if ((func_080BB654() << 0x18) == 0) {
+    if ((IsBattleCameraTransitionComplete() << 0x18) == 0) {
         goto block_453;
     }
-    func_080BFB90();
+    RollBattleEffectRemovalMasks();
     if (M2C_FIELD((void *)0x0203055C, u8 *, 0) != 1) {
         goto block_461;
     }
@@ -3399,19 +3386,19 @@ loop_454:
                 goto block_461;
             }
         }
-        func_0809AEC0(flag_address_453, 4, 0x08107094);
+        BeginLinkSend(flag_address_453, 4, 0x08107094);
 loop_458:
-        ready_453 = func_0809AEF4();
+        ready_453 = PollLinkSend();
         ready_453 = (u8)ready_453;
-        func_080ED17C(1);
+        YieldTaskForUpdates(1);
         if (ready_453 == 0) {
             goto loop_458;
         }
-        func_0809AEC0(0x0203ED28, 0x30, 0x081070A8);
+        BeginLinkSend(0x0203ED28, 0x30, 0x081070A8);
 loop_460:
-        ready_453 = func_0809AEF4();
+        ready_453 = PollLinkSend();
         ready_453 = (u8)ready_453;
-        func_080ED17C(1);
+        YieldTaskForUpdates(1);
         if (ready_453 == 0) {
             goto loop_460;
         }
@@ -3420,7 +3407,7 @@ block_461:
     *(u32 *)0x02030558 = 0x2400U;
     goto block_643;
 block_462:
-    func_080C5D14();
+    ResetBattleEffectDisplayQueue();
     {
         register u32 base_462 asm("r1") = (u32)gBattleState;
         register u32 row_offset_462 asm("r4") = (u32)D_off_27A4_BBA04;
@@ -3477,7 +3464,7 @@ case 4:                                             /* switch 1 */
     goto block_633;
 case 5:                                             /* switch 1 */
     {
-        register u8 *(*slot_base)[6] asm("r4") = D_02032EBC;
+        register u8 *(*slot_base)[6] asm("r4") = gBattleUnitGaugeSprites;
         register u8 *case_base asm("r6");
         register u8 *row asm("r5");
         register u8 *col asm("r3");
@@ -3507,7 +3494,7 @@ case 5:                                             /* switch 1 */
             *(s32 *)(*(u8 **)slot_offset + 0x2C) = 0x20000;
         }
         {
-            register u8 *flag_base asm("r2") = &D_02032EEC[0][0];
+            register u8 *flag_base asm("r2") = &gBattleUnitSpriteMotionStates[0][0];
 
             {
                 register u32 row_value asm("r1") = *row;
@@ -3547,7 +3534,7 @@ case 5:                                             /* switch 1 */
                         register u32 row_value asm("r1");
                         register u32 flag_offset asm("r0");
 
-                        func_080ED17C(1);
+                        YieldTaskForUpdates(1);
                         flag_offset = (u32)D_off_27A5_BBA04;
                         asm volatile("add %0, %1, %2"
                                      : "=r"(loop_col)
@@ -3598,7 +3585,7 @@ default:
         }
     }
 block_475:
-    func_080BB940();
+    InitializeBattleFieldDisplay();
     {
     register u32 outer_475 asm("r6") = 0;
     register u32 zero_475_local asm("r8");
@@ -3606,7 +3593,7 @@ block_475:
 
     zero_475_local = outer_475;
     {
-        register u8 ***slot_seed_475 asm("r2") = D_02032EBC;
+        register u8 ***slot_seed_475 asm("r2") = gBattleUnitGaugeSprites;
 
         slot_base_475_local = slot_seed_475;
     }
@@ -3649,7 +3636,7 @@ loop_477:
         second_475 = *(u8 *)(record_475 + 1);
         record_475 += 0x38;
         record_475 = *(u8 *)record_475;
-        func_080BAF2C(first_475, second_475, record_475, outer_475,
+        ConfigureBattleUnitSprites(first_475, second_475, record_475, outer_475,
             inner_475, zero_475_local, zero_475_local);
         {
             register u32 slot_outer_475 asm("r0") = outer_475 << 1;
@@ -3684,7 +3671,7 @@ block_479:
         goto loop_476;
     }
     }
-    func_080BAB3C();
+    UpdateBattleUnitGaugeGraphics();
     if (*(u8 *)0x02033F35 != 0) {
         goto block_483;
     }
@@ -3708,7 +3695,7 @@ block_483:
         asm volatile("" : "+r"(col_offset));
         carrier += col_offset;
         carrier = *(u8 *)carrier;
-        func_080BB224(5, row, carrier, 1);
+        StartBattleCameraTransition(5, row, carrier, 1);
     }
     {
         register u32 *state_slot asm("r1") = (u32 *)0x02030558;
@@ -3716,7 +3703,7 @@ block_483:
         *state_slot = state_value;
     }
 block_484:
-    func_08093AE8(0x0202F094, 1);
+    InitializePerspectiveScanlineBuffers(0x0202F094, 1);
     *(u8 *)0x03000074 |= 1;
     RunMenuScript(0x080036D3);
     var_r0_8 = 1;
@@ -3789,13 +3776,13 @@ block_495:
         col_offset_495_first = (u32)D_off_27A5_BBA04;
         base_495_first += col_offset_495_first;
         base_495_first = *(u8 *)base_495_first;
-        func_080BFD1C(row_495_first, base_495_first);
+        BattleTurnNoOp(row_495_first, base_495_first);
     }
     goto loop_497;
 block_496:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_497:
-    if ((func_0809669C() << 0x18) == 0) {
+    if ((IsScreenTransitionComplete() << 0x18) == 0) {
         goto block_496;
     }
     {
@@ -3814,15 +3801,15 @@ loop_497:
         RemoveBattleAttackEffects(row_495_second, base_495_second);
     }
 block_499:
-    func_080C5DB4(1);
+    PresentQueuedBattleEffectResults(1);
     goto block_539;
 block_501:
-    func_080BFD1C(gBattleState[0x27A4], gBattleState[0x27A5]);
+    BattleTurnNoOp(gBattleState[0x27A4], gBattleState[0x27A5]);
     goto loop_503;
 block_502:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_503:
-    if ((func_0809669C() << 0x18) == 0) {
+    if ((IsScreenTransitionComplete() << 0x18) == 0) {
         goto block_502;
     }
     AddBattleEffect(gBattleState[0x27A4], gBattleState[0x27A5], -1, 0, 0, 0, 0x1A, 0, 1, 0);
@@ -3869,7 +3856,7 @@ block_508:
         }
     }
 block_510:
-    func_080C5DB4(0);
+    PresentQueuedBattleEffectResults(0);
     goto block_539;
 block_512:
     {
@@ -3892,7 +3879,7 @@ block_512:
             col_offset_512 = (u32)D_off_27A5_BBA04;
             col_value_512 = (u32)base + col_offset_512;
             col_value_512 = *(u8 *)col_value_512;
-            func_080BFD1C(row_value_512, col_value_512);
+            BattleTurnNoOp(row_value_512, col_value_512);
         }
         {
             register u32 row_value_512 asm("r1") = *row;
@@ -3902,36 +3889,36 @@ block_512:
             UseBattleRecoveryItem(*(u8 *)(record_512 + 0xA07D), row_value_512,
                            *(u8 *)(record_512 + 0xA07E));
         }
-        func_080E5D98((base + (*row * 4))[0xA07D], 1);
+        SubtractRecoveryItemsFromInventory((base + (*row * 4))[0xA07D], 1);
     }
     goto loop_515;
 block_514:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_515:
-    if ((func_0809669C() << 0x18) == 0) {
+    if ((IsScreenTransitionComplete() << 0x18) == 0) {
         goto block_514;
     }
     goto block_499;
 block_517:
-    func_080BFD1C(gBattleState[0x27A4], gBattleState[0x27A5]);
+    BattleTurnNoOp(gBattleState[0x27A4], gBattleState[0x27A5]);
     goto loop_520;
 block_519:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_520:
-    if ((func_0809669C() << 0x18) == 0) {
+    if ((IsScreenTransitionComplete() << 0x18) == 0) {
         goto block_519;
     }
     goto block_510;
 block_522:
-    func_080BFD1C(gBattleState[0x27A4], gBattleState[0x27A5]);
+    BattleTurnNoOp(gBattleState[0x27A4], gBattleState[0x27A5]);
     goto loop_525;
 block_524:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 loop_525:
-    if ((func_0809669C() << 0x18) == 0) {
+    if ((IsScreenTransitionComplete() << 0x18) == 0) {
         goto block_524;
     }
-    func_080EA408(gBattleState[0x27A4], gBattleState[0x27A5]);
+    ApplyBattleAuxiliaryPilotEffects(gBattleState[0x27A4], gBattleState[0x27A5]);
     goto block_499;
 block_527:
     {
@@ -4001,7 +3988,7 @@ block_527:
 
             asm volatile("" : : "r"(first_row_527));
             col = base + 0x27A5;
-            func_080BE560(first_row_527, *col);
+            ClearBattleUnitEffects(first_row_527, *col);
         }
         ApplyBattlePassiveEquipmentEffects(*row, *col);
         RecalculateBattleUnitStats(*row, *col);
@@ -4017,15 +4004,15 @@ block_527:
             record = *(u8 **)record_address_527;
         }
         zero = 0;
-        func_080BAF2C(record[0], record[1], record[0x38], *row, *col,
+        ConfigureBattleUnitSprites(record[0], record[1], record[0x38], *row, *col,
                      *row == 0 ? 0x10000 : 0xFFFF0000, zero);
 
-        D_02032EEC[gBattleState[0x27A4]][gBattleState[0x27A5]] = 1;
-        while ((func_0809669C() << 0x18) == 0) {
-            func_080ED17C(1);
+        gBattleUnitSpriteMotionStates[gBattleState[0x27A4]][gBattleState[0x27A5]] = 1;
+        while ((IsScreenTransitionComplete() << 0x18) == 0) {
+            YieldTaskForUpdates(1);
         }
         {
-            register u8 *status_base_527 asm("r4") = (u8 *)D_02032EEC;
+            register u8 *status_base_527 asm("r4") = (u8 *)gBattleUnitSpriteMotionStates;
             register u8 *base_527_wait asm("r2") = gBattleState;
             register u8 *row_address_527 asm("r6");
             register u8 *saved_base_527 asm("r7");
@@ -4057,7 +4044,7 @@ block_527:
 
                 status_base_527 = saved_base_527;
 loop_538_local:
-                func_080ED17C(1);
+                YieldTaskForUpdates(1);
                 {
                     register u32 loop_column_offset_527 asm("r3") =
                         (u32)D_off_27A5_BBA04;
@@ -4090,7 +4077,7 @@ block_541:
     register u8 *saved_state_541 asm("r6");
     register u32 state_mode_541 asm("r1");
 
-    temp_r4_14 = func_080C682C();
+    temp_r4_14 = CheckBattleResultAndPlayStoryScenes();
     if (temp_r4_14 != 0) {
         goto block_545;
     }
@@ -4120,7 +4107,7 @@ block_545:
     if (state_mode_541 != 0xA) {
         goto block_547;
     }
-    func_080BB7EC();
+    RestoreBitFromPlayerBackup();
 block_547:
     if (!(4 & temp_r4_14)) {
         goto block_550;
@@ -4160,34 +4147,34 @@ block_556:
     goto block_643;
     }
 block_558:
-    func_080C5D14();
-    func_080BFB90();
+    ResetBattleEffectDisplayQueue();
+    RollBattleEffectRemovalMasks();
     if (M2C_FIELD((void *)0x0203055C, u8 *, 0) != 1) {
         goto block_567;
     }
     if (*(u8 *)0x0300603C == 0) {
         goto block_564;
     }
-    func_0809AEC0(0x0203ED28, 0x30, 0x081070A8);
+    BeginLinkSend(0x0203ED28, 0x30, 0x081070A8);
     {
     register u32 ready_561 asm("r5");
 loop_561:
-    ready_561 = func_0809AEF4();
+    ready_561 = PollLinkSend();
     ready_561 = (u8)ready_561;
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     if (ready_561 == 0) {
         goto loop_561;
     }
     }
     goto block_567;
 block_564:
-    func_0809B00C(0x0203ED28, 0x30, 0x081070A8);
+    BeginLinkReceive(0x0203ED28, 0x30, 0x081070A8);
     {
     register u32 ready_565 asm("r4");
 loop_565:
-    ready_565 = func_0809B040();
+    ready_565 = PollLinkReceive();
     ready_565 = (u8)ready_565;
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     if (ready_565 == 0) {
         goto loop_565;
     }
@@ -4195,7 +4182,7 @@ loop_565:
     SwapBattleEffectMaskSides();
 block_567:
     UpdateBattleRoundEffects();
-    func_080C5DB4(1);
+    PresentQueuedBattleEffectResults(1);
     {
         register u8 *state_base asm("r4") = gBattleState;
         register u32 count_offset asm("r3") = 0x270C;
@@ -4270,7 +4257,7 @@ block_579:
         arg2 = matched_work + arg2;
         arg2 = *(u16 *)arg2;
         arg2 <<= 0xB;
-        func_0809E204(arg0, arg1, arg2, 0);
+        RequestFieldMapChange(arg0, arg1, arg2, 0);
     }
     {
         register u32 value asm("r0");
@@ -4355,7 +4342,7 @@ block_581:
         arg2 = matched_work + arg2;
         arg2 = *(u16 *)arg2;
         arg2 <<= 0xB;
-        func_0809E204(arg0, arg1, arg2, 0);
+        RequestFieldMapChange(arg0, arg1, arg2, 0);
     }
     {
         register u32 value asm("r0");
@@ -4425,8 +4412,8 @@ block_581:
     }
     goto block_596;
 block_583:
-    func_080C7190(0);
-    func_080E6684();
+    ProcessBattleOutcomeAndRewards(BATTLE_OUTCOME_DEFEAT);
+    ClearBattleRules();
     {
         register u8 *state_load asm("r2");
         register u32 range asm("r0");
@@ -4570,10 +4557,10 @@ block_595:
         }
     }
 block_596:
-    func_08092E0C(3);
+    StopTask(3);
     *(u8 *)0x02030664 = 0;
     *(u32 *)0x02021690 = GAME_MODE_FIELD;
-    func_08096308(2, 0x20);
+    StartScreenTransition(SCREEN_TRANSITION_FADE_TO_BLACK, 0x20);
     goto block_643;
     }
 block_598:
@@ -4585,15 +4572,15 @@ block_598:
     register u32 left_ready_598 asm("r5");
     register u32 right_ready_598 asm("r4");
 
-    func_0809AEC0(transfer_598, 4, 0x08107130);
+    BeginLinkSend(transfer_598, 4, 0x08107130);
     transfer_598 += 4;
-    func_0809B00C(transfer_598, 4, 0x0810713C);
+    BeginLinkReceive(transfer_598, 4, 0x0810713C);
 loop_599:
-    left_ready_598 = func_0809AEF4();
+    left_ready_598 = PollLinkSend();
     left_ready_598 = (u8)left_ready_598;
-    right_ready_598 = func_0809B040();
+    right_ready_598 = PollLinkReceive();
     right_ready_598 = (u8)right_ready_598;
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     if (left_ready_598 == 0) {
         goto loop_599;
     }
@@ -4601,7 +4588,7 @@ loop_599:
         goto loop_599;
     }
     }
-    func_0809AEA0();
+    StopLinkConnection();
     ClearWindow(0);
     RunMenuScript(0x08003CE0);
     {
@@ -4620,7 +4607,7 @@ loop_599:
     PlaySong(0x58);
     RunMenuScript(0x08003FB7);
 block_603:
-    func_080E6684();
+    ClearBattleRules();
     {
         register u32 *mode_slot asm("r0") = &gGameMode_BBA04;
         register u32 one asm("r1") = 1;
@@ -4637,7 +4624,7 @@ block_603:
     }
 block_605:
     RunMenuScript(0x08003D4E);
-    func_080E6684();
+    ClearBattleRules();
     {
         register s16 *state_slot_605 asm("r1") = (s16 *)0x02032E76;
         register u32 state_value_605 asm("r4") = 0x3000;
@@ -4669,7 +4656,7 @@ block_611:
     }
     goto block_643;
 block_613:
-    var_r0_11 = 1;
+    var_r0_11 = BATTLE_OUTCOME_VICTORY;
     goto block_631;
 block_614:
     {
@@ -4680,15 +4667,15 @@ block_614:
     register u32 left_ready_614 asm("r5");
     register u32 right_ready_614 asm("r4");
 
-    func_0809AEC0(transfer_614, 4, 0x0810713C);
+    BeginLinkSend(transfer_614, 4, 0x0810713C);
     transfer_614 += 4;
-    func_0809B00C(transfer_614, 4, 0x08107130);
+    BeginLinkReceive(transfer_614, 4, 0x08107130);
 loop_615:
-    left_ready_614 = func_0809AEF4();
+    left_ready_614 = PollLinkSend();
     left_ready_614 = (u8)left_ready_614;
-    right_ready_614 = func_0809B040();
+    right_ready_614 = PollLinkReceive();
     right_ready_614 = (u8)right_ready_614;
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     if (left_ready_614 == 0) {
         goto loop_615;
     }
@@ -4696,7 +4683,7 @@ loop_615:
         goto loop_615;
     }
     }
-    func_0809AEA0();
+    StopLinkConnection();
     ClearWindow(0);
     RunMenuScript(0x08003CB8);
     {
@@ -4715,7 +4702,7 @@ loop_615:
     PlaySong(0x58);
     RunMenuScript(0x08003FB7);
 block_619:
-    func_080E6684();
+    ClearBattleRules();
     {
         register u32 *mode_slot asm("r0") = &gGameMode_BBA04;
         register u32 one asm("r1") = 1;
@@ -4731,7 +4718,7 @@ block_619:
     }
 block_620:
     RunMenuScript(0x08003D26);
-    func_080E6684();
+    ClearBattleRules();
     {
         register u16 *state_slot_620 asm("r1") = (u16 *)0x02032E76;
         register u32 state_620 asm("r2") = 0x80;
@@ -4757,18 +4744,18 @@ block_621:
         register u8 *transfer asm("r4") = (u8 *)0x0203EBC8;
         register void *asset asm("r5") = (void *)0x08107148;
 
-        func_0809AEC0(transfer, 4, asset);
+        BeginLinkSend(transfer, 4, asset);
         transfer += 4;
-        func_0809B00C(transfer, 4, asset);
+        BeginLinkReceive(transfer, 4, asset);
     }
 loop_622:
     {
     register u32 left_ready asm("r5");
     register u32 right_ready asm("r4");
 
-    left_ready = func_0809AEF4();
-    right_ready = func_0809B040();
-    func_080ED17C(1);
+    left_ready = PollLinkSend();
+    right_ready = PollLinkReceive();
+    YieldTaskForUpdates(1);
     if (left_ready == 0) {
         goto loop_622;
     }
@@ -4776,9 +4763,9 @@ loop_622:
         goto loop_622;
     }
     }
-    func_0809AEA0();
+    StopLinkConnection();
     RunMenuScript(0x08003D0A);
-    func_080E6684();
+    ClearBattleRules();
     {
         register u32 *mode_slot asm("r1") = &gGameMode_BBA04;
         register u32 one asm("r0") = 1;
@@ -4800,7 +4787,7 @@ block_625:
     if (M2C_FIELD((void *)0x0203055C, u8 *, 0) != 0) {
         goto block_627;
     }
-    func_080C7190(2);
+    ProcessBattleOutcomeAndRewards(BATTLE_OUTCOME_RETREAT);
     mode_slot_625 = (s32 *)0x02021690;
     mode_625 = 3;
     goto block_628;
@@ -4820,41 +4807,41 @@ block_627:
     mode_625 = 0x10;
 block_628:
     *mode_slot_625 = mode_625;
-    func_080E6684();
+    ClearBattleRules();
     goto block_633;
     }
 block_630:
-    var_r0_11 = 3;
+    var_r0_11 = BATTLE_OUTCOME_RESTORE_ONLY;
 block_631:
-    func_080C7190(var_r0_11);
-    func_080E6684();
+    ProcessBattleOutcomeAndRewards(var_r0_11);
+    ClearBattleRules();
     var_r0_12 = 3;
 block_632:
     *mode_base = var_r0_12;
 block_633:
     var_r0_8 = 2;
 block_634:
-    func_08096308(var_r0_8, 8);
+    StartScreenTransition(var_r0_8, 8);
     goto block_643;
 block_635:
-    func_080BB940();
+    InitializeBattleFieldDisplay();
     {
-        register struct ViewStateBBA04 *view asm("r1") =
-            (struct ViewStateBBA04 *)0x030033C4;
+        register struct PerspectiveCamera *view asm("r1") =
+            (struct PerspectiveCamera *)0x030033C4;
 
-        view->center_x = 0x78;
-        view->center_y = 0x58;
-        view->size = 0x80;
-        view->flags = 0x20000;
+        view->projection.screen_center_x = 0x78;
+        view->projection.screen_center_y = 0x58;
+        view->projection.focal_length = 0x80;
+        view->far_clip_depth = 0x20000;
     }
-    func_080BB224(0, 0U, 0U, 1);
-    func_08093AE8(0x0202F094, 1);
+    StartBattleCameraTransition(0, 0U, 0U, 1);
+    InitializePerspectiveScanlineBuffers(0x0202F094, 1);
     *(u8 *)0x03000074 = (u8) (*(u8 *)0x03000074 | 1);
     *(u32 *)0x02030558 = 0xFF20U;
     goto block_643;
 block_637:
-    func_080BB940();
-    func_08093AE8(0x0202F094, 1);
+    InitializeBattleFieldDisplay();
+    InitializePerspectiveScanlineBuffers(0x0202F094, 1);
     *(u8 *)0x03000074 = (u8) (*(u8 *)0x03000074 | 1);
     var_r0_5 = 0xFF20;
 block_638:
@@ -4876,7 +4863,7 @@ block_640:
     }
     goto loop_647;
 block_642:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 block_643:
     {
         register u32 exit_guard asm("r2") = 0;
@@ -4898,17 +4885,17 @@ block_643:
     }
     goto loop_647;
 block_646:
-    func_08093B7C();
-    func_080BB764();
-    func_080ED17C(1);
+    UpdatePerspectiveScanlineBuffers();
+    UpdateCameraRotationMatrix();
+    YieldTaskForUpdates(1);
 loop_647:
-    if ((func_0809669C() << 0x18) == 0) {
+    if ((IsScreenTransitionComplete() << 0x18) == 0) {
         goto block_646;
     }
-    func_08092E0C(7);
-    func_08093B54();
+    StopTask(7);
+    StopPerspectiveScanlineCallback();
     *(u8 *)0x03000074 = 0U;
-    func_0809534C();
+    DisableDisplayWindows();
     *(u8 *)0x03000075 = 1;
     *(u8 *)0x0300603D = 1;
     if (*(u8 *)0x02030664 == 1) {
@@ -4933,7 +4920,7 @@ block_651:
         goto block_656;
     }
     *(u8 *)0x02030664 = 1U;
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
 block_656:
     return;
 }

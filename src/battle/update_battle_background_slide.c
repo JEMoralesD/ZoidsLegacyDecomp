@@ -4,9 +4,9 @@
 extern volatile u16 D_0300004C;
 extern volatile u16 D_0300004E;
 extern volatile u16 D_03000050;
-extern s32 D_03000054[];
+extern s32 gFieldCameraScrollOffsets[] asm("D_03000054");
 extern volatile u8 gBattleBackgroundSlideFrame asm("D_02034861");
-extern volatile u8 D_02033F36;
+extern volatile u8 gBattleSceneSide asm("D_02033F36");
 
 void UpdateBattleBackgroundSlide(void) asm("func_080D1A44");
 
@@ -26,8 +26,8 @@ void UpdateBattleBackgroundSlide(void)
         if (state == 1) {
             D_0300004C |= 0x200;
             *(u16 *)0x0400000A = *(u16 *)0x04000008;
-            D_03000054[2] = D_03000054[0];
-            D_03000054[3] = D_03000054[1];
+            gFieldCameraScrollOffsets[2] = gFieldCameraScrollOffsets[0];
+            gFieldCameraScrollOffsets[3] = gFieldCameraScrollOffsets[1];
             D_0300004E = 0x641;
         }
 
@@ -62,13 +62,13 @@ void UpdateBattleBackgroundSlide(void)
                         D_03000050 = 0x810;
                         D_0300004C &= 0xFDFF;
                     }
-                    if (D_02033F36 == 0) {
-                        if (D_03000054[2] > -0x10000) {
-                            D_03000054[2] += -0x800;
+                    if (gBattleSceneSide == 0) {
+                        if (gFieldCameraScrollOffsets[2] > -0x10000) {
+                            gFieldCameraScrollOffsets[2] += -0x800;
                         }
                     } else {
-                        if (D_03000054[2] <= 0xFFFF) {
-                            D_03000054[2] += 0x800;
+                        if (gFieldCameraScrollOffsets[2] <= 0xFFFF) {
+                            gFieldCameraScrollOffsets[2] += 0x800;
                         }
                     }
                 }

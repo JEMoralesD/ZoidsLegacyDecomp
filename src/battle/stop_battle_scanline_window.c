@@ -10,7 +10,7 @@ struct BattleWindowSpriteGroup {
 void ClearHBlankCallback(s32) asm("func_080942E0");
 
 extern volatile u16 D_0300004C;
-extern volatile u16 D_03005EFA;
+extern volatile u16 gDisplayWindowOutsideLayers asm("D_03005EFA");
 extern volatile u16 D_0400004A;
 extern volatile u16 D_03000052;
 extern volatile u16 D_0300004E;
@@ -37,7 +37,7 @@ void StopBattleScanlineWindow(void)
     D_0300004C = (D_0300004C & 0x7DFF) | 0x400;
     asm volatile("" : : : "memory");
     {
-        register volatile u16 *mirror asm("r3") = &D_03005EFA;
+        register volatile u16 *mirror asm("r3") = &gDisplayWindowOutsideLayers;
         register volatile u16 *source asm("r1") = &D_0400004A;
 
         asm volatile("" : "+r"(mirror) : : "memory");

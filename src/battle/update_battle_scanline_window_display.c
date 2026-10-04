@@ -15,7 +15,7 @@ extern volatile u8 gBattleScanlineWindowBufferIndex asm("D_02034868");
 extern volatile u16 D_0300004C;
 extern volatile u16 D_0300004E;
 extern volatile u16 D_03000050;
-extern volatile u16 D_03005EFA;
+extern volatile u16 gDisplayWindowOutsideLayers asm("D_03005EFA");
 extern struct BattleWindowSpriteGroup *D_02033F3C;
 extern struct BattleWindowSpriteGroup *D_02033F40[3];
 
@@ -32,7 +32,7 @@ void UpdateBattleScanlineWindowDisplay(s32 begin_frame)
             *(volatile u16 *)0x04000208 = 0;
             SetHBlankCallback(1, 0x0300605C);
             {
-                register volatile u16 *mirror asm("r2") = &D_03005EFA;
+                register volatile u16 *mirror asm("r2") = &gDisplayWindowOutsideLayers;
                 register volatile u16 *source asm("r1") =
                     (volatile u16 *)0x0400004A;
                 register u32 value asm("r3") = 0x3E3F;

@@ -1,0 +1,182 @@
+#include "player_selection.h"
+#include "../graphics/screen_effects.h"
+
+M2C_UNK PlaySong(s32) asm("func_08092E84");                         /* extern */
+M2C_UNK ClearSpritePools() asm("func_08094330");                            /* extern */
+void *CreateSpriteFromTable(s32, u8, s32, s32, s32, s32, s32, s32, s32) asm("func_08094374"); /* extern */
+s32 *CreateSprite(M2C_UNK, M2C_UNK, s32, s32, s32, s32, s32, s32, s32) asm("func_08094484"); /* extern */
+M2C_UNK DestroySprite(void *) asm("func_08094554");                      /* extern */
+M2C_UNK SetSpriteAnimation(void *, u16) asm("func_08094564");                 /* extern */
+M2C_UNK QueueCopy(M2C_UNK, M2C_UNK, s32) asm("func_08095208");       /* extern */
+M2C_UNK StartScreenTransition(s32, s32) asm("func_08096308");                    /* extern */
+s32 IsScreenTransitionComplete() asm("func_0809669C");                                /* extern */
+M2C_UNK InitializeWindowGraphics(s32, s32, s32, s32, s32, s32, s32, s32, s32, s32) asm("func_08096FBC"); /* extern */
+M2C_UNK RequestWindowRefresh() asm("func_080972C8");                            /* extern */
+M2C_UNK RunMenuScript(s32) asm("func_08098BB4");                         /* extern */
+M2C_UNK QueuePilotPortraitGraphics(u8, s32, s32, s32, s32, s32) asm("func_0809A9C8"); /* extern */
+M2C_UNK InitializeScrollingTextWindow(s32, s32) asm("func_080E2DCC");                    /* extern */
+M2C_UNK UpdateScrollingTextWindowInput() asm("func_080E2EA4");                            /* extern */
+M2C_UNK DestroyScrollingTextWindowArrows() asm("func_080E2F30");                            /* extern */
+M2C_UNK BiosCpuFastSet(s32 *, M2C_UNK, M2C_UNK) asm("func_080ECD28");     /* extern */
+M2C_UNK BiosLz77ToVram(M2C_UNK, M2C_UNK) asm("func_080ECD34");            /* extern */
+M2C_UNK YieldTaskForUpdates(s32) asm("func_080ED17C");                         /* extern */
+
+void RunCharacterDatabaseViewer(u8 *character_ids_with_count) asm("func_080E364C");
+
+void RunCharacterDatabaseViewer(u8 *character_ids_with_count) {
+    s32 sp18;
+    register s32 *temp_r9 asm("r9");
+    s32 temp_r1_2;
+    s32 temp_r4;
+    s32 temp_r4_2;
+    register s32 var_r0_3 asm("r0");
+    s32 var_r4;
+    s32 var_r6;
+    s32 flags_index;
+    s32 flags_mask;
+    s32 *flags_base;
+    s32 *flags_word;
+    s32 *description_base;
+    s32 *names_base;
+    s32 preview_base;
+    s32 animation_base;
+    s32 temp_r1;
+    u8 var_r0;
+    u8 var_r5;
+    s32 var_sl;
+    s32 *var_r7;
+
+    *(s16 *)0x0300004C = 0x1840;
+    InitializeWindowGraphics(3, 1, 0, 0x3C0, 0x3C0, 0, 0xE, 0, 0x3E6, 0xF);
+    ClearSpritePools();
+    CreateSprite(0x08105DF4, 0x08105E00, 0, 0xA0, 0x98, 0x399, 0xF, 8, 0);
+    CreateSprite(0x08105A20, 0x08105A2C, 0, 0xD8, 0x98, 0x343, 0xF, 8, 0);
+    RunMenuScript(0x08006845);
+    StartScreenTransition(SCREEN_TRANSITION_CHECKERBOARD_REVEAL, 0);
+    var_sl = 1;
+    var_r5 = character_ids_with_count[1];
+    description_base = (s32 *)0x087F2928;
+    asm volatile("" : "+r"(description_base));
+    temp_r4 = var_r5 * 4;
+    RunMenuScript(*(s32 *)(temp_r4 + (s32)description_base));
+    names_base = (s32 *)0x087A38C0;
+    asm volatile("" : "+r"(names_base));
+    InitializeScrollingTextWindow(6, *(s32 *)(temp_r4 + (s32)names_base));
+    RequestWindowRefresh();
+    var_r7 = 0;
+    BiosLz77ToVram(0x0832BB4C, 0x06010200);
+    temp_r9 = CreateSprite(0x0832BB9C, 0x0832BBA8, 0, 0x60, 0x30, 0x10, 0xF, 0x108, 0);
+    CreateSprite(0x08359850, 0x0835985C, 0, 8, 8, 0x20, 2, 8, 0);
+    var_r4 = 1;
+    while (1) {
+    temp_r1 = *(u16 *)0x0300000E;
+    if (0x20 & temp_r1) {
+        if (var_sl == 1) {
+            var_sl = character_ids_with_count[0];
+        } else {
+            var_r0 = var_sl - 1;
+            var_sl = var_r0;
+        }
+        var_r4 = 1;
+        PlaySong(0x40);
+    } else if (0x10 & temp_r1) {
+        if (var_sl == character_ids_with_count[0]) {
+            var_sl = 1;
+        } else {
+            var_r0 = var_sl + 1;
+            var_sl = var_r0;
+        }
+        var_r4 = 1;
+        PlaySong(0x40);
+    } else if (({
+        s32 test = 2;
+        test &= temp_r1;
+        test;
+    })) {
+        PlaySong(0x3F);
+        StartScreenTransition(SCREEN_TRANSITION_CHECKERBOARD_CONCEAL, 0);
+        break;
+    } else {
+        UpdateScrollingTextWindowInput();
+    }
+    if (var_r4 != 0) {
+            var_r5 = character_ids_with_count[var_sl];
+            RunMenuScript(0x080068C7);
+            DestroyScrollingTextWindowArrows();
+            flags_base = (s32 *)0x020217B4;
+            asm volatile("" : "+r"(flags_base));
+            flags_index = (var_r5 >> 5) * 4;
+            flags_base += 5;
+            flags_index += (s32)flags_base;
+            asm volatile("" : "+r"(flags_index));
+            flags_word = (s32 *)flags_index;
+            flags_mask = 1 << (0x1F & var_r5);
+            if (*flags_word & flags_mask) {
+                var_r6 = 1;
+                description_base = (s32 *)0x087F2928;
+                asm volatile("" : "+r"(description_base));
+                temp_r4_2 = var_r5 * 4;
+                RunMenuScript(*(s32 *)(temp_r4_2 + (s32)description_base));
+                names_base = (s32 *)0x087A38C0;
+                asm volatile("" : "+r"(names_base));
+                InitializeScrollingTextWindow(6, *(s32 *)(temp_r4_2 + (s32)names_base));
+            } else {
+                var_r6 = 0;
+                RunMenuScript(*(s32 *)0x087F2928);
+                InitializeScrollingTextWindow(6, *(s32 *)0x087A38C0);
+            }
+            QueuePilotPortraitGraphics(var_r5, 0, 0, 0x20, 2, 0x02002880);
+            if (var_r6 == 0) {
+                QueueCopy(0x087A3E20, 0x05000240, 0x20);
+            }
+            if (var_r7 != 0) {
+                DestroySprite(var_r7);
+            }
+            YieldTaskForUpdates(1);
+            preview_base = 0x087AD208;
+            if ((*(s32 *)((var_r5 * 0x10) + preview_base) != 0) && (var_r5 != 0xA) && (var_r5 != 0xB) && (var_r5 != 0x10) && (var_r5 != 0x11) && (var_r5 != 0x3F) && (var_r5 != 0x46) && (var_r5 != 0x47) && (var_r5 != 0x48)) {
+                var_r7 = (s32 *)CreateSpriteFromTable(preview_base, var_r5, 0, 0x60, 0x20, 0, 0, 0x400020, 0);
+                if (var_r6 == 0) {
+                    sp18 = var_r6;
+                    BiosCpuFastSet(&sp18, 0x05000200, 0x01000008);
+                }
+                if ((var_r5 != 0x4B) && (var_r5 != 0x49)) {
+                    var_r0_3 = *({
+                        register s32 *bits asm("r1") = temp_r9;
+                        bits;
+                    }) & 0xFFFDFFFF;
+                } else {
+                    goto block_42;
+                }
+            } else {
+                var_r7 = 0;
+block_42:
+                var_r0_3 = *({
+                    register s32 *bits asm("r1") = temp_r9;
+                    bits;
+                }) | 0x20000;
+            }
+            *({
+                register s32 *bits asm("r2") = temp_r9;
+                bits;
+            }) = var_r0_3;
+            RequestWindowRefresh();
+            var_r4 = 0;
+        }
+        if (M2C_FIELD(var_r7, s32 *, 0) & 4) {
+            animation_base = 0x087AD208;
+            asm volatile("" : "+r"(animation_base));
+            temp_r1_2 = *(s32 *)((var_r5 * 0x10) + animation_base);
+            if ((temp_r1_2 == 0x08279A64) || (temp_r1_2 == 0x0827A0C4)) {
+                SetSpriteAnimation(var_r7, (u16) ((M2C_FIELD(var_r7, u16 *, 0x12) + 1) % 16));
+            } else if (temp_r1_2 == 0x08279EE4) {
+                SetSpriteAnimation(var_r7, (u16) ((M2C_FIELD(var_r7, u16 *, 0x12) + 1) % 8));
+            }
+        }
+        YieldTaskForUpdates(1);
+    }
+    while ((IsScreenTransitionComplete() << 0x18) == 0) {
+        YieldTaskForUpdates(1);
+    }
+    DestroyScrollingTextWindowArrows();
+}

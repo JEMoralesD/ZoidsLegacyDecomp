@@ -1,28 +1,7 @@
 #include "m2c_prelude.h"
+#include "window.h"
 #include "menu_script.h"
 
-struct Window {
-    u32 flags;
-    s16 x;
-    s16 y;
-    u16 width;
-    u16 height;
-    s16 text_column;
-    s16 text_row;
-    u16 printed_lines;
-    u8 text_color;
-    u8 slot;
-    u8 top;
-    u8 prior_top;
-    u8 selected;
-    u8 prior_selected;
-    u8 style;
-    u8 frame_extra_width;
-    u8 frame_tail_height;
-    u8 repeat;
-    u16 keys;
-    u16 tiles[1];
-};
 
 struct MenuSprite {
     s32 flags;
@@ -55,14 +34,14 @@ extern u8 D_0200A880;
 extern u8 D_0200A881;
 extern u8 D_0200A882;
 extern u16 D_0200A884;
-extern volatile u8 D_0200E6C4[];
-extern volatile u8 D_0200DE90[];
-extern u8 D_0200E6CE[];
-extern u32 D_02021664;
-extern u16 D_02021668;
-extern u16 D_0202166A;
-extern u16 D_0202166C;
-extern s32 D_02021670;
+extern volatile u8 gWindowTextItemCounts[] asm("D_0200E6C4");
+extern volatile u8 gWindowTextBlockOffsets[] asm("D_0200DE90");
+extern u8 gWindowTextBlocks[] asm("D_0200E6CE");
+extern u32 gWindowFrameTileOffset asm("D_02021664");
+extern u16 gWindowBgPaletteAttribute asm("D_02021668");
+extern u16 gWindowCursorTileOffset asm("D_0202166A");
+extern u16 gWindowCursorPaletteBank asm("D_0202166C");
+extern s32 gWindowTextTileOffset asm("D_02021670");
 extern volatile u16 gHeldKeys;
 extern volatile u16 gPressedKeys;
 extern volatile u8 gFrameStep;
@@ -76,12 +55,12 @@ struct Window *GetWindow(u8) asm("func_0809716C");
 void BringWindowToFront(u8) asm("func_080971AC");
 void RequestWindowRefresh(void) asm("func_080972C8");
 void ReleaseWindowTile(u16) asm("func_08097980");
-u8 *func_08097DA8(struct Window *, u8 *);
+u8 *DrawWindowText(struct Window *, u8 *) asm("func_08097DA8");
 void OpenWindow(s32, s32, s32, s32, s32, s32) asm("func_08098514");
 void ClearWindow(u8) asm("func_080986B4");
 void CloseWindow(u8) asm("func_08098754");
-void func_0809885C(struct Window *);
-void func_080ED17C(s32);
+void DrawAppendedWindowTextItem(struct Window *) asm("func_0809885C");
+void YieldTaskForUpdates(s32) asm("func_080ED17C");
 
 M2C_UNK jtbl_08098BDC();                            /* static */
 
@@ -278,7 +257,7 @@ case MENU_CLOSE_WINDOW:
     }
 case MENU_REFRESH:
     RequestWindowRefresh();
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     {
         register u8 *next_r3 asm("r3") = cursor;
 
@@ -292,7 +271,7 @@ case MENU_PRINT_BUFFER:
     register u8 *parser_stream_r4 asm("r4") = cursor;
 
     temp_r0_2 = GetWindow(M2C_FIELD(parser_stream_r4, u8 *, 1));
-    temp_r0_2->printed_lines = 0;
+    temp_r0_2->page_progress_rows = 0;
     if (M2C_FIELD(parser_stream_r4, u8 *, 0) != 5) {
         goto block_9;
     }
@@ -306,7 +285,7 @@ block_10:
     }
     goto loop_41;
 block_12:
-    var_r8 = func_08097DA8(temp_r0_2, var_r8);
+    var_r8 = DrawWindowText(temp_r0_2, var_r8);
     goto block_44;
 loop_13:
     temp_r3 = M2C_FIELD(var_r8, u8 *, 0);
@@ -346,7 +325,7 @@ block_24:
         register u8 *case1_first_index_entry_r1 asm("r1");
 
         {
-            register u8 *case1_first_index_base_r4 asm("r4") = D_0200E6C4;
+            register u8 *case1_first_index_base_r4 asm("r4") = gWindowTextItemCounts;
 
             case1_first_index_entry_r1 = (u8 *)(
                 case1_first_slot_r2 + (s32)case1_first_index_base_r4);
@@ -356,7 +335,7 @@ block_24:
         case1_first_destination_r0 *= case1_first_row_stride_r5;
         case1_first_destination_r0 += *case1_first_index_entry_r1;
         {
-            register u8 *case1_first_lookup_r6 asm("r6") = D_0200DE90;
+            register u8 *case1_first_lookup_r6 asm("r6") = gWindowTextBlockOffsets;
 
             case1_first_destination_r0 += (s32) case1_first_lookup_r6;
         }
@@ -370,7 +349,7 @@ block_24:
             case1_first_destination_r0 += case1_first_grid_offset_r1;
         }
         {
-            register u8 *case1_first_output_r5 asm("r5") = D_0200E6CE;
+            register u8 *case1_first_output_r5 asm("r5") = gWindowTextBlocks;
 
             case1_first_destination_r0 += (s32) case1_first_output_r5;
         }
@@ -389,7 +368,7 @@ block_24:
         register u8 *case1_second_index_entry_r1 asm("r1");
 
         {
-            register u8 *case1_second_index_base_r0 asm("r0") = D_0200E6C4;
+            register u8 *case1_second_index_base_r0 asm("r0") = gWindowTextItemCounts;
 
             case1_second_index_entry_r1 = (u8 *)(
                 case1_second_slot_r2 + (s32)case1_second_index_base_r0);
@@ -399,7 +378,7 @@ block_24:
         case1_second_destination_r0 *= case1_second_row_stride_r3;
         case1_second_destination_r0 += *case1_second_index_entry_r1;
         {
-            register u8 *case1_second_lookup_r4 asm("r4") = D_0200DE90;
+            register u8 *case1_second_lookup_r4 asm("r4") = gWindowTextBlockOffsets;
 
             case1_second_destination_r0 += (s32) case1_second_lookup_r4;
         }
@@ -413,7 +392,7 @@ block_24:
             case1_second_destination_r0 += case1_second_grid_offset_r1;
         }
         {
-            register u8 *case1_second_output_r6 asm("r6") = D_0200E6CE;
+            register u8 *case1_second_output_r6 asm("r6") = gWindowTextBlocks;
 
             case1_second_destination_r0 += (s32) case1_second_output_r6;
         }
@@ -434,7 +413,7 @@ block_26:
         register u8 *case2_first_index_entry_r1 asm("r1");
 
         {
-            register u8 *case2_first_index_base_r4 asm("r4") = D_0200E6C4;
+            register u8 *case2_first_index_base_r4 asm("r4") = gWindowTextItemCounts;
 
             case2_first_index_entry_r1 = (u8 *)(
                 case2_first_slot_r2 + (s32)case2_first_index_base_r4);
@@ -444,7 +423,7 @@ block_26:
         case2_first_destination_r0 *= case2_first_row_stride_r5;
         case2_first_destination_r0 += *case2_first_index_entry_r1;
         {
-            register u8 *case2_first_lookup_r6 asm("r6") = D_0200DE90;
+            register u8 *case2_first_lookup_r6 asm("r6") = gWindowTextBlockOffsets;
 
             case2_first_destination_r0 += (s32) case2_first_lookup_r6;
         }
@@ -458,7 +437,7 @@ block_26:
             case2_first_destination_r0 += case2_first_grid_offset_r1;
         }
         {
-            register u8 *case2_first_output_r5 asm("r5") = D_0200E6CE;
+            register u8 *case2_first_output_r5 asm("r5") = gWindowTextBlocks;
 
             case2_first_destination_r0 += (s32) case2_first_output_r5;
         }
@@ -477,7 +456,7 @@ block_26:
         register u8 *case2_second_index_entry_r1 asm("r1");
 
         {
-            register u8 *case2_second_index_base_r0 asm("r0") = D_0200E6C4;
+            register u8 *case2_second_index_base_r0 asm("r0") = gWindowTextItemCounts;
 
             case2_second_index_entry_r1 = (u8 *)(
                 case2_second_slot_r2 + (s32)case2_second_index_base_r0);
@@ -487,7 +466,7 @@ block_26:
         case2_second_destination_r0 *= case2_second_row_stride_r3;
         case2_second_destination_r0 += *case2_second_index_entry_r1;
         {
-            register u8 *case2_second_lookup_r4 asm("r4") = D_0200DE90;
+            register u8 *case2_second_lookup_r4 asm("r4") = gWindowTextBlockOffsets;
 
             case2_second_destination_r0 += (s32) case2_second_lookup_r4;
         }
@@ -501,7 +480,7 @@ block_26:
             case2_second_destination_r0 += case2_second_grid_offset_r1;
         }
         {
-            register u8 *case2_second_output_r6 asm("r6") = D_0200E6CE;
+            register u8 *case2_second_output_r6 asm("r6") = gWindowTextBlocks;
 
             case2_second_destination_r0 += (s32) case2_second_output_r6;
         }
@@ -524,7 +503,7 @@ block_26:
         register u8 *case2_third_index_entry_r1 asm("r1");
 
         {
-            register u8 *case2_third_index_base_r4 asm("r4") = D_0200E6C4;
+            register u8 *case2_third_index_base_r4 asm("r4") = gWindowTextItemCounts;
 
             case2_third_index_entry_r1 = (u8 *)(
                 case2_third_slot_r2 + (s32)case2_third_index_base_r4);
@@ -534,7 +513,7 @@ block_26:
         case2_third_destination_r0 *= case2_third_row_stride_r5;
         case2_third_destination_r0 += *case2_third_index_entry_r1;
         {
-            register u8 *case2_third_lookup_r6 asm("r6") = D_0200DE90;
+            register u8 *case2_third_lookup_r6 asm("r6") = gWindowTextBlockOffsets;
 
             case2_third_destination_r0 += (s32) case2_third_lookup_r6;
         }
@@ -548,7 +527,7 @@ block_26:
             case2_third_destination_r0 += case2_third_grid_offset_r1;
         }
         {
-            register u8 *case2_third_output_r4 asm("r4") = D_0200E6CE;
+            register u8 *case2_third_output_r4 asm("r4") = gWindowTextBlocks;
 
             case2_third_destination_r0 += (s32) case2_third_output_r4;
         }
@@ -568,7 +547,7 @@ block_27:
         register u8 *case3_index_entry_r1 asm("r1");
 
         {
-            register u8 *case3_index_base_r6 asm("r6") = D_0200E6C4;
+            register u8 *case3_index_base_r6 asm("r6") = gWindowTextItemCounts;
 
             case3_index_entry_r1 = (u8 *)(
                 case3_slot_r2 + (s32)case3_index_base_r6);
@@ -578,7 +557,7 @@ block_27:
         case3_destination_r0 *= case3_row_stride_r4;
         case3_destination_r0 += *case3_index_entry_r1;
         {
-            register u8 *case3_lookup_r5 asm("r5") = D_0200DE90;
+            register u8 *case3_lookup_r5 asm("r5") = gWindowTextBlockOffsets;
 
             case3_destination_r0 += (s32) case3_lookup_r5;
         }
@@ -592,7 +571,7 @@ block_27:
             case3_destination_r0 += case3_grid_offset_r1;
         }
         {
-            register u8 *case3_output_r1 asm("r1") = D_0200E6CE;
+            register u8 *case3_output_r1 asm("r1") = gWindowTextBlocks;
 
             case3_destination_r0 += (s32) case3_output_r1;
         }
@@ -601,8 +580,8 @@ block_27:
     goto block_32;
 block_28:
     {
-        register volatile u8 *opcode10_lookup_r3 asm("r3") = D_0200DE90;
-        register volatile u8 *opcode10_index_r4 asm("r4") = D_0200E6C4;
+        register volatile u8 *opcode10_lookup_r3 asm("r3") = gWindowTextBlockOffsets;
+        register volatile u8 *opcode10_index_r4 asm("r4") = gWindowTextItemCounts;
         register s32 opcode10_slot_r2 asm("r2") = temp_r0_2->slot;
         register volatile u8 *opcode10_entry_r1 asm("r1") =
             (volatile u8 *)(
@@ -630,7 +609,7 @@ block_28:
         opcode10_grid_offset_r1 *= opcode10_grid_stride_r6;
         opcode10_destination_r0 += opcode10_grid_offset_r1;
         {
-            register u8 *opcode10_output_r1 asm("r1") = D_0200E6CE;
+            register u8 *opcode10_output_r1 asm("r1") = gWindowTextBlocks;
 
             opcode10_destination_r0 += (s32)opcode10_output_r1;
         }
@@ -702,10 +681,10 @@ block_30:
 block_31:
         ;
     }
-    func_0809885C(temp_r0_2);
+    DrawAppendedWindowTextItem(temp_r0_2);
     {
         register u32 print_advance_slot_r1 asm("r1") = temp_r0_2->slot;
-        register u8 *print_advance_base_r3 asm("r3") = D_0200E6C4;
+        register u8 *print_advance_base_r3 asm("r3") = gWindowTextItemCounts;
         register u32 print_advance_value_r0 asm("r0");
 
         print_advance_slot_r1 += (u32)print_advance_base_r3;
@@ -743,13 +722,13 @@ block_34:
 
     print_output =
         ({
-            register u8 *print_output_seed_r6 asm("r6") = D_0200E6CE;
+            register u8 *print_output_seed_r6 asm("r6") = gWindowTextBlocks;
 
             asm volatile("" : "+r"(print_output_seed_r6));
             print_output_seed_r6;
         });
-    print_lookup = D_0200DE90;
-    print_index_base = D_0200E6C4;
+    print_lookup = gWindowTextBlockOffsets;
+    print_index_base = gWindowTextItemCounts;
     temp_r2_10 = temp_r0_2->slot;
     print_index_entry = print_index_base + temp_r2_10;
     {
@@ -817,7 +796,7 @@ block_36:
         }
     }
     temp_r1_4 = temp_r0_2->slot;
-    temp_r0_5 = D_0200E6C4[temp_r1_4];
+    temp_r0_5 = gWindowTextItemCounts[temp_r1_4];
     temp_r2_12 = print_row_stride * temp_r1_4;
     asm volatile(
         ".byte 0x51, 0x1C\n\t"
@@ -826,11 +805,11 @@ block_36:
         : "r"(temp_r0_5),
           "r"(temp_r2_12));
     var_r1_2 += (s32)print_lookup;
-    var_r0_2 = D_0200DE90[temp_r0_5 + temp_r2_12] + 1;
+    var_r0_2 = gWindowTextBlockOffsets[temp_r0_5 + temp_r2_12] + 1;
     goto block_40;
 block_39:
     temp_r1_5 = temp_r0_2->slot;
-    temp_r0_6 = D_0200E6C4[temp_r1_5];
+    temp_r0_6 = gWindowTextItemCounts[temp_r1_5];
     temp_r2_13 = print_row_stride * temp_r1_5;
     asm volatile(
         ".byte 0x51, 0x1C\n\t"
@@ -839,14 +818,14 @@ block_39:
         : "r"(temp_r0_6),
           "r"(temp_r2_13));
     var_r1_2 += (s32)print_lookup;
-    var_r0_2 = D_0200DE90[temp_r0_6 + temp_r2_13] + 2;
+    var_r0_2 = gWindowTextBlockOffsets[temp_r0_6 + temp_r2_13] + 2;
 block_40:
     *var_r1_2 = var_r0_2;
     }
-    func_0809885C(temp_r0_2);
+    DrawAppendedWindowTextItem(temp_r0_2);
     {
         register s32 print_slot_r1 asm("r1") = temp_r0_2->slot;
-        register u8 *print_index_base_r4 asm("r4") = D_0200E6C4;
+        register u8 *print_index_base_r4 asm("r4") = gWindowTextItemCounts;
         register u32 print_index_value_r0 asm("r0");
 
         asm volatile("" : "+r"(print_slot_r1),
@@ -903,8 +882,8 @@ block_44:
             popup_y >>= 0x10;
             popup_y;
         }),
-        (u16) (s32) (u16) (D_0202166A + 2),
-        (u16) (s32) D_0202166C,
+        (u16) (s32) (u16) (gWindowCursorTileOffset + 2),
+        (u16) (s32) gWindowCursorPaletteBank,
         0x20,
         0);
     RequestWindowRefresh();
@@ -912,7 +891,7 @@ block_44:
     register volatile u16 *parser_keys_r4 asm("r4") = &gPressedKeys;
     register u32 parser_key_mask_r5 asm("r5") = 3;
 loop_46:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     {
         register u32 parser_test_r0 asm("r0");
         register u32 parser_keys_r1 asm("r1");
@@ -974,7 +953,7 @@ case MENU_PRINT_TITLE:
         goto block_58;
     }
     }
-    var_r6_tiles = &D_02021664;
+    var_r6_tiles = &gWindowFrameTileOffset;
 loop_54:
     {
         register u32 case9_tile_r1 asm("r1") = *var_r4;
@@ -994,9 +973,9 @@ loop_54:
         goto block_57;
     }
 block_56:
-    ReleaseWindowTile((u16) (temp_r1_7 - D_02021670));
+    ReleaseWindowTile((u16) (temp_r1_7 - gWindowTextTileOffset));
 block_57:
-    *var_r4 = (*var_r6_tiles + 6) | D_02021668;
+    *var_r4 = (*var_r6_tiles + 6) | gWindowBgPaletteAttribute;
     var_r4 += 1;
     var_r5_2 += 1;
     if (var_r5_2 < (s32) (temp_r0_7->width - 1)) {
@@ -1009,8 +988,8 @@ block_58:
     temp_r0_7->text_column = 0;
     temp_r0_7->text_row = -1;
     temp_r0_7->text_color = 0;
-    func_08097DA8(temp_r0_7, (u8 *)0x080ED944);
-    var_r8 = func_08097DA8(temp_r0_7, var_r8);
+    DrawWindowText(temp_r0_7, (u8 *)0x080ED944);
+    var_r8 = DrawWindowText(temp_r0_7, var_r8);
     temp_r0_7->flags |= 2;
     {
         register u8 *case9_next_command_r3 asm("r3") = var_r8;
@@ -1047,7 +1026,7 @@ case MENU_CLEAR_TITLE:
         goto block_66;
     }
     }
-    var_r6_tiles = &D_02021664;
+    var_r6_tiles = &gWindowFrameTileOffset;
 loop_62:
     {
         register u32 case10_tile_r1 asm("r1") = *var_r4_2;
@@ -1067,9 +1046,9 @@ loop_62:
         goto block_65;
     }
 block_64:
-    ReleaseWindowTile((u16) (temp_r1_8 - D_02021670));
+    ReleaseWindowTile((u16) (temp_r1_8 - gWindowTextTileOffset));
 block_65:
-    *var_r4_2 = (*var_r6_tiles + 6) | D_02021668;
+    *var_r4_2 = (*var_r6_tiles + 6) | gWindowBgPaletteAttribute;
     var_r4_2 += 1;
     case10_counter_r5 += 1;
     if (case10_counter_r5 < (s32) (temp_r0_8->width - 1)) {
@@ -1094,9 +1073,9 @@ case MENU_SELECT:
             goto block_70;
         }
     }
-    map_entry->prior_selected = 0xFF;
+    map_entry->prior_selected_item = 0xFF;
 block_70:
-    if (map_entry->prior_selected == 0xFF) {
+    if (map_entry->prior_selected_item == 0xFF) {
         goto block_72;
     }
     goto block_73;
@@ -1112,14 +1091,14 @@ block_72:
             0x080ED92C,
             0U,
             (s16) ((u16) D_0200A8A0.x * 8),
-            (s16) ((((u16) D_0200A8A0.y + 1) * 8) + ((D_0200A8A0.selected - D_0200A8A0.top) * 0x10)),
+            (s16) ((((u16) D_0200A8A0.y + 1) * 8) + ((D_0200A8A0.selected_item - D_0200A8A0.top_item) * 0x10)),
             ({
-                case7_palette_low_r5 = &D_0202166A;
+                case7_palette_low_r5 = &gWindowCursorTileOffset;
                 case7_palette_long_sl = case7_palette_low_r5;
                 (u16)(*case7_palette_low_r5 + 0xE);
             }),
             ({
-                case7_tile_low_r6 = &D_0202166C;
+                case7_tile_low_r6 = &gWindowCursorPaletteBank;
                 case7_tile_long_r9 = case7_tile_low_r6;
                 *case7_tile_low_r6;
             }),
@@ -1170,18 +1149,18 @@ block_72:
             case7_zero_arg_r6;
         }));
     }
-    D_0200A880 = D_0200A8A0.selected;
-    D_0200A881 = D_0200A8A0.top;
+    D_0200A880 = D_0200A8A0.selected_item;
+    D_0200A881 = D_0200A8A0.top_item;
 block_73:
     {
-        register u8 *case7_count_base_r0 asm("r0") = D_0200E6C4;
+        register u8 *case7_count_base_r0 asm("r0") = gWindowTextItemCounts;
         register s32 case7_count_r1 asm("r1") = D_0200A8A0.slot;
 
         case7_count_r1 += (s32)case7_count_base_r0;
         case7_count_r1 = *(u8 *)case7_count_r1;
         temp_r1_9 = case7_count_r1;
     }
-    if ((u32) D_0200A8A0.selected < (u32) temp_r1_9) {
+    if ((u32) D_0200A8A0.selected_item < (u32) temp_r1_9) {
         goto block_79;
     }
     {
@@ -1192,8 +1171,8 @@ block_73:
 
     clamp_selected_r0 = temp_r1_9 - 1;
     clamp_zero_r3 = 0;
-    D_0200A8A0.selected = clamp_selected_r0;
-    clamp_top_r1 = D_0200A8A0.top;
+    D_0200A8A0.selected_item = clamp_selected_r0;
+    clamp_top_r1 = D_0200A8A0.top_item;
     if ((u32)clamp_top_r1 <= (u32) (u8) clamp_selected_r0) {
         goto block_83;
     }
@@ -1209,16 +1188,16 @@ block_73:
         asm volatile("sub %0, %1, %0"
                      : "+r"(clamp_new_top_r0)
                      : "r"(clamp_top_r2));
-        D_0200A8A0.top = clamp_new_top_r0;
+        D_0200A8A0.top_item = clamp_new_top_r0;
     }
     goto block_83;
 block_78:
-    D_0200A8A0.top = clamp_zero_r3;
+    D_0200A8A0.top_item = clamp_zero_r3;
     asm volatile("" : : "r"(clamp_zero_r3));
     goto block_83;
     }
 block_79:
-    temp_r2_14 = D_0200A8A0.selected - D_0200A8A0.top;
+    temp_r2_14 = D_0200A8A0.selected_item - D_0200A8A0.top_item;
     if (temp_r2_14 < 0) {
         goto block_81;
     }
@@ -1227,21 +1206,21 @@ block_79:
         goto block_82;
     }
 block_81:
-    D_0200A8A0.top = D_0200A8A0.selected;
+    D_0200A8A0.top_item = D_0200A8A0.selected_item;
     goto block_83;
 block_82:
     {
         register s32 clamp_prior_top_r0 asm("r0") =
-            D_0200A8A0.prior_top;
+            D_0200A8A0.prior_top_item;
 
         asm volatile("" : "+r"(clamp_prior_top_r0));
-        if (D_0200A8A0.top == clamp_prior_top_r0) {
+        if (D_0200A8A0.top_item == clamp_prior_top_r0) {
             goto block_84;
         }
     }
 block_83:
     D_0200A8A0.flags |= 2;
-    D_0200A8A0.prior_selected = 0xFF;
+    D_0200A8A0.prior_selected_item = 0xFF;
     goto block_85;
 block_84:
     RequestWindowRefresh();
@@ -1255,9 +1234,9 @@ loop_86:
     goto block_153;
 block_88:
     {
-        u32 selected_now = D_0200A8A0.selected;
+        u32 selected_now = D_0200A8A0.selected_item;
         register u32 prior_selected_r3 asm("r3") =
-            D_0200A8A0.prior_selected;
+            D_0200A8A0.prior_selected_item;
 
         asm volatile("" : "+r"(prior_selected_r3));
         if (selected_now != prior_selected_r3) {
@@ -1286,7 +1265,7 @@ block_90:
             : "r"(map_entry)
             : "r0", "r1", "r2", "cc", "memory");
     }
-    temp_r2_15 = D_0200A8A0.top - D_0200A8A0.prior_top;
+    temp_r2_15 = D_0200A8A0.top_item - D_0200A8A0.prior_top_item;
     temp_r1_10 = D_0200A8A0.height - 2;
     temp_r0_13 = (s32) (temp_r1_10 + (temp_r1_10 >> 0x1F)) >> 1;
     asm volatile("" :: "r"(temp_r1_10));
@@ -1296,7 +1275,7 @@ block_90:
     if (temp_r2_15 > temp_r0_13) {
         goto block_92;
     }
-    temp_r6_2 = D_0200A8A0.prior_top - D_0200A8A0.top;
+    temp_r6_2 = D_0200A8A0.prior_top_item - D_0200A8A0.top_item;
     if (temp_r6_2 <= temp_r0_13) {
         goto block_102;
     }
@@ -1315,7 +1294,7 @@ block_92:
     goto block_150;
 block_94:
 {
-    register volatile u8 *scroll_index_r1 asm("r1") = D_0200E6C4;
+    register volatile u8 *scroll_index_r1 asm("r1") = gWindowTextItemCounts;
     register s32 scroll_slot_r0 asm("r0") = D_0200A8A0.slot;
     register s32 scroll_slot_r4 asm("r4");
     register s32 scroll_row_r2 asm("r2");
@@ -1325,7 +1304,7 @@ block_94:
                  : "+r"(scroll_index_r1)
                  : "r"(scroll_slot_r0));
     scroll_slot_r4 = scroll_slot_r0;
-    scroll_row_r2 = D_0200A8A0.top;
+    scroll_row_r2 = D_0200A8A0.top_item;
     asm volatile("ldrb %0, [%0]"
                  : "+r"(scroll_index_r1)
                  :
@@ -1335,7 +1314,7 @@ block_94:
     }
     goto block_150;
 block_96:
-    scroll_lookup_r5 = D_0200DE90;
+    scroll_lookup_r5 = gWindowTextBlockOffsets;
 loop_97:
     {
         register s32 scroll_grid_stride_r0 asm("r0") = 0x1E5A;
@@ -1352,12 +1331,12 @@ loop_97:
         scroll_row_r2 = *(volatile u8 *)scroll_row_r2;
         scroll_destination_r0 = scroll_row_r2 * 0x25;
         {
-            register u8 *scroll_output_r2 asm("r2") = D_0200E6CE;
+            register u8 *scroll_output_r2 asm("r2") = gWindowTextBlocks;
 
             scroll_destination_r0 += (s32)scroll_output_r2;
         }
         scroll_grid_offset_r1 += scroll_destination_r0;
-        func_08097DA8(&D_0200A8A0, (void *)scroll_grid_offset_r1);
+        DrawWindowText(&D_0200A8A0, (void *)scroll_grid_offset_r1);
     }
     D_0200A8A0.text_column = 0;
     D_0200A8A0.text_row = (u16) D_0200A8A0.text_row + 2;
@@ -1377,9 +1356,9 @@ block_99:
         register s32 scroll_count_r0 asm("r0") = var_r9;
         register s32 scroll_compare_r3 asm("r3");
 
-        scroll_row_r2 = D_0200A8A0.top;
+        scroll_row_r2 = D_0200A8A0.top_item;
         scroll_compare_r3 = scroll_row_r2 + scroll_count_r0;
-        scroll_index_r1 = D_0200E6C4;
+        scroll_index_r1 = gWindowTextItemCounts;
         scroll_slot_r0 = D_0200A8A0.slot;
         asm volatile("add %0, %1, %0"
                      : "+r"(scroll_index_r1)
@@ -1396,7 +1375,7 @@ block_99:
     goto block_150;
 }
 block_102:
-    if ((u32) D_0200A8A0.top > (u32) D_0200A8A0.prior_top) {
+    if ((u32) D_0200A8A0.top_item > (u32) D_0200A8A0.prior_top_item) {
         goto block_104;
     }
     goto block_127;
@@ -1480,14 +1459,14 @@ loop_106:
         cleanup_tile_r1 &= cleanup_mask_copy_r0;
         temp_r1_12 = cleanup_tile_r1;
     }
-    if (temp_r1_12 < (u32) D_02021664) {
+    if (temp_r1_12 < (u32) gWindowFrameTileOffset) {
         goto block_108;
     }
-    if (temp_r1_12 < (u32) (D_02021664 + 0x40)) {
+    if (temp_r1_12 < (u32) (gWindowFrameTileOffset + 0x40)) {
         goto block_109;
     }
 block_108:
-    ReleaseWindowTile((u16) (temp_r1_12 - D_02021670));
+    ReleaseWindowTile((u16) (temp_r1_12 - gWindowTextTileOffset));
 block_109:
     cleanup_column_r5 += 1;
     temp_r1_11 = D_0200A8A0.width;
@@ -1497,7 +1476,7 @@ block_109:
 block_110:
     var_r8_3 = cleanup_next_r8_sl;
     var_r9_2 = cleanup_next_row_r4;
-    if (var_r9_2 < (u32) ((D_0200A8A0.top - D_0200A8A0.prior_top) * 2)) {
+    if (var_r9_2 < (u32) ((D_0200A8A0.top_item - D_0200A8A0.prior_top_item) * 2)) {
         goto loop_105;
     }
 block_111:
@@ -1541,8 +1520,8 @@ loop_114:
         copy_destination_r2;
     }) =
         *(u16 *)({
-            register s32 copy_source_r0 asm("r0") = D_0200A8A0.top;
-            register s32 copy_prior_r1 asm("r1") = D_0200A8A0.prior_top;
+            register s32 copy_source_r0 asm("r0") = D_0200A8A0.top_item;
+            register s32 copy_prior_r1 asm("r1") = D_0200A8A0.prior_top_item;
 
             copy_source_r0 -= copy_prior_r1;
             copy_source_r0 <<= 1;
@@ -1566,8 +1545,8 @@ block_115:
 loop_116:
     {
         register s32 copy_height_r0 asm("r0") = D_0200A8A0.height;
-        register s32 copy_difference_r1 asm("r1") = D_0200A8A0.top;
-        register s32 copy_prior_r2 asm("r2") = D_0200A8A0.prior_top;
+        register s32 copy_difference_r1 asm("r1") = D_0200A8A0.top_item;
+        register s32 copy_prior_r2 asm("r2") = D_0200A8A0.prior_top_item;
 
         copy_difference_r1 -= copy_prior_r2;
         copy_difference_r1 <<= 1;
@@ -1612,8 +1591,8 @@ loop_119:
         first_adjacent_row_r4 += 1;
         sp28 = first_adjacent_row_r4;
     }
-    var_ip_tiles = &D_02021664;
-    var_sl_attr = &D_02021668;
+    var_ip_tiles = &gWindowFrameTileOffset;
+    var_sl_attr = &gWindowBgPaletteAttribute;
 loop_121:
     *(u16 *)({
         register s32 first_product_r4 asm("r4") = var_r8_4;
@@ -1680,10 +1659,10 @@ block_122:
             : "r"(first_average_value_r2),
               "r"(first_average_sign_r3)
             : "cc");
-        first_top_r5 = D_0200A8A0.top;
+        first_top_r5 = D_0200A8A0.top_item;
         first_item_r4 = first_average_r0 + first_top_r5;
         first_slot_r3 = D_0200A8A0.slot;
-        first_index_base_r6 = D_0200E6C4;
+        first_index_base_r6 = gWindowTextItemCounts;
         {
             register s32 first_limit_address_r0 asm("r0") =
                 first_slot_r3 + (s32)first_index_base_r6;
@@ -1699,7 +1678,7 @@ block_122:
 
             first_grid_offset_r1 *= first_grid_stride_r0;
             {
-                register u8 *first_lookup_r2 asm("r2") = D_0200DE90;
+                register u8 *first_lookup_r2 asm("r2") = gWindowTextBlockOffsets;
 
                 first_row_address_r0 = 0xD2;
                 first_row_address_r0 *= first_slot_r3;
@@ -1709,12 +1688,12 @@ block_122:
             }
             first_row_address_r0 = *(u8 *) first_row_address_r0 * 0x25;
             {
-                register u8 *first_output_r2 asm("r2") = D_0200E6CE;
+                register u8 *first_output_r2 asm("r2") = gWindowTextBlocks;
 
                 first_row_address_r0 += (s32) first_output_r2;
             }
             first_grid_offset_r1 += first_row_address_r0;
-            func_08097DA8(&D_0200A8A0, (void *) first_grid_offset_r1);
+            DrawWindowText(&D_0200A8A0, (void *) first_grid_offset_r1);
         }
     }
 block_124:
@@ -1729,7 +1708,7 @@ block_124:
     goto block_150;
 }
 block_127:
-    if ((u32) D_0200A8A0.top < (u32) D_0200A8A0.prior_top) {
+    if ((u32) D_0200A8A0.top_item < (u32) D_0200A8A0.prior_top_item) {
         goto block_129;
     }
     goto block_150;
@@ -1785,14 +1764,14 @@ loop_131:
         mirror_tile_r1 &= mirror_mask_copy_r0;
         temp_r1_14 = mirror_tile_r1;
     }
-    if (temp_r1_14 < (u32) D_02021664) {
+    if (temp_r1_14 < (u32) gWindowFrameTileOffset) {
         goto block_133;
     }
-    if (temp_r1_14 < (u32) (D_02021664 + 0x40)) {
+    if (temp_r1_14 < (u32) (gWindowFrameTileOffset + 0x40)) {
         goto block_134;
     }
 block_133:
-    ReleaseWindowTile((u16) (temp_r1_14 - D_02021670));
+    ReleaseWindowTile((u16) (temp_r1_14 - gWindowTextTileOffset));
 block_134:
     mirror_column_r5 += 1;
     temp_r1_13 = D_0200A8A0.width;
@@ -1802,7 +1781,7 @@ block_134:
 block_135:
     var_r8_5 -= 1;
     var_r9_3 += 1;
-    if (var_r9_3 < (u32) ((D_0200A8A0.prior_top - D_0200A8A0.top) * 2)) {
+    if (var_r9_3 < (u32) ((D_0200A8A0.prior_top_item - D_0200A8A0.top_item) * 2)) {
         goto loop_130;
     }
 block_136:
@@ -1832,8 +1811,8 @@ block_138:
         mirror_copy_destination_r2 <<= 1;
         mirror_copy_destination_r2 =
             (s32)mirror_copy_tiles_r4 + mirror_copy_destination_r2;
-        mirror_copy_source_r0 = D_0200A8A0.prior_top;
-        mirror_copy_source_r0 -= D_0200A8A0.top;
+        mirror_copy_source_r0 = D_0200A8A0.prior_top_item;
+        mirror_copy_source_r0 -= D_0200A8A0.top_item;
         mirror_copy_source_r0 <<= 1;
         mirror_copy_row_r6 = var_r8_6;
         asm volatile("" : "+r"(mirror_copy_row_r6));
@@ -1858,7 +1837,7 @@ block_141:
 loop_142:
     {
         s32 mirror_limit =
-            (s32) ((D_0200A8A0.prior_top - D_0200A8A0.top) * 2);
+            (s32) ((D_0200A8A0.prior_top_item - D_0200A8A0.top_item) * 2);
 
         if (var_r8_6 > mirror_limit) {
             goto block_138;
@@ -1909,7 +1888,7 @@ loop_144:
     register u32 *mirror_tiles_ip asm("r12") =
         ({
             register u32 *mirror_tiles_seed_r2 asm("r2") =
-                &D_02021664;
+                &gWindowFrameTileOffset;
 
             asm volatile("" : "+r"(mirror_tiles_seed_r2));
             mirror_tiles_seed_r2;
@@ -1917,7 +1896,7 @@ loop_144:
     register u16 *mirror_attr_sl asm("r10") =
         ({
             register u16 *mirror_attr_seed_r4 asm("r4") =
-                &D_02021668;
+                &gWindowBgPaletteAttribute;
 
             asm volatile("" : "+r"(mirror_attr_seed_r4));
             mirror_attr_seed_r4;
@@ -1997,10 +1976,10 @@ block_147:
             : "r"(mirror_average_value_r2),
               "r"(mirror_average_sign_r3)
             : "cc");
-        mirror_top_r5 = D_0200A8A0.top;
+        mirror_top_r5 = D_0200A8A0.top_item;
         mirror_item_r4 = mirror_average_r0 + mirror_top_r5;
         mirror_slot_r3 = D_0200A8A0.slot;
-        mirror_index_base_r6 = D_0200E6C4;
+        mirror_index_base_r6 = gWindowTextItemCounts;
         {
             register s32 mirror_limit_address_r0 asm("r0") =
                 mirror_slot_r3 + (s32)mirror_index_base_r6;
@@ -2016,7 +1995,7 @@ block_147:
 
         mirror_grid_offset_r1 *= mirror_grid_stride_r0;
         {
-            register u8 *mirror_lookup_r2 asm("r2") = D_0200DE90;
+            register u8 *mirror_lookup_r2 asm("r2") = gWindowTextBlockOffsets;
 
             mirror_row_address_r0 = 0xD2;
             mirror_row_address_r0 *= mirror_slot_r3;
@@ -2026,12 +2005,12 @@ block_147:
         }
         mirror_row_address_r0 = *(u8 *)mirror_row_address_r0 * 0x25;
         {
-            register u8 *mirror_output_r2 asm("r2") = D_0200E6CE;
+            register u8 *mirror_output_r2 asm("r2") = gWindowTextBlocks;
 
             mirror_row_address_r0 += (s32)mirror_output_r2;
         }
         mirror_grid_offset_r1 += mirror_row_address_r0;
-        func_08097DA8(&D_0200A8A0, (void *) mirror_grid_offset_r1);
+        DrawWindowText(&D_0200A8A0, (void *) mirror_grid_offset_r1);
         }
     }
 block_149:
@@ -2045,11 +2024,11 @@ block_149:
     }
 }
 block_150:
-    D_0200A880 = D_0200A8A0.selected;
-    D_0200A881 = D_0200A8A0.top;
+    D_0200A880 = D_0200A8A0.selected_item;
+    D_0200A881 = D_0200A8A0.top_item;
     asm volatile("" : : : "memory");
-    D_0200A8A0.prior_selected = D_0200A8A0.selected;
-    D_0200A8A0.prior_top = D_0200A8A0.top;
+    D_0200A8A0.prior_selected_item = D_0200A8A0.selected_item;
+    D_0200A8A0.prior_top_item = D_0200A8A0.top_item;
     if (({
             register s32 return_state_r1 asm("r1") = sp18;
 
@@ -2065,7 +2044,7 @@ block_153:
 {
     register struct MenuSprite **arrow_table_r5 asm("r5");
 
-    if (D_0200A8A0.top == 0) {
+    if (D_0200A8A0.top_item == 0) {
         goto block_155;
     }
     {
@@ -2100,8 +2079,8 @@ block_156:
     register u32 upper_flags_r1 asm("r1");
 
     {
-    register s32 upper_arrow_top_r4 asm("r4") = D_0200A8A0.top;
-    register volatile u8 *upper_arrow_index_r3 asm("r3") = D_0200E6C4;
+    register s32 upper_arrow_top_r4 asm("r4") = D_0200A8A0.top_item;
+    register volatile u8 *upper_arrow_index_r3 asm("r3") = gWindowTextItemCounts;
     register s32 upper_arrow_slot_r0 asm("r0") = D_0200A8A0.slot;
     register volatile u8 *upper_arrow_entry_r0 asm("r0");
     register s32 upper_arrow_count_r2 asm("r2");
@@ -2138,7 +2117,7 @@ block_158:
 block_159:
     upper_record_r0->flags = upper_flags_r1;
     }
-    if (D_0200A8A0.top == 0) {
+    if (D_0200A8A0.top_item == 0) {
         goto block_161;
     }
     {
@@ -2169,9 +2148,9 @@ block_162:
     register u32 lower_flags_r1 asm("r1");
 
     {
-    register s32 lower_arrow_top_r3 asm("r3") = D_0200A8A0.top;
+    register s32 lower_arrow_top_r3 asm("r3") = D_0200A8A0.top_item;
     register s32 lower_arrow_slot_r0 asm("r0") = D_0200A8A0.slot;
-    register volatile u8 *lower_arrow_index_r4 asm("r4") = D_0200E6C4;
+    register volatile u8 *lower_arrow_index_r4 asm("r4") = gWindowTextItemCounts;
     register volatile u8 *lower_arrow_entry_r0 asm("r0");
     register s32 lower_arrow_count_r2 asm("r2");
 
@@ -2208,7 +2187,7 @@ block_165:
     lower_record_r0->flags = lower_flags_r1;
     }
 }
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     {
         register u8 *repeat_stream_r5 asm("r5") = cursor;
 
@@ -2218,14 +2197,14 @@ block_165:
     register volatile u16 *repeat_state_r5 asm("r5");
     register u16 *repeat_keys_r2 asm("r2") = &gHeldKeys;
     register u32 repeat_keys_r1 asm("r1") = *repeat_keys_r2;
-    register u32 saved_keys_r6 asm("r6") = D_0200A8A0.keys;
+    register u32 saved_keys_r6 asm("r6") = D_0200A8A0.prior_held_keys;
 
     asm volatile("" : "+r"(saved_keys_r6));
     if (repeat_keys_r1 != saved_keys_r6) {
         goto block_170;
     }
-    temp_r0_18 = gFrameStep + D_0200A8A0.repeat;
-    D_0200A8A0.repeat = temp_r0_18;
+    temp_r0_18 = gFrameStep + D_0200A8A0.key_repeat_frames;
+    D_0200A8A0.key_repeat_frames = temp_r0_18;
     if ((u32) (u8) temp_r0_18 <= 7U) {
         goto block_169;
     }
@@ -2234,7 +2213,7 @@ block_165:
 
         repeat_keys_r2 = &D_0200A884;
         *repeat_keys_r2 = repeated_keys_r0;
-        D_0200A8A0.repeat = 0;
+        D_0200A8A0.key_repeat_frames = 0;
         repeat_state_r5 = repeat_keys_r2;
     }
     goto block_171;
@@ -2252,12 +2231,12 @@ block_170:
         register u16 *repeat_changed_input_r1 asm("r1");
         register u16 *repeat_changed_state_r4 asm("r4");
 
-        D_0200A8A0.keys = repeat_keys_r1;
+        D_0200A8A0.prior_held_keys = repeat_keys_r1;
         repeat_changed_input_r1 = &gPressedKeys;
         repeat_keys_r1 = *repeat_changed_input_r1;
         repeat_changed_state_r4 = &D_0200A884;
         *repeat_changed_state_r4 = repeat_keys_r1;
-        D_0200A8A0.repeat = repeat_changed_zero_r0;
+        D_0200A8A0.key_repeat_frames = repeat_changed_zero_r0;
         repeat_state_r5 = repeat_changed_state_r4;
     }
 block_171:
@@ -2275,15 +2254,15 @@ block_171:
     if (temp_r3_4 == 0) {
         goto block_180;
     }
-    if (D_0200A8A0.selected == 0) {
+    if (D_0200A8A0.selected_item == 0) {
         goto block_177;
     }
-    temp_r0_19 = D_0200A8A0.selected - 1;
-    D_0200A8A0.selected = temp_r0_19;
-    if ((u32) (u8) temp_r0_19 >= (u32) D_0200A8A0.top) {
+    temp_r0_19 = D_0200A8A0.selected_item - 1;
+    D_0200A8A0.selected_item = temp_r0_19;
+    if ((u32) (u8) temp_r0_19 >= (u32) D_0200A8A0.top_item) {
         goto block_175;
     }
-    D_0200A8A0.top -= 1;
+    D_0200A8A0.top_item -= 1;
     {
         register struct MenuSprite **up_scroll_table_r5 asm("r5") =
             D_0200A890;
@@ -2309,7 +2288,7 @@ block_177:
             goto block_179;
         }
     }
-    D_0200A8A0.selected = D_0200E6C4[D_0200A8A0.slot] - 1;
+    D_0200A8A0.selected_item = gWindowTextItemCounts[D_0200A8A0.slot] - 1;
     D_0200A8A0.flags |= 2;
     PlaySong(0x40);
 block_179:
@@ -2329,13 +2308,13 @@ block_180:
     if (!(0x80 & repeat_event_r1)) {
         goto block_189;
     }
-    if ((s32) D_0200A8A0.selected >= (s32) (D_0200E6C4[D_0200A8A0.slot] - 1)) {
+    if ((s32) D_0200A8A0.selected_item >= (s32) (gWindowTextItemCounts[D_0200A8A0.slot] - 1)) {
         goto block_186;
     }
-    D_0200A8A0.selected += 1;
+    D_0200A8A0.selected_item += 1;
     {
-    register s32 down_selected_r2 asm("r2") = D_0200A8A0.selected;
-    register s32 down_top_r3 asm("r3") = D_0200A8A0.top;
+    register s32 down_selected_r2 asm("r2") = D_0200A8A0.selected_item;
+    register s32 down_top_r3 asm("r3") = D_0200A8A0.top_item;
 
     temp_r0_20 = D_0200A8A0.height - 2;
     if (down_selected_r2 <
@@ -2344,7 +2323,7 @@ block_180:
         goto block_184;
     }
     }
-    D_0200A8A0.top += 1;
+    D_0200A8A0.top_item += 1;
     {
         register struct MenuSprite **down_scroll_table_r2 asm("r2") =
             D_0200A890;
@@ -2370,7 +2349,7 @@ block_186:
             goto block_188;
         }
     }
-    D_0200A8A0.selected = (u8) temp_r3_4;
+    D_0200A8A0.selected_item = (u8) temp_r3_4;
     D_0200A8A0.flags |= 2;
     PlaySong(0x40);
 block_188:
@@ -2390,11 +2369,11 @@ block_189:
     if (!(0x20 & repeat_event_r1)) {
         goto block_198;
     }
-    if (D_0200A8A0.selected == 0) {
+    if (D_0200A8A0.selected_item == 0) {
         goto block_196;
     }
     {
-    register s32 page_up_top_r2 asm("r2") = D_0200A8A0.top;
+    register s32 page_up_top_r2 asm("r2") = D_0200A8A0.top_item;
 
     temp_r0_21 = D_0200A8A0.height - 2;
     temp_r0_22 = (s32) (temp_r0_21 + (temp_r0_21 >> 0x1F)) >> 1;
@@ -2411,12 +2390,12 @@ block_193:
         var_r1_6 = page_up_zero_r1;
     }
 block_194:
-    D_0200A8A0.top = var_r1_6;
-    if ((u8)var_r1_6 == D_0200A8A0.prior_top) {
+    D_0200A8A0.top_item = var_r1_6;
+    if ((u8)var_r1_6 == D_0200A8A0.prior_top_item) {
         goto block_196;
     }
     }
-    D_0200A8A0.selected -= D_0200A8A0.prior_top - var_r1_6;
+    D_0200A8A0.selected_item -= D_0200A8A0.prior_top_item - var_r1_6;
     {
         register struct MenuSprite **page_up_table_r1 asm("r1") =
             D_0200A890;
@@ -2435,8 +2414,8 @@ block_198:
         goto block_210;
     }
     {
-        register s32 page_selected_r6 asm("r6") = D_0200A8A0.selected;
-        register u32 page_entry_base_r0 asm("r0") = (u32)D_0200E6C4;
+        register s32 page_selected_r6 asm("r6") = D_0200A8A0.selected_item;
+        register u32 page_entry_base_r0 asm("r0") = (u32)gWindowTextItemCounts;
         register u32 page_entry_r1 asm("r1") = D_0200A8A0.slot;
         register volatile u8 *page_entry_r8 asm("r8");
         register s32 page_count_r4 asm("r4");
@@ -2455,8 +2434,8 @@ block_198:
         if (page_selected_r6 >= page_count_r4 - 1) {
             goto block_209;
         }
-        page_top_r3 = *(volatile u8 *)&D_0200A8A0.top;
-        page_top_compare_r2 = *(volatile u8 *)&D_0200A8A0.top;
+        page_top_r3 = *(volatile u8 *)&D_0200A8A0.top_item;
+        page_top_compare_r2 = *(volatile u8 *)&D_0200A8A0.top_item;
         page_height_r0 = D_0200A8A0.height;
         page_height_r0 -= 2;
         page_height_sign_r1 = page_height_r0 >> 0x1F;
@@ -2480,7 +2459,7 @@ block_198:
         }
         page_top_r3 += page_half_r5;
 block_202:
-        D_0200A8A0.top = page_top_r3;
+        D_0200A8A0.top_item = page_top_r3;
         {
             register s32 page_new_top_r4 asm("r4");
             register s32 page_new_top_scratch_r0 asm("r0");
@@ -2493,7 +2472,7 @@ block_202:
                 : "r"(page_top_r3));
             {
             register s32 page_prior_top_r3 asm("r3") =
-                D_0200A8A0.prior_top;
+                D_0200A8A0.prior_top_item;
             register s32 page_selected_r2 asm("r2");
             register volatile u8 *page_entry_r0 asm("r0");
             register s32 page_count_r1 asm("r1");
@@ -2525,7 +2504,7 @@ block_205:
 block_207:
             page_result_r0 = page_count_r1 - 1;
 block_208:
-            D_0200A8A0.selected = page_result_r0;
+            D_0200A8A0.selected_item = page_result_r0;
             }
         }
     }
@@ -2672,7 +2651,7 @@ block_223:
 
         DestroySprite(close_base_r4[3]);
     }
-    D_0200A8A0.prior_selected = 0xFF;
+    D_0200A8A0.prior_selected_item = 0xFF;
     {
         register u16 *close_tail_base_r5 asm("r5") = &D_0200A884;
         register u32 close_tail_value_r0 asm("r0") = *close_tail_base_r5;
@@ -2700,7 +2679,7 @@ block_226:
     DestroySprite(D_0200A890[1]);
     DestroySprite(D_0200A890[2]);
     DestroySprite(D_0200A890[3]);
-    D_0200A8A0.prior_selected = 0xFF;
+    D_0200A8A0.prior_selected_item = 0xFF;
     goto block_289;
 #undef D_0200A8A0
 case MENU_YES_NO:
@@ -2738,13 +2717,13 @@ case MENU_YES_NO:
             case8_y_r4 += case8_y_term_r2;
             case8_y_r4 -= 5;
             case8_y_r4 <<= 3;
-            case8_y_term_r2 = case8_map->selected;
+            case8_y_term_r2 = case8_map->selected_item;
             case8_y_term_r2 <<= 4;
             case8_y_r4 += case8_y_term_r2;
             case8_y_r4 <<= 16;
             case8_y_r4 >>= 16;
             case8_y_r4;
-        }), (u16) (s32) (u16) (D_0202166A + 0xE), (u16) (s32) D_0202166C, 0x20, ({
+        }), (u16) (s32) (u16) (gWindowCursorTileOffset + 0xE), (u16) (s32) gWindowCursorPaletteBank, 0x20, ({
             case8_zero_r4 = 0;
             case8_zero_r4;
         }));
@@ -2753,8 +2732,8 @@ case MENU_YES_NO:
     {
     register u8 *case8_state_r4 asm("r4") = &D_0200A882;
 loop_229:
-    D_0200A88C->field6 = ((((u16) case8_map->y + case8_map->height) - 5) * 8) + (case8_map->selected * 0x10);
-    func_080ED17C(1);
+    D_0200A88C->field6 = ((((u16) case8_map->y + case8_map->height) - 5) * 8) + (case8_map->selected_item * 0x10);
+    YieldTaskForUpdates(1);
     {
     register volatile u16 *case8_keys_address_r0 asm("r0") = &gPressedKeys;
     register u32 case8_keys_r1 asm("r1") = *case8_keys_address_r0;
@@ -2764,21 +2743,21 @@ loop_229:
     if (!(0x40 & case8_keys_r1)) {
         goto block_233;
     }
-    if (case8_map->selected == 0) {
+    if (case8_map->selected_item == 0) {
         goto block_242;
     }
-    var_r0_5 = case8_map->selected - 1;
+    var_r0_5 = case8_map->selected_item - 1;
     goto block_236;
 block_233:
     if (!(0x80 & case8_keys_r1)) {
         goto block_237;
     }
-    if (case8_map->selected != 0) {
+    if (case8_map->selected_item != 0) {
         goto block_242;
     }
-    var_r0_5 = case8_map->selected + 1;
+    var_r0_5 = case8_map->selected_item + 1;
 block_236:
-    case8_map->selected = var_r0_5;
+    case8_map->selected_item = var_r0_5;
     PlaySong(0x40);
     goto block_242;
 block_237:
@@ -2798,7 +2777,7 @@ block_237:
         }
         *case8_state_r4 = case8_accept_value_r2;
     }
-    D_0200A880 = case8_map->selected;
+    D_0200A880 = case8_map->selected_item;
     {
         register u8 *case8_accept_next_r2 asm("r2") = cursor;
 
@@ -2854,7 +2833,7 @@ case MENU_SET_FRAME_STYLE:
                       "=&r"(case11_guard_r5),
                       "=&r"(case11_guard_r6),
                       "+r"(temp_r0_24));
-    temp_r0_24->style = M2C_FIELD(case11_stream_r4, u8 *, 2);
+    temp_r0_24->frame_style = M2C_FIELD(case11_stream_r4, u8 *, 2);
     temp_r0_25 = M2C_FIELD(case11_stream_r4, u8 *, 2);
     if (temp_r0_25 == 1) {
         goto block_253;
@@ -2875,19 +2854,19 @@ block_248:
     }
     goto block_255;
 block_251:
-    temp_r0_24->frame_extra_width = 0;
+    temp_r0_24->frame_decoration_x = 0;
     var_r0_6 = 5;
     asm volatile("");
     goto block_254;
 block_252:
-    temp_r0_24->frame_extra_width = 0;
+    temp_r0_24->frame_decoration_x = 0;
     var_r0_6 = 5;
     goto block_254;
 block_253:
-    temp_r0_24->frame_extra_width = 4;
+    temp_r0_24->frame_decoration_x = 4;
     var_r0_6 = 6;
 block_254:
-    temp_r0_24->frame_tail_height = var_r0_6;
+    temp_r0_24->frame_decoration_width = var_r0_6;
 block_255:
     temp_r0_24->flags |= 0xA;
     var_r5 = cursor;
@@ -2901,7 +2880,7 @@ case MENU_WAIT_CONFIRM:
     register u32 case12_mask_r5 asm("r5") = 3;
 
 loop_257:
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     {
         register u32 case12_keys_r1 asm("r1") = *case12_keys_r4;
 
@@ -2911,7 +2890,7 @@ loop_257:
         }
     }
     PlaySong(0x41);
-    func_080ED17C(1);
+    YieldTaskForUpdates(1);
     cursor = case12_next_r6;
     goto block_289;
     }
@@ -2935,9 +2914,9 @@ case MENU_CLEAR_RECT:
         var_r8_8 = case13_seed_r0;
     }
     sp20 = case13_stream_r6 + 4;
-    var_r6_tiles = &D_02021664;
+    var_r6_tiles = &gWindowFrameTileOffset;
     {
-        register u16 *case13_attr_seed_r1 asm("r1") = &D_02021668;
+        register u16 *case13_attr_seed_r1 asm("r1") = &gWindowBgPaletteAttribute;
 
         asm volatile("" : "+r"(case13_attr_seed_r1));
         case13_attr_r9 = case13_attr_seed_r1;
@@ -2999,7 +2978,7 @@ block_263:
         }
     }
 block_265:
-    ReleaseWindowTile((u16) (temp_r1_18 - D_02021670));
+    ReleaseWindowTile((u16) (temp_r1_18 - gWindowTextTileOffset));
 block_266:
     if (var_r5_10 != -1) {
         goto block_272;

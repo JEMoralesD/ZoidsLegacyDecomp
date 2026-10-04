@@ -1,13 +1,14 @@
 #include "m2c_prelude.h"
+#include "../../graphics/screen_effects.h"
 #include "../game_state.h"
 
-void func_08096FBC(s32, s32, s32, s32, s32, s32, s32, s32, s32, s32);
-u8 func_0809669C(void);
+void InitializeWindowGraphics(s32, s32, s32, s32, s32, s32, s32, s32, s32, s32) asm("func_08096FBC");
+u8 IsScreenTransitionComplete(void) asm("func_0809669C");
 void ReleaseWindowTile(s32) asm("func_08097980");
-void func_08097B2C(s32, s32, u16 *);
+void AllocateWindowShiftJisGlyphTiles(s32, s32, u16 *) asm("func_08097B2C");
 void BiosCpuFastSet(const void *, void *, s32) asm("func_080ECD28");
-void func_080ED17C(s32);
-void func_08096308(s32, s32);
+void YieldTaskForUpdates(s32) asm("func_080ED17C");
+void StartScreenTransition(s32, s32) asm("func_08096308");
 
 void RunCredits(void)
 {
@@ -19,14 +20,14 @@ void RunCredits(void)
     u8 *stream;
 
     *(u16 *)0x0300004C = 0x1140;
-    func_08096FBC(0, 1, 0, 0x3C0, 0x3C0, 0, 14, 0, 0x3E6, 15);
+    InitializeWindowGraphics(0, 1, 0, 0x3C0, 0x3C0, 0, 14, 0, 0x3E6, 15);
     BiosCpuFastSet((void *)0x087A57F0, (void *)0x050001C0, 8);
     fill_word = 0xE3C1E3C1;
     BiosCpuFastSet(&fill_word, (void *)0x06000000, 0x01000200);
-    func_08096308(1, 60);
+    StartScreenTransition(SCREEN_TRANSITION_FADE_FROM_BLACK, 60);
 
-    while (func_0809669C() == 0) {
-        func_080ED17C(1);
+    while (IsScreenTransitionComplete() == 0) {
+        YieldTaskForUpdates(1);
     }
 
     {
@@ -94,7 +95,7 @@ decode_command:
                             stream += 2;
                         }
 
-                        func_08097B2C((stream[0] << 8) | stream[1],
+                        AllocateWindowShiftJisGlyphTiles((stream[0] << 8) | stream[1],
                                       palette, decoded);
                         tiles[0] = decodedp[0];
                         tiles[32] = decodedp[1];
@@ -137,12 +138,12 @@ command_zero:
         asm volatile("" : "+r"(stream));
         asm volatile("" : "+r"(stream));
         scroll[1] += 0x80;
-        func_080ED17C(1);
+        YieldTaskForUpdates(1);
     } while (scroll[1] != end_offset);
 
-    func_08096308(2, 8);
-    while (func_0809669C() == 0) {
-        func_080ED17C(1);
+    StartScreenTransition(SCREEN_TRANSITION_FADE_TO_BLACK, 8);
+    while (IsScreenTransitionComplete() == 0) {
+        YieldTaskForUpdates(1);
     }
 
     *(u8 *)0x02021694 = 1;

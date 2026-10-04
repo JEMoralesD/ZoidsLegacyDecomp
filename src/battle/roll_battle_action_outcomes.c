@@ -1,10 +1,10 @@
 #include "m2c_prelude.h"
 #include "battle.h"
 
-s32 func_080BE488(s32, s32, s32);                   /* extern */
+s32 RollBattleStatusResistance(s32, s32, s32) asm("func_080BE488");                   /* extern */
 u8 FindBattleEffect(u8, u8, s32) asm("func_080BF464");                      /* extern */
 s32 FindAbilityValue(s32, s32, s32) asm("func_080E74F0");                   /* extern */
-s32 func_080E7AE0(s32, s32, s32);                   /* extern */
+s32 FindActiveBattleAuxiliaryPilotEffectValue(s32, s32, s32) asm("func_080E7AE0");                   /* extern */
 u32 CallFunctionR0(s32) asm("func_080ECD5C");                             /* extern */
 extern u8 gBattleState[];
 extern u8 D_000027BE[];
@@ -261,7 +261,7 @@ loop_4:
         })) {
         goto block_set1;
     }
-    if (((func_080E7AE0(target_side, target_unit_slot, 0x15) << 0x10) != 0) &&
+    if (((FindActiveBattleAuxiliaryPilotEffectValue(target_side, target_unit_slot, 0x15) << 0x10) != 0) &&
         ((s32) ({
             register u32 index_r1 asm("r1") = target_unit_slot;
             register u32 address_r0 asm("r0");
@@ -395,9 +395,9 @@ loop_4:
                 }
             }
         }
-        if (func_080BE488(target_side, target_unit_slot, var_r2 - var_r0_2) != 0) {
+        if (RollBattleStatusResistance(target_side, target_unit_slot, var_r2 - var_r0_2) != 0) {
             register u32 value_r1 asm("r1") = *temp_r4;
-            register u32 mask_r0 asm("r0") = 0x40;
+            register u32 mask_r0 asm("r0") = BATTLE_OUTCOME_FREEZE_RESISTED;
 
             value_r1 |= mask_r0;
             *temp_r4 = value_r1;
@@ -462,7 +462,7 @@ loop_4:
             asm volatile("" : "+r"(second_offset_r5));
             call_base_r1 += second_offset_r5;
             call_base_r1 = *(u8 *)call_base_r1;
-            FindBattleEffect(first_value_r0, call_base_r1, 0x1F);
+            FindBattleEffect(first_value_r0, call_base_r1, BATTLE_EFFECT_MELEE_DEFENSE_DAMAGE_CHANCE);
         }) != 0xFF) && ({
             register u32 flag_address_r0 asm("r0");
 
@@ -514,9 +514,9 @@ block_set1:
     goto block_random;
 block_set3:
     *temp_r4 = BATTLE_OUTCOME_HIT;
-    if (func_080BE488(target_side, target_unit_slot, 0) != 0) {
+    if (RollBattleStatusResistance(target_side, target_unit_slot, 0) != 0) {
         or_value_r1 = *temp_r4;
-        var_r0 = 0x40;
+        var_r0 = BATTLE_OUTCOME_FREEZE_RESISTED;
         goto block_or;
     }
     goto block_random;
