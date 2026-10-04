@@ -49,6 +49,8 @@ STARTUP_CALL = 0x9B200
 COPY_HOOK = 0xED128
 CONCAT_HOOK = 0x99F5C
 PREFIX_HOOK = 0x9F770
+MESSAGE_VENEER = PREFIX_HOOK + 8
+COPY_BYTES = 0x080ED038
 CONSTRUCTION_POSITION_CALLS = (
     0xA3B8C, 0xA3C54, 0xA3CF4, 0xA3D8A, 0xA3E14, 0xA3EAA,
     0xA3F8C, 0xA3FFC, 0xA40AE, 0xA4146, 0xA41D0, 0xA426C,
@@ -71,6 +73,7 @@ MENU_SCRIPT_AREA = 0xA00000
 CUSTOMIZE_WINDOWS = {0x005828, 0x005AD5, 0x005B13}
 STRING_AREA = 0xA80000
 FORMAT_STRING_AREA = 0xB00000
+MESSAGE_TEMPLATE_AREA = 0xB40000
 MOVABLE_POINTER_TABLES = (
     (0x7A3624, 0x7A3660),
     (0x7A3660, 0x7A3660 + 152 * 4),
@@ -102,6 +105,22 @@ COUNTED_NAME_SITES = (
      (0x464D, 0xE780, 0x464B, 0x781B, 0xB401, 0x4806, 0x4684, 0xBC01, 0x4760, 0x46C0),
      0xE2BCC),
 )
+MESSAGE_TEMPLATE_SITES = {
+    0x103B10: ((0xA3BAC, 22), (0xA3C74, 22), (0xA3DAA, 22), (0xA3ECA, 22), (0xA4166, 22)),
+    0x103BBC: ((0xA432A, 22),),
+    0x103BE4: ((0xA440E, 22),),
+    0x103C28: ((0xA44EC, 22),),
+    0x103C58: ((0xA4590, 30),),
+    0x103C94: ((0xA4628, 30),),
+    0x103CC8: ((0xA46C8, 32),),
+    0x103D18: ((0xA4758, 22),),
+    0x103DD4: ((0xA50C2, 54),),
+    0x103DF0: ((0xA5308, 20),),
+}
+MESSAGE_TEMPLATE_PARTS = (0x103AF4, 0x103B0C, 0x103B88, 0x103BA0, 0x103C38, 0x103CA4,
+                          0x103D98, 0x103DB8, 0x103DCC, 0x103DD8)
+MONEY_MESSAGE_TAIL = (0xA475E, 0xA4776)
+SPRITE_DIGIT_STRINGS = (0x108C18,)
 TITLE_STRING_COPY_SITES = {
     0x103A38: 0x09D0D0,
     0x103A70: 0x09D138,
@@ -237,6 +256,60 @@ def patch_counted_names(rom, original, target):
         rom[call:call + 4] = encode_bl(call, BASE + entry)
         rom[block:block + len(after) * 2] = struct.pack(f'<{len(after)}H', *after)
         struct.pack_into('<I', rom, literal, target | 1)
+
+
+def fixed_text_copies(original):
+    profile = dialogue.PROFILE
+    copies = {}
+    for at in range(profile['code_start'] + 12, profile['code_end'] - 4, 2):
+        high, low = struct.unpack_from('<HH', original, at)
+        if high & 0xf800 != 0xf000 or low & 0xf800 != 0xf800:
+            continue
+        displacement = ((high & 0x7ff) << 12) | ((low & 0x7ff) << 1)
+        if displacement & 0x400000:
+            displacement -= 0x800000
+        length = struct.unpack_from('<H', original, at - 2)[0]
+        if BASE + at + 4 + displacement != COPY_BYTES or length & 0xff00 != 0x2200:
+            continue
+        for back in range(4, 12, 2):
+            load = struct.unpack_from('<H', original, at - back)[0]
+            if load & 0xff00 == 0x4900:
+                pool = ((at - back + 4) & ~3) + (load & 0xff) * 4
+                source = struct.unpack_from('<I', original, pool)[0] - BASE
+                if 0 <= source < len(original):
+                    copies[source] = min(length & 0xff, copies.get(source, 0xff))
+                break
+    return copies
+
+
+def patch_message_templates(rom, original, templates, compose):
+    missing = set(MESSAGE_TEMPLATE_SITES) - set(templates)
+    if missing:
+        raise ValueError(f'Message at 0x{min(missing):X} needs a template_format entry.')
+    rom[MESSAGE_VENEER:MESSAGE_VENEER + 8] = long_jump(compose)
+    cursor = MESSAGE_TEMPLATE_AREA
+    for offset, sites in MESSAGE_TEMPLATE_SITES.items():
+        template = templates[offset]
+        if any(value != 0xff for value in rom[cursor:cursor + len(template)]):
+            raise ValueError(f'No free ROM space for message template at 0x{offset:X}.')
+        rom[cursor:cursor + len(template)] = template
+        for length_at, argument_start in sites:
+            load, call = length_at - 2, length_at + 2
+            pool = ((load + 4) & ~3) + original[load] * 4
+            if (rom[load:call + 4] != original[load:call + 4] or original[load + 1] != 0x49 or
+                    original[length_at + 1] != 0x22 or
+                    struct.unpack_from('<I', original, pool)[0] != BASE + offset or
+                    rom[pool:pool + 4] != original[pool:pool + 4] or
+                    original[call:call + 4] != encode_bl(call, COPY_BYTES)):
+                raise ValueError(f'Message copy differs at 0x{call:X}.')
+            struct.pack_into('<I', rom, pool, BASE + cursor)
+            struct.pack_into('<H', rom, length_at, 0x2200 | argument_start)
+            rom[call:call + 4] = encode_bl(call, BASE + MESSAGE_VENEER)
+        cursor = (cursor + len(template) + 3) & ~3
+    start, resume = MONEY_MESSAGE_TAIL
+    if rom[start:resume] != original[start:resume]:
+        raise ValueError(f'Money message tail differs at 0x{start:X}.')
+    struct.pack_into('<H', rom, start, 0xe000 | ((resume - start - 4) >> 1))
 
 
 def patch_title_string_copy_lengths(rom, original, edits):
@@ -487,6 +560,8 @@ def build_rom(original, document, choices, dialogue_document):
     fixed_edits = {}
     string_capacities = {}
     menu_overrides = set()
+    fixed_copies = fixed_text_copies(original)
+    message_templates = {}
     for entry in dialogue_document['entries']:
         offset = int(entry['offset'], 16)
         raw = bytes.fromhex(entry['original'])
@@ -532,6 +607,20 @@ def build_rom(original, document, choices, dialogue_document):
             replacement = b'~' + replacement
         if replacement == source:
             continue
+        if offset in SPRITE_DIGIT_STRINGS:
+            raise ValueError(f'Text at {entry["offset"]} is read as number sprite digits, not text.')
+        if offset in MESSAGE_TEMPLATE_PARTS:
+            raise ValueError(f'Text at {entry["offset"]} is spliced into a message template; edit the template instead.')
+        if offset in MESSAGE_TEMPLATE_SITES:
+            if not entry.get('template_format') or any(
+                    field != b'1$s' for field in re.findall(rb'%([1-9][0-9]*\$[dsv])', replacement)):
+                raise ValueError(f'Message at {entry["offset"]} must be a template_format entry using only %1$s.')
+            check_game_text(checker, entry, source, replacement, True)
+            message_templates[offset] = replacement
+            continue
+        if (offset in fixed_copies and offset not in TITLE_STRING_COPY_SITES and
+                len(replacement) > fixed_copies[offset]):
+            raise ValueError(f'Text at {entry["offset"]} is copied with a fixed length of {fixed_copies[offset]} bytes.')
         if offset in scene_offsets:
             raise ValueError(f'Edit scene text in scene-translation.json at {entry["offset"]}.')
         check_game_text(checker, entry, source, replacement, template_format)
@@ -584,6 +673,7 @@ def build_rom(original, document, choices, dialogue_document):
     rom[FIELD_CURRENT_HOOK:FIELD_CURRENT_HOOK + 8] = long_jump(
         symbols['vwf_field_current'])
     patch_counted_names(rom, original, symbols['vwf_field_counted'])
+    patch_message_templates(rom, original, message_templates, symbols['vwf_compose_message'])
     rom[CLEAR_HOOK:CLEAR_HOOK + 8] = long_jump(symbols['vwf_clear_window'])
     rom[CLEAR_ALL_HOOK:CLEAR_ALL_HOOK + 8] = long_jump(symbols['vwf_clear_window_all'])
     rom[WINDOW_CREATE_HOOK:WINDOW_CREATE_HOOK + 8] = long_jump(symbols['vwf_window_created'])

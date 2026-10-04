@@ -1385,6 +1385,56 @@ u32 vwf_menu_prefix(u8 *destination, const u8 *source) {
     return writer.status == TEXT_OK ? writer.length >> 1 : 0;
 }
 
+#define ASSET_MESSAGE ((u8 *)0x02031756)
+#define ASSET_MESSAGE_CAPACITY 0x80
+
+static u32 message_unit_size(const u8 *text) {
+    u8 value = *text;
+    if (!value)
+        return 0;
+    if (value == 2 || value == 7 || value == 8)
+        return 3;
+    if (value == 1 || value == 4 || value == 6 || (value >= 0x80 && value <= 0x9f))
+        return 2;
+    return 1;
+}
+
+// %1$s is what the game wrote between argument_start and end, minus zero padding.
+void vwf_compose_message(const u8 *end, const u8 *template_text, u32 argument_start) {
+    u8 argument[ASSET_MESSAGE_CAPACITY];
+    u32 argument_length = 0;
+    for (const u8 *at = ASSET_MESSAGE + argument_start; at < end;) {
+        u32 size = message_unit_size(at);
+        if (!size) {
+            ++at;
+            continue;
+        }
+        if (at + size > end || argument_length + size > sizeof(argument))
+            break;
+        for (u32 i = 0; i < size; ++i)
+            argument[argument_length++] = at[i];
+        at += size;
+    }
+    u32 length = 0;
+    for (const u8 *cursor = template_text; *cursor;) {
+        const u8 *source = cursor;
+        u32 size;
+        if (cursor[0] == '%' && cursor[1] == '1' && cursor[2] == '$' && cursor[3] == 's') {
+            source = argument;
+            size = argument_length;
+            cursor += 4;
+        } else {
+            size = message_unit_size(cursor);
+            cursor += size;
+        }
+        if (length + size >= ASSET_MESSAGE_CAPACITY)
+            break;
+        for (u32 i = 0; i < size; ++i)
+            ASSET_MESSAGE[length++] = source[i];
+    }
+    ASSET_MESSAGE[length] = 0;
+}
+
 u8 vwf_storage_cells(const u8 *text) {
     int length = plain_length(text, read_capacity(text), 0);
     if (length < 0 || (length & 1) || length > 510)

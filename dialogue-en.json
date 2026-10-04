@@ -27796,16 +27796,19 @@
    "text": ", "
   },
   {
-   "offset": "0x103AF4",
-   "text": "You got "
+   "offset": "0x103B10",
+   "build_text": "You got %1$s!",
+   "template_format": true
   },
   {
-   "offset": "0x103B10",
-   "text": "!"
+   "offset": "0x103BBC",
+   "build_text": "An Organoid{01 02} called Pulse{01 00} \njoined your party.",
+   "template_format": true
   },
   {
    "offset": "0x103BE4",
-   "text": "!"
+   "build_text": "You got %1$s!",
+   "template_format": true
   },
   {
    "offset": "0x103BF4",
@@ -27813,20 +27816,13 @@
   },
   {
    "offset": "0x103C28",
-   "text": "!"
-  },
-  {
-   "offset": "0x103C38",
-   "text": "You got the "
+   "build_text": "You got %1$s!",
+   "template_format": true
   },
   {
    "offset": "0x103C58",
-   "replace_lines": [
-    [
-     1,
-     "data!"
-    ]
-   ]
+   "build_text": "You got the %1$s\ndata!",
+   "template_format": true
   },
   {
    "offset": "0x103C64",
@@ -27834,20 +27830,13 @@
   },
   {
    "offset": "0x103C94",
-   "text": "!"
-  },
-  {
-   "offset": "0x103CA4",
-   "replace_lines": [
-    [
-     0,
-     "You learned the "
-    ]
-   ]
+   "build_text": "You got the %1$s!",
+   "template_format": true
   },
   {
    "offset": "0x103CC8",
-   "text": " Deck Command!"
+   "build_text": "You learned the \n%1$s Deck Command!",
+   "template_format": true
   },
   {
    "offset": "0x103CE8",
@@ -27855,11 +27844,22 @@
   },
   {
    "offset": "0x103D18",
-   "text": "G!"
+   "build_text": "You got %1$sG{01 00}!",
+   "template_format": true
   },
   {
    "offset": "0x103D60",
    "text": "Pulse’s emotions will change\nas shown. Is that OK?"
+  },
+  {
+   "offset": "0x103DD4",
+   "build_text": "{01 02}Pulse’s level {01 00}went up to %1$s.",
+   "template_format": true
+  },
+  {
+   "offset": "0x103DF0",
+   "build_text": "Pulse got %1$s\nskill.",
+   "template_format": true
   },
   {
    "offset": "0x103E00",
