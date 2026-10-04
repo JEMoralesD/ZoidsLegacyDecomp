@@ -37,7 +37,7 @@ def regions(path: Path):
         if len(fields) < 4:
             raise ValueError(f"invalid region line: {raw}")
         mode = fields[4] if len(fields) > 4 else None
-        if mode not in {None, "old", "pb", "noint"}:
+        if mode not in {None, "old", "pb", "noint", "o1"}:
             raise ValueError(f"invalid compiler mode: {mode}")
         yield fields[0], int(fields[1], 16), int(fields[2], 16), fields[3].split(","), mode
 
@@ -80,14 +80,19 @@ def coverage(selected) -> tuple[int, int]:
     return len(owners), total_bytes
 
 
+def compiler_flags(mode) -> list[str]:
+    flags = ["-O" if mode == "o1" else "-O2", "-mno-thumb-interwork" if mode == "noint" else "-mthumb-interwork"]
+    if mode == "pb":
+        flags.append("-fprologue-bugfix")
+    return flags
+
+
 def compile_region(region, work: Path, agbcc: Path, old_agbcc: Path) -> bytes:
     name, start, end, sources, mode = region
     compiler = old_agbcc if mode == "old" else agbcc
     if not compiler.is_file():
         raise RuntimeError(f"{name}: compiler is unavailable: {compiler}")
-    flags = ["-O2", "-mno-thumb-interwork" if mode == "noint" else "-mthumb-interwork"]
-    if mode == "pb":
-        flags.append("-fprologue-bugfix")
+    flags = compiler_flags(mode)
     objects = []
     for index, source_name in enumerate(sources):
         source = ROOT / "src" / source_name

@@ -13,6 +13,8 @@ LD = "arm-none-eabi-ld"
 OBJCOPY = "arm-none-eabi-objcopy"
 OBJDUMP = "arm-none-eabi-objdump"
 RE_FUNC = re.compile(r"^func_([0-9A-Fa-f]+)$")
+RE_CALL_VIA = re.compile(r"^_call_via_r([0-7])$")
+CALL_VIA_BASE = 0x080ECD5C
 
 def _all_func_addrs():
     with open(os.path.join(ROOT, "cfg", "functions.json")) as source:
@@ -54,9 +56,12 @@ def link_text(objs, vma, out_bin, work="grind", extra_includes=()):
             if sym in defined:
                 continue
             m = RE_FUNC.match(sym)
-            if not m:
+            if m:
+                addr = int(m.group(1), 16)
+            elif RE_CALL_VIA.match(sym):
+                addr = CALL_VIA_BASE + 4 * int(RE_CALL_VIA.match(sym).group(1))
+            else:
                 continue
-            addr = int(m.group(1), 16)
             if "CALL" in typ or "JUMP" in typ:
                 # Symbol names can identify internal branch targets outside the inventory.
                 call_syms.add((sym, addr))
