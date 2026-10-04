@@ -497,12 +497,12 @@ m4a_call_thunk   0xEAE52  0xEAE54  audio/m4a_call_thunk.s
 m4a_read_u32     0xEAF00  0xEAF3C  audio/m4a_read_u32.s
 m4a_repeat       0xEAF50  0xEAF80  audio/m4a_repeat.s
 m4a_calc_pan     0xEB36C  0xEB39C  audio/m4a_calc_pan.s
-m4a_ext_dispatch 0xECA58  0xECA78  audio/m4a_ext_dispatch.s
-m4a_load_word    0xECA8C  0xECAD4  audio/m4a_load_word.s
-m4a_init_table   0xEB8C0  0xEB8EC  audio/m4a_init_table.s
-m4a_set_pitch    0xEC68C  0xEC6B4  audio/m4a_set_pitch.s
-m4a_copy_control_a 0xECB7C  0xECBBC  audio/m4a_copy_control.s
-m4a_copy_control_b 0xECBBC  0xECBFC  audio/m4a_copy_control.s
+m4a_ext_dispatch 0xECA58  0xECA78  audio/run_extended_music_command.c  old
+m4a_load_word    0xECA8C  0xECAD4  audio/set_music_track_tone_wave.c  old
+m4a_init_table   0xEB8C0  0xEB8EC  audio/continue_all_music_players.c  old
+m4a_set_pitch    0xEC68C  0xEC6B4  audio/set_music_player_tempo.c  old
+m4a_copy_control_a 0xECB7C  0xECBBC  save/copy_sram_bytes.c  o1
+m4a_copy_control_b 0xECBBC  0xECBFC  save/copy_sram_bytes.c  o1
 libgcc_divmod    0xECD98  0xED038  runtime/libgcc_divmod.s
 libc_memcpy      0xED038  0xED098  runtime/copy_bytes.c noint
 libc_strcmp      0xED0CC  0xED128  runtime/compare_strings.c noint
@@ -777,7 +777,7 @@ sub_080B339C     0xB339C  0xB3410  ui/draw_player_team_zoid_names.c
 sub_080B460C     0xB460C  0xB4684  ui/draw_battle_team_zoid_names.c
 sub_080E7AE0     0xE7AE0  0xE7B64  battle/find_active_battle_auxiliary_pilot_effect_value.c
 m4a_sound_main   0xEAAA4  0xEAB28  audio/m4a_sound_main.s
-m4a_cgb_sound    0xEC240  0xEC68A  audio/update_psg_sound_channels.s
+m4a_cgb_sound    0xEC240  0xEC68A  audio/update_psg_sound_channels.c  old
 sub_0809C540     0x9C540  0x9C5C8  ui/set_name_entry_character_category.c
 sub_080BB764     0xBB764  0xBB7EC  graphics/update_camera_rotation_matrix.c
 sub_0809FCB0     0x9FCB0  0x9FD3C  events/reset_event_scripts.c

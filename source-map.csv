@@ -1110,7 +1110,7 @@ src/sub_080EB7CC.c,src/audio/start_or_continue_song_by_id.c,sub_080EB7CC,0x080EB
 src/sub_080EB820.c,src/audio/stop_and_continue_song.c,sub_080EB820,0x080EB820,0x080EB888,StopSongById;ContinueSongById
 src/sub_080EB888.c,src/audio/stop_all_music_players.c,sub_080EB888,0x080EB888,0x080EB8B4,StopAllMusicPlayers
 src/auto_080EB8B4.c,src/audio/resume_music_player_playback.c,auto_080EB8B4,0x080EB8B4,0x080EB8C0,ResumeMusicPlayerPlayback
-src/m4a_init_table.s,src/audio/m4a_init_table.s,m4a_init_table,0x080EB8C0,0x080EB8EC,m4a_init_table
+src/m4a_init_table.s,src/audio/continue_all_music_players.c,m4a_init_table,0x080EB8C0,0x080EB8EC,ContinueAllMusicPlayers
 src/auto_080EB8EC.c,src/audio/fade_out_music_player.c,auto_080EB8EC,0x080EB8EC,0x080EB8FA,FadeOutMusicPlayer
 src/sub_080EB944.c,src/audio/initialize_pending_music_tracks.c,sub_080EB944,0x080EB944,0x080EB98C,InitializePendingMusicTracks
 src/sub_080EB98C.c,src/audio/initialize_psg_channels.c,sub_080EB98C,0x080EB98C,0x080EBAA8,InitializePsgChannels;BiosGetSoundDriverJumpList
@@ -1129,8 +1129,8 @@ src/sub_080EC02C.c,src/audio/update_music_track_volume_and_pitch.c,sub_080EC02C,
 src/sub_080EC0E0.c,src/audio/calculate_psg_frequency_register.c,sub_080EC0E0,0x080EC0E0,0x080EC188,CalculatePsgFrequencyRegister
 src/sub_080EC188.c,src/audio/stop_psg_channel.c,sub_080EC188,0x080EC188,0x080EC1D8,StopPsgChannel
 src/sub_080EC1D8.c,src/audio/update_psg_channel_volume_and_pan.c,sub_080EC1D8,0x080EC1D8,0x080EC240,UpdatePsgChannelVolumeAndPan
-src/m4a_cgb_sound.s,src/audio/update_psg_sound_channels.s,m4a_cgb_sound,0x080EC240,0x080EC68A,UpdatePsgSoundChannels
-src/m4a_set_pitch.s,src/audio/m4a_set_pitch.s,m4a_set_pitch,0x080EC68C,0x080EC6B4,m4a_set_pitch
+src/m4a_cgb_sound.s,src/audio/update_psg_sound_channels.c,m4a_cgb_sound,0x080EC240,0x080EC68A,UpdatePsgSoundChannels
+src/m4a_set_pitch.s,src/audio/set_music_player_tempo.c,m4a_set_pitch,0x080EC68C,0x080EC6B4,SetMusicPlayerTempo
 src/sub_080EC6B4.c,src/audio/set_music_track_volume.c,sub_080EC6B4,0x080EC6B4,0x080EC71C,SetMusicTrackVolume
 src/sub_080EC71C.c,src/audio/set_music_player_track_pitch_offset.c,sub_080EC71C,0x080EC71C,0x080EC790,SetMusicPlayerTrackPitchOffset
 src/sub_080EC790.c,src/audio/set_music_player_track_pan_offset.c,sub_080EC790,0x080EC790,0x080EC7F8,SetMusicPlayerTrackPanOffset
@@ -1138,9 +1138,9 @@ src/sub_080EC7F8.c,src/audio/reset_music_track_modulation_state.c,sub_080EC7F8,0
 src/sub_080EC818.c,src/audio/set_music_player_track_modulation_depth.c,sub_080EC818,0x080EC818,0x080EC88C,SetMusicPlayerTrackModulationDepth
 src/sub_080EC88C.c,src/audio/set_music_player_track_lfo_speed.c,sub_080EC88C,0x080EC88C,0x080EC900,SetMusicPlayerTrackLfoSpeed
 src/sub_080EC900.c,src/audio/music_command_access_player_memory.c,sub_080EC900,0x080EC900,0x080ECA58,MusicCommandAccessPlayerMemory
-src/m4a_ext_dispatch.s,src/audio/m4a_ext_dispatch.s,m4a_ext_dispatch,0x080ECA58,0x080ECA78,m4a_ext_dispatch
+src/m4a_ext_dispatch.s,src/audio/run_extended_music_command.c,m4a_ext_dispatch,0x080ECA58,0x080ECA78,RunExtendedMusicCommand
 src/sub_080ECA78.c,src/audio/music_command_end_track_via_callback.c,sub_080ECA78,0x080ECA78,0x080ECA8C,MusicCommandEndTrackViaCallback
-src/m4a_load_word.s,src/audio/m4a_load_word.s,m4a_load_word,0x080ECA8C,0x080ECAD4,m4a_load_word
+src/m4a_load_word.s,src/audio/set_music_track_tone_wave.c,m4a_load_word,0x080ECA8C,0x080ECAD4,SetMusicTrackToneWave
 src/sub_080ECAD4.c,src/audio/music_command_set_track_tone_type.c,sub_080ECAD4,0x080ECAD4,0x080ECAE8,MusicCommandSetTrackToneType
 src/sub_080ECAE8.c,src/audio/music_command_set_track_tone_attack.c,sub_080ECAE8,0x080ECAE8,0x080ECAFC,MusicCommandSetTrackToneAttack
 src/sub_080ECAFC.c,src/audio/music_command_set_track_tone_decay.c,sub_080ECAFC,0x080ECAFC,0x080ECB10,MusicCommandSetTrackToneDecay
@@ -1150,7 +1150,7 @@ src/sub_080ECB38.c,src/audio/music_command_set_track_pseudo_echo_volume.c,sub_08
 src/sub_080ECB44.c,src/audio/music_command_set_track_pseudo_echo_length.c,sub_080ECB44,0x080ECB44,0x080ECB50,MusicCommandSetTrackPseudoEchoLength
 src/sub_080ECB50.c,src/audio/music_command_set_track_tone_length.c,sub_080ECB50,0x080ECB50,0x080ECB64,MusicCommandSetTrackToneLength
 src/sub_080ECB64.c,src/audio/music_command_set_track_tone_pan_sweep.c,sub_080ECB64,0x080ECB64,0x080ECB76,MusicCommandSetTrackTonePanSweep
-src/m4a_copy_control.s,src/audio/m4a_copy_control.s,m4a_copy_control_a;m4a_copy_control_b,0x080ECB7C;0x080ECBBC,0x080ECBBC;0x080ECBFC,m4a_copy_control
+src/m4a_copy_control.s,src/save/copy_sram_bytes.c,m4a_copy_control_a;m4a_copy_control_b,0x080ECB7C;0x080ECBBC,0x080ECBBC;0x080ECBFC,CopySramBytes
 src/sub_080ECBFC.c,src/engine/find_first_mismatching_byte.c,sub_080ECBFC,0x080ECBFC,0x080ECC48,FindFirstMismatchingByte
 src/sub_080ECC48.c,src/save/init_sram_access.c,sub_080ECC48,0x080ECC48,0x080ECCE4,InitSramAccess
 src/sub_080ECCE4.c,src/save/write_sram_with_retries.c,sub_080ECCE4,0x080ECCE4,0x080ECD24,WriteSramWithRetries
