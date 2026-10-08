@@ -1412,7 +1412,6 @@
   {
    "offset": "0x0046C4",
    "build_text": "{07 00 01}AT:{08 18 68}{04 02}%2$s\n{07 00 02}PR:{08 18 68}{04 02}%3$s%%\n{07 00 03}RG:{08 18 68}{04 02}%4$s\n{07 00 04}EN:{07 07 04}PS:{07 00 04}%5$s\n{07 00 05}TIP:{08 20 68}%6$s\n{07 00 06}{08 00 68}%7$s\n{07 00 08}Precio:{08 30 68}{04 02}%9$sG",
-   "compact_format": true,
    "row_format": true
   },
   {
@@ -1422,7 +1421,6 @@
   {
    "offset": "0x004712",
    "build_text": "{07 00 01}%2$s\n{07 00 02}%3$s\n{07 00 03}RG:{08 18 68}{04 02}%4$s\n{07 00 04}EN:{07 07 04}PS:{07 00 04}%5$s\n{07 00 05}USO:{08 20 68}{04 02}%6$s\n{07 00 06}{08 00 68}%7$s\n{07 00 08}Precio:{08 30 68}{04 02}%9$sG",
-   "compact_format": true,
    "row_format": true
   },
   {
@@ -10133,7 +10131,7 @@
   },
   {
    "offset": "0x01D108",
-   "text": "Unidad de Cañón"
+   "text": "Unidad Cañón"
   },
   {
    "offset": "0x01D11D",
@@ -32936,8 +32934,7 @@
   },
   {
    "offset": "0x106334",
-   "text": "ALIADO-",
-   "compact_format": true
+   "text": "ALIA-"
   },
   {
    "offset": "0x106350",
@@ -32946,8 +32943,7 @@
   },
   {
    "offset": "0x106358",
-   "text": " PROPIO",
-   "compact_format": true
+   "text": " PROP"
   },
   {
    "offset": "0x106360",
@@ -32976,8 +32972,7 @@
   },
   {
    "offset": "0x106380",
-   "text": "Ninguno",
-   "compact_format": true
+   "text": "Ninguno"
   },
   {
    "offset": "0x10638C",
@@ -33050,28 +33045,23 @@
   },
   {
    "offset": "0x1064EC",
-   "text": "Quitar arma",
-   "compact_format": true
+   "text": "Quitar arma"
   },
   {
    "offset": "0x10651C",
-   "text": "Límite de tamaño:",
-   "compact_format": true
+   "text": "Límite de tamaño:"
   },
   {
    "offset": "0x106534",
-   "text": "Solo tamaño S",
-   "compact_format": true
+   "text": "Solo tamaño S"
   },
   {
    "offset": "0x10654C",
-   "text": "Excepto XL",
-   "compact_format": true
+   "text": "Excepto XL"
   },
   {
    "offset": "0x106568",
-   "text": "Precio:",
-   "compact_format": true
+   "text": "Precio:"
   },
   {
    "offset": "0x10657C",
@@ -33087,13 +33077,11 @@
   },
   {
    "offset": "0x106E7C",
-   "text": "Falta ",
-   "compact_format": true
+   "text": "Falta "
   },
   {
    "offset": "0x106E84",
-   "text": "\n",
-   "compact_format": true
+   "text": "\n"
   },
   {
    "offset": "0x106E94",
@@ -33121,8 +33109,7 @@
   },
   {
    "offset": "0x106F18",
-   "text": "\nvale ",
-   "compact_format": true
+   "text": "\nvale "
   },
   {
    "offset": "0x107078",
@@ -33135,8 +33122,7 @@
   },
   {
    "offset": "0x1070D0",
-   "text": "Ataque",
-   "compact_format": true
+   "text": "Ataque"
   },
   {
    "offset": "0x1070E0",
@@ -33144,18 +33130,15 @@
   },
   {
    "offset": "0x1070F0",
-   "text": "Objeto",
-   "compact_format": true
+   "text": "Objeto"
   },
   {
    "offset": "0x1070FC",
-   "text": "Organoide",
-   "compact_format": true
+   "text": "Organoide"
   },
   {
    "offset": "0x107110",
-   "text": "CAS",
-   "compact_format": true
+   "text": "CAS"
   },
   {
    "offset": "0x107118",
@@ -33164,8 +33147,7 @@
   },
   {
    "offset": "0x107154",
-   "text": "Quitar",
-   "compact_format": true
+   "text": "Quitar"
   },
   {
    "offset": "0x107164",
@@ -33293,8 +33275,7 @@
   },
   {
    "offset": "0x10760C",
-   "text": "Obtuviste ",
-   "compact_format": true
+   "text": "Obtuviste "
   },
   {
    "offset": "0x10761C",
@@ -33643,8 +33624,7 @@
   },
   {
    "offset": "0x108BE4",
-   "text": "ALIADO-",
-   "compact_format": true
+   "text": "ALIA-"
   },
   {
    "offset": "0x108C04",
@@ -33674,38 +33654,31 @@
   },
   {
    "offset": "0x108FD4",
-   "text": "Hasta 2",
-   "compact_format": true
+   "text": "Hasta 2"
   },
   {
    "offset": "0x108FE4",
-   "text": "Hasta 3",
-   "compact_format": true
+   "text": "Hasta 3"
   },
   {
    "offset": "0x108FF4",
-   "text": "Hasta 4",
-   "compact_format": true
+   "text": "Hasta 4"
   },
   {
    "offset": "0x109004",
-   "text": "Solo tamaño S",
-   "compact_format": true
+   "text": "Solo tamaño S"
   },
   {
    "offset": "0x10901C",
-   "text": "Hasta tamaño M",
-   "compact_format": true
+   "text": "Hasta tamaño M"
   },
   {
    "offset": "0x109038",
-   "text": "Solo tamaño M",
-   "compact_format": true
+   "text": "Solo tamaño M"
   },
   {
    "offset": "0x109050",
-   "text": "Hasta tamaño L",
-   "compact_format": true
+   "text": "Hasta tamaño L"
   },
   {
    "offset": "0x10906C",
@@ -33725,8 +33698,7 @@
   },
   {
    "offset": "0x1090DC",
-   "text": "Solo Ligers",
-   "compact_format": true
+   "text": "Solo Ligers"
   },
   {
    "offset": "0x1090F4",
@@ -33766,8 +33738,7 @@
   },
   {
    "offset": "0x1091B4",
-   "text": "Ninguno",
-   "compact_format": true
+   "text": "Ninguno"
   },
   {
    "offset": "0x1091C0",
