@@ -1,4 +1,5 @@
 {
+ "challenge_reward_prefixes": true,
  "title_menu": {
   "continue": "Continuar",
   "new_game": "Nuevo juego",
@@ -1238,7 +1239,7 @@
   },
   {
    "offset": "0x0040E0",
-   "build_text": "Siguiente\nOK\nCancelar"
+   "build_text": "Seguir\nOK\nCancelar"
   },
   {
    "offset": "0x004112",
@@ -33794,11 +33795,15 @@
   },
   {
    "offset": "0x1093CC",
-   "text": "Ganaste "
+   "text": "Ganaste las piezas "
+  },
+  {
+   "offset": "0x1093DC",
+   "text": "!"
   },
   {
    "offset": "0x1093EC",
-   "text": " datos!"
+   "text": "Ganaste los datos de "
   },
   {
    "offset": "0x109404",

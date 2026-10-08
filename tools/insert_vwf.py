@@ -264,6 +264,16 @@ def relocate_strings(rom, original, edits, capacities, area=STRING_AREA):
         cursor = stop
 
 
+def patch_challenge_reward_prefixes(rom, original):
+    # Use the former data suffix as its prefix. Both rewards use the same ending.
+    for site, offset in ((0xE4EFC, 0x1093CC), (0xE4F04, 0x1093EC),
+                         (0xE4E64, 0x1093DC)):
+        if struct.unpack_from('<I', original, site)[0] != BASE + offset:
+            raise ValueError(f'Challenge reward pointer differs at 0x{site:X}.')
+    rom[0xE4EFC:0xE4F00] = rom[0xE4F04:0xE4F08]
+    rom[0xE4F04:0xE4F08] = rom[0xE4E64:0xE4E68]
+
+
 def patch_counted_names(rom, original, target):
     for call, block, entry, after, literal in COUNTED_NAME_SITES:
         if (rom[call:call + 4] != original[call:call + 4] or
@@ -618,6 +628,7 @@ def load_translation(path, rom_path):
 
 def build_rom(original, document, choices, dialogue_document, version=None):
     version = version or release_version()
+    challenge_reward_prefixes = dialogue_document.get('challenge_reward_prefixes', False)
     title_labels = dialogue_document.get('title_menu')
     dialogue_document = {'entries': [
         {key: value.replace('{VERSION}', version) if key in ('text', 'build_text') else value
@@ -720,6 +731,8 @@ def build_rom(original, document, choices, dialogue_document, version=None):
     relocate_strings(rom, original, string_edits, string_capacities)
     relocate_strings(rom, original, format_string_edits, string_capacities,
                      FORMAT_STRING_AREA)
+    if challenge_reward_prefixes:
+        patch_challenge_reward_prefixes(rom, original)
     patch_string_copy_lengths(rom, original, string_edits)
     for offset, replacement in fixed_edits.items():
         rom[offset:offset + len(replacement)] = replacement
