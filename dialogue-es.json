@@ -2155,7 +2155,7 @@
   },
   {
    "offset": "0x006DA9",
-   "text": "Unidad personal de Karl L. Schwarz, armada con un cañón Gatling de rayos."
+   "text": "Unidad personal de Karl L. Schubaltz, armada con un cañón Gatling de rayos."
   },
   {
    "offset": "0x006DD6",
@@ -2263,7 +2263,7 @@
   },
   {
    "offset": "0x00744B",
-   "text": "Unidad personal de Karl L. Schwarz, armada con un cañón Gatling de rayos."
+   "text": "Unidad personal de Karl L. Schubaltz, armada con un cañón Gatling de rayos."
   },
   {
    "offset": "0x007482",
@@ -4226,11 +4226,11 @@
   },
   {
    "offset": "0x00F326",
-   "text": "Van es un joven de la Colonia del Viento que ama los Zoids. Conoció a Fine y al Organoide Zeke en unas ruinas antiguas. Juntos partieron para descubrir el pasado de Fine. Su Zoid es el Blade Liger."
+   "text": "Van es un joven de la Colonia del Viento que ama los Zoids. Conoció a Fiona y al Organoide Zeke en unas ruinas antiguas. Juntos partieron para descubrir el pasado de Fiona. Su Zoid es el Blade Liger."
   },
   {
    "offset": "0x00F477",
-   "build_text": "Fine"
+   "build_text": "Fiona"
   },
   {
    "offset": "0x00F484",
@@ -4246,7 +4246,7 @@
   },
   {
    "offset": "0x00F4CE",
-   "text": "Fine despertó en unas ruinas antiguas sin recordar su pasado. Acompañó a Van para descubrir quién era y supo que descendía de los zoidianos antiguos. Es amable, pero suele estar distraída."
+   "text": "Fiona despertó en unas ruinas antiguas sin recordar su pasado. Acompañó a Van para descubrir quién era y supo que descendía de los zoidianos antiguos. Es amable, pero suele estar distraída."
   },
   {
    "offset": "0x00F627",
@@ -4286,7 +4286,7 @@
   },
   {
    "offset": "0x00F822",
-   "text": "Moonbay es una mensajera del desierto que se unió por casualidad al viaje de Van. Se convirtió en una hermana mayor para Van y Fine: les da consejos firmes y los cuida con cariño."
+   "text": "Moonbay es una mensajera del desierto que se unió por casualidad al viaje de Van. Se convirtió en una hermana mayor para Van y Fiona: les da consejos firmes y los cuida con cariño."
   },
   {
    "offset": "0x00F987",
@@ -4392,7 +4392,7 @@
   },
   {
    "offset": "0x0102D3",
-   "build_text": "Fine"
+   "build_text": "Fiona"
   },
   {
    "offset": "0x0102E0",
@@ -4408,7 +4408,7 @@
   },
   {
    "offset": "0x010328",
-   "text": "El verdadero nombre de Fine es Elisi Linette. Tras recuperar sus recuerdos como zoidiana antigua, trabajó como ayudante del Dr. D. Más tarde se reunió con Van. Sigue siendo amable y distraída."
+   "text": "El verdadero nombre de Fiona es Elisi Linette. Tras recuperar sus recuerdos como zoidiana antigua, trabajó como ayudante del Dr. D. Más tarde se reunió con Van. Sigue siendo amable y distraída."
   },
   {
    "offset": "0x010461",
@@ -4452,7 +4452,7 @@
   },
   {
    "offset": "0x01074B",
-   "build_text": "Karl L. Schwarz"
+   "build_text": "Karl L. Schubaltz"
   },
   {
    "offset": "0x010764",
@@ -4468,11 +4468,11 @@
   },
   {
    "offset": "0x0107B0",
-   "text": "Karl Schwarz es un coronel imperial al mando de la Primera División Blindada. Este oficial experimentado procede de una respetada familia militar. Las misiones difíciles siempre parecen encontrarlo."
+   "text": "Karl Schubaltz es un coronel imperial al mando de la Primera División Blindada. Este oficial experimentado procede de una respetada familia militar. Las misiones difíciles siempre parecen encontrarlo."
   },
   {
    "offset": "0x010938",
-   "build_text": "Thomas R.\nSchwarz",
+   "build_text": "Thomas R.\nSchubaltz",
    "compact_format": true
   },
   {
@@ -4489,7 +4489,7 @@
   },
   {
    "offset": "0x010997",
-   "text": "Thomas Schwarz es un teniente imperial de la Fuerza Guardián y hermano menor de Karl. Construyó la IA Beak, que él considera superior a un Organoide. Se enamora de Fine en cuanto la conoce."
+   "text": "Thomas Schubaltz es un teniente imperial de la Fuerza Guardián y hermano menor de Karl. Construyó la IA Beak, que él considera superior a un Organoide. Se enamora de Fiona en cuanto la conoce."
   },
   {
    "offset": "0x010B2A",
@@ -4573,7 +4573,7 @@
   },
   {
    "offset": "0x011101",
-   "build_text": "Ballad Hunter"
+   "build_text": "Brad Hunter"
   },
   {
    "offset": "0x011116",
@@ -4589,7 +4589,7 @@
   },
   {
    "offset": "0x011154",
-   "text": "Ballad es un Guerrero Zoid independiente contratado por el Equipo Blitz. Finge que solo le importa el dinero, pero en el fondo es leal y bondadoso."
+   "text": "Brad es un Guerrero Zoid independiente contratado por el Equipo Blitz. Finge que solo le importa el dinero, pero en el fondo es leal y bondadoso."
   },
   {
    "offset": "0x011243",
@@ -5413,7 +5413,7 @@
   },
   {
    "offset": "0x014BD2",
-   "text": "Zeke, el Organoide blanco que acompaña a Van, puede fortalecer a los Zoids. Van también lo despertó en unas ruinas antiguas, igual que a Fine."
+   "text": "Zeke, el Organoide blanco que acompaña a Van, puede fortalecer a los Zoids. Van también lo despertó en unas ruinas antiguas, igual que a Fiona."
   },
   {
    "offset": "0x014CCB",
@@ -7011,7 +7011,7 @@
   },
   {
    "offset": "0x018511",
-   "build_text": "{01 02}Fine\n{01 00}¡Mira! ¡Juno está libre!"
+   "build_text": "{01 02}Fiona\n{01 00}¡Mira! ¡Juno está libre!"
   },
   {
    "offset": "0x01854E",
@@ -7151,7 +7151,7 @@
   },
   {
    "offset": "0x01911D",
-   "build_text": "{01 02}Ballad\n{01 00}..."
+   "build_text": "{01 02}Brad\n{01 00}..."
   },
   {
    "offset": "0x01913E",
@@ -7223,7 +7223,7 @@
   },
   {
    "offset": "0x019819",
-   "build_text": "{01 02}Ballad\n{01 00}¡Ese último ataque dañó al Blade Liger!"
+   "build_text": "{01 02}Brad\n{01 00}¡Ese último ataque dañó al Blade Liger!"
   },
   {
    "offset": "0x01986F",
@@ -7243,7 +7243,7 @@
   },
   {
    "offset": "0x0199AE",
-   "build_text": "{01 02}Órdenes de Mando"
+   "build_text": "{01 02}Mis órdenes"
   },
   {
    "offset": "0x0199BF",
@@ -11195,7 +11195,7 @@
   },
   {
    "offset": "0x01E2FF",
-   "text": "Fine"
+   "text": "Fiona"
   },
   {
    "offset": "0x01E30A",
@@ -11227,7 +11227,7 @@
   },
   {
    "offset": "0x01E365",
-   "text": "Fine"
+   "text": "Fiona"
   },
   {
    "offset": "0x01E370",
@@ -11263,7 +11263,7 @@
   },
   {
    "offset": "0x01E3CE",
-   "text": "Ballad"
+   "text": "Brad"
   },
   {
    "offset": "0x01E3DB",
@@ -12503,7 +12503,7 @@
   },
   {
    "offset": "0x020897",
-   "text": "Plegaria de Fine"
+   "text": "Plegaria de Fiona"
   },
   {
    "offset": "0x0208B2",
@@ -12711,7 +12711,7 @@
   },
   {
    "offset": "0x022413",
-   "text": "Fusiona a Zeke con el Zoid de Van y aumenta sus PV máximos en 300 y su EN máxima en 30. Van debe estar en combate y Fine no debe estar presente. No se puede usar si los Organoides están prohibidos."
+   "text": "Fusiona a Zeke con el Zoid de Van y aumenta sus PV máximos en 300 y su EN máxima en 30. Van debe estar en combate y Fiona no debe estar presente. No se puede usar si los Organoides están prohibidos."
   },
   {
    "offset": "0x0224CE",
@@ -14310,7 +14310,7 @@
   },
   {
    "offset": "0x02569B",
-   "text": "Fine, lo siento."
+   "text": "Fiona, lo siento."
   },
   {
    "offset": "0x0256B6",
@@ -18370,7 +18370,7 @@
   },
   {
    "offset": "0x033FD8",
-   "text": "{01 02}Ballad\n{01 00}Quizá ya no arreglen los combates, pero esa regla es muy propia de Backdraft."
+   "text": "{01 02}Brad\n{01 00}Quizá ya no arreglen los combates, pero esa regla es muy propia de Backdraft."
   },
   {
    "offset": "0x034067",
@@ -18593,7 +18593,7 @@
   },
   {
    "offset": "0x0353BB",
-   "text": "{01 02}Ballad\n{01 00}¿El Equipo Fluegel? ¿No es el equipo de Naomi?"
+   "text": "{01 02}Brad\n{01 00}¿El Equipo Fluegel? ¿No es el equipo de Naomi?"
   },
   {
    "offset": "0x03541E",
@@ -18605,7 +18605,7 @@
   },
   {
    "offset": "0x03556F",
-   "text": "{01 02}Ballad\n{01 00}No lo entiendo. Naomi suele preferir los duelos uno a uno. ¿Por qué no nos retó a uno?"
+   "text": "{01 02}Brad\n{01 00}No lo entiendo. Naomi suele preferir los duelos uno a uno. ¿Por qué no nos retó a uno?"
   },
   {
    "offset": "0x03561B",
@@ -18729,7 +18729,7 @@
   },
   {
    "offset": "0x035FB3",
-   "text": "{01 02}Ballad\n{01 00}¡Leena! ¡Si bajas la guardia, te arrepentirás!"
+   "text": "{01 02}Brad\n{01 00}¡Leena! ¡Si bajas la guardia, te arrepentirás!"
   },
   {
    "offset": "0x036029",
@@ -18749,7 +18749,7 @@
   },
   {
    "offset": "0x0361BC",
-   "text": "{01 02}Jamie\n{01 00}Me preocupa que Naomi debe tener un motivo para elegir un combate sin límites de armas. No es propio de ella."
+   "text": "{01 02}Jamie\n{01 00}Lo que me preocupa es que Naomi debe de tener un motivo para elegir un combate sin límites de armas. No es propio de ella."
   },
   {
    "offset": "0x0362BD",
@@ -18910,7 +18910,7 @@
   },
   {
    "offset": "0x036E7D",
-   "text": "{01 02}Ballad\n{01 00}Es demasiado pronto para bajar la guardia."
+   "text": "{01 02}Brad\n{01 00}Es demasiado pronto para bajar la guardia."
   },
   {
    "offset": "0x036EB9",
@@ -18974,7 +18974,7 @@
   },
   {
    "offset": "0x037362",
-   "text": "{01 02}Ballad\n{01 00}¿Por qué ese tipo es compañero de Naomi?"
+   "text": "{01 02}Brad\n{01 00}¿Por qué ese tipo es compañero de Naomi?"
   },
   {
    "offset": "0x0373CD",
@@ -19140,7 +19140,7 @@
    "replace_lines": [
     [
      1,
-     "{01 00}Nos vemos, Ballad."
+     "{01 00}Nos vemos, Brad."
     ]
    ]
   },
@@ -19155,7 +19155,7 @@
   },
   {
    "offset": "0x037E8E",
-   "text": "{01 02}Ballad\n{01 00}...Se fueron."
+   "text": "{01 02}Brad\n{01 00}...Se fueron."
   },
   {
    "offset": "0x037EBC",
@@ -19187,11 +19187,11 @@
   },
   {
    "offset": "0x038243",
-   "text": "{01 02}Ballad\n{01 00}Así que nos toca el Equipo Buffalo."
+   "text": "{01 02}Brad\n{01 00}Así que nos toca el Equipo Buffalo."
   },
   {
    "offset": "0x03828A",
-   "text": "{01 02}Ballad\n{01 00}Tres Dibisons disparando a la vez. Dicen que son difíciles de enfrentar."
+   "text": "{01 02}Brad\n{01 00}Tres Dibisons disparando a la vez. Dicen que son difíciles de enfrentar."
   },
   {
    "offset": "0x038321",
@@ -19225,7 +19225,7 @@
   },
   {
    "offset": "0x0384E2",
-   "text": "{01 02}Ballad\n{01 00}Eso es lo que queda del Equipo Buffalo."
+   "text": "{01 02}Brad\n{01 00}Eso es lo que queda del Equipo Buffalo."
   },
   {
    "offset": "0x03853D",
@@ -19266,7 +19266,7 @@
   },
   {
    "offset": "0x038749",
-   "text": "{01 02}Ballad\n{01 00}¿Otra vez camuflaje óptico?"
+   "text": "{01 02}Brad\n{01 00}¿Otra vez camuflaje óptico?"
   },
   {
    "offset": "0x038792",
@@ -19412,11 +19412,11 @@
   },
   {
    "offset": "0x0394CC",
-   "text": "{01 02}Ballad\n{01 00}¿Antigravedad?"
+   "text": "{01 02}Brad\n{01 00}¿Antigravedad?"
   },
   {
    "offset": "0x0394FE",
-   "text": "{01 02}Ballad\n{01 00}Entonces, ¿quién les hizo esto?"
+   "text": "{01 02}Brad\n{01 00}Entonces, ¿quién les hizo esto?"
   },
   {
    "offset": "0x039541",
@@ -19459,7 +19459,7 @@
   },
   {
    "offset": "0x0396D7",
-   "text": "{01 02}Ballad\n{01 00}No deja de retarnos, y siempre pierde."
+   "text": "{01 02}Brad\n{01 00}No deja de retarnos, y siempre pierde."
   },
   {
    "offset": "0x03974F",
@@ -19543,7 +19543,7 @@
   },
   {
    "offset": "0x039F09",
-   "text": "{01 02}Ballad\n{01 00}Vencerlo tampoco nos daría puntos."
+   "text": "{01 02}Brad\n{01 00}Vencerlo tampoco nos daría puntos."
   },
   {
    "offset": "0x039F73",
@@ -19583,7 +19583,7 @@
   },
   {
    "offset": "0x03A1E5",
-   "text": "{01 02}Ballad\n{01 00}Ni vale la pena el esfuerzo..."
+   "text": "{01 02}Brad\n{01 00}Ni vale la pena el esfuerzo..."
   },
   {
    "offset": "0x03A257",
@@ -19644,7 +19644,7 @@
   },
   {
    "offset": "0x03A76B",
-   "text": "{01 02}Ballad\n{01 00}¡La cantidad no lo es todo!"
+   "text": "{01 02}Brad\n{01 00}¡La cantidad no lo es todo!"
   },
   {
    "offset": "0x03A7CB",
@@ -19684,7 +19684,7 @@
   },
   {
    "offset": "0x03AB06",
-   "text": "{01 02}Ballad\n{01 00}Por muchos que derribemos, siguen apareciendo..."
+   "text": "{01 02}Brad\n{01 00}Por muchos que derribemos, siguen apareciendo..."
   },
   {
    "offset": "0x03AB8F",
@@ -19831,7 +19831,7 @@
   },
   {
    "offset": "0x03B747",
-   "text": "{01 02}Ballad\n{01 00}No te hagas ilusiones."
+   "text": "{01 02}Brad\n{01 00}No te hagas ilusiones."
   },
   {
    "offset": "0x03B794",
@@ -20001,7 +20001,7 @@
    "replace_lines": [
     [
      1,
-     "{01 00}¿Eh? ¿Ballad?"
+     "{01 00}¿Eh? ¿Brad?"
     ]
    ]
   },
@@ -20014,13 +20014,13 @@
    "replace_lines": [
     [
      1,
-     "{01 00}¿Ballad salió a buscar un Zoid?"
+     "{01 00}¿Brad salió a buscar un Zoid?"
     ]
    ]
   },
   {
    "offset": "0x03C691",
-   "text": "{01 02}Jamie\n{01 00}¿Recuerdan cuando fuimos al monte Iselina? Ballad vio algo en el bosque."
+   "text": "{01 02}Jamie\n{01 00}¿Recuerdan cuando fuimos al monte Iselina? Brad vio algo en el bosque."
   },
   {
    "offset": "0x03C739",
@@ -20040,7 +20040,7 @@
   },
   {
    "offset": "0x03C92C",
-   "text": "{01 02}Jamie\n{01 00}Pero Ballad está seguro. Insiste en que ese Zoid misterioso existe."
+   "text": "{01 02}Jamie\n{01 00}Pero Brad está seguro. Insiste en que ese Zoid misterioso existe."
   },
   {
    "offset": "0x03C9A4",
@@ -20053,7 +20053,7 @@
   },
   {
    "offset": "0x03C9DC",
-   "text": "{01 02}Leena\n{01 00}Ballad sabe que tenemos un combate. ¿Por qué no sabemos dónde está?"
+   "text": "{01 02}Leena\n{01 00}Brad sabe que tenemos un combate. ¿Por qué no sabemos dónde está?"
   },
   {
    "offset": "0x03CA75",
@@ -20061,7 +20061,7 @@
   },
   {
    "offset": "0x03CADF",
-   "text": "{01 02}Dr. Toros\n{01 00}Bueno, si Ballad no se comunica, tendremos que ir sin él."
+   "text": "{01 02}Dr. Toros\n{01 00}Bueno, si Brad no se comunica, tendremos que ir sin él."
   },
   {
    "offset": "0x03CB8A",
@@ -20142,21 +20142,21 @@
    "replace_lines": [
     [
      1,
-     "{01 00}¡Ese es... Ballad!"
+     "{01 00}¡Ese es... Brad!"
     ]
    ]
   },
   {
    "offset": "0x03D235",
-   "text": "{01 02}Ballad\n{01 00}Je, je..."
+   "text": "{01 02}Brad\n{01 00}Je, je..."
   },
   {
    "offset": "0x03D263",
-   "text": "{01 02}Jamie\n{01 00}¡Ballad!"
+   "text": "{01 02}Jamie\n{01 00}¡Brad!"
   },
   {
    "offset": "0x03D28D",
-   "text": "{01 02}Bit\n{01 00}¡Ballad! ¿Cuándo te uniste a Backdraft?"
+   "text": "{01 02}Bit\n{01 00}¡Brad! ¿Cuándo te uniste a Backdraft?"
   },
   {
    "offset": "0x03D2FF",
@@ -20216,11 +20216,11 @@
   },
   {
    "offset": "0x03D771",
-   "text": "{01 02}Dr. Laon\n{01 00}¡Maldita sea! ¡Nos vamos, Ballad!"
+   "text": "{01 02}Dr. Laon\n{01 00}¡Maldita sea! ¡Nos vamos, Brad!"
   },
   {
    "offset": "0x03D7C4",
-   "text": "{01 02}Ballad\n{01 00}Lo siento, Doc. Solo quería el Shadow Fox. Nunca pensé unirme a tu bando."
+   "text": "{01 02}Brad\n{01 00}Lo siento, Doc. Solo quería el Shadow Fox. Nunca pensé unirme a tu bando."
   },
   {
    "offset": "0x03D874",
@@ -20228,7 +20228,7 @@
   },
   {
    "offset": "0x03D8E2",
-   "text": "{01 02}Ballad\n{01 00}Bien, he vuelto. La misma tarifa de antes. Considéralo una oferta especial."
+   "text": "{01 02}Brad\n{01 00}Bien, he vuelto. La misma tarifa de antes. Considéralo una oferta especial."
   },
   {
    "offset": "0x03D9BF",
@@ -20340,7 +20340,7 @@
   },
   {
    "offset": "0x03E28C",
-   "text": "{01 02}Ballad\n{01 00}Y no olvidemos el premio."
+   "text": "{01 02}Brad\n{01 00}Y no olvidemos el premio."
   },
   {
    "offset": "0x03E2F8",
@@ -20586,7 +20586,7 @@
   },
   {
    "offset": "0x03F538",
-   "text": "{01 02}Ballad\n{01 00}¡Oigan, ustedes dos! ¡Dejen de mirar y concéntrense en el combate!"
+   "text": "{01 02}Brad\n{01 00}¡Oigan, ustedes dos! ¡Dejen de mirar y concéntrense en el combate!"
   },
   {
    "offset": "0x03F5D4",
@@ -21081,7 +21081,7 @@
   },
   {
    "offset": "0x041873",
-   "text": "{01 02}Ballad\n{01 00}¿Y aceptaste?"
+   "text": "{01 02}Brad\n{01 00}¿Y aceptaste?"
   },
   {
    "offset": "0x0418CA",
@@ -21718,7 +21718,7 @@
   },
   {
    "offset": "0x04527C",
-   "text": "{01 02}Ballad\n{01 00}¿Pero quién lo envió?"
+   "text": "{01 02}Brad\n{01 00}¿Pero quién lo envió?"
   },
   {
    "offset": "0x0452B6",
@@ -21819,7 +21819,7 @@
   },
   {
    "offset": "0x04587F",
-   "text": "{01 02}Ballad\n{01 00}Ese es Jack Cisco..."
+   "text": "{01 02}Brad\n{01 00}Ese es Jack Cisco..."
   },
   {
    "offset": "0x0458BD",
@@ -21928,7 +21928,7 @@
   },
   {
    "offset": "0x045CE2",
-   "text": "{01 02}Ballad\n{01 00}Otra vez lo mismo..."
+   "text": "{01 02}Brad\n{01 00}Otra vez lo mismo..."
   },
   {
    "offset": "0x045D0A",
@@ -23920,7 +23920,7 @@
   },
   {
    "offset": "0x0609EE",
-   "text": "{01 02}Fine\n{01 00}¡Reese! ¡Por favor, detente!"
+   "text": "{01 02}Fiona\n{01 00}¡Reese! ¡Por favor, detente!"
   },
   {
    "offset": "0x060A32",
@@ -24981,15 +24981,15 @@
   },
   {
    "offset": "0x06646F",
-   "text": "{01 02}Fine\n{01 00}Rudolph y los demás deben de haber llegado al Castillo Miletos, cerca de Guygalos..."
+   "text": "{01 02}Fiona\n{01 00}Rudolph y los demás deben de haber llegado al Castillo Miletos, cerca de Guygalos..."
   },
   {
    "offset": "0x06651B",
-   "text": "{01 02}Fine\n{01 00}Reparamos el Liger y fuimos hacia el Castillo Miletos... pero hay mucha vigilancia imperial..."
+   "text": "{01 02}Fiona\n{01 00}Reparamos el Liger y fuimos hacia el Castillo Miletos... pero hay mucha vigilancia imperial..."
   },
   {
    "offset": "0x0665F1",
-   "text": "{01 02}Fine\n{01 00}Por eso necesitamos su ayuda."
+   "text": "{01 02}Fiona\n{01 00}Por eso necesitamos su ayuda."
   },
   {
    "offset": "0x066648",
@@ -25127,7 +25127,7 @@
   },
   {
    "offset": "0x0672AF",
-   "text": "{01 02}Niño\n{01 00}¿Qué pasa, Fine?"
+   "text": "{01 02}Niño\n{01 00}¿Qué pasa, Fiona?"
   },
   {
    "offset": "0x0672E5",
@@ -25208,15 +25208,15 @@
   },
   {
    "offset": "0x0675CA",
-   "text": "{01 02}Fine\n{01 00}No parecen malas personas... No son como el Organoide de Raven."
+   "text": "{01 02}Fiona\n{01 00}No parecen malas personas... No son como el Organoide de Raven."
   },
   {
    "offset": "0x06763A",
-   "text": "{01 02}Niño\n{01 00}Si Fine lo dice, deben de ser de fiar..."
+   "text": "{01 02}Niño\n{01 00}Si Fiona lo dice, deben de ser de fiar..."
   },
   {
    "offset": "0x067697",
-   "text": "{01 02}Niño\n{01 00}Me llamo Van. Ella es Fine. ¿Y tú?"
+   "text": "{01 02}Niño\n{01 00}Me llamo Van. Ella es Fiona. ¿Y tú?"
   },
   {
    "offset": "0x0676F8",
@@ -25307,7 +25307,7 @@
   },
   {
    "offset": "0x067D66",
-   "text": "{01 02}Fine\n{01 00}...Eh... Ustedes también pilotan Zoids, ¿verdad? Quiero preguntarles algo..."
+   "text": "{01 02}Fiona\n{01 00}...Eh... Ustedes también pilotan Zoids, ¿verdad? Quiero preguntarles algo..."
   },
   {
    "offset": "0x067E01",
@@ -25348,7 +25348,7 @@
   },
   {
    "offset": "0x06818B",
-   "text": "{01 02}Fine\n{01 00}Tu última corazonada te metió en una pelea con la gente a la que pediste ayuda..."
+   "text": "{01 02}Fiona\n{01 00}Tu última corazonada te metió en una pelea con la gente a la que pediste ayuda..."
   },
   {
    "offset": "0x06822E",
@@ -25414,7 +25414,7 @@
   },
   {
    "offset": "0x06882C",
-   "text": "{01 02}Fine\n{01 00}¿Están todos bien? ¿Y Rudolph?"
+   "text": "{01 02}Fiona\n{01 00}¿Están todos bien? ¿Y Rudolph?"
   },
   {
    "offset": "0x068887",
@@ -25549,7 +25549,7 @@
   },
   {
    "offset": "0x069434",
-   "text": "{01 02}Van\n{01 00}Bien, los dejo contigo. Vamos, Fine."
+   "text": "{01 02}Van\n{01 00}Bien, los dejo contigo. Vamos, Fiona."
   },
   {
    "offset": "0x069487",
@@ -25566,7 +25566,7 @@
   },
   {
    "offset": "0x0694E0",
-   "text": "{01 02}Fine\n{01 00}Siento que volveremos a encontrarnos... Nos vemos."
+   "text": "{01 02}Fiona\n{01 00}Siento que volveremos a encontrarnos... Nos vemos."
   },
   {
    "offset": "0x069588",
@@ -26247,7 +26247,7 @@
   },
   {
    "offset": "0x06CDA0",
-   "text": "{01 02}Fine\n{01 00}¡Estás a salvo!"
+   "text": "{01 02}Fiona\n{01 00}¡Estás a salvo!"
   },
   {
    "offset": "0x06CDD8",
@@ -26264,7 +26264,7 @@
   },
   {
    "offset": "0x06CE4A",
-   "text": "{01 02}Fine\n{01 00}¡El Dr. D, el mejor científico del mundo!"
+   "text": "{01 02}Fiona\n{01 00}¡El Dr. D, el mejor científico del mundo!"
   },
   {
    "offset": "0x06CE9D",
@@ -26272,7 +26272,7 @@
   },
   {
    "offset": "0x06CF30",
-   "text": "{01 02}Fine\n{01 00}¿Dónde se había escondido todo este tiempo?"
+   "text": "{01 02}Fiona\n{01 00}¿Dónde se había escondido todo este tiempo?"
   },
   {
    "offset": "0x06CF75",
@@ -26292,7 +26292,7 @@
   },
   {
    "offset": "0x06D10E",
-   "text": "{01 02}Fine\n{01 00}De verdad... Me alegro mucho..."
+   "text": "{01 02}Fiona\n{01 00}De verdad... Me alegro mucho..."
   },
   {
    "offset": "0x06D14A",
@@ -27395,15 +27395,15 @@
   },
   {
    "offset": "0x074184",
-   "text": "{01 02}Ballad\n{01 00}Me da igual cualquiera de las dos opciones..."
+   "text": "{01 02}Brad\n{01 00}Me da igual cualquiera de las dos opciones..."
   },
   {
    "offset": "0x0741BC",
-   "text": "{01 02}Ballad\n{01 00}Aunque dudo que vuelva a ver un grupo como este..."
+   "text": "{01 02}Brad\n{01 00}Aunque dudo que vuelva a ver un grupo como este..."
   },
   {
    "offset": "0x07422A",
-   "text": "{01 02}Ballad\n{01 00}Gente de la República, del Imperio... y hasta de otra época..."
+   "text": "{01 02}Brad\n{01 00}Gente de la República, del Imperio... y hasta de otra época..."
   },
   {
    "offset": "0x0742A6",
@@ -27592,7 +27592,7 @@
   },
   {
    "offset": "0x07574F",
-   "text": "{01 02}Gard\n{01 00}Ser, aparte de los riesgos de probar un sistema nuevo, Juno y Leviathe son igual de valiosas."
+   "text": "{01 02}Gard\n{01 00}Señor, aparte de los riesgos de probar un sistema nuevo, Juno y Leviathe son igual de valiosas."
   },
   {
    "offset": "0x07581D",
@@ -28127,7 +28127,7 @@
   },
   {
    "offset": "0x078C54",
-   "text": "{01 02}Ballad\n{01 00}¡Bien! ¡Trato hecho!"
+   "text": "{01 02}Brad\n{01 00}¡Bien! ¡Trato hecho!"
   },
   {
    "offset": "0x078CA6",
@@ -28135,7 +28135,7 @@
   },
   {
    "offset": "0x078D08",
-   "text": "{01 02}Ballad\n{01 00}Tienes razón. Estos tratos no son asunto mío. No tengo nada que perder."
+   "text": "{01 02}Brad\n{01 00}Tienes razón. Estos tratos no son asunto mío. No tengo nada que perder."
   },
   {
    "offset": "0x078DE3",
@@ -28148,7 +28148,7 @@
   },
   {
    "offset": "0x078E13",
-   "text": "{01 02}Ballad\n{01 00}Por eso deberíamos aceptar."
+   "text": "{01 02}Brad\n{01 00}Por eso deberíamos aceptar."
   },
   {
    "offset": "0x078E5C",
@@ -28600,7 +28600,7 @@
   },
   {
    "offset": "0x07BB2D",
-   "text": "{01 02}Ballad\n{01 00}¡¿Qué fue eso?!"
+   "text": "{01 02}Brad\n{01 00}¡¿Qué fue eso?!"
   },
   {
    "offset": "0x07BB63",
@@ -28802,7 +28802,7 @@
   },
   {
    "offset": "0x07CB5A",
-   "text": "{01 02}Ballad\n{01 00}¿Lo conoces?"
+   "text": "{01 02}Brad\n{01 00}¿Lo conoces?"
   },
   {
    "offset": "0x07CB94",
@@ -29216,7 +29216,7 @@
   },
   {
    "offset": "0x07EF3F",
-   "text": "{01 02}Ballad\n{01 00}¡Naomi!"
+   "text": "{01 02}Brad\n{01 00}¡Naomi!"
   },
   {
    "offset": "0x07EF65",
@@ -29460,7 +29460,7 @@
   },
   {
    "offset": "0x0802DF",
-   "text": "{01 02}Ballad\n{01 00}Un plan así solo puede ser de Backdraft."
+   "text": "{01 02}Brad\n{01 00}Un plan así solo puede ser de Backdraft."
   },
   {
    "offset": "0x08033A",
@@ -29749,7 +29749,7 @@
   },
   {
    "offset": "0x081F76",
-   "text": "{01 02}Polta\n{01 00}¡Ser!"
+   "text": "{01 02}Polta\n{01 00}¡Señor!"
   },
   {
    "offset": "0x081FF4",
@@ -30133,7 +30133,7 @@
   },
   {
    "offset": "0x08469D",
-   "text": "{01 02}Fine\n{01 00}Máscara Roja y Máscara Púrpura, los misteriosos héroes de la justicia."
+   "text": "{01 02}Fiona\n{01 00}Máscara Roja y Máscara Púrpura, los misteriosos héroes de la justicia."
   },
   {
    "offset": "0x08472C",
@@ -30185,7 +30185,7 @@
   },
   {
    "offset": "0x084CA3",
-   "text": "{01 02}Fine\n{01 00}Rudolph, ¿estás bien?"
+   "text": "{01 02}Fiona\n{01 00}Rudolph, ¿estás bien?"
   },
   {
    "offset": "0x084CE6",
@@ -30430,7 +30430,7 @@
   },
   {
    "offset": "0x0869E5",
-   "text": "{01 02}Ballad\n{01 00}Eso parece... ¡No queda más que luchar!"
+   "text": "{01 02}Brad\n{01 00}Eso parece... ¡No queda más que luchar!"
   },
   {
    "offset": "0x086A5E",
@@ -30458,7 +30458,7 @@
   },
   {
    "offset": "0x086CF6",
-   "text": "{01 02}Van\n{01 00}Uf... ¡Fine! ¡Thomas! ¿Están bien?"
+   "text": "{01 02}Van\n{01 00}Uf... ¡Fiona! ¡Thomas! ¿Están bien?"
   },
   {
    "offset": "0x086D55",
@@ -30466,11 +30466,11 @@
   },
   {
    "offset": "0x086DC7",
-   "text": "{01 02}Fine\n{01 00}¡Thomas! ¡Cálmate!"
+   "text": "{01 02}Fiona\n{01 00}¡Thomas! ¡Cálmate!"
   },
   {
    "offset": "0x086DFF",
-   "text": "{01 02}Thomas\n{01 00}¡S-sí, señorita Fine!"
+   "text": "{01 02}Thomas\n{01 00}¡S-sí, señorita Fiona!"
   },
   {
    "offset": "0x086E3E",
@@ -30518,7 +30518,7 @@
   },
   {
    "offset": "0x08747D",
-   "text": "{01 02}Soldado Imperial\n{01 00}De acuerdo, nosotros también ayudaremos. Soy el coronel Karl L. Schwarz, del Ejército Imperial, como pueden ver. Este es mi hermano Thomas."
+   "text": "{01 02}Soldado Imperial\n{01 00}De acuerdo, nosotros también ayudaremos. Soy el coronel Karl L. Schubaltz, del Ejército Imperial, como pueden ver. Este es mi hermano Thomas."
   },
   {
    "offset": "0x087587",
@@ -30716,7 +30716,7 @@
   },
   {
    "offset": "0x0888EC",
-   "text": "{01 02}Fine\n{01 00}Ten cuidado. ¡Es peligroso!"
+   "text": "{01 02}Fiona\n{01 00}Ten cuidado. ¡Es peligroso!"
   },
   {
    "offset": "0x08893B",
@@ -31619,7 +31619,7 @@
   },
   {
    "offset": "0x08DBB1",
-   "text": "{01 02}Ballad\n{01 00}Al menos descansamos bien."
+   "text": "{01 02}Brad\n{01 00}Al menos descansamos bien."
   },
   {
    "offset": "0x08DBEF",
@@ -32364,7 +32364,7 @@
   },
   {
    "offset": "0x0911E5",
-   "text": "{01 02}Ballad\n{01 00}Otra vez lo mismo. Bit anda perdido en su propio mundo."
+   "text": "{01 02}Brad\n{01 00}Otra vez lo mismo. Bit anda perdido en su propio mundo."
   },
   {
    "offset": "0x091238",
@@ -32388,7 +32388,7 @@
   },
   {
    "offset": "0x0914AF",
-   "text": "{01 02}Fine\n{01 00}¿Qué...? Siento algo extraño..."
+   "text": "{01 02}Fiona\n{01 00}¿Qué...? Siento algo extraño..."
   },
   {
    "offset": "0x0914F2",
@@ -32396,11 +32396,11 @@
   },
   {
    "offset": "0x09150F",
-   "text": "{01 02}Van\n{01 00}¿Qué pasa, Fine?"
+   "text": "{01 02}Van\n{01 00}¿Qué pasa, Fiona?"
   },
   {
    "offset": "0x09155D",
-   "text": "{01 02}Fine\n{01 00}No, nada... Solo fue mi imaginación."
+   "text": "{01 02}Fiona\n{01 00}No, nada... Solo fue mi imaginación."
   },
   {
    "offset": "0x0915B3",
@@ -32408,7 +32408,7 @@
   },
   {
    "offset": "0x091627",
-   "text": "{01 02}Fine\n{01 00}Sí, doctor. Con mucha sal, ¿verdad?"
+   "text": "{01 02}Fiona\n{01 00}Sí, doctor. Con mucha sal, ¿verdad?"
   },
   {
    "offset": "0x09168D",
@@ -33207,7 +33207,7 @@
   },
   {
    "offset": "0x1073BC",
-   "text": "Fine debe estar\n"
+   "text": "Fiona debe estar\n"
   },
   {
    "offset": "0x1073E0",
