@@ -57,6 +57,12 @@ The translation lives in `dialogue-en.json` and `scene-translation.json`, and `k
 
 To release the patches, set the English version in `VERSION` and the Spanish version in `VERSION_ES`. Run `python3 tools/build_site_patch.py`. It writes `site/patch.bps`, `site/patch-es.bps`, and `site/version.mjs`. Each ROM uses its own version for the `{VERSION}` placeholder in the credits.
 
+## Edit and check the text
+
+Run `python3 tools/script_editor.py` and open http://127.0.0.1:5097/. Use ENG or ESP to pick the language. Turn on Translate interface to show the editor itself in that language. The editor lists every text record from the ROM, shows the event or menu script that uses it, and renders the text with the game's own text core. Dialogue previews stop wherever the game waits for A, so long lines show each box in order. Saves go to the language's JSON files after the same checks the builder runs. Build ROM writes `build/zoids-legacy-<code>.gba`.
+
+Run `python3 tools/text_fit_check.py --language esp` (or `eng`) to find text that does not fit its window. The check reads the draw calls in `src/`, takes each window's size from the menu script or `OpenWindow` call that opens it, and lays out every string with the text core at that width. It writes `build/text-fit-<code>.json`, which the editor uses to mark and preview clipped text. Results where every draw argument resolved are listed as exact; the rest depend on an inferred window or position. The command exits with an error when an exact result clips.
+
 ## Localize another language
 
 Create `scene-translation-<code>.json` and `dialogue-<code>.json` using the English files as format examples. Replace `<code>` with a short language code. Translate `english_draft` in scene entries and `build_text` or `text` in dialogue entries. Keep each offset, control code, placeholder, and build setting. You can include only the entries you translate. Missing entries keep the text from the original USA ROM, except required message templates and credits, which use the English translation.
