@@ -2,7 +2,7 @@ import en from './locales/en.js';
 import es from './locales/es.js';
 
 const languages = { en, es };
-const attributes = ['aria-label', 'alt', 'content', 'title'];
+const attributes = ['aria-label', 'alt', 'content', 'src', 'title'];
 
 export function text(key, language) {
   return languages[language]?.[key] ?? en[key] ?? key;

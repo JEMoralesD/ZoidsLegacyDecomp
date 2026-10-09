@@ -279,8 +279,9 @@
             </h2>
             <div class="action-list">
               <div class="language-picker" role="group" aria-label="Patch and page language" data-i18n-aria-label="language.group">
-                <button class="language-option" type="button" data-language="en" aria-label="English" data-i18n-aria-label="language.english" aria-pressed="true" title="English" data-i18n-title="language.english"><span aria-hidden="true">🇺🇸</span><span data-i18n="language.shortEnglish">EN</span></button>
-                <button class="language-option" type="button" data-language="es" aria-label="Español (in progress)" data-i18n-aria-label="language.spanish" aria-pressed="false" title="Español (in progress)" data-i18n-title="language.spanish"><span aria-hidden="true">🇲🇽</span><span data-i18n="language.shortSpanish">ES</span></button>
+                <button class="language-option" type="button" data-language="en" aria-label="English" data-i18n-aria-label="language.english" aria-pressed="true" title="English" data-i18n-title="language.english"><span data-i18n="language.shortEnglish">ENG</span></button>
+                <button class="language-option" type="button" data-language="es" aria-label="Español (in progress)" data-i18n-aria-label="language.spanish" aria-pressed="false" title="Español (in progress)" data-i18n-title="language.spanish"><span data-i18n="language.shortSpanish">ESP</span></button>
+                <span class="language-tail" aria-hidden="true"><svg class="language-chevrons" viewBox="0 0 84 44"><path d="M8 44 L52 0 L64 0 L20 44 Z"/><path d="M28 44 L72 0 L84 0 L40 44 Z"/></svg><span class="language-readout"><span class="language-wedge"></span><span class="language-signal"><span></span><span></span><span></span><span></span></span></span></span>
               </div>
               <label id="drop-zone" class="drop-zone menu-control" for="rom-input">
                 <input id="rom-input" type="file" accept=".gba" aria-describedby="file-help" aria-label="Select your Zoids™ Legacy USA ROM" data-i18n-aria-label="patch.romAria">
@@ -410,7 +411,7 @@
                 <img src="images/dialogue-before.png" width="240" height="160" decoding="async" alt="Regina’s original dialogue uses widely spaced letters: “Prince! We got unusual time-space vibes!”" data-i18n-alt="feature.dialogue.beforeAlt">
               </div>
               <div id="dialogue-after" class="game-panel" role="tabpanel" aria-labelledby="dialogue-after-tab" tabindex="0">
-                <img src="images/dialogue-after.png" width="240" height="160" decoding="async" alt="Regina’s revised dialogue uses proportional lettering: “Your Highness! I’m detecting an unusual space-time distortion!”" data-i18n-alt="feature.dialogue.afterAlt">
+                <img src="images/dialogue-after.png" data-i18n-src="feature.dialogue.afterImage" width="240" height="160" decoding="async" alt="Regina’s revised dialogue uses proportional lettering: “Your Highness! I’m detecting an unusual space-time distortion!”" data-i18n-alt="feature.dialogue.afterAlt">
               </div>
             </div>
             <div class="feature-info">
@@ -441,7 +442,7 @@
                 <img src="images/names-before.png" width="240" height="160" decoding="async" alt="The original pilot roster lists Zeru, Ballad and Jimmy." data-i18n-alt="feature.names.beforeAlt">
               </div>
               <div id="names-after" class="game-panel" role="tabpanel" aria-labelledby="names-after-tab" tabindex="0">
-                <img src="images/names-after.png" width="240" height="160" decoding="async" alt="The same pilot roster now lists Zeru, Brad and Jamie." data-i18n-alt="feature.names.afterAlt">
+                <img src="images/names-after.png" data-i18n-src="feature.names.afterImage" width="240" height="160" decoding="async" alt="The same pilot roster now lists Zeru, Brad and Jamie." data-i18n-alt="feature.names.afterAlt">
               </div>
             </div>
             <div class="feature-info">
@@ -471,7 +472,7 @@
                 <img src="images/commands-before.png" width="240" height="160" decoding="async" alt="The original Parts Removal description begins “When a pilot with Strat.Commd 2 skill, has a post in the troop” and continues beyond the window." data-i18n-alt="feature.commands.beforeAlt">
               </div>
               <div id="commands-after" class="game-panel" role="tabpanel" aria-labelledby="commands-after-tab" tabindex="0">
-                <img src="images/commands-after.png" width="240" height="160" decoding="async" alt="Parts Removal’s revised description fits in one window: removes all weapon rack equipment from the selected ally Zoid; requires a pilot with Tactics 2." data-i18n-alt="feature.commands.afterAlt">
+                <img src="images/commands-after.png" data-i18n-src="feature.commands.afterImage" width="240" height="160" decoding="async" alt="Parts Removal’s revised description fits in one window: removes all weapon rack equipment from the selected ally Zoid; requires a pilot with Tactics 2." data-i18n-alt="feature.commands.afterAlt">
               </div>
             </div>
             <div class="feature-info">
@@ -500,7 +501,7 @@
                 <img src="images/cast-before.png" width="240" height="160" decoding="async" alt="Harry declares, “I am Harry Champ. I was born to be a champion,” in the original release." data-i18n-alt="feature.cast.beforeAlt">
               </div>
               <div id="cast-after" class="game-panel" role="tabpanel" aria-labelledby="cast-after-tab" tabindex="0">
-                <img src="images/cast-after.png" width="240" height="160" decoding="async" alt="Harry declares, “My name is Harry Champ. I’m a man destined to be king!” in the retranslation." data-i18n-alt="feature.cast.afterAlt">
+                <img src="images/cast-after.png" data-i18n-src="feature.cast.afterImage" width="240" height="160" decoding="async" alt="Harry declares, “My name is Harry Champ. I’m a man destined to be king!” in the retranslation." data-i18n-alt="feature.cast.afterAlt">
               </div>
             </div>
             <div class="feature-info">
