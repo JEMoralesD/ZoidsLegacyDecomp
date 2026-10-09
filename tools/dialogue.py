@@ -100,8 +100,9 @@ def readable(unit: bytes) -> str:
 def _readable(unit: bytes) -> str:
     if unit in (b"@", COPYRIGHT_CODE.to_bytes(2, "big")):
         return "©"
-    if len(unit) == 2 and int.from_bytes(unit, 'big') in SPANISH_CHARACTERS:
-        return SPANISH_CHARACTERS[int.from_bytes(unit, 'big')]
+    code = int.from_bytes(unit, 'big')
+    if code in SPANISH_CHARACTERS:
+        return SPANISH_CHARACTERS[code]
     if unit == b"\x0a":
         return "\n"
     if unit[0] < 0x20:
