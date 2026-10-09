@@ -147,6 +147,14 @@ DECK_RESTRICTION_WINDOW_INSTRUCTIONS = {
     0xC222E: (0x2200, 0x2201),
     0xC2238: (0x2200, 0x2201),
 }
+PADDING_GUARD_INSTRUCTIONS = {
+    0xAC8EC: (0xD208, 0xDA08),
+    0xAC956: (0xD208, 0xDA08),
+    0xAC9A2: (0xD208, 0xDA08),
+    0xAC9F6: (0xD208, 0xDA08),
+    0xB2392: (0xD20D, 0xDA0D),
+    0xB2636: (0xD20C, 0xDA0C),
+}
 
 
 def align_menu_scripts(rom, original, text_edits):
@@ -758,6 +766,10 @@ def build_rom(original, document, choices, dialogue_document, version=None):
     for offset, (expected, replacement) in DECK_RESTRICTION_WINDOW_INSTRUCTIONS.items():
         if struct.unpack_from('<H', rom, offset)[0] != expected:
             raise ValueError(f'Deck restriction window instruction differs at 0x{offset:X}.')
+        struct.pack_into('<H', rom, offset, replacement)
+    for offset, (expected, replacement) in PADDING_GUARD_INSTRUCTIONS.items():
+        if struct.unpack_from('<H', rom, offset)[0] != expected:
+            raise ValueError(f'Padding guard instruction differs at 0x{offset:X}.')
         struct.pack_into('<H', rom, offset, replacement)
     rom[MENU_COMMAND_HOOK:MENU_COMMAND_HOOK + 12] = (
         struct.pack('<HH', 0x1c38, 0x4641) +
