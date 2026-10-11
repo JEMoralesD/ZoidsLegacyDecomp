@@ -16,9 +16,10 @@ import struct
 import sys
 
 from decomp_calls import (CAST, OPEN_WINDOW, RUN_SCRIPT, callers, evaluate, sources,
-                          symbols)
+                          split_arguments, symbols)
 import dialogue
 import game_text
+import insert_vwf
 import scene_layout
 import script_context
 import text_core
@@ -36,6 +37,17 @@ RAM_TEXT = range(0x02000000, 0x02040000)
 SCROLLING_TEXT = 'func_080E2DCC'
 COPIES = {'func_080ED128': 'copy', 'func_080ED038': 'copy', 'func_08099F5C': 'append'}
 PILOT_NAME = 'func_080E7B64'
+# Match source draw calls to the column instructions changed by the ROM builder.
+PATCHED_DRAW_COLUMNS = {
+    ('func_080ADD38', 0x08106374): 0xAE5B4,
+    ('func_080ADD38', 0x08106378): 0xAE5B4,
+    ('func_080ADD38', 0x0810637C): 0xAE5C8,
+    ('func_080ADD38', 0x087EE170): 0xAE566,
+    ('func_080B0354', 0x08106374): 0xB07E8,
+    ('func_080B0354', 0x08106378): 0xB07E8,
+    ('func_080B0354', 0x0810637C): 0xB07FC,
+    ('func_080B0354', 0x087EE170): 0xB079A,
+}
 @lru_cache(maxsize=1)
 def table_bounds():
     rom = game_text.clean_rom()
@@ -57,12 +69,17 @@ def table_bounds():
 
 def text_targets(expression, source, function, names, depth=0):
     """Return ROM text offsets an argument can point at, and how they were found."""
+    for match in re.finditer(r'\b(\w+)\s*\(', expression):
+        if source.aliases.get(match[1], match[1]) == PILOT_NAME:
+            arguments, _ = split_arguments(expression, match.end())
+            argument = re.sub(r'\b(0x[0-9A-Fa-f]+|\d+)[uUlL]+\b', r'\1',
+                              CAST.sub(' ', arguments[0])) if arguments else ''
+            pilot_id = evaluate(argument, names)
+            return pilot_name_targets(pilot_id)
     expression = CAST.sub(' ', expression).strip().strip('()').strip()
     value = evaluate(expression, names)
     if value is not None and dialogue.BASE <= value < dialogue.BASE + 0x1000000:
         return {value - dialogue.BASE}, 'literal'
-    if PILOT_NAME in [source.aliases.get(word, word) for word in re.findall(r'\b(\w+)\s*\(', expression)]:
-        return set(table_bounds().get(symbols().get('D_087EDFB4', 0x087EDFB4), [])), 'pilot names'
     for candidate in [*re.findall(r'\b(\w+)\s*\[', expression), *re.findall(r'0x087E[0-9A-Fa-f]{4}', expression),
                       *re.findall(r'\b\w+\b', expression)]:
         base = evaluate(candidate, names)
@@ -90,6 +107,22 @@ def text_targets(expression, source, function, names, depth=0):
         if targets:
             return targets, how
     return set(), None
+
+
+def pilot_name_targets(pilot_id):
+    names = table_bounds().get(symbols().get('D_087EDFB4', 0x087EDFB4), [])
+    if pilot_id is None:
+        return set(names), 'pilot names'
+    pilot_id &= 0xFF
+    # Pilot 1 uses the player name in RAM, not a name from the ROM table.
+    if pilot_id == 1:
+        return set(), 'player name'
+    targets = {names[pilot_id]} if pilot_id < len(names) else set()
+    if pilot_id in (2, 0x60, 0x61):
+        targets.add(0x109414)
+    if pilot_id in (0x36, 0x37):
+        targets.add(0x109434)
+    return targets, 'pilot names'
 
 
 def script_windows(source, function, names, before=None, depth=0):
@@ -217,6 +250,8 @@ def draw_sites():
                     continue
                 window_id = literal(arguments[spec['window']], names, source, function, at)
                 column = literal(arguments[spec['column']], names, source, function, at) if 'column' in spec else 0
+                if 'column' in spec:
+                    column = patched_column(function[1], offsets, how, column)
                 row = literal(arguments[spec['row']], names, source, function, at) if 'row' in spec else 0
                 site = f'{source.path.relative_to(ROOT)}:{source.line(at)}'
                 boxes = script_windows(source, function, names, at).get(window_id, []) if window_id is not None else []
@@ -231,6 +266,21 @@ def draw_sites():
                        'windowLabel': f'#{box["id"]} from {box["sourceRoot"]}',
                        'column': column or 0, 'row': row or 0,
                        'exact': column is not None and row is not None and len({b['width'] for b in boxes}) == 1}
+
+
+def patched_column(function, offsets, how, column):
+    references = {int(how.split()[1], 16)} if how and how.startswith('table ') else {
+        dialogue.BASE + offset for offset in offsets}
+    instructions = {PATCHED_DRAW_COLUMNS.get((function, reference)) for reference in references}
+    if not instructions or None in instructions:
+        return column
+    columns = set()
+    for instruction in instructions:
+        expected, replacement = insert_vwf.WEAPON_LAYOUT_INSTRUCTIONS[instruction]
+        if expected & 0xFF00 != 0x2300 or replacement & 0xFF00 != 0x2300 or column != expected & 0xFF:
+            raise ValueError(f'Patched draw column differs at 0x{instruction:X}.')
+        columns.add(replacement & 0xFF)
+    return columns.pop() if len(columns) == 1 else None
 
 
 def script_sites():

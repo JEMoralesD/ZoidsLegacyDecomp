@@ -144,7 +144,7 @@
   },
   {
    "offset": "0x001057",
-   "build_text": "Puntos de\nvida del Zoid.\nSi llegan a 0,\nno puede\nluchar.",
+   "build_text": "Puntos de\nvida del Zoid\nSi llegan a 0\nno puede\nluchar.",
    "compact_format": true
   },
   {
@@ -194,12 +194,12 @@
   },
   {
    "offset": "0x0012FF",
-   "build_text": "Nivel de\ncontrol. Si el\npiloto no llega\nal requerido,\nbajan las\nestadísticas.",
+   "build_text": "Nivel de\ncontrol. Con\npiloto\nmenor,\nbajan las\nestadísticas.",
    "compact_format": true
   },
   {
    "offset": "0x001349",
-   "build_text": "Puntos de\nentrenamiento.\nMejoran los\natributos al\nentrenar.",
+   "build_text": "Puntos de\nentrenamiento\nMejoran los\natributos al\nentrenar.",
    "compact_format": true
   },
   {
@@ -209,7 +209,7 @@
   },
   {
    "offset": "0x0013E4",
-   "build_text": "Tamaño del\nZoid. Afecta\nla formación\ny el riesgo de\nser golpeado.",
+   "build_text": "Tamaño del\nZoid. Afecta\nla formación\ny el riesgo a\nser golpeado.",
    "compact_format": true
   },
   {
@@ -342,7 +342,7 @@
   },
   {
    "offset": "0x001647",
-   "build_text": "Ajuste de\nmovilidad.\nMide la rapidez\nde reacción\ndel piloto.",
+   "build_text": "Ajuste de\nmovilidad.\nMide rapidez\nde reacción\ndel piloto.",
    "compact_format": true
   },
   {
@@ -357,7 +357,7 @@
   },
   {
    "offset": "0x001734",
-   "build_text": "Ajuste de DSC.\nResistencia\ndel piloto\ncuando el\nZoid recibe\nun golpe.",
+   "build_text": "Ajuste de DSC\nResistencia\ndel piloto\ncuando el\nZoid recibe\nun golpe.",
    "compact_format": true
   },
   {
@@ -367,7 +367,7 @@
   },
   {
    "offset": "0x0017CA",
-   "build_text": "Nivel del\npiloto. Si es\nmuy bajo,\ndisminuyen los\natributos del\nZoid.",
+   "build_text": "Nivel del\npiloto. Si es\nmuy bajo,\ndisminuyen\natributos del\nZoid.",
    "compact_format": true
   },
   {
@@ -377,7 +377,7 @@
   },
   {
    "offset": "0x001830",
-   "build_text": "EXP para el\nsig. nivel.\nAl alcanzarla,\nsube de nivel.",
+   "build_text": "EXP para el\nsig. nivel.\nAl alcanzarla\nsube de nivel",
    "compact_format": true
   },
   {
@@ -404,12 +404,12 @@
   },
   {
    "offset": "0x0018C4",
-   "build_text": "Porcentaje de\nPV restaurados\nal fusionarse\nel Organoide\ncon el Zoid.",
+   "build_text": "Porcentaje de\nPV restaurado\nal fusionarse\nel Organoide\ncon el Zoid.",
    "compact_format": true
   },
   {
    "offset": "0x0018F6",
-   "build_text": "Ajuste de\nataque tras la\nfusión con el\nOrganoide.",
+   "build_text": "Ajuste de\nataque tras\nfusión con el\nOrganoide.",
    "compact_format": true
   },
   {
@@ -419,7 +419,7 @@
   },
   {
    "offset": "0x00193D",
-   "build_text": "Ajuste de\nvelocidad tras\nla fusión con\nel Organoide.",
+   "build_text": "Ajuste de\nvelocidad\ntras fusiónar\nel Organoide.",
    "compact_format": true
   },
   {
@@ -429,17 +429,17 @@
   },
   {
    "offset": "0x001984",
-   "build_text": "Nivel del\nOrganoide. Se\nsuma al del\npiloto tras la\nfusión.",
+   "build_text": "Nivel del\nOrganoide. Se\nsuma al del\npiloto tras\nfusión.",
    "compact_format": true
   },
   {
    "offset": "0x0019BC",
-   "build_text": "Circuito de\nemociones de\nPulse. Su\nemoción\ndominante define\ncómo crece.",
+   "build_text": "Circuito de\nemociones de\nPulse. Su\nemoción\ndefine\ncómo crece.",
    "compact_format": true
   },
   {
    "offset": "0x001A06",
-   "build_text": "Emoción\nblanca. Acelera\nla recuperación\ny la defensa.",
+   "build_text": "Emoción\nblanca. Acel.\nrecuperación\ny la defensa.",
    "compact_format": true
   },
   {
@@ -454,7 +454,7 @@
   },
   {
    "offset": "0x001ACD",
-   "build_text": "Emoción negra.\nAcelera el\naumento de\nataque y\nvelocidad.",
+   "build_text": "Emoción negra\nAcelera el\naumento de\nataque y\nvelocidad.",
    "compact_format": true
   },
   {
@@ -480,7 +480,7 @@
   },
   {
    "offset": "0x001C35",
-   "build_text": "Asignar\ntodos los puntos"
+   "build_text": "Asignar\ntodos"
   },
   {
    "offset": "0x001C56",
@@ -625,7 +625,7 @@
   },
   {
    "offset": "0x002184",
-   "build_text": "No se encontraron piezas."
+   "build_text": "No hay piezas."
   },
   {
    "offset": "0x0021BD",
@@ -706,7 +706,7 @@
   },
   {
    "offset": "0x002564",
-   "build_text": "Al menos un piloto debe estar\na bordo de un Zoid apto para luchar."
+   "build_text": "Al menos un piloto debe\nestar a bordo de un \nZoid apto para luchar."
   },
   {
    "offset": "0x0025C0",
@@ -722,7 +722,7 @@
   },
   {
    "offset": "0x002623",
-   "build_text": "Un {01 01}Zoid desplegado{01 00}\nno tiene {01 01}piloto a bordo{01 00}.\n¿Retirarlo de la formación?"
+   "build_text": "Un {01 01}Zoid desplegado{01 00}\nno tiene {01 01}piloto a bordo{01 00}.\n¿Quitar de la formación?"
   },
   {
    "offset": "0x0026B1",
@@ -794,7 +794,7 @@
   },
   {
    "offset": "0x002A27",
-   "build_text": "Un Zoid {01 01}XL{01 00} solo puede ir\nen el {01 01}centro de una columna{01 00}."
+   "build_text": "Un Zoid {01 01}XL{01 00} solo puede ir\nen el {01 01}centro \nde una columna{01 00}."
   },
   {
    "offset": "0x002AA7",
@@ -830,7 +830,7 @@
   },
   {
    "offset": "0x002C79",
-   "build_text": "{01 01}Ese Zoid{01 00} no puede cambiar\nsu equipo. {01 01}El piloto se niega{01 00}."
+   "build_text": "{01 01}Ese Zoid{01 00} no puede \ncambiar su equipo. \n{01 01}El piloto se niega{01 00}."
   },
   {
    "offset": "0x002CF4",
@@ -850,7 +850,7 @@
   },
   {
    "offset": "0x002DD9",
-   "build_text": "{01 02}Soporte de Armas"
+   "build_text": "{01 02}Sop. de Armas"
   },
   {
    "offset": "0x002E12",
@@ -910,7 +910,7 @@
   },
   {
    "offset": "0x003130",
-   "build_text": "{01 01}Las armas de humo{01 00} no pueden\ninstalarse en un {01 01}Zoid aéreo{01 00}."
+   "build_text": "{01 01}Las armas de humo{01 00} \nno pueden instalarse \nen un {01 01}Zoid aéreo{01 00}."
   },
   {
    "offset": "0x0031B1",
@@ -934,7 +934,7 @@
   },
   {
    "offset": "0x0033AF",
-   "build_text": "{01 01}{04 01}¿Guardar ahora?"
+   "build_text": "{01 01}{04 01}Salvar juego?"
   },
   {
    "offset": "0x0033D5",
@@ -1146,7 +1146,7 @@
   },
   {
    "offset": "0x003DFB",
-   "build_text": "{01 02}Crecimiento de Atributos"
+   "build_text": "{01 02}Aumento de Atr."
   },
   {
    "offset": "0x003E0B",
@@ -1167,7 +1167,7 @@
   },
   {
    "offset": "0x003EA2",
-   "build_text": "{01 02}Crecimiento de Atributos"
+   "build_text": "{01 02}Aumento de Atr."
   },
   {
    "offset": "0x003EB2",
@@ -1311,7 +1311,7 @@
   },
   {
    "offset": "0x0043F5",
-   "build_text": "Tienda de objetos"
+   "build_text": "Tienda obj."
   },
   {
    "offset": "0x00440A",
@@ -1524,7 +1524,7 @@
   },
   {
    "offset": "0x004B0B",
-   "build_text": "Bonificación\nde VEL al usar\no equipar\nesta arma.",
+   "build_text": "Bonificación\nde VEL al \nusar o \nequipar\nesta arma.",
    "compact_format": true
   },
   {
@@ -1539,12 +1539,12 @@
   },
   {
    "offset": "0x004BCE",
-   "build_text": "Bonificación\nde PR del arma\nal usarla o\nequiparla.",
+   "build_text": "Bonificación\nde PR del\narma al \nusarla o\nequiparla.",
    "compact_format": true
   },
   {
    "offset": "0x004C1A",
-   "build_text": "Reduce la PR\ndel arma del\nobjetivo al usar\no equipar\nesta arma.",
+   "build_text": "Reduce la PR\nde armas \ndel objetivo \nal usar\no equipar\nesta arma.",
    "compact_format": true
   },
   {
@@ -1554,17 +1554,17 @@
   },
   {
    "offset": "0x004CA3",
-   "build_text": "Bonificación\nde evasión al\nusar o equipar\nesta arma.",
+   "build_text": "Bonificación\nde evasión al\nusar o \nequipar\nesta arma.",
    "compact_format": true
   },
   {
    "offset": "0x004CEA",
-   "build_text": "Aumenta los PV\nmáximos al\nusar o equipar\nesta arma.",
+   "build_text": "Aumenta PV\nmáximos al\nusar o \nequipar\nesta arma.",
    "compact_format": true
   },
   {
    "offset": "0x004D2B",
-   "build_text": "Aumenta la EN\nmáxima al\nusar o equipar\nesta arma.",
+   "build_text": "Aumenta la EN\nmáxima al\nusar \no equipar\nesta arma.",
    "compact_format": true
   },
   {
@@ -1579,17 +1579,17 @@
   },
   {
    "offset": "0x004DE6",
-   "build_text": "Fija los SN\ndel Zoid en\neste valor al\nusar o equipar.",
+   "build_text": "Fija los SN\ndel Zoid en\neste valor al\nusar o \nequipar.",
    "compact_format": true
   },
   {
    "offset": "0x004E26",
-   "build_text": "PV del\nEscudo E al\nusar o equipar\nesta arma.",
+   "build_text": "PV del\nEscudo E al\nusar o \nequipar\nesta arma.",
    "compact_format": true
   },
   {
    "offset": "0x004E5F",
-   "build_text": "Da acciones\nextra al\nusar o equipar\nesta arma.",
+   "build_text": "Da acciones\nextra al\nusar o \nequipar\nesta arma.",
    "compact_format": true
   },
   {
@@ -1960,7 +1960,7 @@
   },
   {
    "offset": "0x005F35",
-   "build_text": "{07 00 04}Piloto a bordo. ¿Venderlo?"
+   "build_text": "{07 00 04}Tiene Piloto. ¿Vender?"
   },
   {
    "offset": "0x005F68",
@@ -1996,7 +1996,7 @@
   },
   {
    "offset": "0x006131",
-   "build_text": "{07 00 02}{01 00}El Zoid de este piloto\nno puede venderse."
+   "build_text": "{07 00 02}{01 00}El Zoid de \neste piloto\nno puede venderse."
   },
   {
    "offset": "0x006186",
@@ -2004,7 +2004,7 @@
   },
   {
    "offset": "0x0061A5",
-   "build_text": "{08 00 70}Datos de Zoids{07 11 00}/151\n{08 00 70}Datos de Personajes{07 11 00}/75"
+   "build_text": "{08 00 70}Datos de Zoids{07 11 00}/151\n{08 00 70}Datos de Personaj.{07 11 00}/75"
   },
   {
    "offset": "0x00620F",
@@ -2068,7 +2068,7 @@
   },
   {
    "offset": "0x0068EB",
-   "build_text": "Armas{20}de{20}ataque\nArmas{20}de{20}defensa"
+   "build_text": "Armas{20}de{20}ataq.\nArmas{20}de{20}def."
   },
   {
    "offset": "0x006938",
@@ -2172,7 +2172,7 @@
   },
   {
    "offset": "0x006E94",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x006EB1",
@@ -2184,7 +2184,7 @@
   },
   {
    "offset": "0x006F42",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x006F5F",
@@ -2208,7 +2208,7 @@
   },
   {
    "offset": "0x0070C7",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x0070E4",
@@ -2328,7 +2328,7 @@
   },
   {
    "offset": "0x00784B",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x007868",
@@ -2340,7 +2340,7 @@
   },
   {
    "offset": "0x00790F",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x00792C",
@@ -2352,7 +2352,7 @@
   },
   {
    "offset": "0x0079D8",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x0079F5",
@@ -2364,7 +2364,7 @@
   },
   {
    "offset": "0x007A97",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x007AB4",
@@ -2376,7 +2376,7 @@
   },
   {
    "offset": "0x007B57",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x007B74",
@@ -2388,7 +2388,7 @@
   },
   {
    "offset": "0x007C17",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x007C34",
@@ -2400,7 +2400,7 @@
   },
   {
    "offset": "0x007CD8",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x007CF5",
@@ -2412,7 +2412,7 @@
   },
   {
    "offset": "0x007D9A",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x007DB7",
@@ -2424,7 +2424,7 @@
   },
   {
    "offset": "0x007E63",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x007E80",
@@ -2436,7 +2436,7 @@
   },
   {
    "offset": "0x007F1B",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x007F38",
@@ -2496,7 +2496,7 @@
   },
   {
    "offset": "0x0082A1",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x0082BE",
@@ -2508,7 +2508,7 @@
   },
   {
    "offset": "0x00835B",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x008378",
@@ -2520,7 +2520,7 @@
   },
   {
    "offset": "0x008424",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x008441",
@@ -2532,7 +2532,7 @@
   },
   {
    "offset": "0x0084DB",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x0084F8",
@@ -2544,7 +2544,7 @@
   },
   {
    "offset": "0x008593",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x0085B0",
@@ -2556,7 +2556,7 @@
   },
   {
    "offset": "0x008649",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x008666",
@@ -2568,7 +2568,7 @@
   },
   {
    "offset": "0x008706",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x008723",
@@ -2580,7 +2580,7 @@
   },
   {
    "offset": "0x0087C4",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x0087E1",
@@ -2616,7 +2616,7 @@
   },
   {
    "offset": "0x008A01",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x008A1E",
@@ -2628,7 +2628,7 @@
   },
   {
    "offset": "0x008AB7",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x008AD4",
@@ -2640,7 +2640,7 @@
   },
   {
    "offset": "0x008B84",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x008BA1",
@@ -2664,7 +2664,7 @@
   },
   {
    "offset": "0x008CF5",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x008D12",
@@ -2676,7 +2676,7 @@
   },
   {
    "offset": "0x008DAD",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x008DCA",
@@ -2688,7 +2688,7 @@
   },
   {
    "offset": "0x008E73",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x008E90",
@@ -2700,7 +2700,7 @@
   },
   {
    "offset": "0x008F2B",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x008F48",
@@ -2784,7 +2784,7 @@
   },
   {
    "offset": "0x00944C",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x009469",
@@ -3000,7 +3000,7 @@
   },
   {
    "offset": "0x00A1BB",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x00A1D8",
@@ -3012,7 +3012,7 @@
   },
   {
    "offset": "0x00A27B",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x00A298",
@@ -3024,7 +3024,7 @@
   },
   {
    "offset": "0x00A34D",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x00A36A",
@@ -3036,7 +3036,7 @@
   },
   {
    "offset": "0x00A412",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x00A42F",
@@ -3048,7 +3048,7 @@
   },
   {
    "offset": "0x00A4D1",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x00A4EE",
@@ -3060,7 +3060,7 @@
   },
   {
    "offset": "0x00A59A",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x00A5B7",
@@ -3072,7 +3072,7 @@
   },
   {
    "offset": "0x00A663",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x00A680",
@@ -3108,7 +3108,7 @@
   },
   {
    "offset": "0x00A89A",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x00A8B7",
@@ -3120,7 +3120,7 @@
   },
   {
    "offset": "0x00A94A",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x00A967",
@@ -3144,7 +3144,7 @@
   },
   {
    "offset": "0x00AABF",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x00AADC",
@@ -3156,7 +3156,7 @@
   },
   {
    "offset": "0x00AB77",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x00AB94",
@@ -3204,7 +3204,7 @@
   },
   {
    "offset": "0x00AE5F",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x00AE7C",
@@ -3276,7 +3276,7 @@
   },
   {
    "offset": "0x00B2B4",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x00B2D1",
@@ -3288,7 +3288,7 @@
   },
   {
    "offset": "0x00B360",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x00B37D",
@@ -3300,7 +3300,7 @@
   },
   {
    "offset": "0x00B41E",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x00B43B",
@@ -3312,7 +3312,7 @@
   },
   {
    "offset": "0x00B4DE",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x00B4FB",
@@ -3324,7 +3324,7 @@
   },
   {
    "offset": "0x00B5A6",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x00B5C3",
@@ -3336,7 +3336,7 @@
   },
   {
    "offset": "0x00B654",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x00B671",
@@ -3348,7 +3348,7 @@
   },
   {
    "offset": "0x00B718",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x00B735",
@@ -3360,7 +3360,7 @@
   },
   {
    "offset": "0x00B7D2",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x00B7EF",
@@ -3408,7 +3408,7 @@
   },
   {
    "offset": "0x00BAC5",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x00BAE2",
@@ -3420,7 +3420,7 @@
   },
   {
    "offset": "0x00BB7F",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x00BB9C",
@@ -3432,7 +3432,7 @@
   },
   {
    "offset": "0x00BC4A",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x00BC67",
@@ -3444,7 +3444,7 @@
   },
   {
    "offset": "0x00BD1D",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x00BD3A",
@@ -3456,7 +3456,7 @@
   },
   {
    "offset": "0x00BDDF",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x00BDFC",
@@ -3480,7 +3480,7 @@
   },
   {
    "offset": "0x00BF53",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x00BF70",
@@ -3516,7 +3516,7 @@
   },
   {
    "offset": "0x00C16F",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x00C18C",
@@ -3708,7 +3708,7 @@
   },
   {
    "offset": "0x00CC46",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x00CC63",
@@ -3768,7 +3768,7 @@
   },
   {
    "offset": "0x00CFF4",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x00D011",
@@ -3780,7 +3780,7 @@
   },
   {
    "offset": "0x00D0BC",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x00D0D9",
@@ -3804,7 +3804,7 @@
   },
   {
    "offset": "0x00D243",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x00D260",
@@ -3828,7 +3828,7 @@
   },
   {
    "offset": "0x00D3B5",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x00D3D2",
@@ -3852,7 +3852,7 @@
   },
   {
    "offset": "0x00D540",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x00D55D",
@@ -3864,7 +3864,7 @@
   },
   {
    "offset": "0x00D602",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x00D61F",
@@ -3876,7 +3876,7 @@
   },
   {
    "offset": "0x00D6BC",
-   "build_text": "Ejército Republicano"
+   "build_text": "Ejército Republic."
   },
   {
    "offset": "0x00D6D9",
@@ -4030,7 +4030,7 @@
   },
   {
    "offset": "0x00E191",
-   "build_text": "Capitán Republicano"
+   "build_text": "Capitán Republic."
   },
   {
    "offset": "0x00E1A8",
@@ -4132,7 +4132,7 @@
   },
   {
    "offset": "0x00EB78",
-   "build_text": "Príncipe de Arcadia"
+   "build_text": "Prínc. de Arcadia"
   },
   {
    "offset": "0x00EB8D",
@@ -4152,7 +4152,7 @@
   },
   {
    "offset": "0x00ED75",
-   "build_text": "Guerrera de las\nTres Bestias",
+   "build_text": "Tres Guerr.\nBestia",
    "compact_format": true
   },
   {
@@ -4165,7 +4165,7 @@
   },
   {
    "offset": "0x00EDB3",
-   "text": "Una de las Tres Bestias de Arcadia. Enseña y protege a Athle, quien lleva sangre de los zoidianos antiguos. Es seria, responsable y a veces entrometida. Conoce bien la tecnología antigua."
+   "text": "Uno de los Tres Guerreros Bestia de Arcadia. Enseña y protege a Athle, quien lleva sangre de los zoidianos antiguos. Es seria, responsable y a veces entrometida. Conoce bien la tecnología antigua."
   },
   {
    "offset": "0x00EF49",
@@ -4173,7 +4173,7 @@
   },
   {
    "offset": "0x00EF62",
-   "build_text": "Guerrero de las\nTres Bestias",
+   "build_text": "Tres Guerr.\nBestia",
    "compact_format": true
   },
   {
@@ -4186,7 +4186,7 @@
   },
   {
    "offset": "0x00EFA0",
-   "text": "Una de las Tres Bestias de Arcadia y exoficial del Imperio de Guylos. Apoya a Athle como miembro del grupo. Es callado, pero tiene una lengua afilada. Destaca en el combate cercano."
+   "text": "Uno de los Tres Guerreros Bestia de Arcadia y exoficial del Imperio de Guylos. Apoya a Athle como miembro del grupo. Es callado, pero tiene una lengua afilada. Destaca en el combate cercano."
   },
   {
    "offset": "0x00F13C",
@@ -4194,7 +4194,7 @@
   },
   {
    "offset": "0x00F153",
-   "build_text": "Guerrero de las\nTres Bestias",
+   "build_text": "Tres Guerr.\nBestia",
    "compact_format": true
   },
   {
@@ -4207,7 +4207,7 @@
   },
   {
    "offset": "0x00F191",
-   "text": "Una de las Tres Bestias de Arcadia. Este antiguo oficial de la República de Helic dirige a los tres guardianes de Athle. Es el miembro sensato del grupo."
+   "text": "Uno de los Tres Guerreros Bestia de Arcadia. Este antiguo oficial de la República de Helic dirige a los tres guardianes de Athle. Es el miembro sensato del grupo."
   },
   {
    "offset": "0x00F2C3",
@@ -4255,7 +4255,7 @@
   },
   {
    "offset": "0x00F636",
-   "build_text": "Cazarrecompensas"
+   "build_text": "Cazarrecompensa"
   },
   {
    "offset": "0x00F651",
@@ -4295,7 +4295,7 @@
   },
   {
    "offset": "0x00F99E",
-   "build_text": "Coronel Republicano"
+   "build_text": "Coronel Republic."
   },
   {
    "offset": "0x00F9B5",
@@ -4357,7 +4357,7 @@
   },
   {
    "offset": "0x00FEBE",
-   "build_text": "Coronel Republicano"
+   "build_text": "Coronel Republic."
   },
   {
    "offset": "0x00FED5",
@@ -4417,7 +4417,7 @@
   },
   {
    "offset": "0x010470",
-   "build_text": "Cazarrecompensas"
+   "build_text": "Coronel Republic."
   },
   {
    "offset": "0x01048B",
@@ -4798,7 +4798,7 @@
   },
   {
    "offset": "0x012128",
-   "build_text": "Habitante del\nSubsuelo",
+   "build_text": "Habitante \ndel Subsuelo",
    "compact_format": true
   },
   {
@@ -4883,7 +4883,7 @@
   },
   {
    "offset": "0x012716",
-   "build_text": "Desconocido"
+   "build_text": "Desconoc."
   },
   {
    "offset": "0x01271F",
@@ -4903,7 +4903,7 @@
   },
   {
    "offset": "0x01283C",
-   "build_text": "Desconocido"
+   "build_text": "Desconoc."
   },
   {
    "offset": "0x012845",
@@ -4919,7 +4919,7 @@
   },
   {
    "offset": "0x01290E",
-   "build_text": "Director de Equipo"
+   "build_text": "Dir. de Equipo"
   },
   {
    "offset": "0x012921",
@@ -5043,7 +5043,7 @@
   },
   {
    "offset": "0x013344",
-   "build_text": "Sexo / Edad"
+   "build_text": "Sexo/Edad"
   },
   {
    "offset": "0x01335B",
@@ -5059,7 +5059,7 @@
   },
   {
    "offset": "0x01339F",
-   "build_text": "Cazarrecompensas"
+   "build_text": "Cazarrecompensa"
   },
   {
    "offset": "0x0133BA",
@@ -5240,7 +5240,7 @@
   },
   {
    "offset": "0x0140F9",
-   "build_text": "Director de equipo"
+   "build_text": "Dir. de equipo"
   },
   {
    "offset": "0x01410C",
@@ -5272,7 +5272,7 @@
   },
   {
    "offset": "0x0142A6",
-   "text": "Fran forma parte del grupo de cuatro generales imperiales que lucharon contra el grupo de Athle. Earth, una de las Tres Bestias de Arcadia, es su rival desde hace años."
+   "text": "Fran forma parte del grupo de cuatro generales imperiales que lucharon contra el grupo de Athle. Earth, uno de los Tres Guerreros Bestia de Arcadia, es su rival desde hace años."
   },
   {
    "offset": "0x0143B3",
@@ -5340,12 +5340,12 @@
   },
   {
    "offset": "0x0148DB",
-   "build_text": "Árbitro de\nbatallas Zoid",
+   "build_text": "Réferi de\nbatall. Zoid",
    "compact_format": true
   },
   {
    "offset": "0x0148EA",
-   "build_text": "Desconocido"
+   "build_text": "Desconoc."
   },
   {
    "offset": "0x0148F3",
@@ -5361,12 +5361,12 @@
   },
   {
    "offset": "0x014A1D",
-   "build_text": "Árbitro de\nbatallas Zoid",
+   "build_text": "Réferi de\nbatall. Zoid",
    "compact_format": true
   },
   {
    "offset": "0x014A2C",
-   "build_text": "Desconocido"
+   "build_text": "Desconoc."
   },
   {
    "offset": "0x014A35",
@@ -5386,7 +5386,7 @@
   },
   {
    "offset": "0x014B39",
-   "build_text": "Sexo / Edad"
+   "build_text": "Sexo/Edad"
   },
   {
    "offset": "0x014B50",
@@ -5406,7 +5406,7 @@
   },
   {
    "offset": "0x014BA1",
-   "build_text": "Desconocido"
+   "build_text": "Desconoc."
   },
   {
    "offset": "0x014BAA",
@@ -5426,7 +5426,7 @@
   },
   {
    "offset": "0x014CED",
-   "build_text": "Desconocido"
+   "build_text": "Desconoc."
   },
   {
    "offset": "0x014CF6",
@@ -5446,7 +5446,7 @@
   },
   {
    "offset": "0x014DE1",
-   "build_text": "Desconocido"
+   "build_text": "Desconoc."
   },
   {
    "offset": "0x014DEA",
@@ -5466,7 +5466,7 @@
   },
   {
    "offset": "0x014F70",
-   "build_text": "Desconocido"
+   "build_text": "Desconoc."
   },
   {
    "offset": "0x014F79",
@@ -5486,7 +5486,7 @@
   },
   {
    "offset": "0x014FDA",
-   "build_text": "Sexo / Edad"
+   "build_text": "Sexo/Edad"
   },
   {
    "offset": "0x014FF1",
@@ -5506,7 +5506,7 @@
   },
   {
    "offset": "0x015044",
-   "build_text": "Sexo / Edad"
+   "build_text": "Sexo/Edad"
   },
   {
    "offset": "0x01505B",
@@ -5526,7 +5526,7 @@
   },
   {
    "offset": "0x0150AE",
-   "build_text": "Sexo / Edad"
+   "build_text": "Sexo/Edad"
   },
   {
    "offset": "0x0150C5",
@@ -5538,7 +5538,7 @@
   },
   {
    "offset": "0x0150F8",
-   "build_text": "Soldado Republicano"
+   "build_text": "Soldado Republic."
   },
   {
    "offset": "0x015115",
@@ -5546,7 +5546,7 @@
   },
   {
    "offset": "0x015122",
-   "build_text": "Sexo / Edad"
+   "build_text": "Sexo/Edad"
   },
   {
    "offset": "0x015139",
@@ -5566,7 +5566,7 @@
   },
   {
    "offset": "0x015194",
-   "build_text": "Sexo / Edad"
+   "build_text": "Sexo/Edad"
   },
   {
    "offset": "0x0151AB",
@@ -5586,7 +5586,7 @@
   },
   {
    "offset": "0x015204",
-   "build_text": "Sexo / Edad"
+   "build_text": "Sexo/Edad"
   },
   {
    "offset": "0x01521B",
@@ -5606,7 +5606,7 @@
   },
   {
    "offset": "0x015274",
-   "build_text": "Sexo / Edad"
+   "build_text": "Sexo/Edad"
   },
   {
    "offset": "0x01528B",
@@ -5626,7 +5626,7 @@
   },
   {
    "offset": "0x0152E0",
-   "build_text": "Sexo / Edad"
+   "build_text": "Sexo/Edad"
   },
   {
    "offset": "0x0152F7",
@@ -5646,7 +5646,7 @@
   },
   {
    "offset": "0x015352",
-   "build_text": "Sexo / Edad"
+   "build_text": "Sexo/Edad"
   },
   {
    "offset": "0x015369",
@@ -5666,7 +5666,7 @@
   },
   {
    "offset": "0x0153C2",
-   "build_text": "Sexo / Edad"
+   "build_text": "Sexo/Edad"
   },
   {
    "offset": "0x0153D9",
@@ -5686,7 +5686,7 @@
   },
   {
    "offset": "0x01542C",
-   "build_text": "Sexo / Edad"
+   "build_text": "Sexo/Edad"
   },
   {
    "offset": "0x015443",
@@ -5706,7 +5706,7 @@
   },
   {
    "offset": "0x01549E",
-   "build_text": "Sexo / Edad"
+   "build_text": "Sexo/Edad"
   },
   {
    "offset": "0x0154B5",
@@ -5726,7 +5726,7 @@
   },
   {
    "offset": "0x01550C",
-   "build_text": "Sexo / Edad"
+   "build_text": "Sexo/Edad"
   },
   {
    "offset": "0x015523",
@@ -5746,7 +5746,7 @@
   },
   {
    "offset": "0x01557A",
-   "build_text": "Sexo / Edad"
+   "build_text": "Sexo/Edad"
   },
   {
    "offset": "0x015591",
@@ -5766,7 +5766,7 @@
   },
   {
    "offset": "0x0155EA",
-   "build_text": "Sexo / Edad"
+   "build_text": "Sexo/Edad"
   },
   {
    "offset": "0x015601",
@@ -5786,7 +5786,7 @@
   },
   {
    "offset": "0x01565C",
-   "build_text": "Sexo / Edad"
+   "build_text": "Sexo/Edad"
   },
   {
    "offset": "0x015673",
@@ -5806,7 +5806,7 @@
   },
   {
    "offset": "0x0156C4",
-   "build_text": "Sexo / Edad"
+   "build_text": "Sexo/Edad"
   },
   {
    "offset": "0x0156DB",
@@ -5826,7 +5826,7 @@
   },
   {
    "offset": "0x01572E",
-   "build_text": "Sexo / Edad"
+   "build_text": "Sexo/Edad"
   },
   {
    "offset": "0x015745",
@@ -5846,7 +5846,7 @@
   },
   {
    "offset": "0x01579C",
-   "build_text": "Sexo / Edad"
+   "build_text": "Sexo/Edad"
   },
   {
    "offset": "0x0157B3",
@@ -5866,7 +5866,7 @@
   },
   {
    "offset": "0x015808",
-   "build_text": "Sexo / Edad"
+   "build_text": "Sexo/Edad"
   },
   {
    "offset": "0x01581F",
@@ -5886,7 +5886,7 @@
   },
   {
    "offset": "0x015874",
-   "build_text": "Sexo / Edad"
+   "build_text": "Sexo/Edad"
   },
   {
    "offset": "0x01588B",
@@ -5906,7 +5906,7 @@
   },
   {
    "offset": "0x0158E0",
-   "build_text": "Sexo / Edad"
+   "build_text": "Sexo/Edad"
   },
   {
    "offset": "0x0158F7",
@@ -5927,7 +5927,7 @@
   },
   {
    "offset": "0x01594C",
-   "build_text": "Sexo / Edad"
+   "build_text": "Sexo/Edad"
   },
   {
    "offset": "0x015963",
@@ -5947,7 +5947,7 @@
   },
   {
    "offset": "0x0159AC",
-   "build_text": "Sexo / Edad"
+   "build_text": "Sexo/Edad"
   },
   {
    "offset": "0x0159C3",
@@ -5987,7 +5987,7 @@
   },
   {
    "offset": "0x015B66",
-   "build_text": "Sexo / Edad"
+   "build_text": "Sexo/Edad"
   },
   {
    "offset": "0x015B7D",
@@ -6007,7 +6007,7 @@
   },
   {
    "offset": "0x015BD4",
-   "build_text": "Sexo / Edad"
+   "build_text": "Sexo/Edad"
   },
   {
    "offset": "0x015BEB",
@@ -6019,7 +6019,7 @@
   },
   {
    "offset": "0x015C1E",
-   "build_text": "Hombre sentado B"
+   "build_text": "Hombr. sentado B"
   },
   {
    "offset": "0x015C37",
@@ -6027,7 +6027,7 @@
   },
   {
    "offset": "0x015C44",
-   "build_text": "Sexo / Edad"
+   "build_text": "Sexo/Edad"
   },
   {
    "offset": "0x015C5B",
@@ -6863,7 +6863,7 @@
   },
   {
    "offset": "0x017745",
-   "build_text": "No se {01 01}guardaron{01 00}\ntus datos. {01 01}Error al guardar{01 00}."
+   "build_text": "No se {01 01}guardaron{01 00} \nlos datos. {01 01}Error al guardar{01 00}."
   },
   {
    "offset": "0x017821",
@@ -6895,7 +6895,7 @@
   },
   {
    "offset": "0x017A53",
-   "build_text": "{01 02}Mejora de atributos"
+   "build_text": "{01 02}Mejora de atr."
   },
   {
    "offset": "0x017A61",
@@ -6908,7 +6908,7 @@
   },
   {
    "offset": "0x017ADF",
-   "build_text": "¿Guardar los datos de la partida terminada?\n{01 01}Se sobrescribirán los datos guardados.{01 00}"
+   "build_text": "¿Guardar partida terminada? \n{01 01}Sobrescribirá los datos guardados.{01 00}"
   },
   {
    "offset": "0x017B41",
@@ -7288,11 +7288,11 @@
   },
   {
    "offset": "0x019BF4",
-   "build_text": "Elige un Zoid para retirarle el armamento"
+   "build_text": "Elige Zoid para quitar armamento"
   },
   {
    "offset": "0x019C33",
-   "build_text": "Elige un Zoid para proteger de los ataques"
+   "build_text": "Elige Zoid a proteger de ataques"
   },
   {
    "offset": "0x019C6C",
@@ -7336,7 +7336,7 @@
   },
   {
    "offset": "0x019D3E",
-   "text": "Zaber Fang Antiguo"
+   "text": "Zaber Fang Antig."
   },
   {
    "offset": "0x019D59",
@@ -7912,19 +7912,19 @@
   },
   {
    "offset": "0x01A9E6",
-   "text": "Cañ. Part. Pesado"
+   "text": "C. Part. Pesado"
   },
   {
    "offset": "0x01A9F9",
-   "text": "Hipercañón Part."
+   "text": "Hipercañ. Part."
   },
   {
    "offset": "0x01AA0E",
-   "text": "Cañ. Part. Plasma"
+   "text": "C. Part. Plasma"
   },
   {
    "offset": "0x01AA21",
-   "text": "Cañ. Prt. Fotónes"
+   "text": "C. Part. Fotónes"
   },
   {
    "offset": "0x01AA34",
@@ -7932,15 +7932,15 @@
   },
   {
    "offset": "0x01AA49",
-   "text": "Cañ. Part. Externo"
+   "text": "C. Part. Externo"
   },
   {
    "offset": "0x01AA5E",
-   "text": "Cañ. P. Enfocadas"
+   "text": "C. P. Enfocadas"
   },
   {
    "offset": "0x01AA73",
-   "text": "Cañ. P. Dispersas"
+   "text": "C. P. Dispersas"
   },
   {
    "offset": "0x01AA88",
@@ -7960,23 +7960,23 @@
   },
   {
    "offset": "0x01AADA",
-   "text": "Láser Cuádruple"
+   "text": "Lsr Cuádruple"
   },
   {
    "offset": "0x01AAED",
-   "text": "Láser Antiaéreo"
+   "text": "Lsr. Antiaéreo"
   },
   {
    "offset": "0x01AB02",
-   "text": "Láser AA. Doble"
+   "text": "Lsr. AA. Doble"
   },
   {
    "offset": "0x01AB17",
-   "text": "Láser AA. Triple"
+   "text": "Lsr AA. Triple"
   },
   {
    "offset": "0x01AB2C",
-   "text": "Láser AA Cuádrup."
+   "text": "Lsr. AA Cuád."
   },
   {
    "offset": "0x01AB41",
@@ -7984,7 +7984,7 @@
   },
   {
    "offset": "0x01AB54",
-   "text": "Pis. Lásr Pulsado"
+   "text": "P. Lsr. Pulsado"
   },
   {
    "offset": "0x01AB69",
@@ -7992,7 +7992,7 @@
   },
   {
    "offset": "0x01AB7E",
-   "text": "Gatling de Rayos"
+   "text": "Gatling de Ray."
   },
   {
    "offset": "0x01AB93",
@@ -8000,7 +8000,7 @@
   },
   {
    "offset": "0x01ABA4",
-   "text": "C. Ray. de Asalto"
+   "text": "C. Ray. de Asalt."
   },
   {
    "offset": "0x01ABB9",
@@ -8020,7 +8020,7 @@
   },
   {
    "offset": "0x01AC09",
-   "text": "Cañón Acelerado"
+   "text": "Cañ. Acelerado"
   },
   {
    "offset": "0x01AC1E",
@@ -8028,7 +8028,7 @@
   },
   {
    "offset": "0x01AC2F",
-   "text": "Cañ. Rápido Doble"
+   "text": "C. Rápido Doble"
   },
   {
    "offset": "0x01AC44",
@@ -8040,15 +8040,15 @@
   },
   {
    "offset": "0x01AC6C",
-   "text": "Cañón de Choque"
+   "text": "Cañ. de Choque"
   },
   {
    "offset": "0x01AC7F",
-   "text": "C. Choque Aceler."
+   "text": "C. Chq. Aceler."
   },
   {
    "offset": "0x01AC94",
-   "text": "3 Cañ. de Choque"
+   "text": "3 C. de Choque"
   },
   {
    "offset": "0x01ACA9",
@@ -8056,7 +8056,7 @@
   },
   {
    "offset": "0x01ACBE",
-   "text": "Cañón de Asalto"
+   "text": "Cañ. de Asalto"
   },
   {
    "offset": "0x01ACD3",
@@ -8084,7 +8084,7 @@
   },
   {
    "offset": "0x01AD45",
-   "text": "C. de Riel Rápido"
+   "text": "C. Riel Rápido"
   },
   {
    "offset": "0x01AD5A",
@@ -8092,7 +8092,7 @@
   },
   {
    "offset": "0x01AD6F",
-   "text": "Hipercañ. de Riel"
+   "text": "Hiperc. de Riel"
   },
   {
    "offset": "0x01AD84",
@@ -8100,7 +8100,7 @@
   },
   {
    "offset": "0x01AD99",
-   "text": "Ametr. Antiaérea"
+   "text": "Ametr. AA"
   },
   {
    "offset": "0x01ADAE",
@@ -8108,7 +8108,7 @@
   },
   {
    "offset": "0x01ADC3",
-   "text": "Hiperametrallad."
+   "text": "Hiperametr."
   },
   {
    "offset": "0x01ADD8",
@@ -8116,7 +8116,7 @@
   },
   {
    "offset": "0x01ADED",
-   "text": "Vulcan Antiaéreo"
+   "text": "Vulcan AntiA."
   },
   {
    "offset": "0x01AE02",
@@ -8140,7 +8140,7 @@
   },
   {
    "offset": "0x01AE63",
-   "text": "Gatling Acelerado"
+   "text": "Gatling Aceler."
   },
   {
    "offset": "0x01AE78",
@@ -8164,7 +8164,7 @@
   },
   {
    "offset": "0x01AEE1",
-   "text": "Misiles AA Dobles"
+   "text": "Misiles AA x2"
   },
   {
    "offset": "0x01AEF6",
@@ -8192,11 +8192,11 @@
   },
   {
    "offset": "0x01AF74",
-   "text": "Mis. de Neutrones"
+   "text": "Misil Neutrones"
   },
   {
    "offset": "0x01AF89",
-   "text": "Misil de Reacción"
+   "text": "M. de Reacción"
   },
   {
    "offset": "0x01AF9E",
@@ -8204,7 +8204,7 @@
   },
   {
    "offset": "0x01AFB3",
-   "text": "M. de Dispersión"
+   "text": "M. Dispersión"
   },
   {
    "offset": "0x01AFC8",
@@ -8212,35 +8212,35 @@
   },
   {
    "offset": "0x01AFDD",
-   "text": "Cañón Ultrasónico"
+   "text": "C. Ultrasónico"
   },
   {
    "offset": "0x01AFF2",
-   "text": "C Ácido Sulfurico"
+   "text": "C Ác. Sulfúrico"
   },
   {
    "offset": "0x01B005",
-   "text": "C. Ácido Concent."
+   "text": "C. Ác. Concent."
   },
   {
    "offset": "0x01B016",
-   "text": "Cañón Electromg."
+   "text": "Cañ. Electromg."
   },
   {
    "offset": "0x01B029",
-   "text": "Súper C Electrmg."
+   "text": "Spr. C Electrmg."
   },
   {
    "offset": "0x01B03E",
-   "text": "Disparo Eléctrico"
+   "text": "Disparo Eléctric."
   },
   {
    "offset": "0x01B04D",
-   "text": "C. Gas Venenoso"
+   "text": "C. Gas Venen."
   },
   {
    "offset": "0x01B062",
-   "text": "C. Niebla Veneno"
+   "text": "C. Niebla Vene."
   },
   {
    "offset": "0x01B077",
@@ -8248,7 +8248,7 @@
   },
   {
    "offset": "0x01B08A",
-   "text": "Cañ Gravitacional"
+   "text": "C. Gravitacional"
   },
   {
    "offset": "0x01B09F",
@@ -8272,27 +8272,27 @@
   },
   {
    "offset": "0x01B0D0",
-   "text": "Vlcn Lsr Perforant"
+   "text": "Vlcn Lsr Perfor."
   },
   {
    "offset": "0x01B0E5",
-   "text": "C. de Rayos Doble"
+   "text": "C. de Rayos x2"
   },
   {
    "offset": "0x01B0FA",
-   "text": "C. Lsr. de Pulsos"
+   "text": "C. Lsr. Pulsos"
   },
   {
    "offset": "0x01B10D",
-   "text": "C. Lsr. de Pulsos"
+   "text": "C. Lsr. Pulsos"
   },
   {
    "offset": "0x01B120",
-   "text": "C. de Rayos Doble"
+   "text": "C. de Rayos x2"
   },
   {
    "offset": "0x01B135",
-   "text": "C. de Rayos Doble"
+   "text": "C. de Rayos x2"
   },
   {
    "offset": "0x01B14A",
@@ -8300,7 +8300,7 @@
   },
   {
    "offset": "0x01B15B",
-   "text": "C. de Rayos Doble"
+   "text": "C. de Rayos x2"
   },
   {
    "offset": "0x01B170",
@@ -8316,23 +8316,23 @@
   },
   {
    "offset": "0x01B1A1",
-   "text": "Blindaje de Capas"
+   "text": "Blind. de Capas"
   },
   {
    "offset": "0x01B1B6",
-   "text": "Bln. Capas Grand."
+   "text": "Bln. Capas Gr."
   },
   {
    "offset": "0x01B1CB",
-   "text": "Blnd. Superpesado"
+   "text": "Blnd. Superpes."
   },
   {
    "offset": "0x01B1E0",
-   "text": "Bl. Superpes. Gr."
+   "text": "Bl. Superpes. G."
   },
   {
    "offset": "0x01B1F5",
-   "text": "Blindaje Chobham"
+   "text": "Blind. Chobham"
   },
   {
    "offset": "0x01B20A",
@@ -8352,15 +8352,15 @@
   },
   {
    "offset": "0x01B258",
-   "text": "Escudo Antipartic"
+   "text": "Esc. Antipartic."
   },
   {
    "offset": "0x01B26D",
-   "text": "Protec. de Energ."
+   "text": "Protector Energ."
   },
   {
    "offset": "0x01B282",
-   "text": "Blind. Metal Raro"
+   "text": "Bl. Metal Raro"
   },
   {
    "offset": "0x01B297",
@@ -8368,7 +8368,7 @@
   },
   {
    "offset": "0x01B2AC",
-   "text": "Blindaje Fusión+"
+   "text": "Blind. Fusión+"
   },
   {
    "offset": "0x01B2C1",
@@ -8380,23 +8380,23 @@
   },
   {
    "offset": "0x01B2E7",
-   "text": "Gen. Escudo Ener."
+   "text": "Gen. Escudo E."
   },
   {
    "offset": "0x01B2FC",
-   "text": "Gen. Esc. E Gran."
+   "text": "Gen. Esc. E Gr."
   },
   {
    "offset": "0x01B30F",
-   "text": "Generador de Humo"
+   "text": "Gen. de Humo"
   },
   {
    "offset": "0x01B324",
-   "text": "Gen. Humo Grande"
+   "text": "Gen. Humo Grd."
   },
   {
    "offset": "0x01B339",
-   "text": "Camuflaje Óptico"
+   "text": "Camuflaje Ópt."
   },
   {
    "offset": "0x01B34E",
@@ -8440,7 +8440,7 @@
   },
   {
    "offset": "0x01B404",
-   "text": "Sensor Compuesto"
+   "text": "Snsr. Compuest."
   },
   {
    "offset": "0x01B419",
@@ -8472,7 +8472,7 @@
   },
   {
    "offset": "0x01B49E",
-   "text": "Radar Todo Clima"
+   "text": "Rdr. Todo Clima"
   },
   {
    "offset": "0x01B4B3",
@@ -8484,31 +8484,31 @@
   },
   {
    "offset": "0x01B4D9",
-   "text": "Detector Magnet."
+   "text": "Detect. Magnet."
   },
   {
    "offset": "0x01B4EE",
-   "text": "Det. Magn. Grande"
+   "text": "Det. Magn. Gran."
   },
   {
    "offset": "0x01B503",
-   "text": "Det. Magnet. GPS"
+   "text": "Det. Magn. GPS"
   },
   {
    "offset": "0x01B518",
-   "text": "Det. Mag. GPS Gr."
+   "text": "Det. Mag. GPS G."
   },
   {
    "offset": "0x01B52D",
-   "text": "Detector Acústico"
+   "text": "Detec. Acústico"
   },
   {
    "offset": "0x01B542",
-   "text": "Det. Acúst. Gran."
+   "text": "Det. Acúst. Grn."
   },
   {
    "offset": "0x01B557",
-   "text": "Turbocompresor"
+   "text": "Turbocompres."
   },
   {
    "offset": "0x01B56C",
@@ -8524,7 +8524,7 @@
   },
   {
    "offset": "0x01B5A5",
-   "text": "Uni. Mejora Física"
+   "text": "U. Mej. Física"
   },
   {
    "offset": "0x01B5BA",
@@ -8532,11 +8532,11 @@
   },
   {
    "offset": "0x01B5CF",
-   "text": "U. Mej. Zoid Core"
+   "text": "U. Mej. Z. Core"
   },
   {
    "offset": "0x01B5E4",
-   "text": "Irradiador Iónes"
+   "text": "Irradiador Ións."
   },
   {
    "offset": "0x01B5F9",
@@ -8544,19 +8544,19 @@
   },
   {
    "offset": "0x01B60C",
-   "text": "Un. Autorrepara."
+   "text": "Un. Autorrepar."
   },
   {
    "offset": "0x01B621",
-   "text": "Tanque de Energía"
+   "text": "Tanque de Enrg."
   },
   {
    "offset": "0x01B636",
-   "text": "Cargador Energía"
+   "text": "Cargador Energ."
   },
   {
    "offset": "0x01B649",
-   "text": "Generador Extra"
+   "text": "Generad. Extra"
   },
   {
    "offset": "0x01B65E",
@@ -8572,7 +8572,7 @@
   },
   {
    "offset": "0x01B699",
-   "text": "ZOS de Prod. Masa"
+   "text": "ZOS Prod. Masa"
   },
   {
    "offset": "0x01B6AA",
@@ -8720,7 +8720,7 @@
   },
   {
    "offset": "0x01B7CA",
-   "text": "Lanzador de Rayos"
+   "text": "Lanz. de Ray."
   },
   {
    "offset": "0x01B7DF",
@@ -8728,7 +8728,7 @@
   },
   {
    "offset": "0x01B7F2",
-   "text": "Pist. Láser Puls."
+   "text": "P. Láser Puls."
   },
   {
    "offset": "0x01B807",
@@ -8744,7 +8744,7 @@
   },
   {
    "offset": "0x01B840",
-   "text": "Un. Alta Maniobra"
+   "text": "U. Alta Maniob."
   },
   {
    "offset": "0x01B855",
@@ -8752,7 +8752,7 @@
   },
   {
    "offset": "0x01B868",
-   "text": "Gatling de Rayos"
+   "text": "Gatling de Ray."
   },
   {
    "offset": "0x01B87D",
@@ -8760,7 +8760,7 @@
   },
   {
    "offset": "0x01B890",
-   "text": "Pist. Láser Puls."
+   "text": "P. Láser Puls."
   },
   {
    "offset": "0x01B8A5",
@@ -8768,15 +8768,15 @@
   },
   {
    "offset": "0x01B8B8",
-   "text": "Doble Pist. Rayos"
+   "text": "Pist. Rayos X2"
   },
   {
    "offset": "0x01B8CD",
-   "text": "Pistola de Rayos"
+   "text": "Pistola de Ray."
   },
   {
    "offset": "0x01B8DE",
-   "text": "Pist. Láser Puls."
+   "text": "P. Láser Puls."
   },
   {
    "offset": "0x01B8F3",
@@ -8784,7 +8784,7 @@
   },
   {
    "offset": "0x01B908",
-   "text": "C. Bola de Hierro"
+   "text": "C. Bola de Hierr."
   },
   {
    "offset": "0x01B91D",
@@ -8792,7 +8792,7 @@
   },
   {
    "offset": "0x01B924",
-   "text": "Rociador de Humo"
+   "text": "Rociador Humo"
   },
   {
    "offset": "0x01B939",
@@ -8816,15 +8816,15 @@
   },
   {
    "offset": "0x01B986",
-   "text": "Doble Pist. Rayos"
+   "text": "Pist. Rayos x2"
   },
   {
    "offset": "0x01B99B",
-   "text": "Pistola Hiperlásr"
+   "text": "Pistola Hiperlsr."
   },
   {
    "offset": "0x01B9B0",
-   "text": "Gatling de Asalto"
+   "text": "Gatling de Aslt."
   },
   {
    "offset": "0x01B9C5",
@@ -8836,7 +8836,7 @@
   },
   {
    "offset": "0x01B9ED",
-   "text": "3 Choques Aceler."
+   "text": "3 Choq. Aceler."
   },
   {
    "offset": "0x01BA02",
@@ -8844,15 +8844,15 @@
   },
   {
    "offset": "0x01BA17",
-   "text": "Cuerno Triturador"
+   "text": "Cuerno Tritur."
   },
   {
    "offset": "0x01BA2C",
-   "text": "3 Cañ. de Choque"
+   "text": "3 C. de Choque"
   },
   {
    "offset": "0x01BA41",
-   "text": "Pist. Rayos 20mm"
+   "text": "P. Rayos 20mm"
   },
   {
    "offset": "0x01BA56",
@@ -8864,11 +8864,11 @@
   },
   {
    "offset": "0x01BA80",
-   "text": "3 Cañ. de Choque"
+   "text": "3 C. de Choque"
   },
   {
    "offset": "0x01BA95",
-   "text": "Pist. Rayos 20mm"
+   "text": "P. Rayos 20mm"
   },
   {
    "offset": "0x01BAAA",
@@ -8880,11 +8880,11 @@
   },
   {
    "offset": "0x01BAD4",
-   "text": "3 Cañ. de Choque"
+   "text": "3 C. de Choque"
   },
   {
    "offset": "0x01BAE9",
-   "text": "Pist. Rayos 20mm"
+   "text": "P. Rayos 20mm"
   },
   {
    "offset": "0x01BAFE",
@@ -8896,15 +8896,15 @@
   },
   {
    "offset": "0x01BB1A",
-   "text": "3 Cañ. de Choque"
+   "text": "3 C. de Choque"
   },
   {
    "offset": "0x01BB2F",
-   "text": "Pistola de Rayos"
+   "text": "Pistola de Ray."
   },
   {
    "offset": "0x01BB40",
-   "text": "Gatling de Rayos"
+   "text": "Gatling de Ray."
   },
   {
    "offset": "0x01BB55",
@@ -8912,7 +8912,7 @@
   },
   {
    "offset": "0x01BB6A",
-   "text": "3 Cañ. de Choque"
+   "text": "3 C. de Choque"
   },
   {
    "offset": "0x01BB7F",
@@ -8928,11 +8928,11 @@
   },
   {
    "offset": "0x01BBB0",
-   "text": "3 Cañ. de Choque"
+   "text": "3 C. de Choque"
   },
   {
    "offset": "0x01BBC5",
-   "text": "Cañón Corto Alc."
+   "text": "Cañ. Corto Alc."
   },
   {
    "offset": "0x01BBDA",
@@ -8952,7 +8952,7 @@
   },
   {
    "offset": "0x01BC10",
-   "text": "Camuflaje Óptico"
+   "text": "Camuflaje Ópt."
   },
   {
    "offset": "0x01BC25",
@@ -8972,7 +8972,7 @@
   },
   {
    "offset": "0x01BC5D",
-   "text": "Colmillo Asesino"
+   "text": "Colmillo Asesin."
   },
   {
    "offset": "0x01BC72",
@@ -8988,11 +8988,11 @@
   },
   {
    "offset": "0x01BC95",
-   "text": "Colmillo Asesino"
+   "text": "Colmillo Asesin."
   },
   {
    "offset": "0x01BCAA",
-   "text": "Cañón de Choque"
+   "text": "Cañ. de Choque"
   },
   {
    "offset": "0x01BCBF",
@@ -9000,7 +9000,7 @@
   },
   {
    "offset": "0x01BCC6",
-   "text": "Escudo de Energía"
+   "text": "Escudo de Enrg."
   },
   {
    "offset": "0x01BCD7",
@@ -9008,7 +9008,7 @@
   },
   {
    "offset": "0x01BCEA",
-   "text": "Cañón de Choque"
+   "text": "Cañ. de Choque"
   },
   {
    "offset": "0x01BCFD",
@@ -9016,7 +9016,7 @@
   },
   {
    "offset": "0x01BD12",
-   "text": "Escudo de Energía"
+   "text": "Escudo de Enrg."
   },
   {
    "offset": "0x01BD23",
@@ -9024,7 +9024,7 @@
   },
   {
    "offset": "0x01BD36",
-   "text": "Cañón de Choque"
+   "text": "Cañ. de Choque"
   },
   {
    "offset": "0x01BD49",
@@ -9032,7 +9032,7 @@
   },
   {
    "offset": "0x01BD5E",
-   "text": "Escudo de Energía"
+   "text": "Escudo de Enrg."
   },
   {
    "offset": "0x01BD6F",
@@ -9040,7 +9040,7 @@
   },
   {
    "offset": "0x01BD82",
-   "text": "Cañón de Choque"
+   "text": "Cañ. de Choque"
   },
   {
    "offset": "0x01BD95",
@@ -9056,7 +9056,7 @@
   },
   {
    "offset": "0x01BDD2",
-   "text": "Cañón de Choque"
+   "text": "Cañ. de Choque"
   },
   {
    "offset": "0x01BDE7",
@@ -9064,7 +9064,7 @@
   },
   {
    "offset": "0x01BDEE",
-   "text": "Escudo de Energía"
+   "text": "Escudo de Enrg."
   },
   {
    "offset": "0x01BDFF",
@@ -9072,7 +9072,7 @@
   },
   {
    "offset": "0x01BE12",
-   "text": "Cañón de Choque"
+   "text": "Cañ. de Choque"
   },
   {
    "offset": "0x01BE27",
@@ -9080,7 +9080,7 @@
   },
   {
    "offset": "0x01BE3A",
-   "text": "Escudo de Energía"
+   "text": "Escudo de Enrg."
   },
   {
    "offset": "0x01BE4B",
@@ -9088,7 +9088,7 @@
   },
   {
    "offset": "0x01BE5E",
-   "text": "Cañón de Choque"
+   "text": "Cañ. de Choque"
   },
   {
    "offset": "0x01BE73",
@@ -9096,15 +9096,15 @@
   },
   {
    "offset": "0x01BE7A",
-   "text": "Propulsor Iónico"
+   "text": "Propulsr. Iónico"
   },
   {
    "offset": "0x01BE8F",
-   "text": "Imp. Garra Láser"
+   "text": "Imp. Garra Lsr."
   },
   {
    "offset": "0x01BEA4",
-   "text": "Cañón de Choque"
+   "text": "Cañ. de Choque"
   },
   {
    "offset": "0x01BEB9",
@@ -9112,7 +9112,7 @@
   },
   {
    "offset": "0x01BECA",
-   "text": "Escudo de Energía"
+   "text": "Escudo de Enrg."
   },
   {
    "offset": "0x01BEDB",
@@ -9120,7 +9120,7 @@
   },
   {
    "offset": "0x01BEEE",
-   "text": "Cañón de Choque"
+   "text": "Cañ. de Choque"
   },
   {
    "offset": "0x01BF03",
@@ -9128,11 +9128,11 @@
   },
   {
    "offset": "0x01BF18",
-   "text": "Propulsor Iónico"
+   "text": "Propulsr. Iónico"
   },
   {
    "offset": "0x01BF2D",
-   "text": "Imp. Garra Láser"
+   "text": "Imp. Garra Lsr."
   },
   {
    "offset": "0x01BF42",
@@ -9144,15 +9144,15 @@
   },
   {
    "offset": "0x01BF6A",
-   "text": "Big Bang Ardiente"
+   "text": "Big Bang Ardie."
   },
   {
    "offset": "0x01BF7D",
-   "text": "Imp. Garra Láser"
+   "text": "Imp. Garra Lsr."
   },
   {
    "offset": "0x01BF92",
-   "text": "Cañón de Choque"
+   "text": "Cañ. de Choque"
   },
   {
    "offset": "0x01BFA7",
@@ -9160,15 +9160,15 @@
   },
   {
    "offset": "0x01BFAE",
-   "text": "Propulsor Iónico"
+   "text": "Propulsr. Iónico"
   },
   {
    "offset": "0x01BFC3",
-   "text": "Imp. Garra Láser"
+   "text": "Imp. Garra Lsr."
   },
   {
    "offset": "0x01BFD8",
-   "text": "Cañón de Choque"
+   "text": "Cañ. de Choque"
   },
   {
    "offset": "0x01BFED",
@@ -9176,15 +9176,15 @@
   },
   {
    "offset": "0x01C000",
-   "text": "Impulsor Energía"
+   "text": "Impulsor Energ."
   },
   {
    "offset": "0x01C011",
-   "text": "Imp. Garra Láser"
+   "text": "Imp. Garra Lsr."
   },
   {
    "offset": "0x01C026",
-   "text": "Pistola de Rayos"
+   "text": "Pistola de Ray."
   },
   {
    "offset": "0x01C037",
@@ -9200,7 +9200,7 @@
   },
   {
    "offset": "0x01C070",
-   "text": "Pistola de Rayos"
+   "text": "Pistola de Ray."
   },
   {
    "offset": "0x01C081",
@@ -9232,7 +9232,7 @@
   },
   {
    "offset": "0x01C0F6",
-   "text": "Cañón de Cohetes"
+   "text": "C. de Cohetes"
   },
   {
    "offset": "0x01C10B",
@@ -9248,7 +9248,7 @@
   },
   {
    "offset": "0x01C13A",
-   "text": "Cañón Largo Alc."
+   "text": "Cañ. Largo Alcn."
   },
   {
    "offset": "0x01C14D",
@@ -9264,11 +9264,11 @@
   },
   {
    "offset": "0x01C17C",
-   "text": "C. de Rayos Doble"
+   "text": "C. de Rayos x2"
   },
   {
    "offset": "0x01C191",
-   "text": "Vulcan de Rayos"
+   "text": "Vulcan de Ray."
   },
   {
    "offset": "0x01C1A6",
@@ -9312,7 +9312,7 @@
   },
   {
    "offset": "0x01C232",
-   "text": "Colmillo Energía"
+   "text": "Colmillo Energ."
   },
   {
    "offset": "0x01C247",
@@ -9324,11 +9324,11 @@
   },
   {
    "offset": "0x01C263",
-   "text": "Imp. Garra Láser"
+   "text": "Imp. Garra Lsr."
   },
   {
    "offset": "0x01C278",
-   "text": "Impacto de Garra"
+   "text": "Impct. de Garra"
   },
   {
    "offset": "0x01C28D",
@@ -9336,11 +9336,11 @@
   },
   {
    "offset": "0x01C294",
-   "text": "Protector Cabeza"
+   "text": "Protectr. Cabeza"
   },
   {
    "offset": "0x01C2A7",
-   "text": "Colmillo Energía"
+   "text": "Colmillo Energ."
   },
   {
    "offset": "0x01C2BC",
@@ -9348,7 +9348,7 @@
   },
   {
    "offset": "0x01C2CF",
-   "text": "Pistola de Rayos"
+   "text": "Pistola de Ray."
   },
   {
    "offset": "0x01C2E0",
@@ -9376,11 +9376,11 @@
   },
   {
    "offset": "0x01C358",
-   "text": "Garra Trituradora"
+   "text": "Garra Triturad."
   },
   {
    "offset": "0x01C36D",
-   "text": "Pistola de Rayos"
+   "text": "Pistola de Ray."
   },
   {
    "offset": "0x01C37E",
@@ -9392,11 +9392,11 @@
   },
   {
    "offset": "0x01C39A",
-   "text": "Garra Trituradora"
+   "text": "Garra Triturad."
   },
   {
    "offset": "0x01C3AF",
-   "text": "C. Choque Cuádru."
+   "text": "C. Choque x4"
   },
   {
    "offset": "0x01C3C4",
@@ -9408,15 +9408,15 @@
   },
   {
    "offset": "0x01C3EE",
-   "text": "Garra Trituradora"
+   "text": "Garra Triturad."
   },
   {
    "offset": "0x01C403",
-   "text": "C. Choque Cuádru."
+   "text": "C. Choque x4"
   },
   {
    "offset": "0x01C418",
-   "text": "Cañón Largo Alc."
+   "text": "Cañ. Largo Alcn."
   },
   {
    "offset": "0x01C42B",
@@ -9440,7 +9440,7 @@
   },
   {
    "offset": "0x01C482",
-   "text": "C. de Rayos Peq."
+   "text": "C. de Rayos Pq."
   },
   {
    "offset": "0x01C497",
@@ -9452,7 +9452,7 @@
   },
   {
    "offset": "0x01C4A5",
-   "text": "Garra Trituradora"
+   "text": "Garra Triturad."
   },
   {
    "offset": "0x01C4BA",
@@ -9472,7 +9472,7 @@
   },
   {
    "offset": "0x01C4FE",
-   "text": "Pistola de Rayos"
+   "text": "Pistola de Ray."
   },
   {
    "offset": "0x01C50F",
@@ -9480,7 +9480,7 @@
   },
   {
    "offset": "0x01C51E",
-   "text": "Det. Magnet. GPS"
+   "text": "Det. Magn. GPS"
   },
   {
    "offset": "0x01C533",
@@ -9488,15 +9488,15 @@
   },
   {
    "offset": "0x01C548",
-   "text": "C. Choque Cuádru."
+   "text": "C. Choque x4"
   },
   {
    "offset": "0x01C55D",
-   "text": "Cañón Largo Alc."
+   "text": "Cañ. Largo Alcn."
   },
   {
    "offset": "0x01C570",
-   "text": "Det. Magnet. GPS"
+   "text": "Det. Magn. GPS"
   },
   {
    "offset": "0x01C585",
@@ -9528,11 +9528,11 @@
   },
   {
    "offset": "0x01C60F",
-   "text": "Cañ. Rayos AntiA"
+   "text": "Cañ. Rayos AA"
   },
   {
    "offset": "0x01C624",
-   "text": "Cuerno Triturador"
+   "text": "Cuerno Tritura."
   },
   {
    "offset": "0x01C639",
@@ -9544,11 +9544,11 @@
   },
   {
    "offset": "0x01C661",
-   "text": "Gatling de Rayos"
+   "text": "Gatling de Ray."
   },
   {
    "offset": "0x01C676",
-   "text": "Cuerno Triturador"
+   "text": "Cuerno Tritura."
   },
   {
    "offset": "0x01C68B",
@@ -9560,11 +9560,11 @@
   },
   {
    "offset": "0x01C6B5",
-   "text": "Gatling de Rayos"
+   "text": "Gatling de Ray."
   },
   {
    "offset": "0x01C6CA",
-   "text": "Cuerno Triturador"
+   "text": "Cuerno Tritura."
   },
   {
    "offset": "0x01C6DF",
@@ -9580,15 +9580,15 @@
   },
   {
    "offset": "0x01C71E",
-   "text": "Cuerno Triturador"
+   "text": "Cuerno Tritura."
   },
   {
    "offset": "0x01C733",
-   "text": "Cañ. Electromg. G"
+   "text": "C. Electromg. G"
   },
   {
    "offset": "0x01C748",
-   "text": "C. Choque Doble"
+   "text": "C. Choque x2"
   },
   {
    "offset": "0x01C75D",
@@ -9596,7 +9596,7 @@
   },
   {
    "offset": "0x01C764",
-   "text": "Taladro Superduro"
+   "text": "Taladro S. Duro"
   },
   {
    "offset": "0x01C779",
@@ -9604,7 +9604,7 @@
   },
   {
    "offset": "0x01C78E",
-   "text": "2 C. Choque Gran."
+   "text": "2 C. Choque Gr."
   },
   {
    "offset": "0x01C7A3",
@@ -9624,11 +9624,11 @@
   },
   {
    "offset": "0x01C7F1",
-   "text": "Láser Largo Alc."
+   "text": "Lsr. Largo Alc."
   },
   {
    "offset": "0x01C802",
-   "text": "Hiper Garra Ases."
+   "text": "Hip. Garra Ases."
   },
   {
    "offset": "0x01C817",
@@ -9640,11 +9640,11 @@
   },
   {
    "offset": "0x01C839",
-   "text": "Láser Largo Alc."
+   "text": "Lsr. Largo Alc."
   },
   {
    "offset": "0x01C84A",
-   "text": "Hiper Garra Ases."
+   "text": "Hip. Garra Ases."
   },
   {
    "offset": "0x01C85F",
@@ -9652,7 +9652,7 @@
   },
   {
    "offset": "0x01C872",
-   "text": "Cañ. P. Enfocadas"
+   "text": "C. P. Enfocadas"
   },
   {
    "offset": "0x01C887",
@@ -9660,7 +9660,7 @@
   },
   {
    "offset": "0x01C89A",
-   "text": "Hiper Garra Ases."
+   "text": "Hip. Garra Ases."
   },
   {
    "offset": "0x01C8AF",
@@ -9672,11 +9672,11 @@
   },
   {
    "offset": "0x01C8D7",
-   "text": "Láser Largo Alc."
+   "text": "Lsr. Largo Alc."
   },
   {
    "offset": "0x01C8E8",
-   "text": "Hiper Garra Ases."
+   "text": "Hip. Garra Ases."
   },
   {
    "offset": "0x01C8FD",
@@ -9684,15 +9684,15 @@
   },
   {
    "offset": "0x01C910",
-   "text": "Cañ. P. Enfocadas"
+   "text": "C. P. Enfocadas"
   },
   {
    "offset": "0x01C925",
-   "text": "C. Ray. de Asalto"
+   "text": "C. Ray. de Asalt."
   },
   {
    "offset": "0x01C93A",
-   "text": "Hiper Garra Ases."
+   "text": "Hip. Garra Ases."
   },
   {
    "offset": "0x01C94F",
@@ -9700,15 +9700,15 @@
   },
   {
    "offset": "0x01C95C",
-   "text": "Cañ. P. Enfocadas"
+   "text": "C. P. Enfocadas"
   },
   {
    "offset": "0x01C971",
-   "text": "Láser Cuádruple"
+   "text": "Lsr Cuádruple"
   },
   {
    "offset": "0x01C980",
-   "text": "Hiper Garra Ases."
+   "text": "Hip. Garra Ases."
   },
   {
    "offset": "0x01C995",
@@ -9720,11 +9720,11 @@
   },
   {
    "offset": "0x01C9BF",
-   "text": "Escudo de Energía"
+   "text": "Escudo de Enrg."
   },
   {
    "offset": "0x01C9D0",
-   "text": "Imp. Garra Láser"
+   "text": "Imp. Garra Lsr."
   },
   {
    "offset": "0x01C9E5",
@@ -9740,11 +9740,11 @@
   },
   {
    "offset": "0x01CA14",
-   "text": "Imp. Garra Láser"
+   "text": "Imp. Garra Lsr."
   },
   {
    "offset": "0x01CA29",
-   "text": "Cañón Largo Alc."
+   "text": "Cañ. Largo Alcn."
   },
   {
    "offset": "0x01CA3C",
@@ -9756,7 +9756,7 @@
   },
   {
    "offset": "0x01CA66",
-   "text": "Imp. Garra Láser"
+   "text": "Imp. Garra Lsr."
   },
   {
    "offset": "0x01CA7B",
@@ -9772,7 +9772,7 @@
   },
   {
    "offset": "0x01CAAC",
-   "text": "Imp. Garra Láser"
+   "text": "Imp. Garra Lsr."
   },
   {
    "offset": "0x01CAC1",
@@ -9788,11 +9788,11 @@
   },
   {
    "offset": "0x01CB00",
-   "text": "Cabeza de Garra"
+   "text": "Cabeza Garra"
   },
   {
    "offset": "0x01CB13",
-   "text": "Cañón de Plasma"
+   "text": "Cañ. de Plasma"
   },
   {
    "offset": "0x01CB28",
@@ -9820,7 +9820,7 @@
   },
   {
    "offset": "0x01CB92",
-   "text": "Colmillo Electrón"
+   "text": "Colmill. Electrón"
   },
   {
    "offset": "0x01CBA7",
@@ -9828,7 +9828,7 @@
   },
   {
    "offset": "0x01CBBC",
-   "text": "C. Lsr. de Pulsos"
+   "text": "C. Lsr. Pulsos"
   },
   {
    "offset": "0x01CBD1",
@@ -9840,7 +9840,7 @@
   },
   {
    "offset": "0x01CBFB",
-   "text": "Guadaña Contraat."
+   "text": "Guadaña Cntrq."
   },
   {
    "offset": "0x01CC10",
@@ -9856,11 +9856,11 @@
   },
   {
    "offset": "0x01CC33",
-   "text": "Guadaña Contraat."
+   "text": "Guadaña Cntrq."
   },
   {
    "offset": "0x01CC48",
-   "text": "Estaca Perforante"
+   "text": "Estaca Perfor."
   },
   {
    "offset": "0x01CC5D",
@@ -9924,7 +9924,7 @@
   },
   {
    "offset": "0x01CD78",
-   "text": "Gatling de Rayos"
+   "text": "Gatling de Ray."
   },
   {
    "offset": "0x01CD8D",
@@ -9952,7 +9952,7 @@
   },
   {
    "offset": "0x01CE0B",
-   "text": "Impacto de Garra"
+   "text": "Impct. de Garra"
   },
   {
    "offset": "0x01CE20",
@@ -9960,11 +9960,11 @@
   },
   {
    "offset": "0x01CE35",
-   "text": "Protector Cabeza"
+   "text": "Protectr. Cabeza"
   },
   {
    "offset": "0x01CE48",
-   "text": "Colmillo Energía"
+   "text": "Colmillo Energ."
   },
   {
    "offset": "0x01CE5D",
@@ -10000,7 +10000,7 @@
   },
   {
    "offset": "0x01CEDB",
-   "text": "C. de Rayos Peq."
+   "text": "C. de Rayos Pq."
   },
   {
    "offset": "0x01CEF0",
@@ -10008,7 +10008,7 @@
   },
   {
    "offset": "0x01CEF7",
-   "text": "Det. Magnet. GPS"
+   "text": "Det. Magn. GPS"
   },
   {
    "offset": "0x01CF0C",
@@ -10020,7 +10020,7 @@
   },
   {
    "offset": "0x01CF36",
-   "text": "C. Lsr. de Pulsos"
+   "text": "C. Lsr. Pulsos"
   },
   {
    "offset": "0x01CF4B",
@@ -10056,7 +10056,7 @@
   },
   {
    "offset": "0x01CFC7",
-   "text": "Ametr. Láser Peq."
+   "text": "Ametr. Lsr Pq."
   },
   {
    "offset": "0x01CFDC",
@@ -10072,11 +10072,11 @@
   },
   {
    "offset": "0x01D019",
-   "text": "Pistola Hiperlásr"
+   "text": "Pistola Hiperlsr."
   },
   {
    "offset": "0x01D02E",
-   "text": "Pinzas Lsr Impac."
+   "text": "Pinzas Lsr Impc."
   },
   {
    "offset": "0x01D043",
@@ -10144,11 +10144,11 @@
   },
   {
    "offset": "0x01D139",
-   "text": "C. de Rayos Doble"
+   "text": "C. de Rayos x2"
   },
   {
    "offset": "0x01D14E",
-   "text": "C. de Rayos Peq."
+   "text": "C. de Rayos Pq."
   },
   {
    "offset": "0x01D163",
@@ -10160,11 +10160,11 @@
   },
   {
    "offset": "0x01D17F",
-   "text": "Ametr. Cuádruple"
+   "text": "Ametrallad. x4"
   },
   {
    "offset": "0x01D194",
-   "text": "C. de Rayos Doble"
+   "text": "C. de Rayos x2"
   },
   {
    "offset": "0x01D1A9",
@@ -10172,11 +10172,11 @@
   },
   {
    "offset": "0x01D1B0",
-   "text": "Espada Demoledora"
+   "text": "Espada Demole."
   },
   {
    "offset": "0x01D1C5",
-   "text": "Impacto de Garra"
+   "text": "Impct. de Garra"
   },
   {
    "offset": "0x01D1DA",
@@ -10204,7 +10204,7 @@
   },
   {
    "offset": "0x01D228",
-   "text": "Impacto de Garra"
+   "text": "Impct. de Garra"
   },
   {
    "offset": "0x01D23D",
@@ -10252,7 +10252,7 @@
   },
   {
    "offset": "0x01D2DC",
-   "text": "Hiper Garra Ases."
+   "text": "Hip. Garra Ases."
   },
   {
    "offset": "0x01D2F1",
@@ -10304,7 +10304,7 @@
   },
   {
    "offset": "0x01D3BF",
-   "text": "Láser de Pulsos"
+   "text": "Lsr. de Pulsos"
   },
   {
    "offset": "0x01D3D4",
@@ -10316,7 +10316,7 @@
   },
   {
    "offset": "0x01D3E2",
-   "text": "Espada Superior"
+   "text": "Espad. Superior"
   },
   {
    "offset": "0x01D3F5",
@@ -10336,7 +10336,7 @@
   },
   {
    "offset": "0x01D437",
-   "text": "Láser AA. Doble"
+   "text": "Lsr. AA. Doble"
   },
   {
    "offset": "0x01D44C",
@@ -10352,7 +10352,7 @@
   },
   {
    "offset": "0x01D47D",
-   "text": "Pist. Hiperchoque"
+   "text": "P. Hiperchoque"
   },
   {
    "offset": "0x01D492",
@@ -10368,7 +10368,7 @@
   },
   {
    "offset": "0x01D4D1",
-   "text": "Pist. Hiperchoque"
+   "text": "P. Hiperchoque"
   },
   {
    "offset": "0x01D4E6",
@@ -10380,11 +10380,11 @@
   },
   {
    "offset": "0x01D500",
-   "text": "Ataque de Lanza"
+   "text": "Ataq. de Lanza"
   },
   {
    "offset": "0x01D515",
-   "text": "C. Rayos Mediano"
+   "text": "C. Rayos Media."
   },
   {
    "offset": "0x01D52A",
@@ -10464,7 +10464,7 @@
   },
   {
    "offset": "0x01D685",
-   "text": "Tonfa de Impacto"
+   "text": "Tonfa de Impct."
   },
   {
    "offset": "0x01D69A",
@@ -10488,11 +10488,11 @@
   },
   {
    "offset": "0x01D6FD",
-   "text": "Cuerno Escudo EM"
+   "text": "Cuerno Esc. EM"
   },
   {
    "offset": "0x01D712",
-   "text": "Colmillo Energía"
+   "text": "Colmillo Energ."
   },
   {
    "offset": "0x01D727",
@@ -10520,7 +10520,7 @@
   },
   {
    "offset": "0x01D7A5",
-   "text": "Propulsor Iónico"
+   "text": "Propulsr. Iónico"
   },
   {
    "offset": "0x01D7BA",
@@ -10528,15 +10528,15 @@
   },
   {
    "offset": "0x01D7CD",
-   "text": "Manip. Hiperpres."
+   "text": "Manip. Hip-pres."
   },
   {
    "offset": "0x01D7E2",
-   "text": "Cola Trituradora"
+   "text": "Cola Triturad."
   },
   {
    "offset": "0x01D7F7",
-   "text": "Hiperescudo Energ"
+   "text": "Hiperesc. Energ."
   },
   {
    "offset": "0x01D80C",
@@ -10548,39 +10548,39 @@
   },
   {
    "offset": "0x01D836",
-   "text": "Ataque Relámpago"
+   "text": "Atq. Relámpago"
   },
   {
    "offset": "0x01D84B",
-   "text": "Cañón de Voltios"
+   "text": "Cañ. de Voltios"
   },
   {
    "offset": "0x01D860",
-   "text": "Sable Triturador"
+   "text": "Sable Triturad."
   },
   {
    "offset": "0x01D875",
-   "text": "Cañ. Part. Plasma"
+   "text": "C. Part. Plasma"
   },
   {
    "offset": "0x01D888",
-   "text": "Demoledor Rayos"
+   "text": "Demoledor Ray."
   },
   {
    "offset": "0x01D89D",
-   "text": "Cañ Gravitacional"
+   "text": "C. Gravitacional"
   },
   {
    "offset": "0x01D8B2",
-   "text": "Aleta Cort. Tras."
+   "text": "Aleta Crt. Tras."
   },
   {
    "offset": "0x01D8C5",
-   "text": "Manip. Hiperpres."
+   "text": "Manip. Hip-pres."
   },
   {
    "offset": "0x01D8D8",
-   "text": "Cola Trituradora"
+   "text": "Cola Triturad."
   },
   {
    "offset": "0x01D8ED",
@@ -10592,7 +10592,7 @@
   },
   {
    "offset": "0x01D917",
-   "text": "Imp. Garra Láser"
+   "text": "Imp. Garra Lsr."
   },
   {
    "offset": "0x01D92C",
@@ -10600,7 +10600,7 @@
   },
   {
    "offset": "0x01D93F",
-   "text": "Escudo de Energía"
+   "text": "Escudo de Enrg."
   },
   {
    "offset": "0x01D950",
@@ -10608,7 +10608,7 @@
   },
   {
    "offset": "0x01D963",
-   "text": "Imp. Garra Láser"
+   "text": "Imp. Garra Lsr."
   },
   {
    "offset": "0x01D978",
@@ -10624,7 +10624,7 @@
   },
   {
    "offset": "0x01D9AF",
-   "text": "Pod de Torpedos"
+   "text": "Pod Torpedos"
   },
   {
    "offset": "0x01D9C4",
@@ -10632,7 +10632,7 @@
   },
   {
    "offset": "0x01D9D5",
-   "text": "Propulsor Iónico"
+   "text": "Propulsr. Iónico"
   },
   {
    "offset": "0x01D9EA",
@@ -10644,15 +10644,15 @@
   },
   {
    "offset": "0x01DA12",
-   "text": "Sens. Infr. Comp."
+   "text": "Sns. Infr. Comp."
   },
   {
    "offset": "0x01DA27",
-   "text": "Propulsor Iónico"
+   "text": "Propulsr. Iónico"
   },
   {
    "offset": "0x01DA3C",
-   "text": "Garra de Choque"
+   "text": "Garra de Choq."
   },
   {
    "offset": "0x01DA51",
@@ -10668,11 +10668,11 @@
   },
   {
    "offset": "0x01DA8A",
-   "text": "Impacto de Garra"
+   "text": "Impct. de Garra"
   },
   {
    "offset": "0x01DA9F",
-   "text": "Cañón Electromg."
+   "text": "Cañ. Electromg."
   },
   {
    "offset": "0x01DAB2",
@@ -10696,7 +10696,7 @@
   },
   {
    "offset": "0x01DAFB",
-   "text": "Propulsor Iónico"
+   "text": "Propulsr. Iónico"
   },
   {
    "offset": "0x01DB10",
@@ -10704,7 +10704,7 @@
   },
   {
    "offset": "0x01DB25",
-   "text": "Garra Magnética"
+   "text": "Garra Magnét."
   },
   {
    "offset": "0x01DB3A",
@@ -10716,7 +10716,7 @@
   },
   {
    "offset": "0x01DB64",
-   "text": "Colmillo Magnezer"
+   "text": "Colm. Magnezer"
   },
   {
    "offset": "0x01DB79",
@@ -10744,11 +10744,11 @@
   },
   {
    "offset": "0x01DBDF",
-   "text": "Escudo de Energía"
+   "text": "Escudo de Enrg."
   },
   {
    "offset": "0x01DBF0",
-   "text": "Diente de Dragón"
+   "text": "Diente Dragón"
   },
   {
    "offset": "0x01DC05",
@@ -10768,7 +10768,7 @@
   },
   {
    "offset": "0x01DC57",
-   "text": "Colmillo Magnezer"
+   "text": "Colm. Magnezer"
   },
   {
    "offset": "0x01DC6C",
@@ -10780,7 +10780,7 @@
   },
   {
    "offset": "0x01DC90",
-   "text": "Imp. Garra Láser"
+   "text": "Imp. Garra Lsr."
   },
   {
    "offset": "0x01DCA5",
@@ -10824,7 +10824,7 @@
   },
   {
    "offset": "0x01DD5F",
-   "text": "Camuflaje Óptico"
+   "text": "Camuflaje Ópt."
   },
   {
    "offset": "0x01DD74",
@@ -10832,7 +10832,7 @@
   },
   {
    "offset": "0x01DD89",
-   "text": "C. Bola de Hierro"
+   "text": "C. Bola de Hierr."
   },
   {
    "offset": "0x01DD9E",
@@ -10840,15 +10840,15 @@
   },
   {
    "offset": "0x01DDA5",
-   "text": "Rociador de Humo"
+   "text": "Rociador Humo"
   },
   {
    "offset": "0x01DDBA",
-   "text": "Cuerno Bifurcado"
+   "text": "Cuerno Bifurc."
   },
   {
    "offset": "0x01DDCF",
-   "text": "C. Rayos Retráct."
+   "text": "C. Ray. Retráct."
   },
   {
    "offset": "0x01DDE4",
@@ -10856,7 +10856,7 @@
   },
   {
    "offset": "0x01DDF9",
-   "text": "Hiperescudo Energ"
+   "text": "Hiperesc. Energ."
   },
   {
    "offset": "0x01DE0E",
@@ -10872,11 +10872,11 @@
   },
   {
    "offset": "0x01DE4B",
-   "text": "Pistola de Rayos"
+   "text": "Pistola de Ray."
   },
   {
    "offset": "0x01DE5C",
-   "text": "Pinzas Lsr Impac."
+   "text": "Pinz. Lsr Impac."
   },
   {
    "offset": "0x01DE71",
@@ -10896,7 +10896,7 @@
   },
   {
    "offset": "0x01DEA7",
-   "text": "Bazuca Rayos Pot."
+   "text": "Bazuca Ry. Pot."
   },
   {
    "offset": "0x01DEBC",
@@ -10912,15 +10912,15 @@
   },
   {
    "offset": "0x01DEDF",
-   "text": "Misil de Maniobra"
+   "text": "M. de Maniobra"
   },
   {
    "offset": "0x01DEF4",
-   "text": "3 Choques Aceler."
+   "text": "3 Choq. Aceler."
   },
   {
    "offset": "0x01DF09",
-   "text": "20 Cañ. de Asalto"
+   "text": "C. Asalto x20"
   },
   {
    "offset": "0x01DF1E",
@@ -10932,11 +10932,11 @@
   },
   {
    "offset": "0x01DF46",
-   "text": "3 Morteros Grand."
+   "text": "3 Morteros Grn."
   },
   {
    "offset": "0x01DF57",
-   "text": "3 Mort. G. Pecho"
+   "text": "3 Mort. G Pecho"
   },
   {
    "offset": "0x01DF6C",
@@ -10944,7 +10944,7 @@
   },
   {
    "offset": "0x01DF81",
-   "text": "3 Cañ. de Choque"
+   "text": "3 C. de Choque"
   },
   {
    "offset": "0x01DF96",
@@ -10952,7 +10952,7 @@
   },
   {
    "offset": "0x01DFAB",
-   "text": "Vulcan Corto Alc"
+   "text": "Vlcn. Corto Alc"
   },
   {
    "offset": "0x01DFBE",
@@ -10960,7 +10960,7 @@
   },
   {
    "offset": "0x01DFD3",
-   "text": "Cañón de Choque"
+   "text": "Cañ. de Choque"
   },
   {
    "offset": "0x01DFE6",
@@ -10968,7 +10968,7 @@
   },
   {
    "offset": "0x01DFED",
-   "text": "Escudo de Energía"
+   "text": "Escudo de Enrg."
   },
   {
    "offset": "0x01DFFE",
@@ -10992,15 +10992,15 @@
   },
   {
    "offset": "0x01E052",
-   "text": "Cañón Largo Alc."
+   "text": "Cañ. Largo Alcn."
   },
   {
    "offset": "0x01E065",
-   "text": "C. Rayos Cuádru."
+   "text": "C. Rayos x4"
   },
   {
    "offset": "0x01E07A",
-   "text": "Escudo de Energía"
+   "text": "Escudo de Enrg."
   },
   {
    "offset": "0x01E08B",
@@ -11032,7 +11032,7 @@
   },
   {
    "offset": "0x01E118",
-   "text": "Cola Trituradora"
+   "text": "Cola Triturad."
   },
   {
    "offset": "0x01E12D",
@@ -11040,7 +11040,7 @@
   },
   {
    "offset": "0x01E142",
-   "text": "Fuego de Apoyo"
+   "text": "Fuego de Apoy."
   },
   {
    "offset": "0x01E157",
@@ -11056,7 +11056,7 @@
   },
   {
    "offset": "0x01E16C",
-   "text": "Fuego de Apoyo"
+   "text": "Fuego de Apoy."
   },
   {
    "offset": "0x01E181",
@@ -11072,7 +11072,7 @@
   },
   {
    "offset": "0x01E196",
-   "text": "Fuego de Apoyo"
+   "text": "Fuego de Apoy."
   },
   {
    "offset": "0x01E1AB",
@@ -11088,7 +11088,7 @@
   },
   {
    "offset": "0x01E1C0",
-   "text": "Fuego de Apoyo"
+   "text": "Fuego de Apoy."
   },
   {
    "offset": "0x01E1D5",
@@ -11104,11 +11104,11 @@
   },
   {
    "offset": "0x01E1EA",
-   "text": "Falange de Flecha"
+   "text": "Falange Flecha"
   },
   {
    "offset": "0x01E1FF",
-   "text": "Falange Mart Thor"
+   "text": "Falange M. Thor"
   },
   {
    "offset": "0x01E214",
@@ -11340,7 +11340,7 @@
   },
   {
    "offset": "0x01E4D9",
-   "text": "Máscara Púrpura"
+   "text": "Másc. Púrp."
   },
   {
    "offset": "0x01E4EC",
@@ -11528,11 +11528,11 @@
   },
   {
    "offset": "0x01E86C",
-   "text": "Miembro Backdraft"
+   "text": "Miembro de Backdraft"
   },
   {
    "offset": "0x01E87F",
-   "text": "Miembro Backdraft"
+   "text": "Miembro de Backdraft"
   },
   {
    "offset": "0x01E892",
@@ -11628,7 +11628,7 @@
   },
   {
    "offset": "0x01EB36",
-   "text": "Vuelve al\nInstituto Zoids\nde una ciudad\nque ya visitaste."
+   "text": "Vuelve al\nInst. Zoid\nde una ciudad\nque visitaste."
   },
   {
    "offset": "0x01EB67",
@@ -13203,7 +13203,7 @@
   },
   {
    "offset": "0x023F31",
-   "text": "Escudo de Energía"
+   "text": "Escudo de Enrg."
   },
   {
    "offset": "0x023F42",
@@ -16639,7 +16639,7 @@
   },
   {
    "offset": "0x0282CA",
-   "build_text": "Comienza el combate en línea.\nMantén conectado el cable\nGame Boy{7F} Advance Game Link{7F}\nhasta que acabe el combate."
+   "build_text": "Comienza combate en línea.\nMantén conectado el cable\nGame Boy{7F} Advance Game Link{7F}\nhasta que acabe el combate."
   },
   {
    "offset": "0x028332",
@@ -16675,7 +16675,7 @@
   },
   {
    "offset": "0x028461",
-   "build_text": "{01 02}Campo de batalla"
+   "build_text": "{01 02}C. de batalla"
   },
   {
    "offset": "0x028472",
@@ -16771,7 +16771,7 @@
   },
   {
    "offset": "0x0289FF",
-   "build_text": "{01 02}Campo de batalla"
+   "build_text": "{01 02}C. de batalla"
   },
   {
    "offset": "0x028A1F",
@@ -16791,7 +16791,7 @@
   },
   {
    "offset": "0x028AA6",
-   "build_text": "{01 02}Campo de batalla"
+   "build_text": "{01 02}C. de batalla"
   },
   {
    "offset": "0x028AB7",
@@ -16803,7 +16803,7 @@
   },
   {
    "offset": "0x028B11",
-   "build_text": "No cumples las reglas."
+   "build_text": "No cumples reglas."
   },
   {
    "offset": "0x028B3C",
@@ -16916,7 +16916,7 @@
   },
   {
    "offset": "0x029009",
-   "build_text": "Error al guardar.\nPiezas no guardadas."
+   "build_text": "Error al guardar.\nPiezas no guardadas"
   },
   {
    "offset": "0x029043",
@@ -33070,7 +33070,7 @@
   },
   {
    "offset": "0x106598",
-   "text": "Tienda de Equipo"
+   "text": "Tienda Equipo"
   },
   {
    "offset": "0x106E54",
@@ -33715,17 +33715,17 @@
   },
   {
    "offset": "0x10913C",
-   "text": "Sin armas a distancia",
+   "text": "Sin arm. dist.",
    "compact_format": true
   },
   {
    "offset": "0x109154",
-   "text": "Sin armas de cerca",
+   "text": "Sin arm. cerca",
    "compact_format": true
   },
   {
    "offset": "0x109168",
-   "text": "Sin recuperación",
+   "text": "Sin recuper.",
    "compact_format": true
   },
   {
